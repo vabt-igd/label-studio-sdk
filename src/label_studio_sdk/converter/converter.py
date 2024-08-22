@@ -1,4 +1,5 @@
 import io
+import itertools
 import logging
 import math
 import os
@@ -24,6 +25,7 @@ from label_studio_sdk.converter.utils import (
     parse_config,
     create_tokens_and_tags,
     download,
+    get_image_size,
     get_image_size_and_channels,
     ensure_dir,
     get_polygon_area,
@@ -33,6 +35,8 @@ from label_studio_sdk.converter.utils import (
     prettify_result,
     convert_annotation_to_yolo,
     convert_annotation_to_yolo_obb,
+    get_cocomask_area,
+    get_cocomask_bounding_box,
 )
 
 logger = logging.getLogger(__name__)
@@ -56,6 +60,7 @@ class Format(Enum):
     YOLO = 11
     YOLO_OBB = 12
     CSV_OLD = 13
+    JSON_TS_WITH_DATA = 14
 
     def __str__(self):
         return self.name
@@ -146,6 +151,12 @@ class Converter(object):
             "format expected by NVIDIA NeMo models.",
             "link": "https://labelstud.io/guide/export.html#ASR-MANIFEST",
             "tags": ["speech recognition"],
+        },
+        Format.JSON_TS_WITH_DATA: {
+            "title": "JSON for timeseries labeling with data",
+            "description": "List of items in raw JSON format stored in one JSON file, similiar to JSON-MIN. "
+            "Additionally includes the raw data in the raw_data/ folder.",
+            "link": "https://labelstud.io/guide/export.html#JSON",
         },
     }
 
@@ -266,6 +277,8 @@ class Converter(object):
                 upload_dir=self.upload_dir,
                 download_resources=self.download_resources,
             )
+        elif format == Format.JSON_TS_WITH_DATA:
+            self.convert_to_json_ts_with_data(input_data, output_data, is_dir=is_dir)
 
     def _get_data_keys_and_output_tags(self, output_tags=None):
         data_keys = set()
@@ -322,10 +335,14 @@ class Converter(object):
             and (
                 "RectangleLabels" in output_tag_types
                 or "PolygonLabels" in output_tag_types
+                or ("BrushLabels" in output_tag_types and brush.pycocotools_imported)
+                or ("brushlabels" in output_tag_types and brush.pycocotools_imported)
             )
             or "Rectangle" in output_tag_types
             and "Labels" in output_tag_types
             or "PolygonLabels" in output_tag_types
+            and "Labels" in output_tag_types
+            or ("Brush" in output_tag_types and brush.pycocotools_imported)
             and "Labels" in output_tag_types
         ):
             all_formats.remove(Format.COCO.name)
@@ -348,6 +365,8 @@ class Converter(object):
             all_formats.remove(Format.ASR_MANIFEST.name)
         if 'Video' in input_tag_types and 'TimelineLabels' in output_tag_types:
             all_formats.remove(Format.YOLO_OBB.name)
+        if not ("TimeSeries" in input_tag_types):
+            all_formats.remove(Format.JSON_TS_WITH_DATA.name)
 
         return all_formats
 
@@ -487,6 +506,74 @@ class Converter(object):
 
     def _check_format(self, fmt):
         pass
+
+    def convert_to_json_ts_with_data(self, input_data, output_dir, is_dir=True):
+        self._check_format(Format.JSON_TS_WITH_DATA)
+
+        ensure_dir(output_dir)
+        output_file = os.path.join(output_dir, "labeled_results.json")
+        records = []
+        item_iterator = self.iter_from_dir if is_dir else self.iter_from_json_file
+
+        for item in item_iterator(input_data):
+            record = deepcopy(item["input"])
+            if "csv" in record:
+                _, file_name = os.path.split(os.path.abspath(record["csv"]))
+                del record["csv"]
+                record["csv_file"] = os.path.join("raw_data", file_name)
+            if item.get("id") is not None:
+                record["id"] = item["id"]
+
+            for name, value in item["output"].items():
+                annotations = []
+                for label in value:
+                    fixed_annotation = {}
+                    fixed_annotation["label"] = label["timeserieslabels"][0]
+                    fixed_annotation["start_time"] = label["start"]
+                    fixed_annotation["end_time"] = label["end"]
+                    annotations.append(fixed_annotation)
+                record["labels"] = annotations
+            records.append(record)
+
+        with io.open(output_file, mode="w", encoding="utf8") as fout:
+            json.dump(records, fout, indent=2, ensure_ascii=False)
+
+        output_raw_data_dir = os.path.join(output_dir, "raw_data")
+        if output_raw_data_dir is not None:
+            ensure_dir(output_raw_data_dir)
+        else:
+            output_raw_data_dir = os.path.join(output_dir, "raw_data")
+            os.makedirs(output_raw_data_dir, exist_ok=True)
+
+        categories, category_name_to_id = self._get_labels()
+        data_key = self._data_keys[0]
+        item_iterator = (
+            self.iter_from_dir(input_data)
+            if is_dir
+            else self.iter_from_json_file(input_data)
+        )
+
+        for item_idx, item in enumerate(item_iterator):
+            ts_path = item["input"][data_key]
+
+            # download all time series data of the dataset, including the ones without annotations
+            if not os.path.exists(ts_path):
+                try:
+                    ts_path = download(
+                        ts_path,
+                        output_raw_data_dir,
+                        project_dir=self.project_dir,
+                        return_relative_path=True,
+                        upload_dir=self.upload_dir,
+                        download_resources=self.download_resources,
+                    )
+                except:
+                    logger.info(
+                        "Unable to download {ts_path}. The time series of {item} will be skipped".format(
+                            ts_path=ts_path, item=item
+                        ),
+                        exc_info=True,
+                    )
 
     def convert_to_json(self, input_data, output_dir, is_dir=True):
         self._check_format(Format.JSON)
@@ -642,13 +729,19 @@ class Converter(object):
 
             for label in labels:
                 category_name = None
-                for key in ["rectanglelabels", "polygonlabels", "labels"]:
+                for key in [
+                    "rectanglelabels",
+                    "polygonlabels",
+                    "brushlabels",
+                    "keypointlabels",
+                    "labels",
+                ]:
                     if key in label and len(label[key]) > 0:
                         category_name = label[key][0]
                         break
 
                 if category_name is None:
-                    logger.warning("Unknown label type or labels are empty")
+                    logger.warning(f"Unknown label type or labels are empty: {label}")
                     continue
 
                 if not height or not width:
@@ -674,25 +767,39 @@ class Converter(object):
                     if xywh is None:
                         continue
 
-                    x, y, w, h = xywh
-                    x = x * label["original_width"] / 100
-                    y = y * label["original_height"] / 100
-                    w = w * label["original_width"] / 100
-                    h = h * label["original_height"] / 100
+                    if "rle" in label and brush.pycocotools_imported:
+                        coco_rle = brush.ls_rle_to_coco_rle(label["rle"], height, width)
+                        segmentation = brush.ls_rle_to_polygon(
+                            label["rle"], height, width
+                        )
+                        bbox = brush.get_cocomask_bounding_box(coco_rle)
+                        area = brush.get_cocomask_area(coco_rle)
+
+                    else:
+                        segmentation = []
+                        x, y, w, h = xywh
+                        x = x * label["original_width"] / 100
+                        y = y * label["original_height"] / 100
+                        w = w * label["original_width"] / 100
+                        h = h * label["original_height"] / 100
+                        bbox = [x, y, w, h]
+                        area = w * h
 
                     annotations.append(
                         {
                             "id": annotation_id,
                             "image_id": image_id,
                             "category_id": category_id,
-                            "segmentation": [],
-                            "bbox": [x, y, w, h],
+                            "segmentation": segmentation,
+                            "bbox": bbox,
                             "ignore": 0,
                             "iscrowd": 0,
-                            "area": w * h,
+                            "area": area,
                         }
                     )
                 elif "polygonlabels" in label:
+                    if "points" not in label:
+                        logger.warn(label)
                     points_abs = [
                         (x / 100 * width, y / 100 * height) for x, y in label["points"]
                     ]
@@ -712,8 +819,52 @@ class Converter(object):
                             "area": get_polygon_area(x, y),
                         }
                     )
+                elif (
+                    "brushlabels" in label
+                    or (label["type"] == "MagicWand" and category_id is not None)
+                ) and brush.pycocotools_imported:
+                    if "rle" not in label:
+                        logger.warn(label)
+                        continue
+                    coco_rle = brush.ls_rle_to_coco_rle(label["rle"], height, width)
+                    segmentation = brush.ls_rle_to_polygon(label["rle"], height, width)
+                    bbox = brush.get_cocomask_bounding_box(coco_rle)
+                    area = brush.get_cocomask_area(coco_rle)
+                    annotations.append(
+                        {
+                            "id": annotation_id,
+                            "image_id": image_id,
+                            "category_id": category_id,
+                            "segmentation": segmentation,
+                            "bbox": bbox,
+                            "ignore": 0,
+                            "iscrowd": 0,
+                            "area": area,
+                        }
+                    )
+                elif "keypointlabels" in label:
+                    if "rle" not in label:
+                        logger.warn(label)
+                        continue
+
+                    coco_rle = brush.ls_rle_to_coco_rle(label["rle"], height, width)
+                    segmentation = brush.ls_rle_to_polygon(label["rle"], height, width)
+                    bbox = brush.get_cocomask_bounding_box(coco_rle)
+                    area = brush.get_cocomask_area(coco_rle)
+                    annotations.append(
+                        {
+                            "id": annotation_id,
+                            "image_id": image_id,
+                            "category_id": category_id,
+                            "segmentation": segmentation,
+                            "bbox": bbox,
+                            "ignore": 0,
+                            "iscrowd": 0,
+                            "area": area,
+                        }
+                    )
                 else:
-                    raise ValueError("Unknown label type")
+                    logger.warn(f"Incompatible label type for COCO export: {label}")
 
                 if os.getenv("LABEL_STUDIO_FORCE_ANNOTATOR_EXPORT"):
                     annotations[-1].update({"annotator": get_annotator(item)})
@@ -859,16 +1010,21 @@ class Converter(object):
             for label in labels:
                 category_name = None
                 category_names = []  # considering multi-label
-                for key in ["rectanglelabels", "polygonlabels", "labels"]:
+                for key in [
+                    "rectanglelabels",
+                    "polygonlabels",
+                    "brushlabels",
+                    "labels",
+                ]:
                     if key in label and len(label[key]) > 0:
                         # change to save multi-label
                         for category_name in label[key]:
                             category_names.append(category_name)
 
-                if len(category_names) == 0:
-                    logger.debug(
-                        "Unknown label type or labels are empty: " + str(label)
-                    )
+                if category_name is None or len(category_names) == 0:
+                    logger.warning(
+                        f"Unknown label type or labels are empty: {label}"
+                        )
                     continue
 
                 for category_name in category_names:
@@ -920,8 +1076,44 @@ class Converter(object):
                             [category_id]
                             + [coord for point in points_abs for coord in point]
                         )
+                    elif (
+                        "brushlabels" in label
+                        or (label["type"] == "MagicWand" and category_id is not None)
+                    ) and brush.pycocotools_imported:
+                        if "rle" not in label:
+                            logger.warn(
+                                f"Encountered a brushlabel without a RLE: {label}"
+                            )
+                            continue
+
+                        width = None
+                        height = None
+                        try:
+                            with Image.open(
+                                os.path.join(output_dir, image_path)
+                            ) as img:
+                                width, height = img.size
+                        except:
+                            logger.warn(
+                                f"Unable to open {image_path}, can't extract width and height for YOLO export...",
+                                exc_info=True,
+                            )
+                            continue
+
+                        coco_rle = brush.ls_rle_to_coco_rle(label["rle"], height, width)
+                        bbox = brush.get_cocomask_bounding_box(coco_rle)
+                        annotations.append(
+                            [
+                                str(category_id)
+                                + " "
+                                + str(bbox)
+                                .replace("[", "")
+                                .replace("]", "")
+                                .replace(",", ""),
+                            ]
+                        )
                     else:
-                        raise ValueError(f"Unknown label type {label}")
+                        logger.warn(f"Incompatible label type for YOLO: {label}")
             with open(label_path, "w") as f:
                 for annotation in annotations:
                     for idx, l in enumerate(annotation):

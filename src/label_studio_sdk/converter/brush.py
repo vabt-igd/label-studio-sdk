@@ -36,8 +36,22 @@ import logging
 from PIL import Image
 from collections import defaultdict
 from itertools import groupby
+from PIL import Image
+from skimage import measure
 
 logger = logging.getLogger(__name__)
+
+try:
+    import pycocotools.mask
+except ImportError:
+    pycocotools_imported = False
+    logger.warning(
+        'pycocotools library import failed! You need to setup this library manually:\n'
+        + 'check this https://stackoverflow.com/questions/60189943/how-to-install-pycocotools-through-conda'
+    )
+else:
+    pycocotools_imported = True
+    logger.info('pycocotools library imported successfully!')
 
 
 ### Brush Export ###
@@ -147,7 +161,7 @@ def save_brush_images_from_annotation(
     )  # sanitize filename
 
     for name in layers:
-        sanitized_name = name.replace("/", "-").replace("\\", "-")
+        sanitized_name = name.replace("/", "-").replace("\\", "-").replace(' ', '-').replace('.', '-')
 
         filename = os.path.join(
             out_dir,
@@ -450,3 +464,48 @@ def image2annotation(
         result["ground_truth"] = ground_truth
 
     return result
+    
+def ls_rle_to_coco_rle(ls_rle, height, width):
+    """from LS rle to compressed coco rle"""
+    ls_mask = decode_rle(ls_rle)
+    ls_mask = np.reshape(ls_mask, [height, width, 4])[:, :, 3]
+    ls_mask = np.where(ls_mask > 0, 1, 0)
+    binary_mask = np.asfortranarray(ls_mask)
+    coco_rle = binary_mask_to_rle(binary_mask)
+    result = pycocotools.mask.frPyObjects(coco_rle, *coco_rle.get('size'))
+    result["counts"] = result["counts"].decode()
+    return result
+
+def ls_rle_to_polygon(ls_rle, height, width):
+    """from LS rle to polygons"""
+    ls_mask = decode_rle(ls_rle)
+    ls_mask = np.reshape(ls_mask, [height, width, 4])[:, :, 3]
+    ls_mask = np.where(ls_mask > 0, 1, 0)
+
+    # Find contours from the binary mask
+    contours = measure.find_contours(ls_mask, 0.5)
+    segmentation = []
+
+    for contour in contours:
+        # Flip dimensions then ravel and cast to list
+        contour = np.flip(contour, axis=1)
+        contour = contour.ravel().tolist()
+        segmentation.append(contour)
+    return segmentation
+    
+def binary_mask_to_rle(binary_mask: np.ndarray):
+    """from binary image mask to uncompressed coco rle"""
+    counts = []
+    for i, (value, elements) in enumerate(groupby(binary_mask.ravel(order='F'))):
+        if i == 0 and value == 1:
+            counts.append(0)
+        counts.append(len(list(elements)))
+    return {'counts': counts, 'size': list(binary_mask.shape)}
+
+
+def get_cocomask_area(segmentation):
+    return int(pycocotools.mask.area(segmentation))
+
+
+def get_cocomask_bounding_box(segmentation):
+    return pycocotools.mask.toBbox(segmentation).tolist()

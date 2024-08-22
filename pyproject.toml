@@ -47,6 +47,7 @@ requests-mock = "1.12.1"
 typing_extensions = ">= 4.0.0"
 ujson = ">=5.8.0"
 xmljson = "0.2.1"
+scikit-image = ">=0.24.0"
 
 [tool.poetry.dev-dependencies]
 mypy = "1.0.1"

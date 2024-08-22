@@ -331,6 +331,14 @@ def get_polygon_bounding_box(x, y):
 
     x1, y1, x2, y2 = min(x), min(y), max(x), max(y)
     return [x1, y1, x2 - x1, y2 - y1]
+    
+
+def get_cocomask_area(segmentation):
+    return int(pycocotools.mask.area(segmentation))
+
+
+def get_cocomask_bounding_box(segmentation):
+    return pycocotools.mask.toBbox(segmentation).tolist()
 
 
 def get_annotator(item, default=None, int_id=False):
