@@ -1,15 +1,14 @@
-import logging
-import io
-import shutil
-import urllib
 import hashlib
-import requests
+import io
+import logging
 import os
-
-from appdirs import user_cache_dir, user_data_dir
-from urllib.parse import urlparse, urljoin
+import shutil
 from contextlib import contextmanager
 from tempfile import mkdtemp
+from urllib.parse import urlparse
+
+import requests
+from appdirs import user_cache_dir, user_data_dir
 
 from label_studio_sdk._extensions.label_studio_tools.core.utils.params import get_env
 
@@ -17,6 +16,7 @@ _DIR_APP_NAME = "label-studio"
 LOCAL_FILES_DOCUMENT_ROOT = get_env(
     "LOCAL_FILES_DOCUMENT_ROOT", default=os.path.abspath(os.sep)
 )
+VERIFY_SSL = get_env("VERIFY_SSL", default=True, is_bool=True)
 
 logger = logging.getLogger(__name__)
 
@@ -79,6 +79,13 @@ def get_local_path(
             f"Using `localhost` ({hostname}) in LABEL_STUDIO_URL, "
             f"`localhost` is not accessible inside of docker containers. "
             f"You can check your IP with utilities like `ifconfig` and set it as LABEL_STUDIO_URL."
+        )
+    if hostname and not (
+        hostname.startswith("http://") or hostname.startswith("https://")
+    ):
+        raise ValueError(
+            f"Invalid hostname in LABEL_STUDIO_URL: {hostname}. "
+            "Please provide full URL starting with protocol (http:// or https://)."
         )
 
     # fix file upload url
@@ -180,13 +187,17 @@ def download_and_cache(
     # File specified by remote URL - download and cache it
     cache_dir = cache_dir or get_cache_dir()
     parsed_url = urlparse(url)
-    url_filename = (
-        # /data/local-files?d=dir/1.jpg => 1.jpg
-        os.path.basename(url)
-        if is_local_storage_file or is_cloud_storage_file
-        # /some/url/1.jpg?expire=xxx => 1.jpg
-        else os.path.basename(parsed_url.path)
-    )
+
+    # local storage: /data/local-files?d=dir/1.jpg => 1.jpg
+    if is_local_storage_file:
+        url_filename = os.path.basename(url.split('?d=')[1])
+    # cloud storage: s3://bucket/1.jpg => 1.jpg
+    elif is_cloud_storage_file:
+        url_filename = os.path.basename(url)
+    # all others: /some/url/1.jpg?expire=xxx => 1.jpg
+    else:
+        url_filename = os.path.basename(parsed_url.path)
+
     url_hash = hashlib.md5(url.encode()).hexdigest()[:8]
     filepath = os.path.join(cache_dir, url_hash + "__" + url_filename)
 
@@ -205,8 +216,15 @@ def download_and_cache(
             ):
                 headers["Authorization"] = "Token " + access_token
                 logger.debug("Authorization token is used for download_and_cache")
-            r = requests.get(url, stream=True, headers=headers)
-            r.raise_for_status()
+            try:
+                r = requests.get(url, stream=True, headers=headers, verify=VERIFY_SSL)
+                r.raise_for_status()
+            except requests.exceptions.SSLError as e:
+                logger.error(
+                    f"SSL error during requests.get('{url}'): {e}\n"
+                    f"Try to set VERIFY_SSL=False in environment variables to bypass SSL verification."
+                )
+                raise e
             with io.open(filepath, mode="wb") as fout:
                 fout.write(r.content)
     return filepath
