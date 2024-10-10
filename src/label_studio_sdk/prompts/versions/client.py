@@ -13,6 +13,7 @@ from ...types.prompt_version import PromptVersion
 from ...types.prompt_version_created_by import PromptVersionCreatedBy
 from ...types.prompt_version_organization import PromptVersionOrganization
 from ...types.prompt_version_provider import PromptVersionProvider
+from ...types.refined_prompt_response import RefinedPromptResponse
 
 # this is used as the default value for optional parameters
 OMIT = typing.cast(typing.Any, ...)
@@ -335,26 +336,87 @@ class VersionsClient:
             raise ApiError(status_code=_response.status_code, body=_response.text)
         raise ApiError(status_code=_response.status_code, body=_response_json)
 
-    def refine_prompt(
+    def get_refined_prompt(
         self,
-        id: int,
+        prompt_id: int,
         version_id: int,
         *,
+        refinement_job_id: str,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> RefinedPromptResponse:
+        """
+        Get the refined prompt based on the `refinement_job_id`.
+
+        Parameters
+        ----------
+        prompt_id : int
+            Prompt ID
+
+        version_id : int
+            Prompt Version ID
+
+        refinement_job_id : str
+            Refinement Job ID acquired from the `POST /api/prompts/{prompt_id}/versions/{version_id}/refine` endpoint
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        RefinedPromptResponse
+
+
+        Examples
+        --------
+        from label_studio_sdk.client import LabelStudio
+
+        client = LabelStudio(
+            api_key="YOUR_API_KEY",
+        )
+        client.prompts.versions.get_refined_prompt(
+            prompt_id=1,
+            version_id=1,
+            refinement_job_id="refinement_job_id",
+        )
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"api/prompts/{jsonable_encoder(prompt_id)}/versions/{jsonable_encoder(version_id)}/refine",
+            method="GET",
+            params={"refinement_job_id": refinement_job_id},
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                return pydantic_v1.parse_obj_as(RefinedPromptResponse, _response.json())  # type: ignore
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, body=_response.text)
+        raise ApiError(status_code=_response.status_code, body=_response_json)
+
+    def refine_prompt(
+        self,
+        prompt_id: int,
+        version_id: int,
+        *,
+        async_: typing.Optional[bool] = None,
         teacher_model_provider_connection_id: typing.Optional[int] = OMIT,
         teacher_model_name: typing.Optional[str] = OMIT,
         project_id: typing.Optional[int] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> PromptVersion:
+    ) -> RefinedPromptResponse:
         """
         Refine a prompt version using a teacher model and save the refined prompt as a new version.
 
         Parameters
         ----------
-        id : int
+        prompt_id : int
             Prompt ID
 
         version_id : int
             Base Prompt Version ID
+
+        async_ : typing.Optional[bool]
+            Run the refinement job asynchronously
 
         teacher_model_provider_connection_id : typing.Optional[int]
             Model Provider Connection ID to use to refine the prompt
@@ -370,7 +432,7 @@ class VersionsClient:
 
         Returns
         -------
-        PromptVersion
+        RefinedPromptResponse
 
 
         Examples
@@ -381,13 +443,14 @@ class VersionsClient:
             api_key="YOUR_API_KEY",
         )
         client.prompts.versions.refine_prompt(
-            id=1,
+            prompt_id=1,
             version_id=1,
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"api/prompts/{jsonable_encoder(id)}/versions/{jsonable_encoder(version_id)}/refine-prompt",
+            f"api/prompts/{jsonable_encoder(prompt_id)}/versions/{jsonable_encoder(version_id)}/refine",
             method="POST",
+            params={"async": async_},
             json={
                 "teacher_model_provider_connection_id": teacher_model_provider_connection_id,
                 "teacher_model_name": teacher_model_name,
@@ -398,7 +461,7 @@ class VersionsClient:
         )
         try:
             if 200 <= _response.status_code < 300:
-                return pydantic_v1.parse_obj_as(PromptVersion, _response.json())  # type: ignore
+                return pydantic_v1.parse_obj_as(RefinedPromptResponse, _response.json())  # type: ignore
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, body=_response.text)
@@ -726,26 +789,87 @@ class AsyncVersionsClient:
             raise ApiError(status_code=_response.status_code, body=_response.text)
         raise ApiError(status_code=_response.status_code, body=_response_json)
 
-    async def refine_prompt(
+    async def get_refined_prompt(
         self,
-        id: int,
+        prompt_id: int,
         version_id: int,
         *,
+        refinement_job_id: str,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> RefinedPromptResponse:
+        """
+        Get the refined prompt based on the `refinement_job_id`.
+
+        Parameters
+        ----------
+        prompt_id : int
+            Prompt ID
+
+        version_id : int
+            Prompt Version ID
+
+        refinement_job_id : str
+            Refinement Job ID acquired from the `POST /api/prompts/{prompt_id}/versions/{version_id}/refine` endpoint
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        RefinedPromptResponse
+
+
+        Examples
+        --------
+        from label_studio_sdk.client import AsyncLabelStudio
+
+        client = AsyncLabelStudio(
+            api_key="YOUR_API_KEY",
+        )
+        await client.prompts.versions.get_refined_prompt(
+            prompt_id=1,
+            version_id=1,
+            refinement_job_id="refinement_job_id",
+        )
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"api/prompts/{jsonable_encoder(prompt_id)}/versions/{jsonable_encoder(version_id)}/refine",
+            method="GET",
+            params={"refinement_job_id": refinement_job_id},
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                return pydantic_v1.parse_obj_as(RefinedPromptResponse, _response.json())  # type: ignore
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, body=_response.text)
+        raise ApiError(status_code=_response.status_code, body=_response_json)
+
+    async def refine_prompt(
+        self,
+        prompt_id: int,
+        version_id: int,
+        *,
+        async_: typing.Optional[bool] = None,
         teacher_model_provider_connection_id: typing.Optional[int] = OMIT,
         teacher_model_name: typing.Optional[str] = OMIT,
         project_id: typing.Optional[int] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> PromptVersion:
+    ) -> RefinedPromptResponse:
         """
         Refine a prompt version using a teacher model and save the refined prompt as a new version.
 
         Parameters
         ----------
-        id : int
+        prompt_id : int
             Prompt ID
 
         version_id : int
             Base Prompt Version ID
+
+        async_ : typing.Optional[bool]
+            Run the refinement job asynchronously
 
         teacher_model_provider_connection_id : typing.Optional[int]
             Model Provider Connection ID to use to refine the prompt
@@ -761,7 +885,7 @@ class AsyncVersionsClient:
 
         Returns
         -------
-        PromptVersion
+        RefinedPromptResponse
 
 
         Examples
@@ -772,13 +896,14 @@ class AsyncVersionsClient:
             api_key="YOUR_API_KEY",
         )
         await client.prompts.versions.refine_prompt(
-            id=1,
+            prompt_id=1,
             version_id=1,
         )
         """
         _response = await self._client_wrapper.httpx_client.request(
-            f"api/prompts/{jsonable_encoder(id)}/versions/{jsonable_encoder(version_id)}/refine-prompt",
+            f"api/prompts/{jsonable_encoder(prompt_id)}/versions/{jsonable_encoder(version_id)}/refine",
             method="POST",
+            params={"async": async_},
             json={
                 "teacher_model_provider_connection_id": teacher_model_provider_connection_id,
                 "teacher_model_name": teacher_model_name,
@@ -789,7 +914,7 @@ class AsyncVersionsClient:
         )
         try:
             if 200 <= _response.status_code < 300:
-                return pydantic_v1.parse_obj_as(PromptVersion, _response.json())  # type: ignore
+                return pydantic_v1.parse_obj_as(RefinedPromptResponse, _response.json())  # type: ignore
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, body=_response.text)

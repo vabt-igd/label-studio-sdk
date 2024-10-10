@@ -15165,6 +15165,94 @@ client.prompts.versions.update(
 </dl>
 </details>
 
+<details><summary><code>client.prompts.versions.<a href="src/label_studio_sdk/prompts/versions/client.py">get_refined_prompt</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get the refined prompt based on the `refinement_job_id`.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk.client import LabelStudio
+
+client = LabelStudio(
+    api_key="YOUR_API_KEY",
+)
+client.prompts.versions.get_refined_prompt(
+    prompt_id=1,
+    version_id=1,
+    refinement_job_id="refinement_job_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**prompt_id:** `int` — Prompt ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**version_id:** `int` — Prompt Version ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**refinement_job_id:** `str` — Refinement Job ID acquired from the `POST /api/prompts/{prompt_id}/versions/{version_id}/refine` endpoint
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.prompts.versions.<a href="src/label_studio_sdk/prompts/versions/client.py">refine_prompt</a>(...)</code></summary>
 <dl>
 <dd>
@@ -15198,7 +15286,7 @@ client = LabelStudio(
     api_key="YOUR_API_KEY",
 )
 client.prompts.versions.refine_prompt(
-    id=1,
+    prompt_id=1,
     version_id=1,
 )
 
@@ -15216,7 +15304,7 @@ client.prompts.versions.refine_prompt(
 <dl>
 <dd>
 
-**id:** `int` — Prompt ID
+**prompt_id:** `int` — Prompt ID
     
 </dd>
 </dl>
@@ -15225,6 +15313,14 @@ client.prompts.versions.refine_prompt(
 <dd>
 
 **version_id:** `int` — Base Prompt Version ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**async_:** `typing.Optional[bool]` — Run the refinement job asynchronously
     
 </dd>
 </dl>
