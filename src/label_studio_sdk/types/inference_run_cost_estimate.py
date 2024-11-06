@@ -5,44 +5,37 @@ import typing
 
 from ..core.datetime_utils import serialize_datetime
 from ..core.pydantic_utilities import deep_union_pydantic_dicts, pydantic_v1
-from .prompt_version import PromptVersion
-from .refined_prompt_response_refinement_status import RefinedPromptResponseRefinementStatus
 
 
-class RefinedPromptResponse(pydantic_v1.BaseModel):
-    title: typing.Optional[str] = pydantic_v1.Field(default=None)
+class InferenceRunCostEstimate(pydantic_v1.BaseModel):
+    prompt_cost_usd: typing.Optional[str] = pydantic_v1.Field(default=None)
     """
-    Title of the refined prompt
-    """
-
-    reasoning: typing.Optional[str] = pydantic_v1.Field(default=None)
-    """
-    Reasoning behind the refinement
+    Cost of the prompt (in USD)
     """
 
-    prompt: str = pydantic_v1.Field()
+    completion_cost_usd: typing.Optional[str] = pydantic_v1.Field(default=None)
     """
-    The refined prompt text
-    """
-
-    refinement_job_id: typing.Optional[str] = pydantic_v1.Field(default=None)
-    """
-    Unique identifier for the refinement job
+    Cost of the completion (in USD)
     """
 
-    refinement_status: typing.Optional[RefinedPromptResponseRefinementStatus] = pydantic_v1.Field(default=None)
+    total_cost_usd: typing.Optional[str] = pydantic_v1.Field(default=None)
     """
-    Status of the refinement job
-    """
-
-    total_cost: typing.Optional[str] = pydantic_v1.Field(default=None)
-    """
-    Total cost of the refinement job (in USD)
+    Total cost of the inference (in USD)
     """
 
-    previous_version: typing.Optional[PromptVersion] = pydantic_v1.Field(default=None)
+    is_error: typing.Optional[bool] = pydantic_v1.Field(default=None)
     """
-    Previous version of the prompt
+    Whether an error occurred or not
+    """
+
+    error_type: typing.Optional[str] = pydantic_v1.Field(default=None)
+    """
+    Type of error (e.g. "Timeout", "Rate Limit", etc)
+    """
+
+    error_message: typing.Optional[str] = pydantic_v1.Field(default=None)
+    """
+    Error message details
     """
 
     def json(self, **kwargs: typing.Any) -> str:
