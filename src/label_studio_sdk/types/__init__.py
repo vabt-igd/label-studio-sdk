@@ -52,6 +52,7 @@ from .ml_backend import MlBackend
 from .ml_backend_auth_method import MlBackendAuthMethod
 from .ml_backend_state import MlBackendState
 from .model_provider_connection import ModelProviderConnection
+from .model_provider_connection_budget_reset_period import ModelProviderConnectionBudgetResetPeriod
 from .model_provider_connection_created_by import ModelProviderConnectionCreatedBy
 from .model_provider_connection_organization import ModelProviderConnectionOrganization
 from .model_provider_connection_provider import ModelProviderConnectionProvider
@@ -87,6 +88,7 @@ from .serialization_option import SerializationOption
 from .serialization_options import SerializationOptions
 from .task import Task
 from .task_annotators_item import TaskAnnotatorsItem
+from .task_comment_authors_item import TaskCommentAuthorsItem
 from .task_filter_options import TaskFilterOptions
 from .user_simple import UserSimple
 from .view import View
@@ -149,6 +151,7 @@ __all__ = [
     "MlBackendAuthMethod",
     "MlBackendState",
     "ModelProviderConnection",
+    "ModelProviderConnectionBudgetResetPeriod",
     "ModelProviderConnectionCreatedBy",
     "ModelProviderConnectionOrganization",
     "ModelProviderConnectionProvider",
@@ -184,6 +187,7 @@ __all__ = [
     "SerializationOptions",
     "Task",
     "TaskAnnotatorsItem",
+    "TaskCommentAuthorsItem",
     "TaskFilterOptions",
     "UserSimple",
     "View",
