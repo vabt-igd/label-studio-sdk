@@ -11,7 +11,6 @@ from copy import deepcopy
 from datetime import datetime
 from enum import Enum
 from glob import glob
-from operator import itemgetter
 from shutil import copy2
 from typing import Optional
 
@@ -295,12 +294,16 @@ class Converter(object):
         for name, info in self._schema.items():
             if output_tags is not None and name not in output_tags:
                 continue
-            data_keys |= set(map(itemgetter("value"), info["inputs"]))
+            for input_tag in info["inputs"]:
+                for value_key_name in ["value", "valueList"]:
+                    if value_key_name in input_tag:
+                        data_keys.add(input_tag[value_key_name])
             output_tag_names.append(name)
 
         return list(data_keys), output_tag_names
 
     def _get_supported_formats(self):
+        is_mig = False
         if len(self._data_keys) > 1:
             return [
                 Format.JSON.name,
@@ -313,6 +316,8 @@ class Converter(object):
         for info in self._schema.values():
             output_tag_types.add(info["type"])
             for input_tag in info["inputs"]:
+                if input_tag.get("valueList"):
+                    is_mig = True
                 if input_tag["type"] == "Text" and input_tag.get("valueType") == "url":
                     logger.error('valueType="url" are not supported for text inputs')
                     continue
@@ -321,7 +326,7 @@ class Converter(object):
         all_formats = [f.name for f in Format]
         if not ("Text" in input_tag_types and "Labels" in output_tag_types):
             all_formats.remove(Format.CONLL2003.name)
-        if not (
+        if is_mig or not (
             "Image" in input_tag_types
             and (
                 "RectangleLabels" in output_tag_types
@@ -330,7 +335,7 @@ class Converter(object):
             )
         ):
             all_formats.remove(Format.VOC.name)
-        if not (
+        if is_mig or not (
             "Image" in input_tag_types
             and (
                 "RectangleLabels" in output_tag_types
@@ -363,7 +368,7 @@ class Converter(object):
             and "TextArea" in output_tag_types
         ):
             all_formats.remove(Format.ASR_MANIFEST.name)
-        if 'Video' in input_tag_types and 'TimelineLabels' in output_tag_types:
+        if is_mig or ('Video' in input_tag_types and 'TimelineLabels' in output_tag_types):
             all_formats.remove(Format.YOLO_OBB.name)
         if not ("TimeSeries" in input_tag_types):
             all_formats.remove(Format.JSON_TS_WITH_DATA.name)
