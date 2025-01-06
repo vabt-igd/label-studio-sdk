@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "label-studio-sdk"
-version = "1.0.9"
+version = "1.0.9.dev"
 description = ""
 readme = "README.md"
 authors = []
@@ -67,5 +67,5 @@ plugins = ["pydantic.mypy"]
 
 
 [build-system]
-requires = ["poetry-core"]
+requires = ["poetry-core<2.0.0"]
 build-backend = "poetry.core.masonry.api"
