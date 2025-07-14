@@ -11,6 +11,9 @@ src/label_studio_sdk/label_interface
 src/label_studio_sdk/client.py
 src/label_studio_sdk/tasks/client_ext.py
 src/label_studio_sdk/projects/client_ext.py
+src/label_studio_sdk/projects/exports/client_ext.py
+src/label_studio_sdk/tokens/client_ext.py
+src/label_studio_sdk/core/client_wrapper.py
 
 # converter
 src/label_studio_sdk/converter
@@ -30,14 +33,16 @@ tests/custom/legacy
 tests/custom/test_interface
 # TODO: fix webhooks !
 tests/test_webhooks.py
+tests/test_refresh_token.py
 
 # manual workflows
-.github/workflows/ci.yml
 .github/workflows/build_pypi.yml
+.github/workflows/ci.yml
 .github/workflows/codeql.yml
 .github/workflows/docs.yml
-.github/workflows/follow-merge-sync-pr-adala.yml
-.github/workflows/follow-merge-sync-pr-lso.yml
+.github/workflows/fm-command.yml
+.github/workflows/follow-merge-dispatch.yml
+.github/workflows/follow-merge-upstream-repo-sync-v2.yml
 .github/workflows/follow-merge-upstream-repo-sync.yml
 .github/workflows/jira-command.yml
 .github/workflows/lint.yml
@@ -48,6 +53,13 @@ tests/test_webhooks.py
 .github/workflows/slash-command-dispatch.yml
 .github/workflows/tests.yml
 .github/workflows/update-draft-release.yml
+.github/workflows/validator-dependencies.yml
+.github/workflows/zendesk_issue_commented.yml
+.github/workflows/zendesk_issue_created.yml
+.github/workflows/zendesk_task_comment.yml
+.github/workflows/zendesk_task_solve.yml
+.github/workflows/gitleaks.yml
+.github/workflows/git-command.yml
 .github/pr-title-checker-config.json
 .github/release.yml
 .github/autolabeler.yml

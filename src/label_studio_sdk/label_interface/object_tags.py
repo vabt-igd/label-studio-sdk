@@ -119,7 +119,7 @@ class ObjectTag(LabelStudioTag):
             tag=tag.tag,
             attr=dict(tag.attrib),
             name=tag.attrib.get("name"),
-            value=tag.attrib["value"],
+            value=tag.attrib.get('valueList', tag.attrib.get('value')),
         )
 
     @classmethod
@@ -127,7 +127,7 @@ class ObjectTag(LabelStudioTag):
         """
         Check if tag is input
         """
-        return bool(tag.attrib.get("name") and tag.attrib.get("value"))
+        return bool(tag.attrib.get("name") and (tag.attrib.get("value") or tag.attrib.get("valueList")))
 
     @property
     def value_type(self):
@@ -189,12 +189,17 @@ class AudioTag(ObjectTag):
 
 
 class ImageTag(ObjectTag):
-    """ """
+    """Image tag"""
     tag: str = "Image"
     
     def _generate_example(self, examples, only_urls=False):
         """ """
         return examples.get("Image")
+    
+    @property
+    def is_image_list(self):
+        """Check if the tag is an image list, i.e. it has a valueList attribute that accepts list of images"""
+        return bool(self.attr.get("valueList")) if self.attr else False
 
 
 class TableTag(ObjectTag):

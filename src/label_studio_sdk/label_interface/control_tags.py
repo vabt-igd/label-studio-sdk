@@ -92,6 +92,12 @@ class ControlTag(LabelStudioTag):
             and tag.attrib.get("toName")
             and tag.tag not in _NOT_CONTROL_TAGS
         )
+        
+    @property
+    def is_output_required(self):
+        # TextArea can be blank unless user specifies "required"="true" in the attribute
+        required_in_attr = str(self.attr.get("required", "false")).lower() == "true"
+        return required_in_attr or False
 
     def to_json_schema(self):
         """
@@ -566,6 +572,7 @@ class LabelsTag(ControlTag):
                 "properties": {
                     "start": {
                         "type": "integer",
+                        # TODO: this is incompatible with the OpenAI API using PredictedOutputs
                         "minimum": 0
                     },
                     "end": {
@@ -985,8 +992,14 @@ class TextAreaTag(ControlTag):
             dict: A dictionary representing the JSON Schema compatible with OpenAPI 3.
         """
         return {
-            "type": "string",
-            "description": f"Text for {self.to_name[0]}"
+            "oneOf": [
+                {"type": "string"},
+                {
+                    "type": "array",
+                    "items": {"type": "string"}
+                }
+            ],
+            "description": f"Text or list of texts for {self.to_name[0]}"
         }
 
 

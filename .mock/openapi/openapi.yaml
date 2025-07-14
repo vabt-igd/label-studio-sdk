@@ -1473,9 +1473,9 @@ paths:
 
         ```bash
 
-        curl -X POST -H 'Content-type: application/json' https://localhost:8080/api/ml -H 'Authorization: Token abc123'\
+        curl -X POST -H 'Content-type: application/json' https://localhost:8080/api/ml -H 'Authorization: Token abc123' --data '{"url": "http://localhost:9090", "project": {project_id}}'
 
-        --data '{"url": "http://localhost:9090", "project": {project_id}}' 
+        ```
       requestBody:
         $ref: "#/components/requestBodies/api_ml_createData"
       responses:
@@ -2269,6 +2269,12 @@ paths:
           required: false
           schema:
             type: integer
+        - name: workspaces
+          in: query
+          description: workspaces
+          required: false
+          schema:
+            type: integer
       responses:
         "200":
           description: ""
@@ -2328,6 +2334,11 @@ paths:
                 description: Project
                 type: object
                 properties:
+                  id:
+                    title: id
+                    description: Project ID
+                    type: integer
+                    example: 1
                   title:
                     title: title
                     description: Project title
@@ -2385,15 +2396,16 @@ paths:
                     default: "#FFFFFF"
                   control_weights:
                     title: control_weights
-                    description: "Dict of weights for each control tag in metric calculation. Each
-                      control tag (e.g. label or choice) will have its own key
-                      in control weight dict with weight for each label and
-                      overall weight. For example, if a bounding box annotation
-                      with a control tag named my_bbox should be included with
-                      0.33 weight in agreement calculation, and the first label
-                      Car should be twice as important as Airplane, then you
-                      need to specify: {'my_bbox': {'type': 'RectangleLabels',
-                      'labels': {'Car': 1.0, 'Airplane': 0.5}, 'overall': 0.33}"
+                    description: >
+                      Dict of weights for each control tag in metric calculation. Each
+                      control tag (e.g. label or choice) will have its own key in
+                      control weight dict with weight for each label and overall
+                      weight. For example, if a bounding box annotation with a
+                      control tag named my_bbox should be included with 0.33 weight
+                      in agreement calculation, and the first label Car should be
+                      twice as important as Airplane, then you need to specify:
+                      {'my_bbox': {'type': 'RectangleLabels', 'labels': {'Car': 1.0,
+                      'Airplane': 0.5}, 'overall': 0.33}}
                     type: object
                     example:
                       my_bbox:
@@ -2486,6 +2498,8 @@ paths:
                     finished_task_number: 10
                     queue_total: 10
                     queue_done: 100
+                    annotation_limit_count: 10
+                    annotation_limit_percent: 50
       tags:
         - Projects
       x-fern-sdk-group-name: projects
@@ -2558,6 +2572,14 @@ paths:
                     title: maximum_annotations
                     description: Maximum annotations per task
                     type: integer
+                  annotation_limit_count:
+                    title: annotation_limit_count
+                    description: Maximum number of annotations per annotator
+                    type: integer
+                  annotation_limit_percent:
+                    title: annotation_limit_percent
+                    description: Maximum percentage of annotations per annotator
+                    type: float
                   color:
                     title: color
                     description: Project color in HEX format
@@ -2565,15 +2587,16 @@ paths:
                     default: "#FFFFFF"
                   control_weights:
                     title: control_weights
-                    description: "Dict of weights for each control tag in metric calculation. Each
-                      control tag (e.g. label or choice) will have its own key
-                      in control weight dict with weight for each label and
-                      overall weight. For example, if a bounding box annotation
-                      with a control tag named my_bbox should be included with
-                      0.33 weight in agreement calculation, and the first label
-                      Car should be twice as important as Airplane, then you
-                      need to specify: {'my_bbox': {'type': 'RectangleLabels',
-                      'labels': {'Car': 1.0, 'Airplane': 0.5}, 'overall': 0.33}"
+                    description: >
+                      Dict of weights for each control tag in metric calculation. Each
+                      control tag (e.g. label or choice) will have its own key in
+                      control weight dict with weight for each label and overall
+                      weight. For example, if a bounding box annotation with a
+                      control tag named my_bbox should be included with 0.33 weight
+                      in agreement calculation, and the first label Car should be
+                      twice as important as Airplane, then you need to specify:
+                      {'my_bbox': {'type': 'RectangleLabels', 'labels': {'Car': 1.0,
+                      'Airplane': 0.5}, 'overall': 0.33}}
                     type: object
                     example:
                       my_bbox:
@@ -2608,401 +2631,6 @@ paths:
         required: true
         schema:
           type: integer
-  "/api/projects/{id}/export":
-    get:
-      operationId: api_projects_export_read
-      summary: Easy export of tasks and annotations
-      description: >
-        
-        <i>Note: if you have a large project it's recommended to use
-
-        export snapshots, this easy export endpoint might have timeouts.</i><br/><br>
-
-        Export annotated tasks as a file in a specific format.
-
-        For example, to export JSON annotations for a project to a file called `annotations.json`,
-
-        run the following from the command line:
-
-        ```bash
-
-        curl -X GET https://localhost:8080/api/projects/{id}/export?exportType=JSON -H 'Authorization: Token abc123' --output 'annotations.json'
-
-        ```
-
-        To export all tasks, including skipped tasks and others without annotations, run the following from the command line:
-
-        ```bash
-
-        curl -X GET https://localhost:8080/api/projects/{id}/export?exportType=JSON&download_all_tasks=true -H 'Authorization: Token abc123' --output 'annotations.json'
-
-        ```
-
-        To export specific tasks with IDs of 123 and 345, run the following from the command line:
-
-        ```bash
-
-        curl -X GET https://localhost:8080/api/projects/{id}/export?ids[]=123\&ids[]=345 -H 'Authorization: Token abc123' --output 'annotations.json'
-
-        ```
-      parameters:
-        - name: export_type
-          in: query
-          description: Selected export format (JSON by default)
-          schema:
-            type: string
-        - name: download_all_tasks
-          in: query
-          description: >
-            
-            If true, download all tasks regardless of status. If false, download only annotated tasks.
-          schema:
-            type: string
-        - name: download_resources
-          in: query
-          description: >
-            
-            If true, download all resource files such as images, audio, and others relevant to the tasks.
-          schema:
-            type: boolean
-        - name: ids
-          in: query
-          description: >
-            
-            Specify a list of task IDs to retrieve only the details for those tasks.
-          style: form
-          explode: false
-          schema:
-            type: array
-            items:
-              title: Task ID
-              description: Individual task ID
-              type: integer
-        - name: id
-          in: path
-          description: A unique integer value identifying this project.
-          required: true
-          schema:
-            type: integer
-      responses:
-        "200":
-          description: Exported data
-          content:
-            application/json:
-              schema:
-                title: Export file
-                description: Export file with results
-                type: string
-                format: binary
-      tags:
-        - Export
-      x-fern-sdk-group-name: projects
-      x-fern-sdk-method-name: create_export
-      x-fern-audiences:
-        - public
-    parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: string
-  "/api/projects/{id}/export/formats":
-    get:
-      operationId: api_projects_export_formats_read
-      summary: Get export formats
-      description: Retrieve the available export formats for the current project by ID.
-      parameters:
-        - name: id
-          in: path
-          description: A unique integer value identifying this project.
-          required: true
-          schema:
-            type: integer
-      responses:
-        "200":
-          description: Export formats
-          content:
-            application/json:
-              schema:
-                title: Format list
-                description: List of available formats
-                type: array
-                items:
-                  title: Export format
-                  type: string
-      tags:
-        - Export
-      x-fern-sdk-group-name:
-        - projects
-        - exports
-      x-fern-sdk-method-name: list_formats
-      x-fern-audiences:
-        - public
-    parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: string
-  "/api/projects/{id}/exports/":
-    get:
-      operationId: api_projects_exports_list
-      summary: List all export snapshots
-      description: |
-        
-        Returns a list of exported files for a specific project by ID.
-      parameters:
-        - name: id
-          in: path
-          description: A unique integer value identifying this project.
-          required: true
-          schema:
-            type: integer
-      responses:
-        "200":
-          description: ""
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/Export"
-      tags:
-        - Export
-      x-fern-sdk-group-name:
-        - projects
-        - exports
-      x-fern-sdk-method-name: list
-      x-fern-audiences:
-        - public
-    post:
-      operationId: api_projects_exports_create
-      summary: Create new export snapshot
-      description: >
-        
-        Create a new export request to start a background task and generate an export file for a specific project by ID.
-      parameters:
-        - name: id
-          in: path
-          description: A unique integer value identifying this project.
-          required: true
-          schema:
-            type: integer
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/ExportCreate"
-        required: true
-      responses:
-        "201":
-          description: ""
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ExportCreate"
-      tags:
-        - Export
-      x-fern-sdk-group-name:
-        - projects
-        - exports
-      x-fern-sdk-method-name: create
-      x-fern-audiences:
-        - public
-    parameters:
-      - name: id
-        in: path
-        description: A unique integer value identifying this export.
-        required: true
-        schema:
-          type: integer
-  "/api/projects/{id}/exports/{export_pk}":
-    get:
-      operationId: api_projects_exports_read
-      summary: Get export snapshot by ID
-      description: >
-        
-        Retrieve information about an export file by export ID for a specific project.
-      parameters:
-        - name: id
-          in: path
-          description: A unique integer value identifying this project.
-          required: true
-          schema:
-            type: integer
-        - name: export_pk
-          in: path
-          description: Primary key identifying the export file.
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          description: ""
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Export"
-      tags:
-        - Export
-      x-fern-sdk-group-name:
-        - projects
-        - exports
-      x-fern-sdk-method-name: get
-      x-fern-audiences:
-        - public
-    delete:
-      operationId: api_projects_exports_delete
-      summary: Delete export snapshot
-      description: |
-        
-        Delete an export file by specified export ID.
-      parameters:
-        - name: id
-          in: path
-          description: A unique integer value identifying this project.
-          required: true
-          schema:
-            type: integer
-        - name: export_pk
-          in: path
-          description: Primary key identifying the export file.
-          required: true
-          schema:
-            type: string
-      responses:
-        "204":
-          description: ""
-      tags:
-        - Export
-      x-fern-sdk-group-name:
-        - projects
-        - exports
-      x-fern-sdk-method-name: delete
-      x-fern-audiences:
-        - public
-    parameters:
-      - name: id
-        in: path
-        description: A unique integer value identifying this export.
-        required: true
-        schema:
-          type: integer
-      - name: export_pk
-        in: path
-        required: true
-        schema:
-          type: string
-  "/api/projects/{id}/exports/{export_pk}/convert":
-    post:
-      operationId: api_projects_exports_convert_create
-      summary: Export conversion
-      description: |
-        
-        Convert export snapshot to selected format
-      parameters:
-        - name: id
-          in: path
-          description: A unique integer value identifying this project.
-          required: true
-          schema:
-            type: integer
-        - name: export_pk
-          in: path
-          description: Primary key identifying the export file.
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/ExportConvert"
-        required: true
-      responses:
-        "201":
-          description: ""
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ExportConvert"
-      tags:
-        - Export
-      x-fern-sdk-group-name:
-        - projects
-        - exports
-      x-fern-sdk-method-name: convert
-      x-fern-audiences:
-        - public
-    parameters:
-      - name: id
-        in: path
-        description: A unique integer value identifying this export.
-        required: true
-        schema:
-          type: integer
-      - name: export_pk
-        in: path
-        required: true
-        schema:
-          type: string
-  "/api/projects/{id}/exports/{export_pk}/download":
-    get:
-      operationId: api_projects_exports_download_read
-      summary: Download export snapshot as file in specified format
-      description: >
-        
-        Download an export file in the specified format for a specific project. Specify the project ID with the `id`
-
-        parameter in the path and the ID of the export file you want to download using the `export_pk` parameter
-
-        in the path.
-
-
-        Get the `export_pk` from the response of the request to [Create new export](/api#operation/api_projects_exports_create)
-
-        or after [listing export files](/api#operation/api_projects_exports_list).
-      parameters:
-        - name: exportType
-          in: query
-          description: Selected export format
-          schema:
-            type: string
-        - name: id
-          in: path
-          description: A unique integer value identifying this project.
-          required: true
-          schema:
-            type: integer
-        - name: export_pk
-          in: path
-          description: Primary key identifying the export file.
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          description: ""
-      tags:
-        - Export
-      x-fern-sdk-group-name:
-        - projects
-        - exports
-      x-fern-sdk-method-name: download
-      x-fern-audiences:
-        - public
-    parameters:
-      - name: id
-        in: path
-        description: A unique integer value identifying this export.
-        required: true
-        schema:
-          type: integer
-      - name: export_pk
-        in: path
-        required: true
-        schema:
-          type: string
   "/api/projects/{id}/file-uploads":
     get:
       operationId: api_projects_file-uploads_list
@@ -3095,7 +2723,7 @@ paths:
         There are three possible ways to import tasks with this endpoint:
 
 
-        ### 1\. **POST with data**
+        ### 1. **POST with data**
 
         Send JSON tasks as POST data. Only JSON is supported for POSTing files directly.
 
@@ -3106,14 +2734,12 @@ paths:
 
         ```bash
 
-        curl -H 'Content-Type: application/json' -H 'Authorization: Token abc123' \
-
-        -X POST 'https://localhost:8080/api/projects/1/import' --data '[{"text": "Some text 1"}, {"text": "Some text 2"}]'
+        curl -H 'Content-Type: application/json' -H 'Authorization: Token abc123' -X POST 'https://localhost:8080/api/projects/1/import' --data '[{"text": "Some text 1"}, {"text": "Some text 2"}]'
 
         ```
 
 
-        ### 2\. **POST with files**
+        ### 2. **POST with files**
 
         Send tasks as files. You can attach multiple files with different names.
 
@@ -3134,25 +2760,19 @@ paths:
 
         ```bash
 
-        curl -H 'Authorization: Token abc123' \
-
-        -X POST 'https://localhost:8080/api/projects/1/import' -F ‘file=@path/to/my_file.csv’
+        curl -H 'Authorization: Token abc123' -X POST 'https://localhost:8080/api/projects/1/import' -F 'file=@path/to/my_file.csv'
 
         ```
 
 
-        ### 3\. **POST with URL**
+        ### 3. **POST with URL**
 
         You can also provide a URL to a file with labeling tasks. Supported file formats are the same as in option 2.
 
 
         ```bash
 
-        curl -H 'Content-Type: application/json' -H 'Authorization: Token abc123' \
-
-        -X POST 'https://localhost:8080/api/projects/1/import' \
-
-        --data '[{"url": "http://example.com/test1.csv"}, {"url": "http://example.com/test2.csv"}]'
+        curl -H 'Content-Type: application/json' -H 'Authorization: Token abc123' -X POST 'https://localhost:8080/api/projects/1/import' --data '[{"url": "http://example.com/test1.csv"}, {"url": "http://example.com/test2.csv"}]'
 
         ```
 
@@ -3758,12 +3378,6 @@ paths:
       x-fern-sdk-method-name: sync
       x-fern-audiences:
         - public
-    parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: string
   /api/storages/export:
     get:
       operationId: api_storages_export_list
@@ -4024,7 +3638,7 @@ paths:
         in: path
         required: true
         schema:
-          type: string
+          type: integer
   /api/storages/export/gcs:
     get:
       operationId: api_storages_export_gcs_list
@@ -4273,7 +3887,7 @@ paths:
         in: path
         required: true
         schema:
-          type: string
+          type: integer
   /api/storages/export/localfiles:
     get:
       operationId: api_storages_export_localfiles_list
@@ -4482,7 +4096,7 @@ paths:
         in: path
         required: true
         schema:
-          type: string
+          type: integer
   /api/storages/export/redis:
     get:
       operationId: api_storages_export_redis_list
@@ -4734,7 +4348,7 @@ paths:
         in: path
         required: true
         schema:
-          type: string
+          type: integer
   /api/storages/export/s3:
     get:
       operationId: api_storages_export_s3_list
@@ -5010,7 +4624,7 @@ paths:
         in: path
         required: true
         schema:
-          type: string
+          type: integer
   /api/storages/export/types:
     get:
       operationId: api_storages_export_types_list
@@ -5339,12 +4953,6 @@ paths:
       x-fern-sdk-method-name: sync
       x-fern-audiences:
         - public
-    parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: string
   /api/storages/localfiles/:
     get:
       operationId: api_storages_localfiles_list
@@ -5555,12 +5163,6 @@ paths:
       x-fern-sdk-method-name: sync
       x-fern-audiences:
         - public
-    parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: string
   /api/storages/redis/:
     get:
       operationId: api_storages_redis_list
@@ -5831,82 +5433,6 @@ paths:
       x-fern-sdk-method-name: sync
       x-fern-audiences:
         - public
-    parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: string
-          
-#  /api/storages/s3s/:
-#    get:
-#      summary: List import storages
-#      description: >
-#
-#        You can connect your S3 bucket to Label Studio as a source storage or target storage. Use this API request to get a list of all Google import (source) storage connections for a specific project.
-#
-#
-#        The project ID can be found in the URL when viewing the project in Label Studio, or you can retrieve all project IDs using [List all projects](../projects/list).
-#
-#
-#        For more information about working with external storage, see [Sync data from external storage](https://labelstud.io/guide/storage).
-#      parameters:
-#        - name: project
-#          in: query
-#          description: Project ID
-#          schema:
-#            type: integer
-#      responses:
-#        "200":
-#          description: ""
-#          content:
-#            application/json:
-#              schema:
-#                type: array
-#                items:
-#                  $ref: "./resources/s3s.yaml#/components/schemas/S3SImportStorage"
-#      x-fern-sdk-group-name:
-#        - import_storage
-#        - s3s
-#      x-fern-sdk-method-name: list
-#      x-fern-audiences:
-#        - public
-
-#  /api/storages/s3s/:
-#    $ref: "./resources/s3s.yaml#/paths/~1api~1storages~1s3s~1"
-#    get:
-#      summary: List import storages
-#      description: >
-#
-#        You can connect your S3 bucket to Label Studio as a source storage or target storage. Use this API request to get a list of all Google import (source) storage connections for a specific project.
-#
-#
-#        The project ID can be found in the URL when viewing the project in Label Studio, or you can retrieve all project IDs using [List all projects](../projects/list).
-#
-#
-#        For more information about working with external storage, see [Sync data from external storage](https://labelstud.io/guide/storage).
-#      parameters:
-#        - name: project
-#          in: query
-#          description: Project ID
-#          schema:
-#            type: integer
-#      responses:
-#        "200":
-#          description: ""
-#          content:
-#            application/json:
-#              schema:
-#                type: array
-#                items:
-#                  type: object
-#      x-fern-sdk-group-name:
-#        - import_storage
-#        - s3s
-#      x-fern-sdk-method-name: list
-#      x-fern-audiences:
-#        - public
-
 
   /api/storages/s3/:
     get:
@@ -6244,12 +5770,6 @@ paths:
       x-fern-sdk-method-name: sync
       x-fern-audiences:
         - public
-    parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: string
   /api/storages/types:
     get:
       operationId: api_storages_types_list
@@ -7174,7 +6694,8 @@ components:
                 default: "#FFFFFF"
               control_weights:
                 title: control_weights
-                description: "Dict of weights for each control tag in metric calculation. Each
+                description: >
+                  Dict of weights for each control tag in metric calculation. Each
                   control tag (e.g. label or choice) will have its own key in
                   control weight dict with weight for each label and overall
                   weight. For example, if a bounding box annotation with a
@@ -7182,7 +6703,7 @@ components:
                   in agreement calculation, and the first label Car should be
                   twice as important as Airplane, then you need to specify:
                   {'my_bbox': {'type': 'RectangleLabels', 'labels': {'Car': 1.0,
-                  'Airplane': 0.5}, 'overall': 0.33}"
+                  'Airplane': 0.5}, 'overall': 0.33}}
                 type: object
                 example:
                   my_bbox:
@@ -8137,7 +7658,9 @@ components:
           minLength: 1
         completed_by:
           title: Completed by
-          type: integer
+          anyOf:
+            - $ref: "#/components/schemas/UserSimple"
+            - integer
         unique_id:
           title: Unique id
           type: string
@@ -8982,6 +8505,11 @@ components:
           title: Organization
           type: integer
           nullable: true
+        prompts:
+          type: array
+          items:
+            $ref: "#/components/schemas/Prompt"
+          nullable: true
         color:
           title: Color
           type: string
@@ -8993,6 +8521,15 @@ components:
             annotations per task is equal or greater to this value, the task is
             completed (is_labeled=True)
           type: integer
+        annotation_limit_count:
+          title: Annotation limit count
+          description: Maximum number of tasks that can be annotated by a single annotator in this project
+            pause
+          type: integer
+        annotation_limit_percent:
+          title: Annotation limit percent
+          description: Maximum percentage of tasks in this project that can be annotated by a single annotator
+          type: float
         is_published:
           title: Published
           description: Whether or not the project is published to annotators
@@ -9021,7 +8558,7 @@ components:
         start_training_on_annotation_update:
           title: Start training on annotation update
           description: Start model training after any annotations are submitted or updated
-          type: string
+          type: boolean
           readOnly: true
         show_collab_predictions:
           title: Show predictions to annotator
@@ -9099,15 +8636,16 @@ components:
           nullable: true
         control_weights:
           title: Control weights
-          description: "Dict of weights for each control tag in metric calculation. Each
-            control tag (e.g. label or choice) will have it's own key in control
-            weight dict with weight for each label and overall weight.For
-            example, if bounding box annotation with control tag named my_bbox
-            should be included with 0.33 weight in agreement calculation, and
-            the first label Car should be twice more important than Airplaine,
-            then you have to need the specify: {'my_bbox': {'type':
-            'RectangleLabels', 'labels': {'Car': 1.0, 'Airplaine': 0.5},
-            'overall': 0.33}"
+          description: >
+            Dict of weights for each control tag in metric calculation. Each
+            control tag (e.g. label or choice) will have its own key in
+            control weight dict with weight for each label and overall
+            weight. For example, if a bounding box annotation with a
+            control tag named my_bbox should be included with 0.33 weight
+            in agreement calculation, and the first label Car should be
+            twice as important as Airplane, then you need to specify:
+            {'my_bbox': {'type': 'RectangleLabels', 'labels': {'Car': 1.0,
+            'Airplane': 0.5}, 'overall': 0.33}}
           type: object
           nullable: true
         parsed_label_config:
@@ -9122,7 +8660,7 @@ components:
         config_has_control_tags:
           title: Config has control tags
           description: Flag to detect is project ready for labeling
-          type: string
+          type: boolean
           readOnly: true
         skip_queue:
           title: Skip queue
@@ -9149,11 +8687,11 @@ components:
           readOnly: true
         queue_total:
           title: Queue total
-          type: string
+          type: integer
           readOnly: true
         queue_done:
           title: Queue done
-          type: string
+          type: integer
           readOnly: true
     ProjectLabelConfig:
       required:
@@ -9237,156 +8775,6 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/ConvertedFormat"
-    TaskFilterOptions:
-      type: object
-      properties:
-        view:
-          title: View
-          description: Apply filters from the view ID (a tab from the Data Manager)
-          type: integer
-        skipped:
-          title: Skipped
-          description: "`only` - include all tasks with skipped annotations<br>`exclude` -
-            exclude all tasks with skipped annotations"
-          type: string
-          enum:
-            - only
-            - exclude
-            - null
-          nullable: true
-        finished:
-          title: Finished
-          description: "`only` - include all finished tasks (is_labeled =
-            true)<br>`exclude` - exclude all finished tasks"
-          type: string
-          enum:
-            - only
-            - exclude
-            - null
-          nullable: true
-        annotated:
-          title: Annotated
-          description: "`only` - include all tasks with at least one not skipped
-            annotation<br>`exclude` - exclude all tasks with at least one not
-            skipped annotation"
-          type: string
-          enum:
-            - only
-            - exclude
-            - null
-          nullable: true
-        only_with_annotations:
-          title: Only with annotations
-          type: boolean
-          default: false
-    AnnotationFilterOptions:
-      type: object
-      properties:
-        usual:
-          title: Usual
-          description: Include not skipped and not ground truth annotations
-          type: boolean
-          default: true
-          nullable: true
-        ground_truth:
-          title: Ground truth
-          description: Include ground truth annotations
-          type: boolean
-          nullable: true
-        skipped:
-          title: Skipped
-          description: Include skipped annotations
-          type: boolean
-          nullable: true
-    SerializationOption:
-      description: JSON dict with parameters
-      type: object
-      properties:
-        only_id:
-          title: Only id
-          description: Include a full json body or IDs only
-          type: boolean
-          default: false
-    SerializationOptions:
-      type: object
-      properties:
-        drafts:
-          $ref: "#/components/schemas/SerializationOption"
-        predictions:
-          $ref: "#/components/schemas/SerializationOption"
-        include_annotation_history:
-          title: Include annotation history
-          description: Include annotation history
-          type: boolean
-          default: false
-        annotations__completed_by:
-          $ref: "#/components/schemas/SerializationOption"
-        interpolate_key_frames:
-          title: Interpolate key frames
-          description: Interpolate video key frames
-          type: boolean
-          default: false
-    ExportCreate:
-      type: object
-      properties:
-        title:
-          title: Title
-          type: string
-          maxLength: 2048
-        id:
-          title: ID
-          type: integer
-          readOnly: true
-        created_by:
-          $ref: "#/components/schemas/UserSimple"
-        created_at:
-          title: Created at
-          description: Creation time
-          type: string
-          format: date-time
-          readOnly: true
-        finished_at:
-          title: Finished at
-          description: Complete or fail time
-          type: string
-          format: date-time
-          nullable: true
-        status:
-          title: Export status
-          type: string
-          enum:
-            - created
-            - in_progress
-            - failed
-            - completed
-        md5:
-          title: Md5 of file
-          type: string
-          maxLength: 128
-          minLength: 1
-        counters:
-          title: Exporting meta data
-          type: object
-        converted_formats:
-          type: array
-          items:
-            $ref: "#/components/schemas/ConvertedFormat"
-        task_filter_options:
-          $ref: "#/components/schemas/TaskFilterOptions"
-        annotation_filter_options:
-          $ref: "#/components/schemas/AnnotationFilterOptions"
-        serialization_options:
-          $ref: "#/components/schemas/SerializationOptions"
-    ExportConvert:
-      required:
-        - export_type
-      type: object
-      properties:
-        export_type:
-          title: Export type
-          description: Export file format.
-          type: string
-          minLength: 1
     ProjectImport:
       type: object
       properties:
@@ -10891,7 +10279,9 @@ components:
                 type: object
                 title: ML Backend instance
               model_run:
-                type: object
+                oneOf:
+                  - type: object
+                  - type: integer
                 title: Model Run instance
               task:
                 type: integer
@@ -11060,7 +10450,9 @@ components:
           type: array
           items:
             description: Users who wrote comments
-            type: integer
+            oneOf:
+              - type: integer
+              - type: object
           uniqueItems: true
     Webhook:
       required:
