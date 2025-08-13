@@ -68,11 +68,11 @@ class Format(Enum):
     YOLO = 11
     YOLO_OBB = 12
     CSV_OLD = 13
-    JSON_TS_WITH_DATA = 14
     YOLO_WITH_IMAGES = 14
     COCO_WITH_IMAGES = 15
     YOLO_OBB_WITH_IMAGES = 16
     BRUSH_TO_COCO = 17
+    JSON_TS_WITH_DATA = 18
 
     def __str__(self):
         return self.name
@@ -193,6 +193,7 @@ class Converter(object):
             "description": "List of items in raw JSON format stored in one JSON file, similiar to JSON-MIN. "
             "Additionally includes the raw data in the raw_data/ folder.",
             "link": "https://labelstud.io/guide/export.html#JSON",
+            "tags": ["timeseries analysis"],
         },
     }
 
