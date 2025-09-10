@@ -7477,6 +7477,14 @@ client.projects.update(
 <dl>
 <dd>
 
+**show_unused_data_columns_to_annotators:** `typing.Optional[bool]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **skip_queue:** `typing.Optional[PatchedLseProjectUpdateRequestSkipQueue]` 
     
 </dd>
@@ -8720,6 +8728,178 @@ client.tasks.update(
 <dd>
 
 **unresolved_comment_count:** `typing.Optional[int]` — Number of unresolved comments in the task including all annotations
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.tasks.<a href="src/label_studio_sdk/tasks/client.py">create_event</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+
+    Create a new task event to track user interactions and system events during annotation.
+    
+    This endpoint is designed to receive events from the frontend labeling interface to enable
+    accurate lead time calculation and detailed annotation analytics.
+    
+    ## Event Types
+    
+    **Core Annotation Events:**
+    - `annotation_loaded` - When annotation interface is loaded
+    - `annotation_submitted` - When annotation is submitted
+    - `annotation_updated` - When annotation is modified
+    - `annotation_reviewed` - When annotation is reviewed
+    
+    **User Activity Events:**
+    - `visibility_change` - When page visibility changes (tab switch, minimize)
+    - `idle_detected` - When user goes idle
+    - `idle_resumed` - When user returns from idle
+    
+    **Interaction Events:**
+    - `region_finished_drawing` - When annotation region is completed
+    - `region_deleted` - When annotation regions are removed
+    - `hotkey_pressed` - When keyboard shortcuts are used
+    
+    **Media Events:**
+    - `video_playback_start/end` - Video playback control
+    - `audio_playback_start/end` - Audio playback control
+    - `video_scrub` - Video timeline scrubbing
+    
+    ## Usage
+    
+    Events are automatically associated with the task specified in the URL path.
+    The current user is automatically set as the actor. Project and organization
+    are derived from the task context.
+    
+    ## Example Request
+    
+    ```json
+    {
+        "event_key": "annotation_loaded",
+        "event_time": "2024-01-15T10:30:00Z",
+        "annotation": 123,
+        "meta": {
+            "annotation_count": 5,
+            "estimated_time": 300
+        }
+    }
+    ```
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+import datetime
+
+from label_studio_sdk import LabelStudio
+
+client = LabelStudio(
+    api_key="YOUR_API_KEY",
+)
+client.tasks.create_event(
+    id=1,
+    event_key="event_key",
+    event_time=datetime.datetime.fromisoformat(
+        "2024-01-15 09:30:00+00:00",
+    ),
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `int` — Task ID to associate the event with
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**event_key:** `str` — Event type identifier (e.g., "annotation_loaded", "region_finished_drawing")
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**event_time:** `dt.datetime` — Timestamp when the event occurred (frontend time)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**annotation:** `typing.Optional[int]` — Annotation ID associated with this event
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**annotation_draft:** `typing.Optional[int]` — Draft annotation ID associated with this event
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**meta:** `typing.Optional[typing.Optional[typing.Any]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**review:** `typing.Optional[int]` — Review ID associated with this event
     
 </dd>
 </dl>
@@ -21880,6 +22060,14 @@ client.projects.members.bulk.post(
 <dl>
 <dd>
 
+**search:** `typing.Optional[str]` — Search term for filtering members by name, email, or username. Only when all=True.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **excluded:** `typing.Optional[typing.Sequence[int]]` 
     
 </dd>
@@ -21889,6 +22077,14 @@ client.projects.members.bulk.post(
 <dd>
 
 **included:** `typing.Optional[typing.Sequence[int]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**roles:** `typing.Optional[typing.Sequence[ProjectMemberBulkAssignRolesRequest]]` 
     
 </dd>
 </dl>
@@ -21959,6 +22155,146 @@ client.projects.members.bulk.delete(
 <dd>
 
 **id:** `int` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**search:** `typing.Optional[str]` — Search term for filtering members by name, email, or username. Only when all=True.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Projects Members Paginated
+<details><summary><code>client.projects.members.paginated.<a href="src/label_studio_sdk/projects/members/paginated/client.py">list</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieve the members for a specific project.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+
+client = LabelStudio(
+    api_key="YOUR_API_KEY",
+)
+response = client.projects.members.paginated.list(
+    id=1,
+)
+for item in response:
+    yield item
+# alternatively, you can paginate page-by-page
+for page in response.iter_pages():
+    yield page
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `int` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**ids:** `typing.Optional[str]` — Comma-separated list of user IDs to filter by
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**implicit:** `typing.Optional[bool]` — Include/Exclude implicit project members in the results. If not provided, explicit + implicit members are returned.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**no_annotators:** `typing.Optional[bool]` — Exclude annotators from the results
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**page:** `typing.Optional[int]` — A page number within the paginated result set.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**page_size:** `typing.Optional[int]` — Number of results to return per page.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**search:** `typing.Optional[str]` — Search term for filtering members by name, email, or username
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**with_deleted:** `typing.Optional[bool]` — Include deleted members in the results
     
 </dd>
 </dl>
@@ -24288,6 +24624,114 @@ client.workspaces.members.bulk.delete(
 <dd>
 
 **id:** `int` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Workspaces Members Paginated
+<details><summary><code>client.workspaces.members.paginated.<a href="src/label_studio_sdk/workspaces/members/paginated/client.py">list</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieve the members for a specific workspace.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+
+client = LabelStudio(
+    api_key="YOUR_API_KEY",
+)
+response = client.workspaces.members.paginated.list(
+    id=1,
+)
+for item in response:
+    yield item
+# alternatively, you can paginate page-by-page
+for page in response.iter_pages():
+    yield page
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `int` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**ids:** `typing.Optional[str]` — Comma-separated list of user IDs to filter by
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**page:** `typing.Optional[int]` — A page number within the paginated result set.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**page_size:** `typing.Optional[int]` — Number of results to return per page.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**search:** `typing.Optional[str]` — A search term.
     
 </dd>
 </dl>

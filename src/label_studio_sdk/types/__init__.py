@@ -121,6 +121,9 @@ from .organization_member import OrganizationMember
 from .organization_membership import OrganizationMembership
 from .paginated_all_roles_project_list_list import PaginatedAllRolesProjectListList
 from .paginated_lse_organization_member_list_list import PaginatedLseOrganizationMemberListList
+from .paginated_lse_user_list import PaginatedLseUserList
+from .paginated_paginated_project_member_list import PaginatedPaginatedProjectMemberList
+from .paginated_project_member import PaginatedProjectMember
 from .paginated_role_based_task_list import PaginatedRoleBasedTaskList
 from .pause import Pause
 from .pause_request import PauseRequest
@@ -133,6 +136,7 @@ from .project_group_role_enum import ProjectGroupRoleEnum
 from .project_import import ProjectImport
 from .project_label_config import ProjectLabelConfig
 from .project_label_config_request import ProjectLabelConfigRequest
+from .project_member_bulk_assign_roles_request import ProjectMemberBulkAssignRolesRequest
 from .project_sampling import ProjectSampling
 from .project_skip_queue import ProjectSkipQueue
 from .project_subset_enum import ProjectSubsetEnum
@@ -173,6 +177,7 @@ from .state_enum import StateEnum
 from .status7bf_enum import Status7BfEnum
 from .status_c5a_enum import StatusC5AEnum
 from .task_assignment import TaskAssignment
+from .task_event import TaskEvent
 from .third_party_model_version import ThirdPartyModelVersion
 from .third_party_model_version_request import ThirdPartyModelVersionRequest
 from .token_refresh_response import TokenRefreshResponse
@@ -313,6 +318,9 @@ __all__ = [
     "OrganizationMembership",
     "PaginatedAllRolesProjectListList",
     "PaginatedLseOrganizationMemberListList",
+    "PaginatedLseUserList",
+    "PaginatedPaginatedProjectMemberList",
+    "PaginatedProjectMember",
     "PaginatedRoleBasedTaskList",
     "Pause",
     "PauseRequest",
@@ -325,6 +333,7 @@ __all__ = [
     "ProjectImport",
     "ProjectLabelConfig",
     "ProjectLabelConfigRequest",
+    "ProjectMemberBulkAssignRolesRequest",
     "ProjectSampling",
     "ProjectSkipQueue",
     "ProjectSubsetEnum",
@@ -365,6 +374,7 @@ __all__ = [
     "Status7BfEnum",
     "StatusC5AEnum",
     "TaskAssignment",
+    "TaskEvent",
     "ThirdPartyModelVersion",
     "ThirdPartyModelVersionRequest",
     "TokenRefreshResponse",

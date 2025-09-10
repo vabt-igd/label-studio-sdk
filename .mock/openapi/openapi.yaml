@@ -4257,33 +4257,113 @@ paths:
       x-fern-sdk-method-name: update
   /api/llm/openai/chat/completions:
     post:
-      description: Proxy requests to OpenAI /chat/completions and return the full response payload.
+      description: 'Proxy requests to OpenAI-compatible chat completions APIs and return the full response payload. Supports multiple providers via model parameter format: "model_name" (defaults to OpenAI), "provider/model_name", or "provider:model_name". Works with providers that offer OpenAI-compatible endpoints.'
       operationId: api_llm_openai_chat_completions_create
       requestBody:
         content:
           application/json:
             schema:
-              additionalProperties: {}
-              type: object
-          application/x-www-form-urlencoded:
-            schema:
-              additionalProperties: {}
-              type: object
-          multipart/form-data:
-            schema:
-              additionalProperties: {}
+              properties:
+                messages:
+                  description: Array of message objects for the chat completion
+                  items:
+                    properties:
+                      content:
+                        description: The content of the message
+                        type: string
+                      role:
+                        description: The role of the message author
+                        enum:
+                          - system
+                          - user
+                          - assistant
+                        type: string
+                    required:
+                      - role
+                      - content
+                    type: object
+                  type: array
+                model:
+                  description: Model identifier. Can be "model_name" (defaults to OpenAI), "provider/model_name", or "provider:model_name"
+                  example: gpt-4
+                  type: string
+              required:
+                - model
+                - messages
               type: object
       responses:
         '200':
           content:
             application/json:
               schema:
-                additionalProperties: {}
-                type: object
+                content:
+                  application/json:
+                    properties:
+                      choices:
+                        description: Array of completion choices
+                        items:
+                          properties:
+                            finish_reason:
+                              description: The reason the completion finished
+                              type: string
+                            index:
+                              description: The index of the choice
+                              type: integer
+                            message:
+                              properties:
+                                content:
+                                  description: The content of the message
+                                  type: string
+                                role:
+                                  description: The role of the message author
+                                  type: string
+                              type: object
+                          type: object
+                        type: array
+                      created:
+                        description: Unix timestamp of when the completion was created
+                        type: integer
+                      id:
+                        description: Unique identifier for the chat completion
+                        type: string
+                      model:
+                        description: The model used for the completion
+                        type: string
+                      object:
+                        description: Object type, always "chat.completion"
+                        type: string
+                      usage:
+                        description: Token usage statistics
+                        properties:
+                          completion_tokens:
+                            description: Number of tokens in the completion
+                            type: integer
+                          prompt_tokens:
+                            description: Number of tokens in the prompt
+                            type: integer
+                          total_tokens:
+                            description: Total number of tokens used
+                            type: integer
+                        type: object
+                    type: object
+                description: Chat completion response
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                content:
+                  application/json:
+                    properties:
+                      detail:
+                        description: Error message describing the issue
+                        type: string
+                    type: object
+                description: Bad request - missing required fields or invalid provider
           description: ''
       security:
         - Token: []
-      summary: Proxy to OpenAI Chat Completions
+      summary: Proxy to OpenAI-Compatible Chat Completions
       tags:
         - LLM
       x-fern-audiences:
@@ -7306,6 +7386,11 @@ paths:
           required: true
           schema:
             type: integer
+        - description: Search term for filtering members by name, email, or username. Only when all=True.
+          in: query
+          name: search
+          schema:
+            type: string
       responses:
         '200':
           content:
@@ -7337,6 +7422,11 @@ paths:
           required: true
           schema:
             type: integer
+        - description: Search term for filtering members by name, email, or username. Only when all=True.
+          in: query
+          name: search
+          schema:
+            type: string
       requestBody:
         content:
           application/json:
@@ -7423,13 +7513,23 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PaginatedLseUserList'
+                $ref: '#/components/schemas/PaginatedPaginatedProjectMemberList'
           description: ''
       security:
         - Token: []
       summary: Get project members paginated
       tags:
         - Projects
+      x-fern-audiences:
+        - public
+      x-fern-pagination:
+        offset: $request.page
+        results: $response.results
+      x-fern-sdk-group-name:
+        - projects
+        - members
+        - paginated
+      x-fern-sdk-method-name: list
   /api/projects/{id}/metricparam/:
     get:
       description: Get the current metrics configuration for a project.
@@ -7574,9 +7674,14 @@ paths:
   /api/projects/{id}/model-stats/{model_version}/prediction:
     get:
       description: |-
-        Mean agreement of annotator annotations vs predictions for a specific model version.
-        Mirrors prediction_per_user_agreement but filtered by prediction.model_version.
-        :return: {"average_prediction_agreement_per_model": float[0..1]}
+        Mean agreement between the given model version and all other model versions in the project.
+
+        Computed as the average of pairwise model-to-model agreement scores from PredictionPairStats where either
+        prediction pair's model_version_from or model_version_to equals the provided model_version.
+
+        When per_label=true, returns a mapping of label -> average agreement across the same set of pairs.
+
+        :return: {"average_prediction_agreement_per_model": float[0..1] | {label: float[0..1]}}
       operationId: api_projects_model_stats_prediction_retrieve
       parameters:
         - in: path
@@ -14655,6 +14760,53 @@ paths:
         - public
       x-fern-sdk-group-name: annotations
       x-fern-sdk-method-name: create
+  /api/tasks/{id}/events/:
+    post:
+      description: "\n    Create a new task event to track user interactions and system events during annotation.\n    \n    This endpoint is designed to receive events from the frontend labeling interface to enable\n    accurate lead time calculation and detailed annotation analytics.\n    \n    ## Event Types\n    \n    **Core Annotation Events:**\n    - `annotation_loaded` - When annotation interface is loaded\n    - `annotation_submitted` - When annotation is submitted\n    - `annotation_updated` - When annotation is modified\n    - `annotation_reviewed` - When annotation is reviewed\n    \n    **User Activity Events:**\n    - `visibility_change` - When page visibility changes (tab switch, minimize)\n    - `idle_detected` - When user goes idle\n    - `idle_resumed` - When user returns from idle\n    \n    **Interaction Events:**\n    - `region_finished_drawing` - When annotation region is completed\n    - `region_deleted` - When annotation regions are removed\n    - `hotkey_pressed` - When keyboard shortcuts are used\n    \n    **Media Events:**\n    - `video_playback_start/end` - Video playback control\n    - `audio_playback_start/end` - Audio playback control\n    - `video_scrub` - Video timeline scrubbing\n    \n    ## Usage\n    \n    Events are automatically associated with the task specified in the URL path.\n    The current user is automatically set as the actor. Project and organization\n    are derived from the task context.\n    \n    ## Example Request\n    \n    ```json\n    {\n        \"event_key\": \"annotation_loaded\",\n        \"event_time\": \"2024-01-15T10:30:00Z\",\n        \"annotation\": 123,\n        \"meta\": {\n            \"annotation_count\": 5,\n            \"estimated_time\": 300\n        }\n    }\n    ```\n    "
+      operationId: api_tasks_events_create
+      parameters:
+        - description: Task ID to associate the event with
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TaskEventRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/TaskEventRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/TaskEventRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskEvent'
+          description: ''
+        '400':
+          description: Bad request - validation errors
+        '401':
+          description: Unauthorized - authentication required
+        '403':
+          description: Forbidden - insufficient permissions
+        '404':
+          description: Not found - task does not exist
+      security:
+        - Token: []
+      summary: Create task event
+      tags:
+        - Task Events
+      x-fern-audiences:
+        - public
+      x-fern-sdk-group-name: tasks
+      x-fern-sdk-method-name: create_event
   /api/token/:
     get:
       description: List all API tokens for the current user.
@@ -15782,6 +15934,61 @@ paths:
         - members
         - bulk
       x-fern-sdk-method-name: post
+  /api/workspaces/{id}/memberships/paginated/:
+    get:
+      description: Retrieve the members for a specific workspace.
+      operationId: api_workspaces_memberships_paginated_list
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+        - description: Comma-separated list of user IDs to filter by
+          in: query
+          name: ids
+          schema:
+            type: string
+        - description: A page number within the paginated result set.
+          in: query
+          name: page
+          required: false
+          schema:
+            type: integer
+        - description: Number of results to return per page.
+          in: query
+          name: page_size
+          required: false
+          schema:
+            type: integer
+        - description: A search term.
+          in: query
+          name: search
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedLseUserList'
+          description: ''
+      security:
+        - Token: []
+      summary: Get workspace members paginated
+      tags:
+        - Workspaces
+      x-fern-audiences:
+        - public
+      x-fern-pagination:
+        offset: $request.page
+        results: $response.results
+      x-fern-sdk-group-name:
+        - workspaces
+        - members
+        - paginated
+      x-fern-sdk-method-name: list
   /api/workspaces/{id}/projects/:
     delete:
       description: Delete projects from a specific workspace.
@@ -16139,9 +16346,6 @@ components:
           description: Honeypot annotation number in project
           readOnly: true
           type: integer
-        has_blueprints:
-          readOnly: true
-          type: string
         id:
           readOnly: true
           type: integer
@@ -16256,6 +16460,9 @@ components:
         show_skip_button:
           description: Show a skip button in interface and allow annotators to skip the task
           type: boolean
+        show_unused_data_columns_to_annotators:
+          nullable: true
+          type: boolean
         skip_queue:
           nullable: true
           oneOf:
@@ -16304,7 +16511,6 @@ components:
         - description_short
         - finished_task_number
         - ground_truth_number
-        - has_blueprints
         - id
         - members
         - members_count
@@ -20528,6 +20734,9 @@ components:
         show_skip_button:
           description: Show a skip button in interface and allow annotators to skip the task
           type: boolean
+        show_unused_data_columns_to_annotators:
+          nullable: true
+          type: boolean
         skip_queue:
           nullable: true
           oneOf:
@@ -21168,6 +21377,9 @@ components:
           type: boolean
         show_skip_button:
           description: Show a skip button in interface and allow annotators to skip the task
+          type: boolean
+        show_unused_data_columns_to_annotators:
+          nullable: true
           type: boolean
         skip_queue:
           nullable: true
@@ -23534,6 +23746,110 @@ components:
         - count
         - results
       type: object
+    PaginatedPaginatedProjectMemberList:
+      properties:
+        count:
+          example: 123
+          type: integer
+        next:
+          example: http://api.example.org/accounts/?page=4
+          format: uri
+          nullable: true
+          type: string
+        previous:
+          example: http://api.example.org/accounts/?page=2
+          format: uri
+          nullable: true
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/PaginatedProjectMember'
+          type: array
+      required:
+        - count
+        - results
+      type: object
+    PaginatedProjectMember:
+      description: |-
+        A ModelSerializer that takes additional arguments for
+        "fields", "omit" and "expand" in order to
+        control which fields are displayed, and whether to replace simple
+        values with complex, nested serializations
+      properties:
+        active_organization:
+          nullable: true
+          type: integer
+        active_organization_meta:
+          readOnly: true
+          type: string
+        allow_newsletters:
+          description: Allow sending newsletters to user
+          nullable: true
+          type: boolean
+        avatar:
+          readOnly: true
+          type: string
+        custom_hotkeys:
+          description: Custom keyboard shortcuts configuration for the user interface
+          nullable: true
+        date_joined:
+          format: date-time
+          type: string
+        email:
+          format: email
+          maxLength: 254
+          title: Email address
+          type: string
+        first_name:
+          maxLength: 256
+          type: string
+        id:
+          readOnly: true
+          type: integer
+        initials:
+          default: '?'
+          readOnly: true
+          type: string
+        last_activity:
+          format: date-time
+          readOnly: true
+          type: string
+        last_name:
+          maxLength: 256
+          type: string
+        lse_fields:
+          allOf:
+            - $ref: '#/components/schemas/LseFields'
+          readOnly: true
+        org_membership:
+          items:
+            $ref: '#/components/schemas/OrganizationMembership'
+          readOnly: true
+          type: array
+        pause:
+          readOnly: true
+          type: string
+        phone:
+          maxLength: 256
+          type: string
+        project_role:
+          readOnly: true
+          type: string
+        username:
+          maxLength: 256
+          type: string
+      required:
+        - active_organization_meta
+        - avatar
+        - id
+        - initials
+        - last_activity
+        - lse_fields
+        - org_membership
+        - pause
+        - project_role
+        - username
+      type: object
     PaginatedRoleBasedTaskList:
       properties:
         tasks:
@@ -24485,6 +24801,9 @@ components:
         show_skip_button:
           description: Show a skip button in interface and allow annotators to skip the task
           type: boolean
+        show_unused_data_columns_to_annotators:
+          nullable: true
+          type: boolean
         skip_queue:
           nullable: true
           oneOf:
@@ -24969,6 +25288,9 @@ components:
           type: boolean
         review_settings:
           description: general dict serialized review settings
+        show_unused_data_columns_to_annotators:
+          nullable: true
+          type: boolean
         tags: {}
       type: object
     PatchedS3DatasetStorageRequest:
@@ -25763,8 +26085,23 @@ components:
             minimum: 1
             type: integer
           type: array
+        roles:
+          items:
+            $ref: '#/components/schemas/ProjectMemberBulkAssignRolesRequest'
+          type: array
       required:
         - all
+      type: object
+    ProjectMemberBulkAssignRolesRequest:
+      properties:
+        role:
+          $ref: '#/components/schemas/Role9e7Enum'
+        user_id:
+          minimum: 1
+          type: integer
+      required:
+        - role
+        - user_id
       type: object
     ProjectMemberRequest:
       properties:
@@ -26038,6 +26375,9 @@ components:
           type: boolean
         review_settings:
           description: general dict serialized review settings
+        show_unused_data_columns_to_annotators:
+          nullable: true
+          type: boolean
         tags: {}
         updated_at:
           format: date-time
@@ -26079,6 +26419,9 @@ components:
           type: boolean
         review_settings:
           description: general dict serialized review settings
+        show_unused_data_columns_to_annotators:
+          nullable: true
+          type: boolean
         tags: {}
       required:
         - name
@@ -26447,6 +26790,10 @@ components:
         show_instruction:
           description: Show instructions to the reviewers before they start
           type: boolean
+        show_unused_data_columns_to_reviewers:
+          description: If true, Data Manager shows all task.data columns to reviewers; if false, hides columns not referenced by the label interface
+          nullable: true
+          type: boolean
       required:
         - id
         - requeue_rejected_tasks_to_annotator
@@ -26502,6 +26849,10 @@ components:
           type: boolean
         show_instruction:
           description: Show instructions to the reviewers before they start
+          type: boolean
+        show_unused_data_columns_to_reviewers:
+          description: If true, Data Manager shows all task.data columns to reviewers; if false, hides columns not referenced by the label interface
+          nullable: true
           type: boolean
       type: object
     ReviewedEnum:
@@ -27318,6 +27669,101 @@ components:
         - created_at
         - id
         - task
+      type: object
+    TaskEvent:
+      description: |-
+        Serializer for TaskEvent model to handle event creation from frontend.
+
+        This serializer validates and processes task events sent from the labeling interface,
+        ensuring proper data format and automatically setting required relationships.
+      properties:
+        actor:
+          readOnly: true
+          type: integer
+        annotation:
+          description: Annotation ID associated with this event
+          nullable: true
+          type: integer
+        annotation_draft:
+          description: Draft annotation ID associated with this event
+          nullable: true
+          type: integer
+        created_at:
+          format: date-time
+          readOnly: true
+          type: string
+        event_key:
+          description: Event type identifier (e.g., "annotation_loaded", "region_finished_drawing")
+          maxLength: 255
+          type: string
+        event_time:
+          description: Timestamp when the event occurred (frontend time)
+          format: date-time
+          type: string
+        id:
+          readOnly: true
+          type: integer
+        meta:
+          description: Additional event metadata (region data, hotkey info, etc.)
+          nullable: true
+        organization:
+          readOnly: true
+          type: integer
+        project:
+          readOnly: true
+          type: integer
+        review:
+          description: Review ID associated with this event
+          nullable: true
+          type: integer
+        task:
+          description: Task this event is associated with
+          readOnly: true
+          type: integer
+      required:
+        - actor
+        - created_at
+        - event_key
+        - event_time
+        - id
+        - organization
+        - project
+        - task
+      type: object
+    TaskEventRequest:
+      description: |-
+        Serializer for TaskEvent model to handle event creation from frontend.
+
+        This serializer validates and processes task events sent from the labeling interface,
+        ensuring proper data format and automatically setting required relationships.
+      properties:
+        annotation:
+          description: Annotation ID associated with this event
+          nullable: true
+          type: integer
+        annotation_draft:
+          description: Draft annotation ID associated with this event
+          nullable: true
+          type: integer
+        event_key:
+          description: Event type identifier (e.g., "annotation_loaded", "region_finished_drawing")
+          maxLength: 255
+          minLength: 1
+          type: string
+        event_time:
+          description: Timestamp when the event occurred (frontend time)
+          format: date-time
+          type: string
+        meta:
+          description: Additional event metadata (region data, hotkey info, etc.)
+          nullable: true
+        review:
+          description: Review ID associated with this event
+          nullable: true
+          type: integer
+      required:
+        - event_key
+        - event_time
       type: object
     TaskSimple:
       properties:
