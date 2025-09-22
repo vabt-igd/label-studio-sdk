@@ -140,6 +140,730 @@ client.activity_logs.list()
 </dl>
 </details>
 
+## AnnotationHistory
+<details><summary><code>client.annotation_history.<a href="src/label_studio_sdk/annotation_history/client.py">list</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+List annotation history items for an annotation. Annotation history logs all actions performed with annotations, such as: imports, submits, updates, reviews, and more. Users can view annotation history items in the Annotation History panel during labeling.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+
+client = LabelStudio(
+    api_key="YOUR_API_KEY",
+)
+client.annotation_history.list()
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**annotation:** `typing.Optional[int]` — Annotation ID to get annotation history items for.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**ordering:** `typing.Optional[str]` — Which field to use when ordering the results.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.annotation_history.<a href="src/label_studio_sdk/annotation_history/client.py">delete</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Delete all annotation history items for a specific annotation, task or project. This method is available only for users with administrator roles.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+
+client = LabelStudio(
+    api_key="YOUR_API_KEY",
+)
+client.annotation_history.delete()
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**annotation:** `typing.Optional[int]` — Annotation ID to delete annotation history items for.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**project:** `typing.Optional[int]` — Project ID to delete annotation history items for.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**task:** `typing.Optional[int]` — Task ID to delete annotation history items for.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.annotation_history.<a href="src/label_studio_sdk/annotation_history/client.py">list_for_project</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+List all annotation history items for the project with pagination.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+
+client = LabelStudio(
+    api_key="YOUR_API_KEY",
+)
+client.annotation_history.list_for_project(
+    id=1,
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `int` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**page:** `typing.Optional[int]` — A page number within the paginated result set.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**page_size:** `typing.Optional[int]` — Number of results to return per page.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## AnnotationReviews
+<details><summary><code>client.annotation_reviews.<a href="src/label_studio_sdk/annotation_reviews/client.py">list</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+List all reviews for a specific annotation ID.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+
+client = LabelStudio(
+    api_key="YOUR_API_KEY",
+)
+client.annotation_reviews.list()
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**annotation:** `typing.Optional[int]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**annotation_task_project:** `typing.Optional[int]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**ordering:** `typing.Optional[str]` — Which field to use when ordering the results.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.annotation_reviews.<a href="src/label_studio_sdk/annotation_reviews/client.py">create</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Create a review for a specific annotation ID.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+
+client = LabelStudio(
+    api_key="YOUR_API_KEY",
+)
+client.annotation_reviews.create(
+    annotation=1,
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**annotation:** `int` — Corresponding annotation
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**async_postprocess:** `typing.Optional[bool]` — Whether to postprocess the review asynchronously.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**accepted:** `typing.Optional[bool]` — Accepted or rejected (if false) flag
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**comment:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**last_annotation_history:** `typing.Optional[int]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**remove_from_queue:** `typing.Optional[bool]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**result:** `typing.Optional[typing.Optional[typing.Any]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**started_at:** `typing.Optional[dt.datetime]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.annotation_reviews.<a href="src/label_studio_sdk/annotation_reviews/client.py">get</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieve a specific review by ID for an annotation.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+
+client = LabelStudio(
+    api_key="YOUR_API_KEY",
+)
+client.annotation_reviews.get(
+    id=1,
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `int` — A unique integer value identifying this annotation review.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.annotation_reviews.<a href="src/label_studio_sdk/annotation_reviews/client.py">delete</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Delete a review by ID
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+
+client = LabelStudio(
+    api_key="YOUR_API_KEY",
+)
+client.annotation_reviews.delete(
+    id=1,
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `int` — A unique integer value identifying this annotation review.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.annotation_reviews.<a href="src/label_studio_sdk/annotation_reviews/client.py">update</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Update a specific review by ID.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+
+client = LabelStudio(
+    api_key="YOUR_API_KEY",
+)
+client.annotation_reviews.update(
+    id=1,
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `int` — A unique integer value identifying this annotation review.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**accepted:** `typing.Optional[bool]` — Accepted or rejected (if false) flag
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**annotation:** `typing.Optional[int]` — Corresponding annotation
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**comment:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**last_annotation_history:** `typing.Optional[int]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**remove_from_queue:** `typing.Optional[bool]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**result:** `typing.Optional[typing.Optional[typing.Any]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**started_at:** `typing.Optional[dt.datetime]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Annotations
 <details><summary><code>client.annotations.<a href="src/label_studio_sdk/annotations/client.py">create_bulk</a>(...)</code></summary>
 <dl>
@@ -944,6 +1668,179 @@ client.billing.info()
 
 <dl>
 <dd>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Blueprints
+<details><summary><code>client.blueprints.<a href="src/label_studio_sdk/blueprints/client.py">create</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Create a new blueprint
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+
+client = LabelStudio(
+    api_key="YOUR_API_KEY",
+)
+client.blueprints.create(
+    project=1,
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project:** `int` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**created_by:** `typing.Optional[int]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**description:** `typing.Optional[str]` — Project description
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**label_config:** `typing.Optional[str]` — Labeling configuration in XML format
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**title:** `typing.Optional[str]` — Blueprint name. Must be between 3 and 50 characters long.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.blueprints.<a href="src/label_studio_sdk/blueprints/client.py">delete</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Delete a blueprint by ID
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+
+client = LabelStudio(
+    api_key="YOUR_API_KEY",
+)
+client.blueprints.delete(
+    id="id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `str` 
+    
+</dd>
+</dl>
 
 <dl>
 <dd>
@@ -3861,6 +4758,329 @@ client.organizations.get(
 </dl>
 </details>
 
+<details><summary><code>client.organizations.<a href="src/label_studio_sdk/organizations/client.py">update</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Update organization details including title, embed domains, and custom scripts settings.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+
+client = LabelStudio(
+    api_key="YOUR_API_KEY",
+)
+client.organizations.update(
+    id=1,
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `int` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**contact_info:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**created_by:** `typing.Optional[int]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**custom_scripts_editable_by:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**custom_scripts_enabled:** `typing.Optional[bool]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**email_notification_settings:** `typing.Optional[typing.Optional[typing.Any]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**embed_domains:** `typing.Optional[typing.Sequence[typing.Dict[str, str]]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**embed_settings:** `typing.Optional[typing.Optional[typing.Any]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**title:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**token:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.organizations.<a href="src/label_studio_sdk/organizations/client.py">update_default_role</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Update the default role for members of a specific organization.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+
+client = LabelStudio(
+    api_key="YOUR_API_KEY",
+)
+client.organizations.update_default_role(
+    id=1,
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `int` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**annotator_reviewer_firewall_enabled_at:** `typing.Optional[dt.datetime]` — Set to current time to restrict data sharing between annotators and reviewers in the label stream, review stream, and notifications (which will be disabled). In these settings, information about annotator and reviewer identity is suppressed in the UI.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**custom_scripts_editable_by:** `typing.Optional[PatchedDefaultRoleRequestCustomScriptsEditableBy]` 
+
+Set the minimum user role that can edit custom scripts in the UI.
+
+* `AD` - Administrator
+* `MA` - Manager
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**custom_scripts_enabled_at:** `typing.Optional[dt.datetime]` — Set to current time to enabled custom scripts for this organization. Can only be enabled if no organization members are active members of any other organizations; otherwise an error will be raised. If this occurs, contact the LEAP team for assistance with enabling custom scripts.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**default_role:** `typing.Optional[Role9E7Enum]` 
+
+Default membership role for invited users
+
+* `OW` - Owner
+* `AD` - Administrator
+* `MA` - Manager
+* `RE` - Reviewer
+* `AN` - Annotator
+* `DI` - Deactivated
+* `NO` - Not Activated
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**email_notification_settings:** `typing.Optional[typing.Optional[typing.Any]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**embed_domains:** `typing.Optional[typing.Optional[typing.Any]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**embed_settings:** `typing.Optional[typing.Optional[typing.Any]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**external_id:** `typing.Optional[str]` — External ID to uniquely identify this organization
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**extra_data_on_activity_logs:** `typing.Optional[bool]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**label_stream_navigation_disabled_at:** `typing.Optional[dt.datetime]` — Set to current time to disable the label stream navigation for this organization. This will prevent users from going back in the label stream to view previous labels.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**organization:** `typing.Optional[int]` — A unique integer value identifying this organization.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**read_only_quick_view_enabled_at:** `typing.Optional[dt.datetime]` — Set to current time to prevent creating or editing annotations in quick view.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## JwtSettings
 <details><summary><code>client.jwt_settings.<a href="src/label_studio_sdk/jwt_settings/client.py">get</a>()</code></summary>
 <dl>
@@ -3954,7 +5174,9 @@ from label_studio_sdk import LabelStudio
 client = LabelStudio(
     api_key="YOUR_API_KEY",
 )
-client.jwt_settings.update()
+client.jwt_settings.update(
+    api_token_ttl_days=1,
+)
 
 ```
 </dd>
@@ -3970,7 +5192,7 @@ client.jwt_settings.update()
 <dl>
 <dd>
 
-**api_token_ttl_days:** `typing.Optional[int]` — Number of days before JWT API tokens expire
+**api_token_ttl_days:** `int` 
     
 </dd>
 </dl>
@@ -4603,6 +5825,90 @@ client.ml.predict_interactive(
 <dd>
 
 **context:** `typing.Optional[typing.Optional[typing.Any]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.ml.<a href="src/label_studio_sdk/ml/client.py">predict_all_tasks</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Note: not available in the community edition of Label Studio. 
+
+Create predictions for all tasks using a specific ML backend so that you can set up an active learning strategy based on the confidence or uncertainty scores associated with the predictions. Creating predictions requires a Label Studio ML backend set up and configured for your project. 
+
+See [Set up machine learning](https://labelstud.io/guide/ml.html) for more details about a Label Studio ML backend. 
+
+Reference the ML backend ID in the path of this API call. Get the ML backend ID by [listing the ML backends for a project](https://labelstud.io/api/#operation/api_ml_list).
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+
+client = LabelStudio(
+    api_key="YOUR_API_KEY",
+)
+client.ml.predict_all_tasks(
+    id=1,
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `int` — A unique integer value identifying this ML backend.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**batch_size:** `typing.Optional[int]` — Computed number of tasks without predictions that the ML backend needs to predict.
     
 </dd>
 </dl>
@@ -6569,6 +7875,636 @@ client.predictions.update(
 </dl>
 </details>
 
+## ProjectTemplates
+<details><summary><code>client.project_templates.<a href="src/label_studio_sdk/project_templates/client.py">list</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get a list of all project templates for an organization.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+
+client = LabelStudio(
+    api_key="YOUR_API_KEY",
+)
+client.project_templates.list()
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**ordering:** `typing.Optional[str]` — Which field to use when ordering the results.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.project_templates.<a href="src/label_studio_sdk/project_templates/client.py">create</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Create a project template for an organization.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+
+client = LabelStudio(
+    api_key="YOUR_API_KEY",
+)
+client.project_templates.create(
+    name="name",
+    project_id=1,
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**name:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**project_id:** `int` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**assignment_settings:** `typing.Optional[typing.Optional[typing.Any]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**created_by:** `typing.Optional[int]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**custom_script:** `typing.Optional[str]` — custom script for projects created from this template
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**description:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**organization:** `typing.Optional[int]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**project_settings:** `typing.Optional[typing.Optional[typing.Any]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**require_comment_on_skip:** `typing.Optional[bool]` — flag to require comment on skip
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**review_settings:** `typing.Optional[typing.Optional[typing.Any]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**show_unused_data_columns_to_annotators:** `typing.Optional[bool]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**tags:** `typing.Optional[typing.Optional[typing.Any]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.project_templates.<a href="src/label_studio_sdk/project_templates/client.py">get</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get a specific project template by ID for an organization.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+
+client = LabelStudio(
+    api_key="YOUR_API_KEY",
+)
+client.project_templates.get(
+    id=1,
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `int` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.project_templates.<a href="src/label_studio_sdk/project_templates/client.py">delete</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Delete a specific project template by ID for an organization.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+
+client = LabelStudio(
+    api_key="YOUR_API_KEY",
+)
+client.project_templates.delete(
+    id=1,
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `int` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.project_templates.<a href="src/label_studio_sdk/project_templates/client.py">update</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Update the details of a specific project template by ID for an organization.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+
+client = LabelStudio(
+    api_key="YOUR_API_KEY",
+)
+client.project_templates.update(
+    id=1,
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `int` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**assignment_settings:** `typing.Optional[typing.Optional[typing.Any]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**created_by:** `typing.Optional[int]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**custom_script:** `typing.Optional[str]` — custom script for projects created from this template
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**description:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**name:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**organization:** `typing.Optional[int]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**project_id:** `typing.Optional[int]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**project_settings:** `typing.Optional[typing.Optional[typing.Any]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**require_comment_on_skip:** `typing.Optional[bool]` — flag to require comment on skip
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**review_settings:** `typing.Optional[typing.Optional[typing.Any]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**show_unused_data_columns_to_annotators:** `typing.Optional[bool]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**tags:** `typing.Optional[typing.Optional[typing.Any]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.project_templates.<a href="src/label_studio_sdk/project_templates/client.py">create_project_from_template</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Create a project from a specific project template by ID for an organization.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+
+client = LabelStudio(
+    api_key="YOUR_API_KEY",
+)
+client.project_templates.create_project_from_template(
+    id=1,
+    title="title",
+    workspace_id=1,
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `int` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**title:** `str` — The title of the project to be created from the template.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**workspace_id:** `int` — A unique integer value identifying the workspace in which to create the project.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**description:** `typing.Optional[str]` — A description for the project.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Projects
 <details><summary><code>client.projects.<a href="src/label_studio_sdk/projects/client.py">list</a>(...)</code></summary>
 <dl>
@@ -6980,6 +8916,138 @@ client.projects.create()
 <dd>
 
 **workspace:** `typing.Optional[int]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.projects.<a href="src/label_studio_sdk/projects/client.py">list_counts</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns a list of projects with their counts. For example, task_number which is the total task number in project
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+
+client = LabelStudio(
+    api_key="YOUR_API_KEY",
+)
+client.projects.list_counts()
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**filter:** `typing.Optional[str]` — Project filter setting. One of 'all', 'pinned_only', 'exclude_pinned'.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**ids:** `typing.Optional[str]` — Filter id by in list
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**include:** `typing.Optional[str]` — Comma-separated list of fields to include
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**ordering:** `typing.Optional[str]` — Which field to use when ordering the results.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**page:** `typing.Optional[int]` — A page number within the paginated result set.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**page_size:** `typing.Optional[int]` — Number of results to return per page.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**search:** `typing.Optional[str]` — Search term for project title and description
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**title:** `typing.Optional[str]` — Filter title by contains (case-insensitive)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**workspaces:** `typing.Optional[float]` — Filter workspaces by exact match
     
 </dd>
 </dl>
@@ -7782,6 +9850,90 @@ client.projects.import_tasks(
 <dd>
 
 **return_task_ids:** `typing.Optional[bool]` — Set to "true" to return task IDs in the response.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.projects.<a href="src/label_studio_sdk/projects/client.py">import_predictions</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Import model predictions for tasks in the specified project.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio, PredictionRequest
+
+client = LabelStudio(
+    api_key="YOUR_API_KEY",
+)
+client.projects.import_predictions(
+    id=1,
+    request=[
+        PredictionRequest(
+            result=[{"key": "value"}],
+            task=1,
+        )
+    ],
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `int` — A unique integer value identifying this project.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `typing.Sequence[PredictionRequest]` 
     
 </dd>
 </dl>
@@ -8900,6 +11052,143 @@ client.tasks.create_event(
 <dd>
 
 **review:** `typing.Optional[int]` — Review ID associated with this event
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## SessionPolicy
+<details><summary><code>client.session_policy.<a href="src/label_studio_sdk/session_policy/client.py">get</a>()</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieve session timeout policy for the currently active organization.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+
+client = LabelStudio(
+    api_key="YOUR_API_KEY",
+)
+client.session_policy.get()
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.session_policy.<a href="src/label_studio_sdk/session_policy/client.py">update</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Update session timeout policy for the currently active organization.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+
+client = LabelStudio(
+    api_key="YOUR_API_KEY",
+)
+client.session_policy.update()
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**max_session_age:** `typing.Optional[int]` — Number of minutes that a session can be active before needing to re-login
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**max_time_between_activity:** `typing.Optional[int]` — Number of minutes that a session stays active without any activity
     
 </dd>
 </dl>
@@ -11018,6 +13307,967 @@ client.export_storage.azure.sync(
 </dl>
 </details>
 
+## ExportStorage AzureSpi
+<details><summary><code>client.export_storage.azure_spi.<a href="src/label_studio_sdk/export_storage/azure_spi/client.py">list</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get a list of all Azure export storage connections that were set up with Service Principal authentication.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+
+client = LabelStudio(
+    api_key="YOUR_API_KEY",
+)
+client.export_storage.azure_spi.list()
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**ordering:** `typing.Optional[str]` — Which field to use when ordering the results.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**project:** `typing.Optional[int]` — Project ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.export_storage.azure_spi.<a href="src/label_studio_sdk/export_storage/azure_spi/client.py">create</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Create an Azure export storage connection with Service Principal authentication to store annotations.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+
+client = LabelStudio(
+    api_key="YOUR_API_KEY",
+)
+client.export_storage.azure_spi.create(
+    project=1,
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project:** `int` — A unique integer value identifying this project.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**account_name:** `typing.Optional[str]` — Azure Blob account name
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**can_delete_objects:** `typing.Optional[bool]` — Deletion from storage enabled
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**client_id:** `typing.Optional[str]` — Azure Blob Service Principal Client ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**client_secret:** `typing.Optional[str]` — Azure Blob Service Principal Client Secret
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**container:** `typing.Optional[str]` — Azure blob container
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**description:** `typing.Optional[str]` — Cloud storage description
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**last_sync:** `typing.Optional[dt.datetime]` — Last sync finished time
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**last_sync_count:** `typing.Optional[int]` — Count of tasks synced last time
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**last_sync_job:** `typing.Optional[str]` — Last sync job ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**meta:** `typing.Optional[typing.Optional[typing.Any]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**prefix:** `typing.Optional[str]` — Azure blob prefix name
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**regex_filter:** `typing.Optional[str]` — Cloud storage regex for filtering objects
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**status:** `typing.Optional[StatusC5AEnum]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**synchronizable:** `typing.Optional[bool]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**tenant_id:** `typing.Optional[str]` — Azure Tenant ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**title:** `typing.Optional[str]` — Cloud storage title
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**traceback:** `typing.Optional[str]` — Traceback report for the last failed sync
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**use_blob_urls:** `typing.Optional[bool]` — Interpret objects as BLOBs and generate URLs
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**user_delegation_key:** `typing.Optional[str]` — User Delegation Key (Backend)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.export_storage.azure_spi.<a href="src/label_studio_sdk/export_storage/azure_spi/client.py">validate</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Validate a specific Azure export storage connection that was set up with Service Principal authentication.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+
+client = LabelStudio(
+    api_key="YOUR_API_KEY",
+)
+client.export_storage.azure_spi.validate(
+    project=1,
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project:** `int` — A unique integer value identifying this project.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**account_name:** `typing.Optional[str]` — Azure Blob account name
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**can_delete_objects:** `typing.Optional[bool]` — Deletion from storage enabled
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**client_id:** `typing.Optional[str]` — Azure Blob Service Principal Client ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**client_secret:** `typing.Optional[str]` — Azure Blob Service Principal Client Secret
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**container:** `typing.Optional[str]` — Azure blob container
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**description:** `typing.Optional[str]` — Cloud storage description
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**last_sync:** `typing.Optional[dt.datetime]` — Last sync finished time
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**last_sync_count:** `typing.Optional[int]` — Count of tasks synced last time
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**last_sync_job:** `typing.Optional[str]` — Last sync job ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**meta:** `typing.Optional[typing.Optional[typing.Any]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**prefix:** `typing.Optional[str]` — Azure blob prefix name
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**regex_filter:** `typing.Optional[str]` — Cloud storage regex for filtering objects
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**status:** `typing.Optional[StatusC5AEnum]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**synchronizable:** `typing.Optional[bool]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**tenant_id:** `typing.Optional[str]` — Azure Tenant ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**title:** `typing.Optional[str]` — Cloud storage title
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**traceback:** `typing.Optional[str]` — Traceback report for the last failed sync
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**use_blob_urls:** `typing.Optional[bool]` — Interpret objects as BLOBs and generate URLs
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**user_delegation_key:** `typing.Optional[str]` — User Delegation Key (Backend)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.export_storage.azure_spi.<a href="src/label_studio_sdk/export_storage/azure_spi/client.py">get</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get a specific Azure export storage connection that was set up with Service Principal authentication.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+
+client = LabelStudio(
+    api_key="YOUR_API_KEY",
+)
+client.export_storage.azure_spi.get(
+    id=1,
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `int` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.export_storage.azure_spi.<a href="src/label_studio_sdk/export_storage/azure_spi/client.py">delete</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Delete a specific Azure export storage connection that was set up with Service Principal authentication.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+
+client = LabelStudio(
+    api_key="YOUR_API_KEY",
+)
+client.export_storage.azure_spi.delete(
+    id=1,
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `int` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.export_storage.azure_spi.<a href="src/label_studio_sdk/export_storage/azure_spi/client.py">update</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Update a specific Azure export storage connection that was set up with Service Principal authentication.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+
+client = LabelStudio(
+    api_key="YOUR_API_KEY",
+)
+client.export_storage.azure_spi.update(
+    id=1,
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `int` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**account_name:** `typing.Optional[str]` — Azure Blob account name
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**can_delete_objects:** `typing.Optional[bool]` — Deletion from storage enabled
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**client_id:** `typing.Optional[str]` — Azure Blob Service Principal Client ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**client_secret:** `typing.Optional[str]` — Azure Blob Service Principal Client Secret
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**container:** `typing.Optional[str]` — Azure blob container
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**description:** `typing.Optional[str]` — Cloud storage description
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**last_sync:** `typing.Optional[dt.datetime]` — Last sync finished time
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**last_sync_count:** `typing.Optional[int]` — Count of tasks synced last time
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**last_sync_job:** `typing.Optional[str]` — Last sync job ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**meta:** `typing.Optional[typing.Optional[typing.Any]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**prefix:** `typing.Optional[str]` — Azure blob prefix name
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**project:** `typing.Optional[int]` — A unique integer value identifying this project.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**regex_filter:** `typing.Optional[str]` — Cloud storage regex for filtering objects
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**status:** `typing.Optional[StatusC5AEnum]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**synchronizable:** `typing.Optional[bool]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**tenant_id:** `typing.Optional[str]` — Azure Tenant ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**title:** `typing.Optional[str]` — Cloud storage title
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**traceback:** `typing.Optional[str]` — Traceback report for the last failed sync
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**use_blob_urls:** `typing.Optional[bool]` — Interpret objects as BLOBs and generate URLs
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**user_delegation_key:** `typing.Optional[str]` — User Delegation Key (Backend)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.export_storage.azure_spi.<a href="src/label_studio_sdk/export_storage/azure_spi/client.py">sync</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Sync tasks from an Azure SPI export storage.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+
+client = LabelStudio(
+    api_key="YOUR_API_KEY",
+)
+client.export_storage.azure_spi.sync(
+    id=1,
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `int` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## ExportStorage Gcs
 <details><summary><code>client.export_storage.gcs.<a href="src/label_studio_sdk/export_storage/gcs/client.py">list</a>(...)</code></summary>
 <dl>
@@ -11658,6 +14908,991 @@ client = LabelStudio(
     api_key="YOUR_API_KEY",
 )
 client.export_storage.gcs.sync(
+    id=1,
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `int` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## ExportStorage Gcswif
+<details><summary><code>client.export_storage.gcswif.<a href="src/label_studio_sdk/export_storage/gcswif/client.py">list</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get a list of all GCS export storage connections that were set up with WIF authentication.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+
+client = LabelStudio(
+    api_key="YOUR_API_KEY",
+)
+client.export_storage.gcswif.list()
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**ordering:** `typing.Optional[str]` — Which field to use when ordering the results.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**project:** `typing.Optional[int]` — Project ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.export_storage.gcswif.<a href="src/label_studio_sdk/export_storage/gcswif/client.py">create</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Create an GCS export storage connection with WIF authentication to store annotations.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+
+client = LabelStudio(
+    api_key="YOUR_API_KEY",
+)
+client.export_storage.gcswif.create(
+    project=1,
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project:** `int` — A unique integer value identifying this project.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**bucket:** `typing.Optional[str]` — GCS bucket name
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**can_delete_objects:** `typing.Optional[bool]` — Deletion from storage enabled
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**description:** `typing.Optional[str]` — Cloud storage description
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**google_application_credentials:** `typing.Optional[str]` — The content of GOOGLE_APPLICATION_CREDENTIALS json file
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**google_project_id:** `typing.Optional[str]` — Google project ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**google_project_number:** `typing.Optional[str]` — Google project number
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**google_service_account_email:** `typing.Optional[str]` — Google service account email
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**google_wif_pool_id:** `typing.Optional[str]` — Google WIF pool ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**google_wif_provider_id:** `typing.Optional[str]` — Google WIF provider ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**last_sync:** `typing.Optional[dt.datetime]` — Last sync finished time
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**last_sync_count:** `typing.Optional[int]` — Count of tasks synced last time
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**last_sync_job:** `typing.Optional[str]` — Last sync job ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**meta:** `typing.Optional[typing.Optional[typing.Any]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**prefix:** `typing.Optional[str]` — GCS bucket prefix
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**regex_filter:** `typing.Optional[str]` — Cloud storage regex for filtering objects
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**status:** `typing.Optional[StatusC5AEnum]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**synchronizable:** `typing.Optional[bool]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**title:** `typing.Optional[str]` — Cloud storage title
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**traceback:** `typing.Optional[str]` — Traceback report for the last failed sync
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**use_blob_urls:** `typing.Optional[bool]` — Interpret objects as BLOBs and generate URLs
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.export_storage.gcswif.<a href="src/label_studio_sdk/export_storage/gcswif/client.py">validate</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Validate a specific GCS export storage connection that was set up with WIF authentication.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+
+client = LabelStudio(
+    api_key="YOUR_API_KEY",
+)
+client.export_storage.gcswif.validate(
+    project=1,
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project:** `int` — A unique integer value identifying this project.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**bucket:** `typing.Optional[str]` — GCS bucket name
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**can_delete_objects:** `typing.Optional[bool]` — Deletion from storage enabled
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**description:** `typing.Optional[str]` — Cloud storage description
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**google_application_credentials:** `typing.Optional[str]` — The content of GOOGLE_APPLICATION_CREDENTIALS json file
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**google_project_id:** `typing.Optional[str]` — Google project ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**google_project_number:** `typing.Optional[str]` — Google project number
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**google_service_account_email:** `typing.Optional[str]` — Google service account email
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**google_wif_pool_id:** `typing.Optional[str]` — Google WIF pool ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**google_wif_provider_id:** `typing.Optional[str]` — Google WIF provider ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**last_sync:** `typing.Optional[dt.datetime]` — Last sync finished time
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**last_sync_count:** `typing.Optional[int]` — Count of tasks synced last time
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**last_sync_job:** `typing.Optional[str]` — Last sync job ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**meta:** `typing.Optional[typing.Optional[typing.Any]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**prefix:** `typing.Optional[str]` — GCS bucket prefix
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**regex_filter:** `typing.Optional[str]` — Cloud storage regex for filtering objects
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**status:** `typing.Optional[StatusC5AEnum]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**synchronizable:** `typing.Optional[bool]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**title:** `typing.Optional[str]` — Cloud storage title
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**traceback:** `typing.Optional[str]` — Traceback report for the last failed sync
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**use_blob_urls:** `typing.Optional[bool]` — Interpret objects as BLOBs and generate URLs
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.export_storage.gcswif.<a href="src/label_studio_sdk/export_storage/gcswif/client.py">get</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get a specific GCS export storage connection that was set up with WIF authentication.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+
+client = LabelStudio(
+    api_key="YOUR_API_KEY",
+)
+client.export_storage.gcswif.get(
+    id=1,
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `int` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.export_storage.gcswif.<a href="src/label_studio_sdk/export_storage/gcswif/client.py">delete</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Delete a specific GCS export storage connection that was set up with WIF authentication.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+
+client = LabelStudio(
+    api_key="YOUR_API_KEY",
+)
+client.export_storage.gcswif.delete(
+    id=1,
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `int` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.export_storage.gcswif.<a href="src/label_studio_sdk/export_storage/gcswif/client.py">update</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Update a specific GCS export storage connection that was set up with WIF authentication.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+
+client = LabelStudio(
+    api_key="YOUR_API_KEY",
+)
+client.export_storage.gcswif.update(
+    id=1,
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `int` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**bucket:** `typing.Optional[str]` — GCS bucket name
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**can_delete_objects:** `typing.Optional[bool]` — Deletion from storage enabled
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**description:** `typing.Optional[str]` — Cloud storage description
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**google_application_credentials:** `typing.Optional[str]` — The content of GOOGLE_APPLICATION_CREDENTIALS json file
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**google_project_id:** `typing.Optional[str]` — Google project ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**google_project_number:** `typing.Optional[str]` — Google project number
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**google_service_account_email:** `typing.Optional[str]` — Google service account email
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**google_wif_pool_id:** `typing.Optional[str]` — Google WIF pool ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**google_wif_provider_id:** `typing.Optional[str]` — Google WIF provider ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**last_sync:** `typing.Optional[dt.datetime]` — Last sync finished time
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**last_sync_count:** `typing.Optional[int]` — Count of tasks synced last time
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**last_sync_job:** `typing.Optional[str]` — Last sync job ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**meta:** `typing.Optional[typing.Optional[typing.Any]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**prefix:** `typing.Optional[str]` — GCS bucket prefix
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**project:** `typing.Optional[int]` — A unique integer value identifying this project.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**regex_filter:** `typing.Optional[str]` — Cloud storage regex for filtering objects
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**status:** `typing.Optional[StatusC5AEnum]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**synchronizable:** `typing.Optional[bool]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**title:** `typing.Optional[str]` — Cloud storage title
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**traceback:** `typing.Optional[str]` — Traceback report for the last failed sync
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**use_blob_urls:** `typing.Optional[bool]` — Interpret objects as BLOBs and generate URLs
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.export_storage.gcswif.<a href="src/label_studio_sdk/export_storage/gcswif/client.py">sync</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Sync tasks from an GCS WIF export storage.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+
+client = LabelStudio(
+    api_key="YOUR_API_KEY",
+)
+client.export_storage.gcswif.sync(
     id=1,
 )
 
@@ -15606,6 +19841,991 @@ client.import_storage.azure.sync(
 </dl>
 </details>
 
+## ImportStorage AzureSpi
+<details><summary><code>client.import_storage.azure_spi.<a href="src/label_studio_sdk/import_storage/azure_spi/client.py">list</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get list of all Azure import storage connections set up with Service Principal authentication.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+
+client = LabelStudio(
+    api_key="YOUR_API_KEY",
+)
+client.import_storage.azure_spi.list()
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**ordering:** `typing.Optional[str]` — Which field to use when ordering the results.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**project:** `typing.Optional[int]` — Project ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.import_storage.azure_spi.<a href="src/label_studio_sdk/import_storage/azure_spi/client.py">create</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Create Azure import storage with Service Principal authentication.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+
+client = LabelStudio(
+    api_key="YOUR_API_KEY",
+)
+client.import_storage.azure_spi.create(
+    project=1,
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project:** `int` — A unique integer value identifying this project.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**account_name:** `typing.Optional[str]` — Azure Blob account name
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**client_id:** `typing.Optional[str]` — Azure Blob Service Principal Client ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**client_secret:** `typing.Optional[str]` — Azure Blob Service Principal Client Secret
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**container:** `typing.Optional[str]` — Azure blob container
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**description:** `typing.Optional[str]` — Cloud storage description
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**last_sync:** `typing.Optional[dt.datetime]` — Last sync finished time
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**last_sync_count:** `typing.Optional[int]` — Count of tasks synced last time
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**last_sync_job:** `typing.Optional[str]` — Last sync job ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**meta:** `typing.Optional[typing.Optional[typing.Any]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**prefix:** `typing.Optional[str]` — Azure blob prefix name
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**presign:** `typing.Optional[bool]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**presign_ttl:** `typing.Optional[int]` — Presigned URLs TTL (in minutes)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**regex_filter:** `typing.Optional[str]` — Cloud storage regex for filtering objects
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**status:** `typing.Optional[StatusC5AEnum]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**synchronizable:** `typing.Optional[bool]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**tenant_id:** `typing.Optional[str]` — Azure Tenant ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**title:** `typing.Optional[str]` — Cloud storage title
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**traceback:** `typing.Optional[str]` — Traceback report for the last failed sync
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**use_blob_urls:** `typing.Optional[bool]` — Interpret objects as BLOBs and generate URLs
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**user_delegation_key:** `typing.Optional[str]` — User Delegation Key (Backend)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.import_storage.azure_spi.<a href="src/label_studio_sdk/import_storage/azure_spi/client.py">validate</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Validate a specific Azure import storage connection that was set up with Service Principal authentication.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+
+client = LabelStudio(
+    api_key="YOUR_API_KEY",
+)
+client.import_storage.azure_spi.validate(
+    project=1,
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project:** `int` — A unique integer value identifying this project.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**account_name:** `typing.Optional[str]` — Azure Blob account name
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**client_id:** `typing.Optional[str]` — Azure Blob Service Principal Client ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**client_secret:** `typing.Optional[str]` — Azure Blob Service Principal Client Secret
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**container:** `typing.Optional[str]` — Azure blob container
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**description:** `typing.Optional[str]` — Cloud storage description
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**last_sync:** `typing.Optional[dt.datetime]` — Last sync finished time
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**last_sync_count:** `typing.Optional[int]` — Count of tasks synced last time
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**last_sync_job:** `typing.Optional[str]` — Last sync job ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**meta:** `typing.Optional[typing.Optional[typing.Any]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**prefix:** `typing.Optional[str]` — Azure blob prefix name
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**presign:** `typing.Optional[bool]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**presign_ttl:** `typing.Optional[int]` — Presigned URLs TTL (in minutes)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**regex_filter:** `typing.Optional[str]` — Cloud storage regex for filtering objects
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**status:** `typing.Optional[StatusC5AEnum]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**synchronizable:** `typing.Optional[bool]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**tenant_id:** `typing.Optional[str]` — Azure Tenant ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**title:** `typing.Optional[str]` — Cloud storage title
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**traceback:** `typing.Optional[str]` — Traceback report for the last failed sync
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**use_blob_urls:** `typing.Optional[bool]` — Interpret objects as BLOBs and generate URLs
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**user_delegation_key:** `typing.Optional[str]` — User Delegation Key (Backend)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.import_storage.azure_spi.<a href="src/label_studio_sdk/import_storage/azure_spi/client.py">get</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get a specific Azure import storage connection that was set up with Service Principal authentication.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+
+client = LabelStudio(
+    api_key="YOUR_API_KEY",
+)
+client.import_storage.azure_spi.get(
+    id=1,
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `int` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.import_storage.azure_spi.<a href="src/label_studio_sdk/import_storage/azure_spi/client.py">delete</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Delete a specific Azure import storage connection that was set up with Service Principal authentication.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+
+client = LabelStudio(
+    api_key="YOUR_API_KEY",
+)
+client.import_storage.azure_spi.delete(
+    id=1,
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `int` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.import_storage.azure_spi.<a href="src/label_studio_sdk/import_storage/azure_spi/client.py">update</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Update a specific Azure import storage connection that was set up with Service Principal authentication.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+
+client = LabelStudio(
+    api_key="YOUR_API_KEY",
+)
+client.import_storage.azure_spi.update(
+    id=1,
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `int` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**account_name:** `typing.Optional[str]` — Azure Blob account name
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**client_id:** `typing.Optional[str]` — Azure Blob Service Principal Client ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**client_secret:** `typing.Optional[str]` — Azure Blob Service Principal Client Secret
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**container:** `typing.Optional[str]` — Azure blob container
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**description:** `typing.Optional[str]` — Cloud storage description
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**last_sync:** `typing.Optional[dt.datetime]` — Last sync finished time
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**last_sync_count:** `typing.Optional[int]` — Count of tasks synced last time
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**last_sync_job:** `typing.Optional[str]` — Last sync job ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**meta:** `typing.Optional[typing.Optional[typing.Any]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**prefix:** `typing.Optional[str]` — Azure blob prefix name
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**presign:** `typing.Optional[bool]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**presign_ttl:** `typing.Optional[int]` — Presigned URLs TTL (in minutes)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**project:** `typing.Optional[int]` — A unique integer value identifying this project.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**regex_filter:** `typing.Optional[str]` — Cloud storage regex for filtering objects
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**status:** `typing.Optional[StatusC5AEnum]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**synchronizable:** `typing.Optional[bool]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**tenant_id:** `typing.Optional[str]` — Azure Tenant ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**title:** `typing.Optional[str]` — Cloud storage title
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**traceback:** `typing.Optional[str]` — Traceback report for the last failed sync
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**use_blob_urls:** `typing.Optional[bool]` — Interpret objects as BLOBs and generate URLs
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**user_delegation_key:** `typing.Optional[str]` — User Delegation Key (Backend)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.import_storage.azure_spi.<a href="src/label_studio_sdk/import_storage/azure_spi/client.py">sync</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Sync tasks from an Azure import storage connection that was set up with Service Principal authentication.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+
+client = LabelStudio(
+    api_key="YOUR_API_KEY",
+)
+client.import_storage.azure_spi.sync(
+    id=1,
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `int` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## ImportStorage Gcs
 <details><summary><code>client.import_storage.gcs.<a href="src/label_studio_sdk/import_storage/gcs/client.py">list</a>(...)</code></summary>
 <dl>
@@ -16336,6 +21556,1015 @@ client.import_storage.gcs.sync(
 <dd>
 
 **id:** `int` — Storage ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## ImportStorage Gcswif
+<details><summary><code>client.import_storage.gcswif.<a href="src/label_studio_sdk/import_storage/gcswif/client.py">list</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get list of all GCS import storage connections set up with WIF authentication.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+
+client = LabelStudio(
+    api_key="YOUR_API_KEY",
+)
+client.import_storage.gcswif.list()
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**ordering:** `typing.Optional[str]` — Which field to use when ordering the results.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**project:** `typing.Optional[int]` — Project ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.import_storage.gcswif.<a href="src/label_studio_sdk/import_storage/gcswif/client.py">create</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Create GCS import storage with WIF.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+
+client = LabelStudio(
+    api_key="YOUR_API_KEY",
+)
+client.import_storage.gcswif.create(
+    project=1,
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project:** `int` — A unique integer value identifying this project.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**bucket:** `typing.Optional[str]` — GCS bucket name
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**description:** `typing.Optional[str]` — Cloud storage description
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**google_application_credentials:** `typing.Optional[str]` — The content of GOOGLE_APPLICATION_CREDENTIALS json file
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**google_project_id:** `typing.Optional[str]` — Google project ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**google_project_number:** `typing.Optional[str]` — Google project number
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**google_service_account_email:** `typing.Optional[str]` — Google service account email
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**google_wif_pool_id:** `typing.Optional[str]` — Google WIF pool ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**google_wif_provider_id:** `typing.Optional[str]` — Google WIF provider ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**last_sync:** `typing.Optional[dt.datetime]` — Last sync finished time
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**last_sync_count:** `typing.Optional[int]` — Count of tasks synced last time
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**last_sync_job:** `typing.Optional[str]` — Last sync job ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**meta:** `typing.Optional[typing.Optional[typing.Any]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**prefix:** `typing.Optional[str]` — GCS bucket prefix
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**presign:** `typing.Optional[bool]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**presign_ttl:** `typing.Optional[int]` — Presigned URLs TTL (in minutes)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**regex_filter:** `typing.Optional[str]` — Cloud storage regex for filtering objects
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**status:** `typing.Optional[StatusC5AEnum]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**synchronizable:** `typing.Optional[bool]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**title:** `typing.Optional[str]` — Cloud storage title
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**traceback:** `typing.Optional[str]` — Traceback report for the last failed sync
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**use_blob_urls:** `typing.Optional[bool]` — Interpret objects as BLOBs and generate URLs
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.import_storage.gcswif.<a href="src/label_studio_sdk/import_storage/gcswif/client.py">validate</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Validate a specific GCS import storage connection that was set up with WIF authentication.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+
+client = LabelStudio(
+    api_key="YOUR_API_KEY",
+)
+client.import_storage.gcswif.validate(
+    project=1,
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project:** `int` — A unique integer value identifying this project.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**bucket:** `typing.Optional[str]` — GCS bucket name
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**description:** `typing.Optional[str]` — Cloud storage description
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**google_application_credentials:** `typing.Optional[str]` — The content of GOOGLE_APPLICATION_CREDENTIALS json file
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**google_project_id:** `typing.Optional[str]` — Google project ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**google_project_number:** `typing.Optional[str]` — Google project number
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**google_service_account_email:** `typing.Optional[str]` — Google service account email
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**google_wif_pool_id:** `typing.Optional[str]` — Google WIF pool ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**google_wif_provider_id:** `typing.Optional[str]` — Google WIF provider ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**last_sync:** `typing.Optional[dt.datetime]` — Last sync finished time
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**last_sync_count:** `typing.Optional[int]` — Count of tasks synced last time
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**last_sync_job:** `typing.Optional[str]` — Last sync job ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**meta:** `typing.Optional[typing.Optional[typing.Any]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**prefix:** `typing.Optional[str]` — GCS bucket prefix
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**presign:** `typing.Optional[bool]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**presign_ttl:** `typing.Optional[int]` — Presigned URLs TTL (in minutes)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**regex_filter:** `typing.Optional[str]` — Cloud storage regex for filtering objects
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**status:** `typing.Optional[StatusC5AEnum]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**synchronizable:** `typing.Optional[bool]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**title:** `typing.Optional[str]` — Cloud storage title
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**traceback:** `typing.Optional[str]` — Traceback report for the last failed sync
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**use_blob_urls:** `typing.Optional[bool]` — Interpret objects as BLOBs and generate URLs
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.import_storage.gcswif.<a href="src/label_studio_sdk/import_storage/gcswif/client.py">get</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get a specific GCS import storage connection that was set up with WIF.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+
+client = LabelStudio(
+    api_key="YOUR_API_KEY",
+)
+client.import_storage.gcswif.get(
+    id=1,
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `int` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.import_storage.gcswif.<a href="src/label_studio_sdk/import_storage/gcswif/client.py">delete</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Delete a specific GCS import storage connection that was set up with WIF authentication.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+
+client = LabelStudio(
+    api_key="YOUR_API_KEY",
+)
+client.import_storage.gcswif.delete(
+    id=1,
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `int` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.import_storage.gcswif.<a href="src/label_studio_sdk/import_storage/gcswif/client.py">update</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Update a specific GCS import storage connection that was set up with WIF authentication.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+
+client = LabelStudio(
+    api_key="YOUR_API_KEY",
+)
+client.import_storage.gcswif.update(
+    id=1,
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `int` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**bucket:** `typing.Optional[str]` — GCS bucket name
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**description:** `typing.Optional[str]` — Cloud storage description
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**google_application_credentials:** `typing.Optional[str]` — The content of GOOGLE_APPLICATION_CREDENTIALS json file
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**google_project_id:** `typing.Optional[str]` — Google project ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**google_project_number:** `typing.Optional[str]` — Google project number
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**google_service_account_email:** `typing.Optional[str]` — Google service account email
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**google_wif_pool_id:** `typing.Optional[str]` — Google WIF pool ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**google_wif_provider_id:** `typing.Optional[str]` — Google WIF provider ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**last_sync:** `typing.Optional[dt.datetime]` — Last sync finished time
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**last_sync_count:** `typing.Optional[int]` — Count of tasks synced last time
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**last_sync_job:** `typing.Optional[str]` — Last sync job ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**meta:** `typing.Optional[typing.Optional[typing.Any]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**prefix:** `typing.Optional[str]` — GCS bucket prefix
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**presign:** `typing.Optional[bool]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**presign_ttl:** `typing.Optional[int]` — Presigned URLs TTL (in minutes)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**project:** `typing.Optional[int]` — A unique integer value identifying this project.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**regex_filter:** `typing.Optional[str]` — Cloud storage regex for filtering objects
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**status:** `typing.Optional[StatusC5AEnum]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**synchronizable:** `typing.Optional[bool]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**title:** `typing.Optional[str]` — Cloud storage title
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**traceback:** `typing.Optional[str]` — Traceback report for the last failed sync
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**use_blob_urls:** `typing.Optional[bool]` — Interpret objects as BLOBs and generate URLs
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.import_storage.gcswif.<a href="src/label_studio_sdk/import_storage/gcswif/client.py">sync</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Sync tasks from an GCS import storage connection that was set up with WIF authentication.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+
+client = LabelStudio(
+    api_key="YOUR_API_KEY",
+)
+client.import_storage.gcswif.sync(
+    id=1,
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `int` 
     
 </dd>
 </dl>
@@ -19661,6 +25890,216 @@ client.import_storage.s3s.sync(
 </dl>
 </details>
 
+## Organizations Invites
+<details><summary><code>client.organizations.invites.<a href="src/label_studio_sdk/organizations/invites/client.py">get_invite_link</a>()</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get invite link for organization
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+
+client = LabelStudio(
+    api_key="YOUR_API_KEY",
+)
+client.organizations.invites.get_invite_link()
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.organizations.invites.<a href="src/label_studio_sdk/organizations/invites/client.py">revoke_invite</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Revoke invite to organization
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+
+client = LabelStudio(
+    api_key="YOUR_API_KEY",
+)
+client.organizations.invites.revoke_invite(
+    email="email",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**email:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.organizations.invites.<a href="src/label_studio_sdk/organizations/invites/client.py">send_email</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Send email with invite to organization
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+
+client = LabelStudio(
+    api_key="YOUR_API_KEY",
+)
+client.organizations.invites.send_email(
+    emails=["emails"],
+    role="role",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**emails:** `typing.Sequence[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**role:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Organizations Members
 <details><summary><code>client.organizations.members.<a href="src/label_studio_sdk/organizations/members/client.py">list</a>(...)</code></summary>
 <dl>
@@ -20018,6 +26457,571 @@ client.organizations.members.delete(
 <dd>
 
 **user_pk:** `int` — A unique integer value identifying the user to be deleted from the organization.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Organizations Permissions
+<details><summary><code>client.organizations.permissions.<a href="src/label_studio_sdk/organizations/permissions/client.py">list</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+List all organization-level permission overrides for a given organization.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+
+client = LabelStudio(
+    api_key="YOUR_API_KEY",
+)
+client.organizations.permissions.list(
+    id=1,
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `int` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**ordering:** `typing.Optional[str]` — Which field to use when ordering the results.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.organizations.permissions.<a href="src/label_studio_sdk/organizations/permissions/client.py">create</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Create a new organization-level permission override for a given organization.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+
+client = LabelStudio(
+    api_key="YOUR_API_KEY",
+)
+client.organizations.permissions.create(
+    id=1,
+    permission="permission",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `int` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**permission:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**roles:** `typing.Optional[typing.Sequence[Role9E7Enum]]` — Explicit roles that have this permission within the organization.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.organizations.permissions.<a href="src/label_studio_sdk/organizations/permissions/client.py">get_options</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieve the list of configurable permission options (label, tooltip, default role and allowed roles).
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+
+client = LabelStudio(
+    api_key="YOUR_API_KEY",
+)
+client.organizations.permissions.get_options(
+    id=1,
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `int` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**ordering:** `typing.Optional[str]` — Which field to use when ordering the results.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.organizations.permissions.<a href="src/label_studio_sdk/organizations/permissions/client.py">get</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+
+client = LabelStudio(
+    api_key="YOUR_API_KEY",
+)
+client.organizations.permissions.get(
+    id=1,
+    permission="permission",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `int` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**permission:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.organizations.permissions.<a href="src/label_studio_sdk/organizations/permissions/client.py">replace</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Replace the organization-level permission override for a given permission key.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+
+client = LabelStudio(
+    api_key="YOUR_API_KEY",
+)
+client.organizations.permissions.replace(
+    id=1,
+    permission_="permission",
+    permission="permission",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `int` — A unique integer value identifying this organization.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**permission_:** `str` — Permission key to update within the organization.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**permission:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**roles:** `typing.Optional[typing.Sequence[Role9E7Enum]]` — Explicit roles that have this permission within the organization.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.organizations.permissions.<a href="src/label_studio_sdk/organizations/permissions/client.py">delete</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+
+client = LabelStudio(
+    api_key="YOUR_API_KEY",
+)
+client.organizations.permissions.delete(
+    id=1,
+    permission="permission",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `int` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**permission:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.organizations.permissions.<a href="src/label_studio_sdk/organizations/permissions/client.py">update</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Partially update the organization-level permission override for a given permission key.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+
+client = LabelStudio(
+    api_key="YOUR_API_KEY",
+)
+client.organizations.permissions.update(
+    id=1,
+    permission="permission",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `int` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**permission:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**patched_organization_permission_request_permission:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**roles:** `typing.Optional[typing.Sequence[Role9E7Enum]]` — Explicit roles that have this permission within the organization.
     
 </dd>
 </dl>
@@ -20945,6 +27949,303 @@ client.projects.stats.iaa(
 </dl>
 </details>
 
+<details><summary><code>client.projects.stats.<a href="src/label_studio_sdk/projects/stats/client.py">agreement_annotator</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get agreement statistics for a specific annotator within a project.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+
+client = LabelStudio(
+    api_key="YOUR_API_KEY",
+)
+client.projects.stats.agreement_annotator(
+    id=1,
+    user_id=1,
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `int` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**user_id:** `int` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.projects.stats.<a href="src/label_studio_sdk/projects/stats/client.py">data_filters</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get statistics about user data filters and their usage within a project.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+
+client = LabelStudio(
+    api_key="YOUR_API_KEY",
+)
+client.projects.stats.data_filters(
+    id=1,
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `int` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.projects.stats.<a href="src/label_studio_sdk/projects/stats/client.py">finished_tasks</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get statistics about finished tasks for a project.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+
+client = LabelStudio(
+    api_key="YOUR_API_KEY",
+)
+client.projects.stats.finished_tasks(
+    id=1,
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `int` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**user_pk:** `typing.Optional[int]` — User ID to filter statistics by (optional)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.projects.stats.<a href="src/label_studio_sdk/projects/stats/client.py">lead_time</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get lead time statistics across the project, including average annotation time.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+
+client = LabelStudio(
+    api_key="YOUR_API_KEY",
+)
+client.projects.stats.lead_time(
+    id=1,
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `int` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.projects.stats.<a href="src/label_studio_sdk/projects/stats/client.py">total_agreement</a>(...)</code></summary>
 <dl>
 <dd>
@@ -21006,6 +28307,345 @@ client.projects.stats.total_agreement(
 <dd>
 
 **per_label:** `typing.Optional[bool]` — Return agreement per label
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.projects.stats.<a href="src/label_studio_sdk/projects/stats/client.py">update_stats</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Start stats recalculation for given project
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+
+client = LabelStudio(
+    api_key="YOUR_API_KEY",
+)
+client.projects.stats.update_stats(
+    id=1,
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `int` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**stat_type:** `typing.Optional[str]` — Stat type to recalculate. Possible values: label, stats
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.projects.stats.<a href="src/label_studio_sdk/projects/stats/client.py">user_prediction_agreement</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get prediction agreement statistics for a specific user within a project.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+
+client = LabelStudio(
+    api_key="YOUR_API_KEY",
+)
+client.projects.stats.user_prediction_agreement(
+    id=1,
+    user_pk=1,
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `int` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**user_pk:** `int` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**per_label:** `typing.Optional[bool]` — Calculate agreement per label
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.projects.stats.<a href="src/label_studio_sdk/projects/stats/client.py">user_review_score</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get review score statistics for a specific user within a project.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+
+client = LabelStudio(
+    api_key="YOUR_API_KEY",
+)
+client.projects.stats.user_review_score(
+    id=1,
+    user_pk=1,
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `int` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**user_pk:** `int` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**per_label:** `typing.Optional[bool]` — Calculate agreement per label
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.projects.stats.<a href="src/label_studio_sdk/projects/stats/client.py">user_ground_truth_agreement</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get ground truth agreement statistics for a specific user within a project.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+
+client = LabelStudio(
+    api_key="YOUR_API_KEY",
+)
+client.projects.stats.user_ground_truth_agreement(
+    id=1,
+    user_pk=1,
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `int` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**user_pk:** `int` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**per_label:** `typing.Optional[bool]` — Calculate agreement per label
     
 </dd>
 </dl>
