@@ -1,4 +1,19 @@
 types:
+  StatsModelVersionAnnotatorAgreementResponse:
+    properties:
+      agreement: optional<double>
+    source:
+      openapi: openapi/openapi.yaml
+  StatsModelVersionGroundTruthAgreementResponse:
+    properties:
+      agreement: optional<double>
+    source:
+      openapi: openapi/openapi.yaml
+  StatsModelVersionPredictionAgreementResponse:
+    properties:
+      average_prediction_agreement_per_model: optional<double>
+    source:
+      openapi: openapi/openapi.yaml
   StatsIaaResponseIaa:
     discriminated: false
     docs: >-
@@ -66,6 +81,15 @@ types:
       Agreement_per_annotator:
         type: optional<double>
         docs: Agreement score for the annotator (0-1)
+    source:
+      openapi: openapi/openapi.yaml
+  StatsAgreementAnnotatorsResponse:
+    properties:
+      agreement:
+        type: map<string, double>
+        docs: >-
+          Mapping of annotator ID to their agreement score (0-1) or null if no
+          data
     source:
       openapi: openapi/openapi.yaml
   StatsDataFiltersResponseUserFiltersStatsItem:
@@ -151,6 +175,29 @@ types:
       - StatsTotalAgreementResponseOne
     source:
       openapi: openapi/openapi.yaml
+  StatsUsersPredictionAgreementResponseAgreementValue:
+    discriminated: false
+    union:
+      - type: double
+        docs: >-
+          Average prediction agreement score for the user (0-1) when
+          per_label=False
+      - type: map<string, double>
+        docs: >-
+          Average prediction agreement score per label for the user (0-1) when
+          per_label=True
+    source:
+      openapi: openapi/openapi.yaml
+    inline: true
+  StatsUsersPredictionAgreementResponse:
+    properties:
+      agreement:
+        type: >-
+          optional<map<string,
+          StatsUsersPredictionAgreementResponseAgreementValue>>
+        docs: Dictionary mapping user IDs to their prediction agreement scores
+    source:
+      openapi: openapi/openapi.yaml
   StatsUserPredictionAgreementResponseAveragePredictionAgreementPerUser:
     discriminated: false
     union:
@@ -216,11 +263,124 @@ service:
   auth: false
   base-path: ''
   endpoints:
+    model_version_annotator_agreement:
+      path: /api/projects/{id}/model-stats/{model_version}/agreement
+      method: GET
+      auth: true
+      docs: >-
+        <Card href="https://humansignal.com/goenterprise">
+                <img style="pointer-events: none; margin-left: 0px; margin-right: 0px;" src="https://docs.humansignal.com/images/badge.svg" alt="Label Studio Enterprise badge"/>
+                <p style="margin-top: 10px; font-size: 14px;">
+                    This endpoint is not available in Label Studio Community Edition. [Learn more about Label Studio Enterprise](https://humansignal.com/goenterprise)
+                </p>
+            </Card>
+        Get agreement between a given model version and all annotators in the
+        project for overlapping tasks.
+      source:
+        openapi: openapi/openapi.yaml
+      path-parameters:
+        id: integer
+        model_version: string
+      display-name: Get model-version overall agreement vs annotators
+      response:
+        docs: Model-version overall agreement vs annotators
+        type: StatsModelVersionAnnotatorAgreementResponse
+      examples:
+        - path-parameters:
+            id: 1
+            model_version: model_version
+          response:
+            body:
+              agreement: 1.1
+      audiences:
+        - public
+    model_version_ground_truth_agreement:
+      path: /api/projects/{id}/model-stats/{model_version}/agreement-groundtruth
+      method: GET
+      auth: true
+      docs: >-
+        <Card href="https://humansignal.com/goenterprise">
+                <img style="pointer-events: none; margin-left: 0px; margin-right: 0px;" src="https://docs.humansignal.com/images/badge.svg" alt="Label Studio Enterprise badge"/>
+                <p style="margin-top: 10px; font-size: 14px;">
+                    This endpoint is not available in Label Studio Community Edition. [Learn more about Label Studio Enterprise](https://humansignal.com/goenterprise)
+                </p>
+            </Card>
+        Get agreement between a given model version and ground truth annotations
+        in the project for overlapping tasks.
+      source:
+        openapi: openapi/openapi.yaml
+      path-parameters:
+        id: integer
+        model_version: string
+      display-name: Get model-version ground truth agreement
+      request:
+        name: StatsModelVersionGroundTruthAgreementRequest
+        query-parameters:
+          per_label:
+            type: optional<boolean>
+            default: false
+            docs: Calculate agreement per label
+      response:
+        docs: Model-version ground truth agreement
+        type: StatsModelVersionGroundTruthAgreementResponse
+      examples:
+        - path-parameters:
+            id: 1
+            model_version: model_version
+          response:
+            body:
+              agreement: 1.1
+      audiences:
+        - public
+    model_version_prediction_agreement:
+      path: /api/projects/{id}/model-stats/{model_version}/prediction
+      method: GET
+      auth: true
+      docs: >-
+        <Card href="https://humansignal.com/goenterprise">
+                <img style="pointer-events: none; margin-left: 0px; margin-right: 0px;" src="https://docs.humansignal.com/images/badge.svg" alt="Label Studio Enterprise badge"/>
+                <p style="margin-top: 10px; font-size: 14px;">
+                    This endpoint is not available in Label Studio Community Edition. [Learn more about Label Studio Enterprise](https://humansignal.com/goenterprise)
+                </p>
+            </Card>
+        Get agreement between a given model version and all other model versions
+        in the project for overlapping tasks.
+      source:
+        openapi: openapi/openapi.yaml
+      path-parameters:
+        id: integer
+        model_version: string
+      display-name: Get model-version prediction agreement
+      request:
+        name: StatsModelVersionPredictionAgreementRequest
+        query-parameters:
+          per_label:
+            type: optional<boolean>
+            default: false
+            docs: Calculate agreement per label
+      response:
+        docs: Model-version prediction agreement
+        type: StatsModelVersionPredictionAgreementResponse
+      examples:
+        - path-parameters:
+            id: 1
+            model_version: model_version
+          response:
+            body:
+              average_prediction_agreement_per_model: 1.1
+      audiences:
+        - public
     iaa:
       path: /api/projects/{id}/stats/IAA
       method: GET
       auth: true
       docs: >-
+        <Card href="https://humansignal.com/goenterprise">
+                <img style="pointer-events: none; margin-left: 0px; margin-right: 0px;" src="https://docs.humansignal.com/images/badge.svg" alt="Label Studio Enterprise badge"/>
+                <p style="margin-top: 10px; font-size: 14px;">
+                    This endpoint is not available in Label Studio Community Edition. [Learn more about Label Studio Enterprise](https://humansignal.com/goenterprise)
+                </p>
+            </Card>
         Get Inter-Annotator Agreement (IAA) matrix for a project, showing
         agreement between all annotators.
       source:
@@ -311,7 +471,14 @@ service:
       path: /api/projects/{id}/stats/agreement_annotator/{user_id}
       method: GET
       auth: true
-      docs: Get agreement statistics for a specific annotator within a project.
+      docs: |-
+        <Card href="https://humansignal.com/goenterprise">
+                <img style="pointer-events: none; margin-left: 0px; margin-right: 0px;" src="https://docs.humansignal.com/images/badge.svg" alt="Label Studio Enterprise badge"/>
+                <p style="margin-top: 10px; font-size: 14px;">
+                    This endpoint is not available in Label Studio Community Edition. [Learn more about Label Studio Enterprise](https://humansignal.com/goenterprise)
+                </p>
+            </Card>
+        Get agreement statistics for a specific annotator within a project.
       source:
         openapi: openapi/openapi.yaml
       path-parameters:
@@ -328,6 +495,45 @@ service:
           response:
             body:
               Agreement_per_annotator: 1.1
+      audiences:
+        - public
+    agreement_annotators:
+      path: /api/projects/{id}/stats/agreement_annotators
+      method: GET
+      auth: true
+      docs: |-
+        <Card href="https://humansignal.com/goenterprise">
+                <img style="pointer-events: none; margin-left: 0px; margin-right: 0px;" src="https://docs.humansignal.com/images/badge.svg" alt="Label Studio Enterprise badge"/>
+                <p style="margin-top: 10px; font-size: 14px;">
+                    This endpoint is not available in Label Studio Community Edition. [Learn more about Label Studio Enterprise](https://humansignal.com/goenterprise)
+                </p>
+            </Card>
+        Get agreement statistics for multiple annotators within a project.
+      source:
+        openapi: openapi/openapi.yaml
+      path-parameters:
+        id: integer
+      display-name: Get agreement statistics for multiple annotators
+      request:
+        name: StatsAgreementAnnotatorsRequest
+        query-parameters:
+          ids:
+            type: string
+            docs: >-
+              Comma separated list of annotator user IDs to get agreement scores
+              for
+      response:
+        docs: Multiple annotator agreement statistics
+        type: StatsAgreementAnnotatorsResponse
+      examples:
+        - path-parameters:
+            id: 1
+          query-parameters:
+            ids: ids
+          response:
+            body:
+              agreement:
+                key: 1.1
       audiences:
         - public
     data_filters:
@@ -416,6 +622,12 @@ service:
       method: GET
       auth: true
       docs: >-
+        <Card href="https://humansignal.com/goenterprise">
+                <img style="pointer-events: none; margin-left: 0px; margin-right: 0px;" src="https://docs.humansignal.com/images/badge.svg" alt="Label Studio Enterprise badge"/>
+                <p style="margin-top: 10px; font-size: 14px;">
+                    This endpoint is not available in Label Studio Community Edition. [Learn more about Label Studio Enterprise](https://humansignal.com/goenterprise)
+                </p>
+            </Card>
         Overall or per-label total agreement across the project.
 
 
@@ -471,11 +683,61 @@ service:
               key: value
       audiences:
         - public
+    users_prediction_agreement:
+      path: /api/projects/{id}/user-stats/prediction
+      method: GET
+      auth: true
+      docs: >-
+        <Card href="https://humansignal.com/goenterprise">
+                <img style="pointer-events: none; margin-left: 0px; margin-right: 0px;" src="https://docs.humansignal.com/images/badge.svg" alt="Label Studio Enterprise badge"/>
+                <p style="margin-top: 10px; font-size: 14px;">
+                    This endpoint is not available in Label Studio Community Edition. [Learn more about Label Studio Enterprise](https://humansignal.com/goenterprise)
+                </p>
+            </Card>
+        Get prediction agreement statistics for multiple annotators within a
+        project.
+      source:
+        openapi: openapi/openapi.yaml
+      path-parameters:
+        id: integer
+      display-name: Get prediction agreement statistics for multiple annotators
+      request:
+        name: StatsUsersPredictionAgreementRequest
+        query-parameters:
+          ids:
+            type: string
+            docs: >-
+              Comma separated list of annotator user IDs to get agreement scores
+              for
+          per_label:
+            type: optional<boolean>
+            default: false
+            docs: Per label
+      response:
+        docs: Prediction agreement statistics for multiple annotators
+        type: StatsUsersPredictionAgreementResponse
+      examples:
+        - path-parameters:
+            id: 1
+          query-parameters:
+            ids: ids
+          response:
+            body:
+              agreement:
+                key: 1.1
+      audiences:
+        - public
     user_prediction_agreement:
       path: /api/projects/{id}/user-stats/{user_pk}/prediction
       method: GET
       auth: true
       docs: >-
+        <Card href="https://humansignal.com/goenterprise">
+                <img style="pointer-events: none; margin-left: 0px; margin-right: 0px;" src="https://docs.humansignal.com/images/badge.svg" alt="Label Studio Enterprise badge"/>
+                <p style="margin-top: 10px; font-size: 14px;">
+                    This endpoint is not available in Label Studio Community Edition. [Learn more about Label Studio Enterprise](https://humansignal.com/goenterprise)
+                </p>
+            </Card>
         Get prediction agreement statistics for a specific user within a
         project.
       source:
@@ -506,7 +768,14 @@ service:
       path: /api/projects/{id}/user-stats/{user_pk}/review_score
       method: GET
       auth: true
-      docs: Get review score statistics for a specific user within a project.
+      docs: |-
+        <Card href="https://humansignal.com/goenterprise">
+                <img style="pointer-events: none; margin-left: 0px; margin-right: 0px;" src="https://docs.humansignal.com/images/badge.svg" alt="Label Studio Enterprise badge"/>
+                <p style="margin-top: 10px; font-size: 14px;">
+                    This endpoint is not available in Label Studio Community Edition. [Learn more about Label Studio Enterprise](https://humansignal.com/goenterprise)
+                </p>
+            </Card>
+        Get review score statistics for a specific user within a project.
       source:
         openapi: openapi/openapi.yaml
       path-parameters:
@@ -537,6 +806,12 @@ service:
       method: GET
       auth: true
       docs: >-
+        <Card href="https://humansignal.com/goenterprise">
+                <img style="pointer-events: none; margin-left: 0px; margin-right: 0px;" src="https://docs.humansignal.com/images/badge.svg" alt="Label Studio Enterprise badge"/>
+                <p style="margin-top: 10px; font-size: 14px;">
+                    This endpoint is not available in Label Studio Community Edition. [Learn more about Label Studio Enterprise](https://humansignal.com/goenterprise)
+                </p>
+            </Card>
         Get ground truth agreement statistics for a specific user within a
         project.
       source:

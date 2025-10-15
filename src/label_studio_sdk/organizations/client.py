@@ -195,7 +195,13 @@ class OrganizationsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> LseOrganization:
         """
-        Update organization details including title, embed domains, and custom scripts settings.
+        <Card href="https://humansignal.com/goenterprise">
+                <img style="pointer-events: none; margin-left: 0px; margin-right: 0px;" src="https://docs.humansignal.com/images/badge.svg" alt="Label Studio Enterprise badge"/>
+                <p style="margin-top: 10px; font-size: 14px;">
+                    This endpoint is not available in Label Studio Community Edition. [Learn more about Label Studio Enterprise](https://humansignal.com/goenterprise)
+                </p>
+            </Card>
+        Update organization details including title, embed domains, and Plugins settings.
 
         Parameters
         ----------
@@ -321,6 +327,12 @@ class OrganizationsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> DefaultRole:
         """
+        <Card href="https://humansignal.com/goenterprise">
+                <img style="pointer-events: none; margin-left: 0px; margin-right: 0px;" src="https://docs.humansignal.com/images/badge.svg" alt="Label Studio Enterprise badge"/>
+                <p style="margin-top: 10px; font-size: 14px;">
+                    This endpoint is not available in Label Studio Community Edition. [Learn more about Label Studio Enterprise](https://humansignal.com/goenterprise)
+                </p>
+            </Card>
         Update the default role for members of a specific organization.
 
         Parameters
@@ -331,13 +343,13 @@ class OrganizationsClient:
             Set to current time to restrict data sharing between annotators and reviewers in the label stream, review stream, and notifications (which will be disabled). In these settings, information about annotator and reviewer identity is suppressed in the UI.
 
         custom_scripts_editable_by : typing.Optional[PatchedDefaultRoleRequestCustomScriptsEditableBy]
-            Set the minimum user role that can edit custom scripts in the UI.
+            Set the minimum user role that can edit custom scripts (Plugins) in the UI.
 
             * `AD` - Administrator
             * `MA` - Manager
 
         custom_scripts_enabled_at : typing.Optional[dt.datetime]
-            Set to current time to enabled custom scripts for this organization. Can only be enabled if no organization members are active members of any other organizations; otherwise an error will be raised. If this occurs, contact the LEAP team for assistance with enabling custom scripts.
+            Set to current time to enable custom scripts (Plugins) for this organization. Can only be enabled if no organization members are active members of any other organizations; otherwise an error will be raised. If this occurs, contact the LEAP team for assistance with enabling custom scripts (Plugins).
 
         default_role : typing.Optional[Role9E7Enum]
             Default membership role for invited users
@@ -618,7 +630,13 @@ class AsyncOrganizationsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> LseOrganization:
         """
-        Update organization details including title, embed domains, and custom scripts settings.
+        <Card href="https://humansignal.com/goenterprise">
+                <img style="pointer-events: none; margin-left: 0px; margin-right: 0px;" src="https://docs.humansignal.com/images/badge.svg" alt="Label Studio Enterprise badge"/>
+                <p style="margin-top: 10px; font-size: 14px;">
+                    This endpoint is not available in Label Studio Community Edition. [Learn more about Label Studio Enterprise](https://humansignal.com/goenterprise)
+                </p>
+            </Card>
+        Update organization details including title, embed domains, and Plugins settings.
 
         Parameters
         ----------
@@ -752,6 +770,12 @@ class AsyncOrganizationsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> DefaultRole:
         """
+        <Card href="https://humansignal.com/goenterprise">
+                <img style="pointer-events: none; margin-left: 0px; margin-right: 0px;" src="https://docs.humansignal.com/images/badge.svg" alt="Label Studio Enterprise badge"/>
+                <p style="margin-top: 10px; font-size: 14px;">
+                    This endpoint is not available in Label Studio Community Edition. [Learn more about Label Studio Enterprise](https://humansignal.com/goenterprise)
+                </p>
+            </Card>
         Update the default role for members of a specific organization.
 
         Parameters
@@ -762,13 +786,13 @@ class AsyncOrganizationsClient:
             Set to current time to restrict data sharing between annotators and reviewers in the label stream, review stream, and notifications (which will be disabled). In these settings, information about annotator and reviewer identity is suppressed in the UI.
 
         custom_scripts_editable_by : typing.Optional[PatchedDefaultRoleRequestCustomScriptsEditableBy]
-            Set the minimum user role that can edit custom scripts in the UI.
+            Set the minimum user role that can edit custom scripts (Plugins) in the UI.
 
             * `AD` - Administrator
             * `MA` - Manager
 
         custom_scripts_enabled_at : typing.Optional[dt.datetime]
-            Set to current time to enabled custom scripts for this organization. Can only be enabled if no organization members are active members of any other organizations; otherwise an error will be raised. If this occurs, contact the LEAP team for assistance with enabling custom scripts.
+            Set to current time to enable custom scripts (Plugins) for this organization. Can only be enabled if no organization members are active members of any other organizations; otherwise an error will be raised. If this occurs, contact the LEAP team for assistance with enabling custom scripts (Plugins).
 
         default_role : typing.Optional[Role9E7Enum]
             Default membership role for invited users

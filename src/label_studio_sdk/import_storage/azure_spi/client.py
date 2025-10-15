@@ -28,6 +28,12 @@ class AzureSpiClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> typing.List[AzureServicePrincipalImportStorage]:
         """
+        <Card href="https://humansignal.com/goenterprise">
+                <img style="pointer-events: none; margin-left: 0px; margin-right: 0px;" src="https://docs.humansignal.com/images/badge.svg" alt="Label Studio Enterprise badge"/>
+                <p style="margin-top: 10px; font-size: 14px;">
+                    This endpoint is not available in Label Studio Community Edition. [Learn more about Label Studio Enterprise](https://humansignal.com/goenterprise)
+                </p>
+            </Card>
         Get list of all Azure import storage connections set up with Service Principal authentication.
 
         Parameters
@@ -94,6 +100,7 @@ class AzureSpiClient:
         prefix: typing.Optional[str] = OMIT,
         presign: typing.Optional[bool] = OMIT,
         presign_ttl: typing.Optional[int] = OMIT,
+        recursive_scan: typing.Optional[bool] = OMIT,
         regex_filter: typing.Optional[str] = OMIT,
         status: typing.Optional[StatusC5AEnum] = OMIT,
         synchronizable: typing.Optional[bool] = OMIT,
@@ -105,6 +112,12 @@ class AzureSpiClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AzureServicePrincipalImportStorage:
         """
+        <Card href="https://humansignal.com/goenterprise">
+                <img style="pointer-events: none; margin-left: 0px; margin-right: 0px;" src="https://docs.humansignal.com/images/badge.svg" alt="Label Studio Enterprise badge"/>
+                <p style="margin-top: 10px; font-size: 14px;">
+                    This endpoint is not available in Label Studio Community Edition. [Learn more about Label Studio Enterprise](https://humansignal.com/goenterprise)
+                </p>
+            </Card>
         Create Azure import storage with Service Principal authentication.
 
         Parameters
@@ -145,6 +158,9 @@ class AzureSpiClient:
 
         presign_ttl : typing.Optional[int]
             Presigned URLs TTL (in minutes)
+
+        recursive_scan : typing.Optional[bool]
+            Perform recursive scan
 
         regex_filter : typing.Optional[str]
             Cloud storage regex for filtering objects
@@ -204,6 +220,7 @@ class AzureSpiClient:
                 "presign": presign,
                 "presign_ttl": presign_ttl,
                 "project": project,
+                "recursive_scan": recursive_scan,
                 "regex_filter": regex_filter,
                 "status": status,
                 "synchronizable": synchronizable,
@@ -246,6 +263,7 @@ class AzureSpiClient:
         prefix: typing.Optional[str] = OMIT,
         presign: typing.Optional[bool] = OMIT,
         presign_ttl: typing.Optional[int] = OMIT,
+        recursive_scan: typing.Optional[bool] = OMIT,
         regex_filter: typing.Optional[str] = OMIT,
         status: typing.Optional[StatusC5AEnum] = OMIT,
         synchronizable: typing.Optional[bool] = OMIT,
@@ -257,6 +275,12 @@ class AzureSpiClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> None:
         """
+        <Card href="https://humansignal.com/goenterprise">
+                <img style="pointer-events: none; margin-left: 0px; margin-right: 0px;" src="https://docs.humansignal.com/images/badge.svg" alt="Label Studio Enterprise badge"/>
+                <p style="margin-top: 10px; font-size: 14px;">
+                    This endpoint is not available in Label Studio Community Edition. [Learn more about Label Studio Enterprise](https://humansignal.com/goenterprise)
+                </p>
+            </Card>
         Validate a specific Azure import storage connection that was set up with Service Principal authentication.
 
         Parameters
@@ -297,6 +321,9 @@ class AzureSpiClient:
 
         presign_ttl : typing.Optional[int]
             Presigned URLs TTL (in minutes)
+
+        recursive_scan : typing.Optional[bool]
+            Perform recursive scan
 
         regex_filter : typing.Optional[str]
             Cloud storage regex for filtering objects
@@ -355,6 +382,7 @@ class AzureSpiClient:
                 "presign": presign,
                 "presign_ttl": presign_ttl,
                 "project": project,
+                "recursive_scan": recursive_scan,
                 "regex_filter": regex_filter,
                 "status": status,
                 "synchronizable": synchronizable,
@@ -379,6 +407,12 @@ class AzureSpiClient:
         self, id: int, *, request_options: typing.Optional[RequestOptions] = None
     ) -> AzureServicePrincipalImportStorage:
         """
+        <Card href="https://humansignal.com/goenterprise">
+                <img style="pointer-events: none; margin-left: 0px; margin-right: 0px;" src="https://docs.humansignal.com/images/badge.svg" alt="Label Studio Enterprise badge"/>
+                <p style="margin-top: 10px; font-size: 14px;">
+                    This endpoint is not available in Label Studio Community Edition. [Learn more about Label Studio Enterprise](https://humansignal.com/goenterprise)
+                </p>
+            </Card>
         Get a specific Azure import storage connection that was set up with Service Principal authentication.
 
         Parameters
@@ -425,6 +459,12 @@ class AzureSpiClient:
 
     def delete(self, id: int, *, request_options: typing.Optional[RequestOptions] = None) -> None:
         """
+        <Card href="https://humansignal.com/goenterprise">
+                <img style="pointer-events: none; margin-left: 0px; margin-right: 0px;" src="https://docs.humansignal.com/images/badge.svg" alt="Label Studio Enterprise badge"/>
+                <p style="margin-top: 10px; font-size: 14px;">
+                    This endpoint is not available in Label Studio Community Edition. [Learn more about Label Studio Enterprise](https://humansignal.com/goenterprise)
+                </p>
+            </Card>
         Delete a specific Azure import storage connection that was set up with Service Principal authentication.
 
         Parameters
@@ -479,6 +519,7 @@ class AzureSpiClient:
         presign: typing.Optional[bool] = OMIT,
         presign_ttl: typing.Optional[int] = OMIT,
         project: typing.Optional[int] = OMIT,
+        recursive_scan: typing.Optional[bool] = OMIT,
         regex_filter: typing.Optional[str] = OMIT,
         status: typing.Optional[StatusC5AEnum] = OMIT,
         synchronizable: typing.Optional[bool] = OMIT,
@@ -490,6 +531,12 @@ class AzureSpiClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AzureServicePrincipalImportStorage:
         """
+        <Card href="https://humansignal.com/goenterprise">
+                <img style="pointer-events: none; margin-left: 0px; margin-right: 0px;" src="https://docs.humansignal.com/images/badge.svg" alt="Label Studio Enterprise badge"/>
+                <p style="margin-top: 10px; font-size: 14px;">
+                    This endpoint is not available in Label Studio Community Edition. [Learn more about Label Studio Enterprise](https://humansignal.com/goenterprise)
+                </p>
+            </Card>
         Update a specific Azure import storage connection that was set up with Service Principal authentication.
 
         Parameters
@@ -532,6 +579,9 @@ class AzureSpiClient:
 
         project : typing.Optional[int]
             A unique integer value identifying this project.
+
+        recursive_scan : typing.Optional[bool]
+            Perform recursive scan
 
         regex_filter : typing.Optional[str]
             Cloud storage regex for filtering objects
@@ -591,6 +641,7 @@ class AzureSpiClient:
                 "presign": presign,
                 "presign_ttl": presign_ttl,
                 "project": project,
+                "recursive_scan": recursive_scan,
                 "regex_filter": regex_filter,
                 "status": status,
                 "synchronizable": synchronizable,
@@ -624,6 +675,12 @@ class AzureSpiClient:
         self, id: int, *, request_options: typing.Optional[RequestOptions] = None
     ) -> AzureServicePrincipalImportStorage:
         """
+        <Card href="https://humansignal.com/goenterprise">
+                <img style="pointer-events: none; margin-left: 0px; margin-right: 0px;" src="https://docs.humansignal.com/images/badge.svg" alt="Label Studio Enterprise badge"/>
+                <p style="margin-top: 10px; font-size: 14px;">
+                    This endpoint is not available in Label Studio Community Edition. [Learn more about Label Studio Enterprise](https://humansignal.com/goenterprise)
+                </p>
+            </Card>
         Sync tasks from an Azure import storage connection that was set up with Service Principal authentication.
 
         Parameters
@@ -681,6 +738,12 @@ class AsyncAzureSpiClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> typing.List[AzureServicePrincipalImportStorage]:
         """
+        <Card href="https://humansignal.com/goenterprise">
+                <img style="pointer-events: none; margin-left: 0px; margin-right: 0px;" src="https://docs.humansignal.com/images/badge.svg" alt="Label Studio Enterprise badge"/>
+                <p style="margin-top: 10px; font-size: 14px;">
+                    This endpoint is not available in Label Studio Community Edition. [Learn more about Label Studio Enterprise](https://humansignal.com/goenterprise)
+                </p>
+            </Card>
         Get list of all Azure import storage connections set up with Service Principal authentication.
 
         Parameters
@@ -755,6 +818,7 @@ class AsyncAzureSpiClient:
         prefix: typing.Optional[str] = OMIT,
         presign: typing.Optional[bool] = OMIT,
         presign_ttl: typing.Optional[int] = OMIT,
+        recursive_scan: typing.Optional[bool] = OMIT,
         regex_filter: typing.Optional[str] = OMIT,
         status: typing.Optional[StatusC5AEnum] = OMIT,
         synchronizable: typing.Optional[bool] = OMIT,
@@ -766,6 +830,12 @@ class AsyncAzureSpiClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AzureServicePrincipalImportStorage:
         """
+        <Card href="https://humansignal.com/goenterprise">
+                <img style="pointer-events: none; margin-left: 0px; margin-right: 0px;" src="https://docs.humansignal.com/images/badge.svg" alt="Label Studio Enterprise badge"/>
+                <p style="margin-top: 10px; font-size: 14px;">
+                    This endpoint is not available in Label Studio Community Edition. [Learn more about Label Studio Enterprise](https://humansignal.com/goenterprise)
+                </p>
+            </Card>
         Create Azure import storage with Service Principal authentication.
 
         Parameters
@@ -806,6 +876,9 @@ class AsyncAzureSpiClient:
 
         presign_ttl : typing.Optional[int]
             Presigned URLs TTL (in minutes)
+
+        recursive_scan : typing.Optional[bool]
+            Perform recursive scan
 
         regex_filter : typing.Optional[str]
             Cloud storage regex for filtering objects
@@ -873,6 +946,7 @@ class AsyncAzureSpiClient:
                 "presign": presign,
                 "presign_ttl": presign_ttl,
                 "project": project,
+                "recursive_scan": recursive_scan,
                 "regex_filter": regex_filter,
                 "status": status,
                 "synchronizable": synchronizable,
@@ -915,6 +989,7 @@ class AsyncAzureSpiClient:
         prefix: typing.Optional[str] = OMIT,
         presign: typing.Optional[bool] = OMIT,
         presign_ttl: typing.Optional[int] = OMIT,
+        recursive_scan: typing.Optional[bool] = OMIT,
         regex_filter: typing.Optional[str] = OMIT,
         status: typing.Optional[StatusC5AEnum] = OMIT,
         synchronizable: typing.Optional[bool] = OMIT,
@@ -926,6 +1001,12 @@ class AsyncAzureSpiClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> None:
         """
+        <Card href="https://humansignal.com/goenterprise">
+                <img style="pointer-events: none; margin-left: 0px; margin-right: 0px;" src="https://docs.humansignal.com/images/badge.svg" alt="Label Studio Enterprise badge"/>
+                <p style="margin-top: 10px; font-size: 14px;">
+                    This endpoint is not available in Label Studio Community Edition. [Learn more about Label Studio Enterprise](https://humansignal.com/goenterprise)
+                </p>
+            </Card>
         Validate a specific Azure import storage connection that was set up with Service Principal authentication.
 
         Parameters
@@ -966,6 +1047,9 @@ class AsyncAzureSpiClient:
 
         presign_ttl : typing.Optional[int]
             Presigned URLs TTL (in minutes)
+
+        recursive_scan : typing.Optional[bool]
+            Perform recursive scan
 
         regex_filter : typing.Optional[str]
             Cloud storage regex for filtering objects
@@ -1032,6 +1116,7 @@ class AsyncAzureSpiClient:
                 "presign": presign,
                 "presign_ttl": presign_ttl,
                 "project": project,
+                "recursive_scan": recursive_scan,
                 "regex_filter": regex_filter,
                 "status": status,
                 "synchronizable": synchronizable,
@@ -1056,6 +1141,12 @@ class AsyncAzureSpiClient:
         self, id: int, *, request_options: typing.Optional[RequestOptions] = None
     ) -> AzureServicePrincipalImportStorage:
         """
+        <Card href="https://humansignal.com/goenterprise">
+                <img style="pointer-events: none; margin-left: 0px; margin-right: 0px;" src="https://docs.humansignal.com/images/badge.svg" alt="Label Studio Enterprise badge"/>
+                <p style="margin-top: 10px; font-size: 14px;">
+                    This endpoint is not available in Label Studio Community Edition. [Learn more about Label Studio Enterprise](https://humansignal.com/goenterprise)
+                </p>
+            </Card>
         Get a specific Azure import storage connection that was set up with Service Principal authentication.
 
         Parameters
@@ -1110,6 +1201,12 @@ class AsyncAzureSpiClient:
 
     async def delete(self, id: int, *, request_options: typing.Optional[RequestOptions] = None) -> None:
         """
+        <Card href="https://humansignal.com/goenterprise">
+                <img style="pointer-events: none; margin-left: 0px; margin-right: 0px;" src="https://docs.humansignal.com/images/badge.svg" alt="Label Studio Enterprise badge"/>
+                <p style="margin-top: 10px; font-size: 14px;">
+                    This endpoint is not available in Label Studio Community Edition. [Learn more about Label Studio Enterprise](https://humansignal.com/goenterprise)
+                </p>
+            </Card>
         Delete a specific Azure import storage connection that was set up with Service Principal authentication.
 
         Parameters
@@ -1172,6 +1269,7 @@ class AsyncAzureSpiClient:
         presign: typing.Optional[bool] = OMIT,
         presign_ttl: typing.Optional[int] = OMIT,
         project: typing.Optional[int] = OMIT,
+        recursive_scan: typing.Optional[bool] = OMIT,
         regex_filter: typing.Optional[str] = OMIT,
         status: typing.Optional[StatusC5AEnum] = OMIT,
         synchronizable: typing.Optional[bool] = OMIT,
@@ -1183,6 +1281,12 @@ class AsyncAzureSpiClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AzureServicePrincipalImportStorage:
         """
+        <Card href="https://humansignal.com/goenterprise">
+                <img style="pointer-events: none; margin-left: 0px; margin-right: 0px;" src="https://docs.humansignal.com/images/badge.svg" alt="Label Studio Enterprise badge"/>
+                <p style="margin-top: 10px; font-size: 14px;">
+                    This endpoint is not available in Label Studio Community Edition. [Learn more about Label Studio Enterprise](https://humansignal.com/goenterprise)
+                </p>
+            </Card>
         Update a specific Azure import storage connection that was set up with Service Principal authentication.
 
         Parameters
@@ -1225,6 +1329,9 @@ class AsyncAzureSpiClient:
 
         project : typing.Optional[int]
             A unique integer value identifying this project.
+
+        recursive_scan : typing.Optional[bool]
+            Perform recursive scan
 
         regex_filter : typing.Optional[str]
             Cloud storage regex for filtering objects
@@ -1292,6 +1399,7 @@ class AsyncAzureSpiClient:
                 "presign": presign,
                 "presign_ttl": presign_ttl,
                 "project": project,
+                "recursive_scan": recursive_scan,
                 "regex_filter": regex_filter,
                 "status": status,
                 "synchronizable": synchronizable,
@@ -1325,6 +1433,12 @@ class AsyncAzureSpiClient:
         self, id: int, *, request_options: typing.Optional[RequestOptions] = None
     ) -> AzureServicePrincipalImportStorage:
         """
+        <Card href="https://humansignal.com/goenterprise">
+                <img style="pointer-events: none; margin-left: 0px; margin-right: 0px;" src="https://docs.humansignal.com/images/badge.svg" alt="Label Studio Enterprise badge"/>
+                <p style="margin-top: 10px; font-size: 14px;">
+                    This endpoint is not available in Label Studio Community Edition. [Learn more about Label Studio Enterprise](https://humansignal.com/goenterprise)
+                </p>
+            </Card>
         Sync tasks from an Azure import storage connection that was set up with Service Principal authentication.
 
         Parameters

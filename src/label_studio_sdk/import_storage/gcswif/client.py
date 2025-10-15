@@ -28,6 +28,12 @@ class GcswifClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> typing.List[GcswifImportStorage]:
         """
+        <Card href="https://humansignal.com/goenterprise">
+                <img style="pointer-events: none; margin-left: 0px; margin-right: 0px;" src="https://docs.humansignal.com/images/badge.svg" alt="Label Studio Enterprise badge"/>
+                <p style="margin-top: 10px; font-size: 14px;">
+                    This endpoint is not available in Label Studio Community Edition. [Learn more about Label Studio Enterprise](https://humansignal.com/goenterprise)
+                </p>
+            </Card>
         Get list of all GCS import storage connections set up with WIF authentication.
 
         Parameters
@@ -97,6 +103,7 @@ class GcswifClient:
         prefix: typing.Optional[str] = OMIT,
         presign: typing.Optional[bool] = OMIT,
         presign_ttl: typing.Optional[int] = OMIT,
+        recursive_scan: typing.Optional[bool] = OMIT,
         regex_filter: typing.Optional[str] = OMIT,
         status: typing.Optional[StatusC5AEnum] = OMIT,
         synchronizable: typing.Optional[bool] = OMIT,
@@ -106,6 +113,12 @@ class GcswifClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> GcswifImportStorage:
         """
+        <Card href="https://humansignal.com/goenterprise">
+                <img style="pointer-events: none; margin-left: 0px; margin-right: 0px;" src="https://docs.humansignal.com/images/badge.svg" alt="Label Studio Enterprise badge"/>
+                <p style="margin-top: 10px; font-size: 14px;">
+                    This endpoint is not available in Label Studio Community Edition. [Learn more about Label Studio Enterprise](https://humansignal.com/goenterprise)
+                </p>
+            </Card>
         Create GCS import storage with WIF.
 
         Parameters
@@ -155,6 +168,9 @@ class GcswifClient:
 
         presign_ttl : typing.Optional[int]
             Presigned URLs TTL (in minutes)
+
+        recursive_scan : typing.Optional[bool]
+            Perform recursive scan over the bucket content
 
         regex_filter : typing.Optional[str]
             Cloud storage regex for filtering objects
@@ -211,6 +227,7 @@ class GcswifClient:
                 "presign": presign,
                 "presign_ttl": presign_ttl,
                 "project": project,
+                "recursive_scan": recursive_scan,
                 "regex_filter": regex_filter,
                 "status": status,
                 "synchronizable": synchronizable,
@@ -254,6 +271,7 @@ class GcswifClient:
         prefix: typing.Optional[str] = OMIT,
         presign: typing.Optional[bool] = OMIT,
         presign_ttl: typing.Optional[int] = OMIT,
+        recursive_scan: typing.Optional[bool] = OMIT,
         regex_filter: typing.Optional[str] = OMIT,
         status: typing.Optional[StatusC5AEnum] = OMIT,
         synchronizable: typing.Optional[bool] = OMIT,
@@ -263,6 +281,12 @@ class GcswifClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> None:
         """
+        <Card href="https://humansignal.com/goenterprise">
+                <img style="pointer-events: none; margin-left: 0px; margin-right: 0px;" src="https://docs.humansignal.com/images/badge.svg" alt="Label Studio Enterprise badge"/>
+                <p style="margin-top: 10px; font-size: 14px;">
+                    This endpoint is not available in Label Studio Community Edition. [Learn more about Label Studio Enterprise](https://humansignal.com/goenterprise)
+                </p>
+            </Card>
         Validate a specific GCS import storage connection that was set up with WIF authentication.
 
         Parameters
@@ -312,6 +336,9 @@ class GcswifClient:
 
         presign_ttl : typing.Optional[int]
             Presigned URLs TTL (in minutes)
+
+        recursive_scan : typing.Optional[bool]
+            Perform recursive scan over the bucket content
 
         regex_filter : typing.Optional[str]
             Cloud storage regex for filtering objects
@@ -367,6 +394,7 @@ class GcswifClient:
                 "presign": presign,
                 "presign_ttl": presign_ttl,
                 "project": project,
+                "recursive_scan": recursive_scan,
                 "regex_filter": regex_filter,
                 "status": status,
                 "synchronizable": synchronizable,
@@ -387,6 +415,12 @@ class GcswifClient:
 
     def get(self, id: int, *, request_options: typing.Optional[RequestOptions] = None) -> GcswifImportStorage:
         """
+        <Card href="https://humansignal.com/goenterprise">
+                <img style="pointer-events: none; margin-left: 0px; margin-right: 0px;" src="https://docs.humansignal.com/images/badge.svg" alt="Label Studio Enterprise badge"/>
+                <p style="margin-top: 10px; font-size: 14px;">
+                    This endpoint is not available in Label Studio Community Edition. [Learn more about Label Studio Enterprise](https://humansignal.com/goenterprise)
+                </p>
+            </Card>
         Get a specific GCS import storage connection that was set up with WIF.
 
         Parameters
@@ -433,6 +467,12 @@ class GcswifClient:
 
     def delete(self, id: int, *, request_options: typing.Optional[RequestOptions] = None) -> None:
         """
+        <Card href="https://humansignal.com/goenterprise">
+                <img style="pointer-events: none; margin-left: 0px; margin-right: 0px;" src="https://docs.humansignal.com/images/badge.svg" alt="Label Studio Enterprise badge"/>
+                <p style="margin-top: 10px; font-size: 14px;">
+                    This endpoint is not available in Label Studio Community Edition. [Learn more about Label Studio Enterprise](https://humansignal.com/goenterprise)
+                </p>
+            </Card>
         Delete a specific GCS import storage connection that was set up with WIF authentication.
 
         Parameters
@@ -490,6 +530,7 @@ class GcswifClient:
         presign: typing.Optional[bool] = OMIT,
         presign_ttl: typing.Optional[int] = OMIT,
         project: typing.Optional[int] = OMIT,
+        recursive_scan: typing.Optional[bool] = OMIT,
         regex_filter: typing.Optional[str] = OMIT,
         status: typing.Optional[StatusC5AEnum] = OMIT,
         synchronizable: typing.Optional[bool] = OMIT,
@@ -499,6 +540,12 @@ class GcswifClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> GcswifImportStorage:
         """
+        <Card href="https://humansignal.com/goenterprise">
+                <img style="pointer-events: none; margin-left: 0px; margin-right: 0px;" src="https://docs.humansignal.com/images/badge.svg" alt="Label Studio Enterprise badge"/>
+                <p style="margin-top: 10px; font-size: 14px;">
+                    This endpoint is not available in Label Studio Community Edition. [Learn more about Label Studio Enterprise](https://humansignal.com/goenterprise)
+                </p>
+            </Card>
         Update a specific GCS import storage connection that was set up with WIF authentication.
 
         Parameters
@@ -550,6 +597,9 @@ class GcswifClient:
 
         project : typing.Optional[int]
             A unique integer value identifying this project.
+
+        recursive_scan : typing.Optional[bool]
+            Perform recursive scan over the bucket content
 
         regex_filter : typing.Optional[str]
             Cloud storage regex for filtering objects
@@ -606,6 +656,7 @@ class GcswifClient:
                 "presign": presign,
                 "presign_ttl": presign_ttl,
                 "project": project,
+                "recursive_scan": recursive_scan,
                 "regex_filter": regex_filter,
                 "status": status,
                 "synchronizable": synchronizable,
@@ -635,6 +686,12 @@ class GcswifClient:
 
     def sync(self, id: int, *, request_options: typing.Optional[RequestOptions] = None) -> GcswifImportStorage:
         """
+        <Card href="https://humansignal.com/goenterprise">
+                <img style="pointer-events: none; margin-left: 0px; margin-right: 0px;" src="https://docs.humansignal.com/images/badge.svg" alt="Label Studio Enterprise badge"/>
+                <p style="margin-top: 10px; font-size: 14px;">
+                    This endpoint is not available in Label Studio Community Edition. [Learn more about Label Studio Enterprise](https://humansignal.com/goenterprise)
+                </p>
+            </Card>
         Sync tasks from an GCS import storage connection that was set up with WIF authentication.
 
         Parameters
@@ -692,6 +749,12 @@ class AsyncGcswifClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> typing.List[GcswifImportStorage]:
         """
+        <Card href="https://humansignal.com/goenterprise">
+                <img style="pointer-events: none; margin-left: 0px; margin-right: 0px;" src="https://docs.humansignal.com/images/badge.svg" alt="Label Studio Enterprise badge"/>
+                <p style="margin-top: 10px; font-size: 14px;">
+                    This endpoint is not available in Label Studio Community Edition. [Learn more about Label Studio Enterprise](https://humansignal.com/goenterprise)
+                </p>
+            </Card>
         Get list of all GCS import storage connections set up with WIF authentication.
 
         Parameters
@@ -769,6 +832,7 @@ class AsyncGcswifClient:
         prefix: typing.Optional[str] = OMIT,
         presign: typing.Optional[bool] = OMIT,
         presign_ttl: typing.Optional[int] = OMIT,
+        recursive_scan: typing.Optional[bool] = OMIT,
         regex_filter: typing.Optional[str] = OMIT,
         status: typing.Optional[StatusC5AEnum] = OMIT,
         synchronizable: typing.Optional[bool] = OMIT,
@@ -778,6 +842,12 @@ class AsyncGcswifClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> GcswifImportStorage:
         """
+        <Card href="https://humansignal.com/goenterprise">
+                <img style="pointer-events: none; margin-left: 0px; margin-right: 0px;" src="https://docs.humansignal.com/images/badge.svg" alt="Label Studio Enterprise badge"/>
+                <p style="margin-top: 10px; font-size: 14px;">
+                    This endpoint is not available in Label Studio Community Edition. [Learn more about Label Studio Enterprise](https://humansignal.com/goenterprise)
+                </p>
+            </Card>
         Create GCS import storage with WIF.
 
         Parameters
@@ -827,6 +897,9 @@ class AsyncGcswifClient:
 
         presign_ttl : typing.Optional[int]
             Presigned URLs TTL (in minutes)
+
+        recursive_scan : typing.Optional[bool]
+            Perform recursive scan over the bucket content
 
         regex_filter : typing.Optional[str]
             Cloud storage regex for filtering objects
@@ -891,6 +964,7 @@ class AsyncGcswifClient:
                 "presign": presign,
                 "presign_ttl": presign_ttl,
                 "project": project,
+                "recursive_scan": recursive_scan,
                 "regex_filter": regex_filter,
                 "status": status,
                 "synchronizable": synchronizable,
@@ -934,6 +1008,7 @@ class AsyncGcswifClient:
         prefix: typing.Optional[str] = OMIT,
         presign: typing.Optional[bool] = OMIT,
         presign_ttl: typing.Optional[int] = OMIT,
+        recursive_scan: typing.Optional[bool] = OMIT,
         regex_filter: typing.Optional[str] = OMIT,
         status: typing.Optional[StatusC5AEnum] = OMIT,
         synchronizable: typing.Optional[bool] = OMIT,
@@ -943,6 +1018,12 @@ class AsyncGcswifClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> None:
         """
+        <Card href="https://humansignal.com/goenterprise">
+                <img style="pointer-events: none; margin-left: 0px; margin-right: 0px;" src="https://docs.humansignal.com/images/badge.svg" alt="Label Studio Enterprise badge"/>
+                <p style="margin-top: 10px; font-size: 14px;">
+                    This endpoint is not available in Label Studio Community Edition. [Learn more about Label Studio Enterprise](https://humansignal.com/goenterprise)
+                </p>
+            </Card>
         Validate a specific GCS import storage connection that was set up with WIF authentication.
 
         Parameters
@@ -992,6 +1073,9 @@ class AsyncGcswifClient:
 
         presign_ttl : typing.Optional[int]
             Presigned URLs TTL (in minutes)
+
+        recursive_scan : typing.Optional[bool]
+            Perform recursive scan over the bucket content
 
         regex_filter : typing.Optional[str]
             Cloud storage regex for filtering objects
@@ -1055,6 +1139,7 @@ class AsyncGcswifClient:
                 "presign": presign,
                 "presign_ttl": presign_ttl,
                 "project": project,
+                "recursive_scan": recursive_scan,
                 "regex_filter": regex_filter,
                 "status": status,
                 "synchronizable": synchronizable,
@@ -1075,6 +1160,12 @@ class AsyncGcswifClient:
 
     async def get(self, id: int, *, request_options: typing.Optional[RequestOptions] = None) -> GcswifImportStorage:
         """
+        <Card href="https://humansignal.com/goenterprise">
+                <img style="pointer-events: none; margin-left: 0px; margin-right: 0px;" src="https://docs.humansignal.com/images/badge.svg" alt="Label Studio Enterprise badge"/>
+                <p style="margin-top: 10px; font-size: 14px;">
+                    This endpoint is not available in Label Studio Community Edition. [Learn more about Label Studio Enterprise](https://humansignal.com/goenterprise)
+                </p>
+            </Card>
         Get a specific GCS import storage connection that was set up with WIF.
 
         Parameters
@@ -1129,6 +1220,12 @@ class AsyncGcswifClient:
 
     async def delete(self, id: int, *, request_options: typing.Optional[RequestOptions] = None) -> None:
         """
+        <Card href="https://humansignal.com/goenterprise">
+                <img style="pointer-events: none; margin-left: 0px; margin-right: 0px;" src="https://docs.humansignal.com/images/badge.svg" alt="Label Studio Enterprise badge"/>
+                <p style="margin-top: 10px; font-size: 14px;">
+                    This endpoint is not available in Label Studio Community Edition. [Learn more about Label Studio Enterprise](https://humansignal.com/goenterprise)
+                </p>
+            </Card>
         Delete a specific GCS import storage connection that was set up with WIF authentication.
 
         Parameters
@@ -1194,6 +1291,7 @@ class AsyncGcswifClient:
         presign: typing.Optional[bool] = OMIT,
         presign_ttl: typing.Optional[int] = OMIT,
         project: typing.Optional[int] = OMIT,
+        recursive_scan: typing.Optional[bool] = OMIT,
         regex_filter: typing.Optional[str] = OMIT,
         status: typing.Optional[StatusC5AEnum] = OMIT,
         synchronizable: typing.Optional[bool] = OMIT,
@@ -1203,6 +1301,12 @@ class AsyncGcswifClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> GcswifImportStorage:
         """
+        <Card href="https://humansignal.com/goenterprise">
+                <img style="pointer-events: none; margin-left: 0px; margin-right: 0px;" src="https://docs.humansignal.com/images/badge.svg" alt="Label Studio Enterprise badge"/>
+                <p style="margin-top: 10px; font-size: 14px;">
+                    This endpoint is not available in Label Studio Community Edition. [Learn more about Label Studio Enterprise](https://humansignal.com/goenterprise)
+                </p>
+            </Card>
         Update a specific GCS import storage connection that was set up with WIF authentication.
 
         Parameters
@@ -1254,6 +1358,9 @@ class AsyncGcswifClient:
 
         project : typing.Optional[int]
             A unique integer value identifying this project.
+
+        recursive_scan : typing.Optional[bool]
+            Perform recursive scan over the bucket content
 
         regex_filter : typing.Optional[str]
             Cloud storage regex for filtering objects
@@ -1318,6 +1425,7 @@ class AsyncGcswifClient:
                 "presign": presign,
                 "presign_ttl": presign_ttl,
                 "project": project,
+                "recursive_scan": recursive_scan,
                 "regex_filter": regex_filter,
                 "status": status,
                 "synchronizable": synchronizable,
@@ -1347,6 +1455,12 @@ class AsyncGcswifClient:
 
     async def sync(self, id: int, *, request_options: typing.Optional[RequestOptions] = None) -> GcswifImportStorage:
         """
+        <Card href="https://humansignal.com/goenterprise">
+                <img style="pointer-events: none; margin-left: 0px; margin-right: 0px;" src="https://docs.humansignal.com/images/badge.svg" alt="Label Studio Enterprise badge"/>
+                <p style="margin-top: 10px; font-size: 14px;">
+                    This endpoint is not available in Label Studio Community Edition. [Learn more about Label Studio Enterprise](https://humansignal.com/goenterprise)
+                </p>
+            </Card>
         Sync tasks from an GCS import storage connection that was set up with WIF authentication.
 
         Parameters

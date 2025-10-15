@@ -8,9 +8,8 @@ from .types import (
     ProjectsDuplicateResponse,
     ProjectsImportPredictionsResponse,
     ProjectsImportTasksResponse,
-    ProjectsListRequestFilter,
 )
-from . import assignments, exports, members, metrics, pauses, stats
+from . import assignments, exports, members, metrics, pauses, roles, stats
 from .assignments import (
     AssignmentsAssignRequestType,
     AssignmentsBulkAssignRequestFilters,
@@ -30,6 +29,7 @@ from .assignments import (
 from .exports import ExportsConvertResponse
 from .stats import (
     StatsAgreementAnnotatorResponse,
+    StatsAgreementAnnotatorsResponse,
     StatsDataFiltersResponse,
     StatsDataFiltersResponseUserFilters,
     StatsDataFiltersResponseUserFiltersStatsItem,
@@ -40,6 +40,9 @@ from .stats import (
     StatsIaaResponseStd,
     StatsLeadTimeResponse,
     StatsLeadTimeResponseLeadTimeStatsItem,
+    StatsModelVersionAnnotatorAgreementResponse,
+    StatsModelVersionGroundTruthAgreementResponse,
+    StatsModelVersionPredictionAgreementResponse,
     StatsTotalAgreementResponse,
     StatsTotalAgreementResponseOne,
     StatsTotalAgreementResponseZero,
@@ -50,6 +53,8 @@ from .stats import (
     StatsUserReviewScoreResponse,
     StatsUserReviewScoreResponsePerformanceScore,
     StatsUserReviewScoreResponseReviewScore,
+    StatsUsersPredictionAgreementResponse,
+    StatsUsersPredictionAgreementResponseAgreementValue,
 )
 
 __all__ = [
@@ -75,8 +80,8 @@ __all__ = [
     "ProjectsDuplicateResponse",
     "ProjectsImportPredictionsResponse",
     "ProjectsImportTasksResponse",
-    "ProjectsListRequestFilter",
     "StatsAgreementAnnotatorResponse",
+    "StatsAgreementAnnotatorsResponse",
     "StatsDataFiltersResponse",
     "StatsDataFiltersResponseUserFilters",
     "StatsDataFiltersResponseUserFiltersStatsItem",
@@ -87,6 +92,9 @@ __all__ = [
     "StatsIaaResponseStd",
     "StatsLeadTimeResponse",
     "StatsLeadTimeResponseLeadTimeStatsItem",
+    "StatsModelVersionAnnotatorAgreementResponse",
+    "StatsModelVersionGroundTruthAgreementResponse",
+    "StatsModelVersionPredictionAgreementResponse",
     "StatsTotalAgreementResponse",
     "StatsTotalAgreementResponseOne",
     "StatsTotalAgreementResponseZero",
@@ -97,10 +105,13 @@ __all__ = [
     "StatsUserReviewScoreResponse",
     "StatsUserReviewScoreResponsePerformanceScore",
     "StatsUserReviewScoreResponseReviewScore",
+    "StatsUsersPredictionAgreementResponse",
+    "StatsUsersPredictionAgreementResponseAgreementValue",
     "assignments",
     "exports",
     "members",
     "metrics",
     "pauses",
+    "roles",
     "stats",
 ]
