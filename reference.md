@@ -4767,14 +4767,6 @@ client.organizations.update(
 <dl>
 <dd>
 
-**custom_scripts_editable_by:** `typing.Optional[str]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
 **custom_scripts_enabled:** `typing.Optional[bool]` 
     
 </dd>
@@ -4900,19 +4892,6 @@ client.organizations.update_default_role(
 <dd>
 
 **annotator_reviewer_firewall_enabled_at:** `typing.Optional[dt.datetime]` — Set to current time to restrict data sharing between annotators and reviewers in the label stream, review stream, and notifications (which will be disabled). In these settings, information about annotator and reviewer identity is suppressed in the UI.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**custom_scripts_editable_by:** `typing.Optional[PatchedDefaultRoleRequestCustomScriptsEditableBy]` 
-
-Set the minimum user role that can edit custom scripts (Plugins) in the UI.
-
-* `AD` - Administrator
-* `MA` - Manager
     
 </dd>
 </dl>
@@ -11199,6 +11178,14 @@ client.tasks.update(
 <dl>
 <dd>
 
+**precomputed_agreement:** `typing.Optional[float]` — Average agreement score for the task
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **predictions_score:** `typing.Optional[float]` 
     
 </dd>
@@ -12058,12 +12045,6 @@ client.tokens.rotate(
 <dl>
 <dd>
 
-<Card href="https://humansignal.com/goenterprise">
-        <img style="pointer-events: none; margin-left: 0px; margin-right: 0px;" src="https://docs.humansignal.com/images/badge.svg" alt="Label Studio Enterprise badge"/>
-        <p style="margin-top: 10px; font-size: 14px;">
-            This endpoint is not available in Label Studio Community Edition. [Learn more about Label Studio Enterprise](https://humansignal.com/goenterprise)
-        </p>
-    </Card>
 Get version information about the Label Studio instance.
 </dd>
 </dl>
@@ -29660,6 +29641,26 @@ client.organizations.permissions.get_options(
 <dl>
 <dd>
 
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+<Card href="https://humansignal.com/goenterprise">
+        <img style="pointer-events: none; margin-left: 0px; margin-right: 0px;" src="https://docs.humansignal.com/images/badge.svg" alt="Label Studio Enterprise badge"/>
+        <p style="margin-top: 10px; font-size: 14px;">
+            This endpoint is not available in Label Studio Community Edition. [Learn more about Label Studio Enterprise](https://humansignal.com/goenterprise)
+        </p>
+    </Card>
+Retrieve the organization-level permission override for a given permission key.
+</dd>
+</dl>
+</dd>
+</dl>
+
 #### 🔌 Usage
 
 <dl>
@@ -29826,6 +29827,26 @@ client.organizations.permissions.replace(
 <details><summary><code>client.organizations.permissions.<a href="src/label_studio_sdk/organizations/permissions/client.py">delete</a>(...)</code></summary>
 <dl>
 <dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+<Card href="https://humansignal.com/goenterprise">
+        <img style="pointer-events: none; margin-left: 0px; margin-right: 0px;" src="https://docs.humansignal.com/images/badge.svg" alt="Label Studio Enterprise badge"/>
+        <p style="margin-top: 10px; font-size: 14px;">
+            This endpoint is not available in Label Studio Community Edition. [Learn more about Label Studio Enterprise](https://humansignal.com/goenterprise)
+        </p>
+    </Card>
+Delete the organization-level permission override for a given permission key.
+</dd>
+</dl>
+</dd>
+</dl>
 
 #### 🔌 Usage
 
@@ -31617,6 +31638,99 @@ client.projects.stats.iaa(
 </dl>
 </details>
 
+<details><summary><code>client.projects.stats.<a href="src/label_studio_sdk/projects/stats/client.py">users_ground_truth_agreement</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+<Card href="https://humansignal.com/goenterprise">
+        <img style="pointer-events: none; margin-left: 0px; margin-right: 0px;" src="https://docs.humansignal.com/images/badge.svg" alt="Label Studio Enterprise badge"/>
+        <p style="margin-top: 10px; font-size: 14px;">
+            This endpoint is not available in Label Studio Community Edition. [Learn more about Label Studio Enterprise](https://humansignal.com/goenterprise)
+        </p>
+    </Card>
+Get ground truth agreement statistics for multiple users within a project.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+
+client = LabelStudio(
+    api_key="YOUR_API_KEY",
+)
+client.projects.stats.users_ground_truth_agreement(
+    id=1,
+    ids="ids",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `int` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**ids:** `str` — Comma separated list of user IDs to get ground truth agreement for
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**per_label:** `typing.Optional[bool]` — Per label
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.projects.stats.<a href="src/label_studio_sdk/projects/stats/client.py">agreement_annotator</a>(...)</code></summary>
 <dl>
 <dd>
@@ -31799,6 +31913,12 @@ client.projects.stats.agreement_annotators(
 <dl>
 <dd>
 
+<Card href="https://humansignal.com/goenterprise">
+        <img style="pointer-events: none; margin-left: 0px; margin-right: 0px;" src="https://docs.humansignal.com/images/badge.svg" alt="Label Studio Enterprise badge"/>
+        <p style="margin-top: 10px; font-size: 14px;">
+            This endpoint is not available in Label Studio Community Edition. [Learn more about Label Studio Enterprise](https://humansignal.com/goenterprise)
+        </p>
+    </Card>
 Get statistics about user data filters and their usage within a project.
 </dd>
 </dl>
@@ -31869,6 +31989,12 @@ client.projects.stats.data_filters(
 <dl>
 <dd>
 
+<Card href="https://humansignal.com/goenterprise">
+        <img style="pointer-events: none; margin-left: 0px; margin-right: 0px;" src="https://docs.humansignal.com/images/badge.svg" alt="Label Studio Enterprise badge"/>
+        <p style="margin-top: 10px; font-size: 14px;">
+            This endpoint is not available in Label Studio Community Edition. [Learn more about Label Studio Enterprise](https://humansignal.com/goenterprise)
+        </p>
+    </Card>
 Get statistics about finished tasks for a project.
 </dd>
 </dl>
@@ -31947,6 +32073,12 @@ client.projects.stats.finished_tasks(
 <dl>
 <dd>
 
+<Card href="https://humansignal.com/goenterprise">
+        <img style="pointer-events: none; margin-left: 0px; margin-right: 0px;" src="https://docs.humansignal.com/images/badge.svg" alt="Label Studio Enterprise badge"/>
+        <p style="margin-top: 10px; font-size: 14px;">
+            This endpoint is not available in Label Studio Community Edition. [Learn more about Label Studio Enterprise](https://humansignal.com/goenterprise)
+        </p>
+    </Card>
 Get lead time statistics across the project, including average annotation time.
 </dd>
 </dl>
@@ -32103,6 +32235,12 @@ client.projects.stats.total_agreement(
 <dl>
 <dd>
 
+<Card href="https://humansignal.com/goenterprise">
+        <img style="pointer-events: none; margin-left: 0px; margin-right: 0px;" src="https://docs.humansignal.com/images/badge.svg" alt="Label Studio Enterprise badge"/>
+        <p style="margin-top: 10px; font-size: 14px;">
+            This endpoint is not available in Label Studio Community Edition. [Learn more about Label Studio Enterprise](https://humansignal.com/goenterprise)
+        </p>
+    </Card>
 Start stats recalculation for given project
 </dd>
 </dl>
@@ -32235,6 +32373,99 @@ client.projects.stats.users_prediction_agreement(
 <dd>
 
 **ids:** `str` — Comma separated list of annotator user IDs to get agreement scores for
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**per_label:** `typing.Optional[bool]` — Per label
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.projects.stats.<a href="src/label_studio_sdk/projects/stats/client.py">users_review_score</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+<Card href="https://humansignal.com/goenterprise">
+        <img style="pointer-events: none; margin-left: 0px; margin-right: 0px;" src="https://docs.humansignal.com/images/badge.svg" alt="Label Studio Enterprise badge"/>
+        <p style="margin-top: 10px; font-size: 14px;">
+            This endpoint is not available in Label Studio Community Edition. [Learn more about Label Studio Enterprise](https://humansignal.com/goenterprise)
+        </p>
+    </Card>
+Get review score and performance score statistics for multiple annotators within a project.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+
+client = LabelStudio(
+    api_key="YOUR_API_KEY",
+)
+client.projects.stats.users_review_score(
+    id=1,
+    ids="ids",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `int` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**ids:** `str` — Comma separated list of annotator user IDs to get review scores for
     
 </dd>
 </dl>
@@ -33921,6 +34152,12 @@ for page in response.iter_pages():
 <dl>
 <dd>
 
+<Card href="https://humansignal.com/goenterprise">
+        <img style="pointer-events: none; margin-left: 0px; margin-right: 0px;" src="https://docs.humansignal.com/images/badge.svg" alt="Label Studio Enterprise badge"/>
+        <p style="margin-top: 10px; font-size: 14px;">
+            This endpoint is not available in Label Studio Community Edition. [Learn more about Label Studio Enterprise](https://humansignal.com/goenterprise)
+        </p>
+    </Card>
 Get the AWS Lambda code for the custom metric configured for this project.
 </dd>
 </dl>
@@ -33991,6 +34228,12 @@ client.projects.metrics.custom.get_lambda(
 <dl>
 <dd>
 
+<Card href="https://humansignal.com/goenterprise">
+        <img style="pointer-events: none; margin-left: 0px; margin-right: 0px;" src="https://docs.humansignal.com/images/badge.svg" alt="Label Studio Enterprise badge"/>
+        <p style="margin-top: 10px; font-size: 14px;">
+            This endpoint is not available in Label Studio Community Edition. [Learn more about Label Studio Enterprise](https://humansignal.com/goenterprise)
+        </p>
+    </Card>
 Create or update the AWS Lambda function used for custom metrics in this project.
 </dd>
 </dl>
@@ -34086,6 +34329,12 @@ client.projects.metrics.custom.update_lambda(
 <dl>
 <dd>
 
+<Card href="https://humansignal.com/goenterprise">
+        <img style="pointer-events: none; margin-left: 0px; margin-right: 0px;" src="https://docs.humansignal.com/images/badge.svg" alt="Label Studio Enterprise badge"/>
+        <p style="margin-top: 10px; font-size: 14px;">
+            This endpoint is not available in Label Studio Community Edition. [Learn more about Label Studio Enterprise](https://humansignal.com/goenterprise)
+        </p>
+    </Card>
 Get AWS lambda logs for project, including filtering by start and end dates
 </dd>
 </dl>
@@ -34180,6 +34429,12 @@ client.projects.metrics.custom.logs(
 <dl>
 <dd>
 
+<Card href="https://humansignal.com/goenterprise">
+        <img style="pointer-events: none; margin-left: 0px; margin-right: 0px;" src="https://docs.humansignal.com/images/badge.svg" alt="Label Studio Enterprise badge"/>
+        <p style="margin-top: 10px; font-size: 14px;">
+            This endpoint is not available in Label Studio Community Edition. [Learn more about Label Studio Enterprise](https://humansignal.com/goenterprise)
+        </p>
+    </Card>
 Validate custom matching function code for the project.
 </dd>
 </dl>
@@ -35133,6 +35388,12 @@ client.prompts.versions.cost_estimate(
 <dl>
 <dd>
 
+<Card href="https://humansignal.com/goenterprise">
+        <img style="pointer-events: none; margin-left: 0px; margin-right: 0px;" src="https://docs.humansignal.com/images/badge.svg" alt="Label Studio Enterprise badge"/>
+        <p style="margin-top: 10px; font-size: 14px;">
+            This endpoint is not available in Label Studio Community Edition. [Learn more about Label Studio Enterprise](https://humansignal.com/goenterprise)
+        </p>
+    </Card>
 Get the refined prompt based on the `refinement_job_id`.
 </dd>
 </dl>
@@ -35220,6 +35481,12 @@ client.prompts.versions.get_refined_prompt(
 <dl>
 <dd>
 
+<Card href="https://humansignal.com/goenterprise">
+        <img style="pointer-events: none; margin-left: 0px; margin-right: 0px;" src="https://docs.humansignal.com/images/badge.svg" alt="Label Studio Enterprise badge"/>
+        <p style="margin-top: 10px; font-size: 14px;">
+            This endpoint is not available in Label Studio Community Edition. [Learn more about Label Studio Enterprise](https://humansignal.com/goenterprise)
+        </p>
+    </Card>
 Refine a prompt version using a teacher model and save the refined prompt as a new version.
 </dd>
 </dl>

@@ -281,7 +281,7 @@ types:
       model_version:
         type: optional<string>
         docs: Machine learning model version
-      num_tasks_with_annotations: integer
+      num_tasks_with_annotations: optional<integer>
       organization: optional<integer>
       overlap_cohort_percentage:
         type: optional<integer>
@@ -1688,15 +1688,6 @@ types:
       total: optional<integer>
     source:
       openapi: openapi/openapi.yaml
-  CustomScriptsEditableByEnum:
-    enum:
-      - AD
-      - MA
-    docs: |-
-      * `AD` - Administrator
-      * `MA` - Manager
-    source:
-      openapi: openapi/openapi.yaml
   DatabricksExportStorage:
     properties:
       can_delete_objects:
@@ -2167,22 +2158,6 @@ types:
       - 'NO'
     source:
       openapi: openapi/openapi.yaml
-  DefaultRoleCustomScriptsEditableBy:
-    discriminated: false
-    docs: >-
-      Set the minimum user role that can edit custom scripts (Plugins) in the
-      UI.
-
-
-      * `AD` - Administrator
-
-      * `MA` - Manager
-    union:
-      - CustomScriptsEditableByEnum
-      - NullEnum
-    source:
-      openapi: openapi/openapi.yaml
-    inline: true
   DefaultRole:
     properties:
       annotator_reviewer_firewall_enabled_at:
@@ -2192,16 +2167,6 @@ types:
           reviewers in the label stream, review stream, and notifications (which
           will be disabled). In these settings, information about annotator and
           reviewer identity is suppressed in the UI.
-      custom_scripts_editable_by:
-        type: optional<DefaultRoleCustomScriptsEditableBy>
-        docs: >-
-          Set the minimum user role that can edit custom scripts (Plugins) in
-          the UI.
-
-
-          * `AD` - Administrator
-
-          * `MA` - Manager
       custom_scripts_enabled_at:
         type: optional<datetime>
         docs: >-
@@ -3031,6 +2996,9 @@ types:
         validation:
           min: -2147483648
           max: 2147483647
+      precomputed_agreement:
+        type: optional<double>
+        docs: Average agreement score for the task
       predictions: optional<list<PredictionRequest>>
       total_annotations:
         type: optional<integer>
@@ -3628,36 +3596,10 @@ types:
       trial_role: optional<LseFieldsRequestTrialRole>
     source:
       openapi: openapi/openapi.yaml
-  LseOrganizationCustomScriptsEditableBy:
-    discriminated: false
-    docs: >-
-      Set the minimum user role that can edit custom scripts (Plugins) in the
-      UI.
-
-
-      * `AD` - Administrator
-
-      * `MA` - Manager
-    union:
-      - CustomScriptsEditableByEnum
-      - NullEnum
-    source:
-      openapi: openapi/openapi.yaml
-    inline: true
   LseOrganization:
     properties:
       billing: OrganizationBilling
       created_at: datetime
-      custom_scripts_editable_by:
-        type: optional<LseOrganizationCustomScriptsEditableBy>
-        docs: >-
-          Set the minimum user role that can edit custom scripts (Plugins) in
-          the UI.
-
-
-          * `AD` - Administrator
-
-          * `MA` - Manager
       custom_scripts_enabled: string
       default_role:
         type: optional<Role9E7Enum>
@@ -3815,9 +3757,7 @@ types:
       model_version:
         type: optional<string>
         docs: Machine learning model version
-      num_tasks_with_annotations:
-        type: integer
-        docs: Tasks with annotations count
+      num_tasks_with_annotations: optional<integer>
       organization: optional<integer>
       overlap_cohort_percentage:
         type: optional<integer>
@@ -3920,7 +3860,7 @@ types:
         type: integer
         docs: Honeypot annotation number in project
       id: integer
-      num_tasks_with_annotations: integer
+      num_tasks_with_annotations: optional<integer>
       queue_done: integer
       queue_left: integer
       queue_total: string
@@ -4952,6 +4892,9 @@ types:
         validation:
           min: -2147483648
           max: 2147483647
+      precomputed_agreement:
+        type: optional<double>
+        docs: Average agreement score for the task
       predictions:
         docs: Predictions for this task
         type: list<LseTaskPredictionsItem>
@@ -5406,6 +5349,9 @@ types:
         validation:
           min: -2147483648
           max: 2147483647
+      precomputed_agreement:
+        type: optional<double>
+        docs: Average agreement score for the task
       predictions:
         docs: Predictions for this task
         type: list<LseTaskSerializerForReviewersPredictionsItem>
