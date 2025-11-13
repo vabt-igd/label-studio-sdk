@@ -190,8 +190,8 @@ class Converter(object):
         },
         Format.JSON_TS_WITH_DATA: {
             "title": "JSON for timeseries labeling with data",
-            "description": "A JSON containing all annotated labels and their corresponding time stamps as *label*, *start_time*, *end_time*. Raw data will be bundled in the raw_data folder."
-            "Additionally includes the raw data in the raw_data/ folder.",
+            "description": "Results are stored in a JSON containing all annotated labels as *label*, *start_time* and *end_time*."
+            "Corresponding raw data is included in the raw_data/ folder.",
             "link": "https://labelstud.io/guide/export.html#JSON",
             "tags": ["timeseries analysis"],
         },
