@@ -190,7 +190,7 @@ class Converter(object):
         },
         Format.JSON_TS_WITH_DATA: {
             "title": "JSON for timeseries labeling with data",
-            "description": "List of items in raw JSON format stored in one JSON file, similiar to JSON-MIN. "
+            "description": "A JSON containing all annotated labels and their corresponding time stamps as *label*, *start_time*, *end_time*. Raw data will be bundled in the raw_data folder."
             "Additionally includes the raw data in the raw_data/ folder.",
             "link": "https://labelstud.io/guide/export.html#JSON",
             "tags": ["timeseries analysis"],
@@ -436,6 +436,10 @@ class Converter(object):
             all_formats.remove(Format.COCO_WITH_IMAGES.name)
             all_formats.remove(Format.YOLO.name)
             all_formats.remove(Format.YOLO_WITH_IMAGES.name)
+            if Format.YOLO_OBB.name in all_formats:
+                all_formats.remove(Format.YOLO_OBB.name)
+            if Format.YOLO_OBB_WITH_IMAGES.name in all_formats:
+                all_formats.remove(Format.YOLO_OBB_WITH_IMAGES.name)
         if not (
             "Image" in input_tag_types
             and (
@@ -456,8 +460,10 @@ class Converter(object):
         if is_mig or (
             "Video" in input_tag_types and "TimelineLabels" in output_tag_types
         ):
-            all_formats.remove(Format.YOLO_OBB.name)
-            all_formats.remove(Format.YOLO_OBB_WITH_IMAGES.name)
+            if Format.YOLO_OBB.name in all_formats:
+                all_formats.remove(Format.YOLO_OBB.name)
+            if Format.YOLO_OBB_WITH_IMAGES.name in all_formats:
+                all_formats.remove(Format.YOLO_OBB_WITH_IMAGES.name)
         if not ("TimeSeries" in input_tag_types):
             all_formats.remove(Format.JSON_TS_WITH_DATA.name)
 
@@ -567,24 +573,36 @@ class Converter(object):
         )
 
         for annotation in annotations:
-            result = annotation["result"]
+            result = annotation.get("result") or []
             outputs = defaultdict(list)
 
             # get results only as output
             for r in result:
-                if "from_name" in r and (
-                    tag_name := self._maybe_matching_tag_from_schema(r["from_name"])
-                ):
+                from_name = r.get("from_name")
+                tag_name = (
+                    self._maybe_matching_tag_from_schema(from_name)
+                    if from_name is not None
+                    else None
+                )
+                if from_name and tag_name:
                     v = deepcopy(r["value"])
                     v["type"] = self._schema[tag_name]["type"]
                     if "original_width" in r:
                         v["original_width"] = r["original_width"]
                     if "original_height" in r:
                         v["original_height"] = r["original_height"]
-                    outputs[r["from_name"]].append(v)
+                    outputs[from_name].append(v)
                     if self.is_keypoints:
                         v["id"] = r.get("id")
                         v["parentID"] = r.get("parentID")
+
+                elif from_name and r.get("type") == "chatmessage":
+                    v = deepcopy(r.get("value", {}))
+                    v["type"] = "chatmessage"
+                    outputs[from_name].append(v)
+
+                else:
+                    pass
 
             data = Converter.get_data(task, outputs, annotation)
             if "agreement" in task:
