@@ -3,7 +3,7 @@
 import typing
 from ....core.client_wrapper import SyncClientWrapper
 from ....core.request_options import RequestOptions
-from .types.custom_get_lambda_response import CustomGetLambdaResponse
+from .types.get_lambda_custom_response import GetLambdaCustomResponse
 from ....core.jsonable_encoder import jsonable_encoder
 from ....core.unchecked_base_model import construct_type
 from json.decoder import JSONDecodeError
@@ -21,7 +21,7 @@ class CustomClient:
 
     def get_lambda(
         self, id: int, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> CustomGetLambdaResponse:
+    ) -> GetLambdaCustomResponse:
         """
         <Card href="https://humansignal.com/goenterprise">
                 <img style="pointer-events: none; margin-left: 0px; margin-right: 0px;" src="https://docs.humansignal.com/images/badge.svg" alt="Label Studio Enterprise badge"/>
@@ -40,8 +40,8 @@ class CustomClient:
 
         Returns
         -------
-        CustomGetLambdaResponse
-            Lambda code
+        GetLambdaCustomResponse
+            Lambda code and deployment status
 
         Examples
         --------
@@ -62,9 +62,9 @@ class CustomClient:
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    CustomGetLambdaResponse,
+                    GetLambdaCustomResponse,
                     construct_type(
-                        type_=CustomGetLambdaResponse,  # type: ignore
+                        type_=GetLambdaCustomResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -96,10 +96,13 @@ class CustomClient:
         id : int
 
         code : str
+            The Python code for the custom metric function.
 
         region : typing.Optional[str]
+            The AWS region for the Lambda function. Uses default if not provided.
 
         role : typing.Optional[str]
+            The AWS IAM role ARN for the Lambda function. Uses default if not provided.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -288,7 +291,7 @@ class AsyncCustomClient:
 
     async def get_lambda(
         self, id: int, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> CustomGetLambdaResponse:
+    ) -> GetLambdaCustomResponse:
         """
         <Card href="https://humansignal.com/goenterprise">
                 <img style="pointer-events: none; margin-left: 0px; margin-right: 0px;" src="https://docs.humansignal.com/images/badge.svg" alt="Label Studio Enterprise badge"/>
@@ -307,8 +310,8 @@ class AsyncCustomClient:
 
         Returns
         -------
-        CustomGetLambdaResponse
-            Lambda code
+        GetLambdaCustomResponse
+            Lambda code and deployment status
 
         Examples
         --------
@@ -337,9 +340,9 @@ class AsyncCustomClient:
         try:
             if 200 <= _response.status_code < 300:
                 return typing.cast(
-                    CustomGetLambdaResponse,
+                    GetLambdaCustomResponse,
                     construct_type(
-                        type_=CustomGetLambdaResponse,  # type: ignore
+                        type_=GetLambdaCustomResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -371,10 +374,13 @@ class AsyncCustomClient:
         id : int
 
         code : str
+            The Python code for the custom metric function.
 
         region : typing.Optional[str]
+            The AWS region for the Lambda function. Uses default if not provided.
 
         role : typing.Optional[str]
+            The AWS IAM role ARN for the Lambda function. Uses default if not provided.
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.

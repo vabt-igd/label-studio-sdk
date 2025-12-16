@@ -2,8 +2,8 @@
 
 from ..core.unchecked_base_model import UncheckedBaseModel
 import typing
-from .annotation_request import AnnotationRequest
 import pydantic
+from .annotation_request import AnnotationRequest
 import datetime as dt
 from .prediction_request import PredictionRequest
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
@@ -12,6 +12,11 @@ from ..core.pydantic_utilities import IS_PYDANTIC_V2
 class ImportApiRequest(UncheckedBaseModel):
     """
     Tasks serializer for Import API (TaskBulkCreateAPI)
+    """
+
+    allow_skip: typing.Optional[bool] = pydantic.Field(default=None)
+    """
+    Whether this task can be skipped. Set to False to make task unskippable.
     """
 
     annotations: typing.Optional[typing.List[AnnotationRequest]] = None
@@ -46,7 +51,11 @@ class ImportApiRequest(UncheckedBaseModel):
     When the last comment was updated
     """
 
-    meta: typing.Optional[typing.Optional[typing.Any]] = None
+    meta: typing.Optional[typing.Optional[typing.Any]] = pydantic.Field(default=None)
+    """
+    Meta is user imported (uploaded) data and can be useful as input for an ML Backend for embeddings, advanced vectors, and other info. It is passed to ML during training/predicting steps.
+    """
+
     overlap: typing.Optional[int] = pydantic.Field(default=None)
     """
     Number of distinct annotators that processed the current task

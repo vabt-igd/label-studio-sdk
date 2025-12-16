@@ -8,7 +8,7 @@ from ..core.jsonable_encoder import jsonable_encoder
 from ..core.unchecked_base_model import construct_type
 from json.decoder import JSONDecodeError
 from ..core.api_error import ApiError
-from .types.tasks_list_request_fields import TasksListRequestFields
+from .types.list_tasks_request_fields import ListTasksRequestFields
 from ..core.pagination import SyncPager
 from ..types.role_based_task import RoleBasedTask
 from ..types.paginated_role_based_task_list import PaginatedRoleBasedTaskList
@@ -125,7 +125,7 @@ class TasksClient:
     def list(
         self,
         *,
-        fields: typing.Optional[TasksListRequestFields] = None,
+        fields: typing.Optional[ListTasksRequestFields] = None,
         include: typing.Optional[str] = None,
         only_annotated: typing.Optional[bool] = None,
         page: typing.Optional[int] = None,
@@ -146,7 +146,7 @@ class TasksClient:
 
         Parameters
         ----------
-        fields : typing.Optional[TasksListRequestFields]
+        fields : typing.Optional[ListTasksRequestFields]
             Set to "all" if you want to include annotations and predictions in the response. Defaults to task_only
 
         include : typing.Optional[str]
@@ -291,6 +291,7 @@ class TasksClient:
     def create(
         self,
         *,
+        allow_skip: typing.Optional[bool] = OMIT,
         cancelled_annotations: typing.Optional[int] = OMIT,
         comment_authors: typing.Optional[typing.Sequence[int]] = OMIT,
         comment_count: typing.Optional[int] = OMIT,
@@ -313,6 +314,9 @@ class TasksClient:
 
         Parameters
         ----------
+        allow_skip : typing.Optional[bool]
+            Whether this task can be skipped. Set to False to make task unskippable.
+
         cancelled_annotations : typing.Optional[int]
             Number of total cancelled annotations for the current task
 
@@ -337,6 +341,7 @@ class TasksClient:
             When the last comment was updated
 
         meta : typing.Optional[typing.Optional[typing.Any]]
+            Meta is user imported (uploaded) data and can be useful as input for an ML Backend for embeddings, advanced vectors, and other info. It is passed to ML during training/predicting steps.
 
         overlap : typing.Optional[int]
             Number of distinct annotators that processed the current task
@@ -380,6 +385,7 @@ class TasksClient:
             "api/tasks/",
             method="POST",
             json={
+                "allow_skip": allow_skip,
                 "cancelled_annotations": cancelled_annotations,
                 "comment_authors": comment_authors,
                 "comment_count": comment_count,
@@ -507,6 +513,7 @@ class TasksClient:
         self,
         id: str,
         *,
+        allow_skip: typing.Optional[bool] = OMIT,
         avg_lead_time: typing.Optional[float] = OMIT,
         cancelled_annotations: typing.Optional[int] = OMIT,
         comment_count: typing.Optional[int] = OMIT,
@@ -538,6 +545,9 @@ class TasksClient:
         id : str
             Task ID
 
+        allow_skip : typing.Optional[bool]
+            Whether this task can be skipped. Set to False to make task unskippable.
+
         avg_lead_time : typing.Optional[float]
 
         cancelled_annotations : typing.Optional[int]
@@ -548,6 +558,7 @@ class TasksClient:
         completed_at : typing.Optional[dt.datetime]
 
         data : typing.Optional[typing.Optional[typing.Any]]
+            User imported or uploaded data for a task. Data is formatted according to the project label config. You can find examples of data for your project on the Import page in the Label Studio Data Manager UI.
 
         draft_exists : typing.Optional[bool]
 
@@ -562,6 +573,7 @@ class TasksClient:
             When the last comment was updated
 
         meta : typing.Optional[typing.Optional[typing.Any]]
+            Meta is user imported (uploaded) data and can be useful as input for an ML Backend for embeddings, advanced vectors, and other info. It is passed to ML during training/predicting steps.
 
         overlap : typing.Optional[int]
             Number of distinct annotators that processed the current task
@@ -610,6 +622,7 @@ class TasksClient:
             f"api/tasks/{jsonable_encoder(id)}/",
             method="PATCH",
             json={
+                "allow_skip": allow_skip,
                 "avg_lead_time": avg_lead_time,
                 "cancelled_annotations": cancelled_annotations,
                 "comment_count": comment_count,
@@ -733,6 +746,7 @@ class TasksClient:
             Draft annotation ID associated with this event
 
         meta : typing.Optional[typing.Optional[typing.Any]]
+            Additional event metadata (region data, hotkey info, etc.)
 
         review : typing.Optional[int]
             Review ID associated with this event
@@ -949,7 +963,7 @@ class AsyncTasksClient:
     async def list(
         self,
         *,
-        fields: typing.Optional[TasksListRequestFields] = None,
+        fields: typing.Optional[ListTasksRequestFields] = None,
         include: typing.Optional[str] = None,
         only_annotated: typing.Optional[bool] = None,
         page: typing.Optional[int] = None,
@@ -970,7 +984,7 @@ class AsyncTasksClient:
 
         Parameters
         ----------
-        fields : typing.Optional[TasksListRequestFields]
+        fields : typing.Optional[ListTasksRequestFields]
             Set to "all" if you want to include annotations and predictions in the response. Defaults to task_only
 
         include : typing.Optional[str]
@@ -1123,6 +1137,7 @@ class AsyncTasksClient:
     async def create(
         self,
         *,
+        allow_skip: typing.Optional[bool] = OMIT,
         cancelled_annotations: typing.Optional[int] = OMIT,
         comment_authors: typing.Optional[typing.Sequence[int]] = OMIT,
         comment_count: typing.Optional[int] = OMIT,
@@ -1145,6 +1160,9 @@ class AsyncTasksClient:
 
         Parameters
         ----------
+        allow_skip : typing.Optional[bool]
+            Whether this task can be skipped. Set to False to make task unskippable.
+
         cancelled_annotations : typing.Optional[int]
             Number of total cancelled annotations for the current task
 
@@ -1169,6 +1187,7 @@ class AsyncTasksClient:
             When the last comment was updated
 
         meta : typing.Optional[typing.Optional[typing.Any]]
+            Meta is user imported (uploaded) data and can be useful as input for an ML Backend for embeddings, advanced vectors, and other info. It is passed to ML during training/predicting steps.
 
         overlap : typing.Optional[int]
             Number of distinct annotators that processed the current task
@@ -1223,6 +1242,7 @@ class AsyncTasksClient:
             "api/tasks/",
             method="POST",
             json={
+                "allow_skip": allow_skip,
                 "cancelled_annotations": cancelled_annotations,
                 "comment_authors": comment_authors,
                 "comment_count": comment_count,
@@ -1366,6 +1386,7 @@ class AsyncTasksClient:
         self,
         id: str,
         *,
+        allow_skip: typing.Optional[bool] = OMIT,
         avg_lead_time: typing.Optional[float] = OMIT,
         cancelled_annotations: typing.Optional[int] = OMIT,
         comment_count: typing.Optional[int] = OMIT,
@@ -1397,6 +1418,9 @@ class AsyncTasksClient:
         id : str
             Task ID
 
+        allow_skip : typing.Optional[bool]
+            Whether this task can be skipped. Set to False to make task unskippable.
+
         avg_lead_time : typing.Optional[float]
 
         cancelled_annotations : typing.Optional[int]
@@ -1407,6 +1431,7 @@ class AsyncTasksClient:
         completed_at : typing.Optional[dt.datetime]
 
         data : typing.Optional[typing.Optional[typing.Any]]
+            User imported or uploaded data for a task. Data is formatted according to the project label config. You can find examples of data for your project on the Import page in the Label Studio Data Manager UI.
 
         draft_exists : typing.Optional[bool]
 
@@ -1421,6 +1446,7 @@ class AsyncTasksClient:
             When the last comment was updated
 
         meta : typing.Optional[typing.Optional[typing.Any]]
+            Meta is user imported (uploaded) data and can be useful as input for an ML Backend for embeddings, advanced vectors, and other info. It is passed to ML during training/predicting steps.
 
         overlap : typing.Optional[int]
             Number of distinct annotators that processed the current task
@@ -1477,6 +1503,7 @@ class AsyncTasksClient:
             f"api/tasks/{jsonable_encoder(id)}/",
             method="PATCH",
             json={
+                "allow_skip": allow_skip,
                 "avg_lead_time": avg_lead_time,
                 "cancelled_annotations": cancelled_annotations,
                 "comment_count": comment_count,
@@ -1600,6 +1627,7 @@ class AsyncTasksClient:
             Draft annotation ID associated with this event
 
         meta : typing.Optional[typing.Optional[typing.Any]]
+            Additional event metadata (region data, hotkey info, etc.)
 
         review : typing.Optional[int]
             Review ID associated with this event
