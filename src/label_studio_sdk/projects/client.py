@@ -25,6 +25,7 @@ from ..core.serialization import convert_and_respect_annotation_metadata
 from ..types.paginated_lse_project_counts_list import PaginatedLseProjectCountsList
 from ..types.lse_project_response import LseProjectResponse
 from ..core.jsonable_encoder import jsonable_encoder
+from ..types.agreement_methodology_enum import AgreementMethodologyEnum
 from ..types.assignment_settings_request import AssignmentSettingsRequest
 from ..types.review_settings_request import ReviewSettingsRequest
 from ..types.lse_project_update import LseProjectUpdate
@@ -191,6 +192,7 @@ class ProjectsClient:
     def create(
         self,
         *,
+        annotator_evaluation_enabled: typing.Optional[bool] = OMIT,
         color: typing.Optional[str] = OMIT,
         control_weights: typing.Optional[typing.Optional[typing.Any]] = OMIT,
         created_by: typing.Optional[UserSimpleRequest] = OMIT,
@@ -227,6 +229,9 @@ class ProjectsClient:
 
         Parameters
         ----------
+        annotator_evaluation_enabled : typing.Optional[bool]
+            Enable annotator evaluation for the project
+
         color : typing.Optional[str]
 
         control_weights : typing.Optional[typing.Optional[typing.Any]]
@@ -328,6 +333,7 @@ class ProjectsClient:
             "api/projects/",
             method="POST",
             json={
+                "annotator_evaluation_enabled": annotator_evaluation_enabled,
                 "color": color,
                 "control_weights": control_weights,
                 "created_by": convert_and_respect_annotation_metadata(
@@ -580,11 +586,14 @@ class ProjectsClient:
         id: int,
         *,
         members_limit: typing.Optional[int] = None,
+        agreement_methodology: typing.Optional[AgreementMethodologyEnum] = OMIT,
         agreement_threshold: typing.Optional[str] = OMIT,
         annotation_limit_count: typing.Optional[int] = OMIT,
         annotation_limit_percent: typing.Optional[str] = OMIT,
+        annotator_evaluation_enabled: typing.Optional[bool] = OMIT,
         annotator_evaluation_minimum_score: typing.Optional[str] = OMIT,
         annotator_evaluation_minimum_tasks: typing.Optional[int] = OMIT,
+        annotator_evaluation_onboarding_tasks: typing.Optional[int] = OMIT,
         assignment_settings: typing.Optional[AssignmentSettingsRequest] = OMIT,
         color: typing.Optional[str] = OMIT,
         comment_classification_config: typing.Optional[str] = OMIT,
@@ -635,6 +644,8 @@ class ProjectsClient:
         members_limit : typing.Optional[int]
             Maximum number of members to return
 
+        agreement_methodology : typing.Optional[AgreementMethodologyEnum]
+
         agreement_threshold : typing.Optional[str]
             Minimum percent agreement threshold for which minimum number of annotators must agree
 
@@ -642,9 +653,14 @@ class ProjectsClient:
 
         annotation_limit_percent : typing.Optional[str]
 
+        annotator_evaluation_enabled : typing.Optional[bool]
+            Enable annotator evaluation for the project
+
         annotator_evaluation_minimum_score : typing.Optional[str]
 
         annotator_evaluation_minimum_tasks : typing.Optional[int]
+
+        annotator_evaluation_onboarding_tasks : typing.Optional[int]
 
         assignment_settings : typing.Optional[AssignmentSettingsRequest]
 
@@ -772,11 +788,14 @@ class ProjectsClient:
                 "members_limit": members_limit,
             },
             json={
+                "agreement_methodology": agreement_methodology,
                 "agreement_threshold": agreement_threshold,
                 "annotation_limit_count": annotation_limit_count,
                 "annotation_limit_percent": annotation_limit_percent,
+                "annotator_evaluation_enabled": annotator_evaluation_enabled,
                 "annotator_evaluation_minimum_score": annotator_evaluation_minimum_score,
                 "annotator_evaluation_minimum_tasks": annotator_evaluation_minimum_tasks,
+                "annotator_evaluation_onboarding_tasks": annotator_evaluation_onboarding_tasks,
                 "assignment_settings": convert_and_respect_annotation_metadata(
                     object_=assignment_settings, annotation=AssignmentSettingsRequest, direction="write"
                 ),
@@ -1000,6 +1019,20 @@ class ProjectsClient:
                     must include a "text" field.
                     <br>
         
+                    ## Async Import Behavior
+                    <hr style="opacity:0.3">
+        
+                    **For non-Community editions, this endpoint processes imports asynchronously.**
+                    
+                    - The POST request **can fail** for invalid parameters, malformed request body, or other request-level validation errors.
+                    - However, **data validation errors** that occur during import processing are handled asynchronously and will not cause the POST request to fail.
+                    - Upon successful request validation, a response is returned: `{"import": <import_id>}`
+                    - Use the returned `import_id` to poll the GET `/api/projects/{project_id}/imports/{import_id}` endpoint to check the import status and see any data validation errors.
+                    - Data-level errors and import failures will only be visible in the GET request response.
+        
+                    For Community edition, imports are processed synchronously and return task counts immediately.
+                    <br>
+        
                     ## POST requests
                     <hr style="opacity:0.3">
         
@@ -1065,7 +1098,7 @@ class ProjectsClient:
         Returns
         -------
         ImportTasksProjectsResponse
-            Tasks successfully imported
+            Tasks successfully imported or import queued. **For non-Community editions**, the response will be `{"import": <import_id>}` which you can use to poll the import status. **For Community edition**, the response contains task counts and is processed synchronously.
         
         Examples
         --------
@@ -1398,6 +1431,7 @@ class AsyncProjectsClient:
     async def create(
         self,
         *,
+        annotator_evaluation_enabled: typing.Optional[bool] = OMIT,
         color: typing.Optional[str] = OMIT,
         control_weights: typing.Optional[typing.Optional[typing.Any]] = OMIT,
         created_by: typing.Optional[UserSimpleRequest] = OMIT,
@@ -1434,6 +1468,9 @@ class AsyncProjectsClient:
 
         Parameters
         ----------
+        annotator_evaluation_enabled : typing.Optional[bool]
+            Enable annotator evaluation for the project
+
         color : typing.Optional[str]
 
         control_weights : typing.Optional[typing.Optional[typing.Any]]
@@ -1543,6 +1580,7 @@ class AsyncProjectsClient:
             "api/projects/",
             method="POST",
             json={
+                "annotator_evaluation_enabled": annotator_evaluation_enabled,
                 "color": color,
                 "control_weights": control_weights,
                 "created_by": convert_and_respect_annotation_metadata(
@@ -1819,11 +1857,14 @@ class AsyncProjectsClient:
         id: int,
         *,
         members_limit: typing.Optional[int] = None,
+        agreement_methodology: typing.Optional[AgreementMethodologyEnum] = OMIT,
         agreement_threshold: typing.Optional[str] = OMIT,
         annotation_limit_count: typing.Optional[int] = OMIT,
         annotation_limit_percent: typing.Optional[str] = OMIT,
+        annotator_evaluation_enabled: typing.Optional[bool] = OMIT,
         annotator_evaluation_minimum_score: typing.Optional[str] = OMIT,
         annotator_evaluation_minimum_tasks: typing.Optional[int] = OMIT,
+        annotator_evaluation_onboarding_tasks: typing.Optional[int] = OMIT,
         assignment_settings: typing.Optional[AssignmentSettingsRequest] = OMIT,
         color: typing.Optional[str] = OMIT,
         comment_classification_config: typing.Optional[str] = OMIT,
@@ -1874,6 +1915,8 @@ class AsyncProjectsClient:
         members_limit : typing.Optional[int]
             Maximum number of members to return
 
+        agreement_methodology : typing.Optional[AgreementMethodologyEnum]
+
         agreement_threshold : typing.Optional[str]
             Minimum percent agreement threshold for which minimum number of annotators must agree
 
@@ -1881,9 +1924,14 @@ class AsyncProjectsClient:
 
         annotation_limit_percent : typing.Optional[str]
 
+        annotator_evaluation_enabled : typing.Optional[bool]
+            Enable annotator evaluation for the project
+
         annotator_evaluation_minimum_score : typing.Optional[str]
 
         annotator_evaluation_minimum_tasks : typing.Optional[int]
+
+        annotator_evaluation_onboarding_tasks : typing.Optional[int]
 
         assignment_settings : typing.Optional[AssignmentSettingsRequest]
 
@@ -2019,11 +2067,14 @@ class AsyncProjectsClient:
                 "members_limit": members_limit,
             },
             json={
+                "agreement_methodology": agreement_methodology,
                 "agreement_threshold": agreement_threshold,
                 "annotation_limit_count": annotation_limit_count,
                 "annotation_limit_percent": annotation_limit_percent,
+                "annotator_evaluation_enabled": annotator_evaluation_enabled,
                 "annotator_evaluation_minimum_score": annotator_evaluation_minimum_score,
                 "annotator_evaluation_minimum_tasks": annotator_evaluation_minimum_tasks,
+                "annotator_evaluation_onboarding_tasks": annotator_evaluation_onboarding_tasks,
                 "assignment_settings": convert_and_respect_annotation_metadata(
                     object_=assignment_settings, annotation=AssignmentSettingsRequest, direction="write"
                 ),
@@ -2263,6 +2314,20 @@ class AsyncProjectsClient:
                     must include a "text" field.
                     <br>
         
+                    ## Async Import Behavior
+                    <hr style="opacity:0.3">
+        
+                    **For non-Community editions, this endpoint processes imports asynchronously.**
+                    
+                    - The POST request **can fail** for invalid parameters, malformed request body, or other request-level validation errors.
+                    - However, **data validation errors** that occur during import processing are handled asynchronously and will not cause the POST request to fail.
+                    - Upon successful request validation, a response is returned: `{"import": <import_id>}`
+                    - Use the returned `import_id` to poll the GET `/api/projects/{project_id}/imports/{import_id}` endpoint to check the import status and see any data validation errors.
+                    - Data-level errors and import failures will only be visible in the GET request response.
+        
+                    For Community edition, imports are processed synchronously and return task counts immediately.
+                    <br>
+        
                     ## POST requests
                     <hr style="opacity:0.3">
         
@@ -2328,7 +2393,7 @@ class AsyncProjectsClient:
         Returns
         -------
         ImportTasksProjectsResponse
-            Tasks successfully imported
+            Tasks successfully imported or import queued. **For non-Community editions**, the response will be `{"import": <import_id>}` which you can use to poll the import status. **For Community edition**, the response contains task counts and is processed synchronously.
         
         Examples
         --------

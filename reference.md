@@ -8961,6 +8961,14 @@ client.projects.create()
 <dl>
 <dd>
 
+**annotator_evaluation_enabled:** `typing.Optional[bool]` — Enable annotator evaluation for the project
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **color:** `typing.Optional[str]` 
     
 </dd>
@@ -9559,6 +9567,14 @@ client.projects.update(
 <dl>
 <dd>
 
+**agreement_methodology:** `typing.Optional[AgreementMethodologyEnum]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **agreement_threshold:** `typing.Optional[str]` — Minimum percent agreement threshold for which minimum number of annotators must agree
     
 </dd>
@@ -9583,6 +9599,14 @@ client.projects.update(
 <dl>
 <dd>
 
+**annotator_evaluation_enabled:** `typing.Optional[bool]` — Enable annotator evaluation for the project
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **annotator_evaluation_minimum_score:** `typing.Optional[str]` 
     
 </dd>
@@ -9592,6 +9616,14 @@ client.projects.update(
 <dd>
 
 **annotator_evaluation_minimum_tasks:** `typing.Optional[int]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**annotator_evaluation_onboarding_tasks:** `typing.Optional[int]` 
     
 </dd>
 </dl>
@@ -10123,6 +10155,20 @@ Data that you want to duplicate: settings only, with tasks, with annotations
             must include a "text" field.
             <br>
 
+            ## Async Import Behavior
+            <hr style="opacity:0.3">
+
+            **For non-Community editions, this endpoint processes imports asynchronously.**
+            
+            - The POST request **can fail** for invalid parameters, malformed request body, or other request-level validation errors.
+            - However, **data validation errors** that occur during import processing are handled asynchronously and will not cause the POST request to fail.
+            - Upon successful request validation, a response is returned: `{"import": <import_id>}`
+            - Use the returned `import_id` to poll the GET `/api/projects/{project_id}/imports/{import_id}` endpoint to check the import status and see any data validation errors.
+            - Data-level errors and import failures will only be visible in the GET request response.
+
+            For Community edition, imports are processed synchronously and return task counts immediately.
+            <br>
+
             ## POST requests
             <hr style="opacity:0.3">
 
@@ -10431,7 +10477,17 @@ client.projects.validate_label_config(
 <dl>
 <dd>
 
-Return data related to async project import operation
+
+            Poll the status of an asynchronous project import operation.
+            
+            **Usage:**
+            1. When you POST to `/api/projects/{project_id}/import`, you'll receive a response like `{"import": <import_id>}`
+            2. Use that `import_id` with this GET endpoint to check the import status
+            3. Poll this endpoint to see if the import has completed, is still processing, or has failed
+            4. **Import errors and failures will only be visible in this GET response**, not in the original POST request
+            
+            This endpoint returns detailed information about the import including task counts, status, and any error messages.
+        
 </dd>
 </dl>
 </dd>
@@ -29136,6 +29192,14 @@ client.organizations.members.list(
 <dl>
 <dd>
 
+**contributed_to_projects:** `typing.Optional[bool]` — Whether to include projects created and contributed to by the members.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **exclude_project_id:** `typing.Optional[int]` — Project ID to exclude users who are already associated with this project (direct members, workspace members, or implicit admin/owner access).
     
 </dd>
@@ -29384,6 +29448,14 @@ client.organizations.members.get(
 <dd>
 
 **user_pk:** `int` — A unique integer value identifying the user to get organization details for.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**contributed_to_projects:** `typing.Optional[bool]` — Whether to include projects created and contributed to by the member.
     
 </dd>
 </dl>
@@ -33988,6 +34060,14 @@ client.projects.members.bulk.post(
 <dl>
 <dd>
 
+**last_activity_lte:** `typing.Optional[str]` — Filter by last activity upper bound (ISO 8601 formatted date). Only when all=True.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **role:** `typing.Optional[str]` — Filter by role, project roles take precedence over organization roles. Only when all=True. (comma-separated values)
     
 </dd>
@@ -34105,6 +34185,14 @@ client.projects.members.bulk.delete(
 <dd>
 
 **last_activity_gte:** `typing.Optional[str]` — Filter by last activity (ISO 8601 formatted date). Only when all=True.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**last_activity_lte:** `typing.Optional[str]` — Filter by last activity upper bound (ISO 8601 formatted date). Only when all=True.
     
 </dd>
 </dl>
@@ -34235,6 +34323,14 @@ for page in response.iter_pages():
 <dd>
 
 **last_activity_gte:** `typing.Optional[dt.datetime]` — Filter by last activity time (ISO 8601 datetime). Returns users with last activity greater than or equal to this time.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**last_activity_lte:** `typing.Optional[dt.datetime]` — Filter by last activity time (ISO 8601 datetime). Returns users with last activity less than or equal to this time.
     
 </dd>
 </dl>
