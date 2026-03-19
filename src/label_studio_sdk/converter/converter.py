@@ -869,7 +869,7 @@ class Converter(object):
                 if not width:
                     images = add_image(images, width, height, image_id, image_path)
 
-                logger.warning("No annotations found for item #" + str(item_idx))
+                logger.warning(f"No annotations found for item {task_id=}")
                 continue
 
             # concatenate results over all tag names
@@ -878,7 +878,7 @@ class Converter(object):
                 labels += item["output"][key]
 
             if len(labels) == 0:
-                logger.debug(f'Empty bboxes for {item["output"]}')
+                logger.debug(f'Empty bboxes for {item["output"]} {task_id=}')
                 continue
 
             keypoint_labels = []
@@ -896,13 +896,13 @@ class Converter(object):
                         break
 
                 if category_name is None:
-                    logger.warning(f"Unknown label type or labels are empty: {label}")
+                    logger.warning(f"Unknown label type or labels are empty {task_id=}")
                     continue
 
                 if not height or not width:
                     if "original_width" not in label or "original_height" not in label:
                         logger.debug(
-                            f"original_width or original_height not found in {image_path}"
+                            f"original_width or original_height not found in {image_path} {task_id=}"
                         )
                         continue
 
@@ -1150,7 +1150,7 @@ class Converter(object):
                             exc_info=True,
                         )
             if not image_path:
-                logger.error(f"No image path found for item #{item_idx}")
+                logger.error(f"No image path found for {task_id=}")
                 continue
 
             # create dedicated subfolder for each labeler if split_labelers=True
@@ -1170,7 +1170,7 @@ class Converter(object):
 
             # Skip tasks without annotations
             if not item["output"]:
-                logger.warning("No completions found for item #" + str(item_idx))
+                logger.warning(f"No completions found for {task_id=}")
                 if not os.path.exists(label_path):
                     with open(label_path, "x"):
                         pass
@@ -1182,7 +1182,7 @@ class Converter(object):
                 labels += item["output"][key]
 
             if len(labels) == 0:
-                logger.warning(f'Empty bboxes for {item["output"]}')
+                logger.warning(f'Empty bboxes for {item["output"]} in {task_id=}')
                 if not os.path.exists(label_path):
                     with open(label_path, "x"):
                         pass
@@ -1422,6 +1422,7 @@ class Converter(object):
                 os.makedirs(annotations_dir)
             # Download image
             channels = 3
+            task_id = item["id"]
             if not os.path.exists(image_path):
                 try:
                     image_path = download(
@@ -1447,11 +1448,11 @@ class Converter(object):
                     try:
                         _, _, channels = get_image_size_and_channels(full_image_path)
                     except:
-                        logger.warning(f"Can't read channels from image")
+                        logger.warning(f"Can't read channels from image {task_id=}")
 
             # skip tasks without annotations
             if not item["output"]:
-                logger.warning("No annotations found for item #" + str(item_idx))
+                logger.warning(f"No annotations found for {task_id=}")
                 continue
 
             image_name = os.path.basename(image_path)
@@ -1463,12 +1464,12 @@ class Converter(object):
                 bboxes += item["output"][key]
 
             if len(bboxes) == 0:
-                logger.debug(f'Empty bboxes for {item["output"]}')
+                logger.debug(f'Empty bboxes for {item["output"]} {task_id=}')
                 continue
 
             if "original_width" not in bboxes[0] or "original_height" not in bboxes[0]:
                 logger.debug(
-                    f"original_width or original_height not found in {image_name}"
+                    f"original_width or original_height not found in {image_name} {task_id=}"
                 )
                 continue
 

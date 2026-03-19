@@ -28,6 +28,9 @@ from .configs import (
     PREDICTION_TEXTAREA_CONFIG,
     PREDICTION_TIMESERIES_LABELS_CONFIG,
     PREDICTION_COMPLEX_CONFIG,
+    PREDICTION_CHAT_CONFIG,
+    PREDICTION_REACTCODE_CONFIG,
+    PREDICTION_REACTCODE_CONFIG_WITHOUT_TO_NAME,
 )
 
 
@@ -117,14 +120,95 @@ class TestPredictionValidation:
         }
         assert li.validate_prediction(valid_pred) is True
         
-        # Invalid - wrong RLE format
+        # Invalid - negative byte value
         invalid_pred = copy.deepcopy(valid_pred)
-        invalid_pred["result"][0]["value"]["rle"] = [1, 2, 3]
+        invalid_pred["result"][0]["value"]["rle"] = [-1, 2, 3, 4]
         assert li.validate_prediction(invalid_pred) is False
         
         # Check specific error message
         errors = li.validate_prediction(invalid_pred, return_errors=True)
         assert any("Invalid value for control 'brush'" in error for error in errors)
+
+    def test_brush_rle_with_zero_bytes(self):
+        """Test that RLE data containing zero bytes is accepted.
+
+        Label Studio's RLE is a byte-stream where 0 is a valid byte.
+        The SDK's own mask2rle() routinely produces zeros.
+        """
+        li = LabelInterface(PREDICTION_BRUSH_CONFIG)
+
+        rle_with_zeros = [0, 1, 222, 96, 57, 27, 255, 175, 135, 0, 141, 3,
+                          129, 83, 128, 71, 127, 63, 252, 104, 28, 10, 124,
+                          2, 223, 252, 104, 28, 10, 124, 2, 56, 8, 255, 227,
+                          128, 255, 255, 224, 28, 154, 252, 0]
+        pred = {
+            "result": [{
+                "from_name": "brush",
+                "to_name": "image",
+                "type": "brush",
+                "value": {
+                    "format": "rle",
+                    "rle": rle_with_zeros,
+                }
+            }],
+            "score": 0.9
+        }
+        assert li.validate_prediction(pred) is True
+
+    def test_brush_rle_full_byte_range(self):
+        """RLE containing every possible byte value (0-255) must be valid."""
+        li = LabelInterface(PREDICTION_BRUSH_CONFIG)
+        pred = {
+            "result": [{
+                "from_name": "brush",
+                "to_name": "image",
+                "type": "brush",
+                "value": {
+                    "format": "rle",
+                    "rle": list(range(256)),
+                }
+            }],
+            "score": 0.5
+        }
+        assert li.validate_prediction(pred) is True
+
+    def test_brush_rle_invalid_byte_values(self):
+        """RLE with values outside [0, 255] must be rejected."""
+        li = LabelInterface(PREDICTION_BRUSH_CONFIG)
+        base = {
+            "result": [{
+                "from_name": "brush",
+                "to_name": "image",
+                "type": "brush",
+                "value": {
+                    "format": "rle",
+                    "rle": None,
+                }
+            }],
+            "score": 0.5
+        }
+
+        for bad_rle in [[-1, 0, 1], [0, 256, 1], [0, 1, -128], []]:
+            pred = copy.deepcopy(base)
+            pred["result"][0]["value"]["rle"] = bad_rle
+            assert li.validate_prediction(pred) is False, f"Should reject rle={bad_rle}"
+
+    def test_brush_rle_odd_length_is_valid(self):
+        """Odd-length RLE lists are valid (the byte-stream has no even-length constraint)."""
+        li = LabelInterface(PREDICTION_BRUSH_CONFIG)
+        pred = {
+            "result": [{
+                "from_name": "brush",
+                "to_name": "image",
+                "type": "brush",
+                "value": {
+                    "format": "rle",
+                    "rle": [1, 2, 3],
+                }
+            }],
+            "score": 0.5
+        }
+        assert li.validate_prediction(pred) is True
 
     def test_brush_labels_validation(self):
         """Test BrushLabels tag validation"""
@@ -154,6 +238,31 @@ class TestPredictionValidation:
         # Check specific error message
         errors = li.validate_prediction(invalid_pred, return_errors=True)
         assert any("Invalid value for control 'brushlabels'" in error for error in errors)
+
+    def test_brush_labels_rle_with_zero_bytes(self):
+        """BrushLabels with RLE containing zeros must be accepted (UTC-596 customer scenario)."""
+        config = """<View>
+          <Image name="image" value="$image" zoom="true"/>
+          <BrushLabels name="label_rle" toName="image">
+            <Label value="abcdefg" background="rgba(179, 123, 99, 0.5)"/>
+          </BrushLabels>
+        </View>"""
+        li = LabelInterface(config)
+
+        pred = {
+            "result": [{
+                "from_name": "label_rle",
+                "to_name": "image",
+                "type": "brushlabels",
+                "value": {
+                    "format": "rle",
+                    "rle": [11, 232, 12, 0, 5, 10],
+                    "brushlabels": ["abcdefg"],
+                }
+            }],
+            "score": 0.9
+        }
+        assert li.validate_prediction(pred) is True
 
     def test_ellipse_validation(self):
         """Test Ellipse tag validation"""
@@ -493,20 +602,16 @@ class TestPredictionValidation:
                     "end": 10,
                     "startOffset": 0,
                     "endOffset": 10,
-                    "htmllabels": ["html1"]
+                    "hypertextlabels": ["html1"]
                 }
             }],
             "score": 0.8
         }
-        # This test is expected to fail because HyperTextLabels validation is not fully implemented
-        # We'll skip this test for now
-        pytest.skip("HyperTextLabels validation not fully implemented in current SDK version")
-        
         assert li.validate_prediction(valid_pred) is True
         
         # Invalid - wrong label
         invalid_pred = copy.deepcopy(valid_pred)
-        invalid_pred["result"][0]["value"]["htmllabels"] = ["invalid_html"]
+        invalid_pred["result"][0]["value"]["hypertextlabels"] = ["invalid_html"]
         assert li.validate_prediction(invalid_pred) is False
 
     def test_pairwise_validation(self):
@@ -1087,3 +1192,340 @@ class TestPredictionValidation:
                 }
             ]
         }
+
+    # ------------------------------------------------------------------
+    # Self-referencing tags: tags where from_name == to_name
+    # These validate the auto-created control tags for <Chat> and <ReactCode>.
+    # ------------------------------------------------------------------
+
+    def test_chat_prediction_validation(self):
+        """Test Chat self-referencing tag: from_name == to_name, type == 'chatmessage'."""
+        li = LabelInterface(PREDICTION_CHAT_CONFIG)
+
+        # Valid prediction
+        valid_pred = {
+            "result": [{
+                "from_name": "chat",
+                "to_name": "chat",
+                "type": "chatmessage",
+                "value": {
+                    "chatmessage": {
+                        "role": "assistant",
+                        "content": "Hello, how can I help you?"
+                    }
+                }
+            }],
+            "score": 0.9
+        }
+        assert li.validate_prediction(valid_pred) is True
+
+        # Valid - with optional createdAt field
+        valid_pred_with_ts = copy.deepcopy(valid_pred)
+        valid_pred_with_ts["result"][0]["value"]["chatmessage"]["createdAt"] = 1700000000
+        assert li.validate_prediction(valid_pred_with_ts) is True
+
+        # Invalid - missing required "content" field
+        invalid_pred = copy.deepcopy(valid_pred)
+        del invalid_pred["result"][0]["value"]["chatmessage"]["content"]
+        assert li.validate_prediction(invalid_pred) is False
+
+        # Invalid - missing required "role" field
+        invalid_pred = copy.deepcopy(valid_pred)
+        del invalid_pred["result"][0]["value"]["chatmessage"]["role"]
+        assert li.validate_prediction(invalid_pred) is False
+
+        # Invalid - missing "chatmessage" key entirely
+        invalid_pred = copy.deepcopy(valid_pred)
+        invalid_pred["result"][0]["value"] = {"text": "wrong structure"}
+        assert li.validate_prediction(invalid_pred) is False
+
+        # Invalid - wrong type (should be "chatmessage", not "chat")
+        invalid_pred = copy.deepcopy(valid_pred)
+        invalid_pred["result"][0]["type"] = "chat"
+        assert li.validate_prediction(invalid_pred) is False
+
+    @pytest.mark.parametrize("config", [
+        PREDICTION_REACTCODE_CONFIG,
+        PREDICTION_REACTCODE_CONFIG_WITHOUT_TO_NAME,
+    ], ids=["with_toName", "without_toName"])
+    def test_reactcode_prediction_validation(self, config):
+        """Test ReactCode self-referencing tag: from_name == to_name, type == 'reactcode'."""
+        li = LabelInterface(config)
+
+        # Valid prediction with outputs matching the config
+        valid_pred = {
+            "result": [{
+                "from_name": "code",
+                "to_name": "code",
+                "type": "reactcode",
+                "value": {
+                    "reactcode": {
+                        "field1": "value1",
+                        "field2": "value2"
+                    }
+                }
+            }],
+            "score": 0.85
+        }
+        errors = li.validate_prediction(valid_pred, return_errors=True)
+        assert li.validate_prediction(valid_pred) is True, f"Expected valid prediction, got errors: {errors}"
+
+        # Valid - reactcode value can contain any dict (Dict[str, Any])
+        valid_pred_extra = copy.deepcopy(valid_pred)
+        valid_pred_extra["result"][0]["value"]["reactcode"]["extra"] = 42
+        errors = li.validate_prediction(valid_pred_extra, return_errors=True)
+        assert li.validate_prediction(valid_pred_extra) is True, f"Expected valid prediction, got errors: {errors}"
+
+        # Invalid - missing "reactcode" key entirely
+        invalid_pred = copy.deepcopy(valid_pred)
+        invalid_pred["result"][0]["value"] = {"text": "wrong structure"}
+        assert li.validate_prediction(invalid_pred) is False
+
+        # Invalid - wrong type (should be "reactcode")
+        invalid_pred = copy.deepcopy(valid_pred)
+        invalid_pred["result"][0]["type"] = "code"
+        assert li.validate_prediction(invalid_pred) is False
+
+        # Invalid - from_name doesn't match to_name
+        invalid_pred = copy.deepcopy(valid_pred)
+        invalid_pred["result"][0]["to_name"] = "other"
+        assert li.validate_prediction(invalid_pred) is False
+
+    @pytest.mark.parametrize("config", [
+        PREDICTION_CHAT_CONFIG,
+        PREDICTION_REACTCODE_CONFIG,
+        PREDICTION_REACTCODE_CONFIG_WITHOUT_TO_NAME,
+    ], ids=["chat", "reactcode_with_toName", "reactcode_without_toName"])
+    def test_self_referencing_tag_empty_result(self, config):
+        """Empty result arrays should be valid for self-referencing tags (Chat, ReactCode)."""
+        li = LabelInterface(config)
+        empty_pred = {"result": [], "score": 0.5}
+        assert li.validate_prediction(empty_pred) is True
+
+    # ------------------------------------------------------------------
+    # Split format: geometry + labels as separate results sharing the same id
+    # ------------------------------------------------------------------
+
+    SPLIT_FORMAT_CONFIG = """
+    <View>
+      <Image name="image" value="$image" maxHeight="auto"/>
+      <Labels name="label" toName="image">
+        <Label value="Item"/>
+        <Label value="Other"/>
+      </Labels>
+      <Rectangle name="bbox" toName="image"/>
+      <Polygon name="poly" toName="image"/>
+    </View>
+    """
+
+    def test_split_format_polygon_with_labels(self):
+        """Split format: polygon + labels sharing the same id should validate."""
+        li = LabelInterface(self.SPLIT_FORMAT_CONFIG)
+
+        pred = {
+            "result": [
+                {
+                    "id": "poly1",
+                    "type": "polygon",
+                    "from_name": "poly",
+                    "to_name": "image",
+                    "value": {
+                        "points": [[10, 40], [8, 41], [8, 45], [37, 45], [36, 44]]
+                    },
+                    "original_width": 1656,
+                    "original_height": 2342,
+                },
+                {
+                    "id": "poly1",
+                    "type": "labels",
+                    "from_name": "label",
+                    "to_name": "image",
+                    "value": {
+                        "points": [[10, 40], [8, 41], [8, 45], [37, 45], [36, 44]],
+                        "labels": ["Item"],
+                    },
+                    "original_width": 1656,
+                    "original_height": 2342,
+                },
+            ]
+        }
+        assert li.validate_prediction(pred) is True
+        errors = li.validate_prediction(pred, return_errors=True)
+        assert errors == []
+
+    def test_split_format_rectangle_with_labels(self):
+        """Split format: rectangle + labels sharing the same id should validate."""
+        li = LabelInterface(self.SPLIT_FORMAT_CONFIG)
+
+        pred = {
+            "result": [
+                {
+                    "id": "rect1",
+                    "type": "rectangle",
+                    "from_name": "bbox",
+                    "to_name": "image",
+                    "value": {"x": 5, "y": 10, "width": 30, "height": 20, "rotation": 0},
+                },
+                {
+                    "id": "rect1",
+                    "type": "labels",
+                    "from_name": "label",
+                    "to_name": "image",
+                    "value": {
+                        "x": 5, "y": 10, "width": 30, "height": 20,
+                        "labels": ["Item"], "rotation": 0,
+                    },
+                },
+            ]
+        }
+        assert li.validate_prediction(pred) is True
+
+    def test_split_format_mixed_geometry_types(self):
+        """Split format with both rectangle and polygon pairs in one prediction."""
+        li = LabelInterface(self.SPLIT_FORMAT_CONFIG)
+
+        pred = {
+            "result": [
+                {
+                    "id": "rect1", "type": "rectangle",
+                    "from_name": "bbox", "to_name": "image",
+                    "value": {"x": 5, "y": 10, "width": 30, "height": 20, "rotation": 0},
+                },
+                {
+                    "id": "rect1", "type": "labels",
+                    "from_name": "label", "to_name": "image",
+                    "value": {"x": 5, "y": 10, "width": 30, "height": 20, "labels": ["Item"], "rotation": 0},
+                },
+                {
+                    "id": "poly1", "type": "polygon",
+                    "from_name": "poly", "to_name": "image",
+                    "value": {"points": [[50, 50], [70, 50], [70, 70], [50, 70]]},
+                },
+                {
+                    "id": "poly1", "type": "labels",
+                    "from_name": "label", "to_name": "image",
+                    "value": {"points": [[50, 50], [70, 50], [70, 70], [50, 70]], "labels": ["Other"]},
+                },
+            ]
+        }
+        assert li.validate_prediction(pred) is True
+
+    def test_split_format_invalid_label_value(self):
+        """Split format with an invalid label should still fail validation."""
+        li = LabelInterface(self.SPLIT_FORMAT_CONFIG)
+
+        pred = {
+            "result": [
+                {
+                    "id": "poly1", "type": "polygon",
+                    "from_name": "poly", "to_name": "image",
+                    "value": {"points": [[10, 10], [20, 10], [20, 20]]},
+                },
+                {
+                    "id": "poly1", "type": "labels",
+                    "from_name": "label", "to_name": "image",
+                    "value": {"points": [[10, 10], [20, 10], [20, 20]], "labels": ["INVALID"]},
+                },
+            ]
+        }
+        assert li.validate_prediction(pred) is False
+        errors = li.validate_prediction(pred, return_errors=True)
+        assert any("Invalid value" in e for e in errors)
+
+    def test_split_format_labels_without_geometry_partner(self):
+        """A standalone labels result (no geometry partner with same id) is NOT
+        detected as split format and should fail strict LabelsValue validation
+        (requires start/end)."""
+        li = LabelInterface(self.SPLIT_FORMAT_CONFIG)
+
+        pred = {
+            "result": [
+                {
+                    "id": "orphan1", "type": "labels",
+                    "from_name": "label", "to_name": "image",
+                    "value": {"points": [[10, 10]], "labels": ["Item"]},
+                },
+            ]
+        }
+        # Without a geometry partner, split_format=False so strict
+        # LabelsValue (requiring start/end) is used → should fail.
+        assert li.validate_prediction(pred) is False
+
+    def test_split_format_customer_exact_data(self):
+        """Exact reproduction of the customer's reported data from UTC-539."""
+        li = LabelInterface(self.SPLIT_FORMAT_CONFIG)
+
+        pred = {
+            "result": [
+                {
+                    "id": "TuNajNh1Di",
+                    "type": "polygon",
+                    "value": {
+                        "points": [
+                            [10.828681302093385, 40.51219122131345],
+                            [8.265036443862948, 40.92312606323242],
+                            [7.969370810180719, 45.365310905151375],
+                            [9.1171875, 45.375],
+                            [22.953125, 45.4375],
+                            [37.54082816841115, 45.37968484191895],
+                            [36.0625, 44.28125],
+                            [32.4375, 43.09375],
+                            [30.984375, 41.84375],
+                            [29.046875, 41.03125],
+                        ]
+                    },
+                    "to_name": "image",
+                    "from_name": "poly",
+                    "image_rotation": 0,
+                    "original_width": 1656,
+                    "original_height": 2342,
+                },
+                {
+                    "id": "TuNajNh1Di",
+                    "type": "labels",
+                    "value": {
+                        "points": [
+                            [10.828681302093385, 40.51219122131345],
+                            [8.265036443862948, 40.92312606323242],
+                            [7.969370810180719, 45.365310905151375],
+                            [9.1171875, 45.375],
+                            [22.953125, 45.4375],
+                            [37.54082816841115, 45.37968484191895],
+                            [36.0625, 44.28125],
+                            [32.4375, 43.09375],
+                            [30.984375, 41.84375],
+                            [29.046875, 41.03125],
+                        ],
+                        "labels": ["Item"],
+                    },
+                    "to_name": "image",
+                    "from_name": "label",
+                    "image_rotation": 0,
+                    "original_width": 1656,
+                    "original_height": 2342,
+                },
+            ]
+        }
+        assert li.validate_prediction(pred) is True
+
+    def test_split_format_invalid_geometry_in_labels(self):
+        """Split format where the labels companion has invalid geometry fields
+        should fail -- geometry is validated against the partner's model."""
+        li = LabelInterface(self.SPLIT_FORMAT_CONFIG)
+
+        pred = {
+            "result": [
+                {
+                    "id": "rect1", "type": "rectangle",
+                    "from_name": "bbox", "to_name": "image",
+                    "value": {"x": 5, "y": 10, "width": 30, "height": 20, "rotation": 0},
+                },
+                {
+                    "id": "rect1", "type": "labels",
+                    "from_name": "label", "to_name": "image",
+                    # x=200 is out of bounds for RectangleValue (le=100)
+                    "value": {"x": 200, "y": 10, "width": 30, "height": 20, "labels": ["Item"]},
+                },
+            ]
+        }
+        assert li.validate_prediction(pred) is False
