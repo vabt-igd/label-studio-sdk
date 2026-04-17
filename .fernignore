@@ -19,6 +19,9 @@ src/label_studio_sdk/core/client_wrapper.py
 # converter
 src/label_studio_sdk/converter
 
+# manually added types not yet in the API spec
+src/label_studio_sdk/types/mode_enum.py
+
 # legacy code - to be removed in the future
 src/label_studio_sdk/_legacy
 src/label_studio_sdk/data_manager.py
@@ -32,6 +35,7 @@ tests/custom/converter
 tests/custom/label_studio_tools
 tests/custom/legacy
 tests/custom/test_interface
+tests/custom/cli
 
 # manual workflows
 .github/workflows/build_pypi.yml
