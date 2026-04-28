@@ -6357,7 +6357,7 @@ client.prompts.subsets(
 </dl>
 </details>
 
-<details><summary><code>client.prompts.<a href="src/label_studio_sdk/prompts/client.py">list</a>(...) -> typing.List[ModelInterfaceSerializerGet]</code></summary>
+<details><summary><code>client.prompts.<a href="src/label_studio_sdk/prompts/client.py">list</a>(...) -> PaginatedModelInterfaceSerializerGetList</code></summary>
 <dl>
 <dd>
 
@@ -6409,6 +6409,22 @@ client.prompts.list()
 <dd>
 
 **ordering:** `typing.Optional[str]` — Which field to use when ordering the results.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**page:** `typing.Optional[int]` — A page number within the paginated result set.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**search:** `typing.Optional[str]` — A search term.
     
 </dd>
 </dl>
@@ -7339,6 +7355,14 @@ client.organizations.update_default_role(
 <dl>
 <dd>
 
+**custom_interfaces_enabled:** `typing.Optional[bool]` — Enable custom interfaces for this organization. When disabled, projects with use_custom_interface=True will not render custom interfaces anywhere in the product (label stream, embed, data manager, interfaces dashboard).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **custom_scripts_enabled_at:** `typing.Optional[datetime.datetime]` — Set to current time to enable custom scripts (Plugins) for this organization. Can only be enabled if no organization members are active members of any other organizations; otherwise an error will be raised. If this occurs, contact the LEAP team for assistance with enabling custom scripts (Plugins).
     
 </dd>
@@ -7381,6 +7405,14 @@ Default membership role for invited users
 <dl>
 <dd>
 
+**embed_enabled:** `typing.Optional[bool]` — Enable embed functionality for this organization
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **embed_settings:** `typing.Optional[typing.Any]` — Embed settings for this organization
     
 </dd>
@@ -7398,6 +7430,14 @@ Default membership role for invited users
 <dd>
 
 **extra_data_on_activity_logs:** `typing.Optional[bool]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**interface_settings:** `typing.Optional[typing.Any]` — Security settings for custom interfaces: CSP allowlists, script origins, iframe permissions.
     
 </dd>
 </dl>
