@@ -11,6 +11,9 @@ if typing.TYPE_CHECKING:
     from .data_filters_stats_response import DataFiltersStatsResponse
     from .data_filters_stats_response_user_filters import DataFiltersStatsResponseUserFilters
     from .data_filters_stats_response_user_filters_stats_item import DataFiltersStatsResponseUserFiltersStatsItem
+    from .data_quality_agreement_confusion_matrix_stats_request_mode import (
+        DataQualityAgreementConfusionMatrixStatsRequestMode,
+    )
     from .finished_tasks_stats_response import FinishedTasksStatsResponse
     from .iaa_stats_response import IaaStatsResponse
     from .iaa_stats_response_common_tasks import IaaStatsResponseCommonTasks
@@ -18,6 +21,10 @@ if typing.TYPE_CHECKING:
     from .iaa_stats_response_std import IaaStatsResponseStd
     from .lead_time_stats_response import LeadTimeStatsResponse
     from .lead_time_stats_response_lead_time_stats_item import LeadTimeStatsResponseLeadTimeStatsItem
+    from .member_performance_rows_stats_request_table import MemberPerformanceRowsStatsRequestTable
+    from .member_performance_rows_stats_response import MemberPerformanceRowsStatsResponse
+    from .member_performance_summary_stats_request_table import MemberPerformanceSummaryStatsRequestTable
+    from .member_performance_summary_stats_response import MemberPerformanceSummaryStatsResponse
     from .model_version_annotator_agreement_stats_response import ModelVersionAnnotatorAgreementStatsResponse
     from .model_version_ground_truth_agreement_stats_response import ModelVersionGroundTruthAgreementStatsResponse
     from .model_version_prediction_agreement_stats_response import ModelVersionPredictionAgreementStatsResponse
@@ -52,6 +59,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "DataFiltersStatsResponse": ".data_filters_stats_response",
     "DataFiltersStatsResponseUserFilters": ".data_filters_stats_response_user_filters",
     "DataFiltersStatsResponseUserFiltersStatsItem": ".data_filters_stats_response_user_filters_stats_item",
+    "DataQualityAgreementConfusionMatrixStatsRequestMode": ".data_quality_agreement_confusion_matrix_stats_request_mode",
     "FinishedTasksStatsResponse": ".finished_tasks_stats_response",
     "IaaStatsResponse": ".iaa_stats_response",
     "IaaStatsResponseCommonTasks": ".iaa_stats_response_common_tasks",
@@ -59,6 +67,10 @@ _dynamic_imports: typing.Dict[str, str] = {
     "IaaStatsResponseStd": ".iaa_stats_response_std",
     "LeadTimeStatsResponse": ".lead_time_stats_response",
     "LeadTimeStatsResponseLeadTimeStatsItem": ".lead_time_stats_response_lead_time_stats_item",
+    "MemberPerformanceRowsStatsRequestTable": ".member_performance_rows_stats_request_table",
+    "MemberPerformanceRowsStatsResponse": ".member_performance_rows_stats_response",
+    "MemberPerformanceSummaryStatsRequestTable": ".member_performance_summary_stats_request_table",
+    "MemberPerformanceSummaryStatsResponse": ".member_performance_summary_stats_response",
     "ModelVersionAnnotatorAgreementStatsResponse": ".model_version_annotator_agreement_stats_response",
     "ModelVersionGroundTruthAgreementStatsResponse": ".model_version_ground_truth_agreement_stats_response",
     "ModelVersionPredictionAgreementStatsResponse": ".model_version_prediction_agreement_stats_response",
@@ -109,6 +121,7 @@ __all__ = [
     "DataFiltersStatsResponse",
     "DataFiltersStatsResponseUserFilters",
     "DataFiltersStatsResponseUserFiltersStatsItem",
+    "DataQualityAgreementConfusionMatrixStatsRequestMode",
     "FinishedTasksStatsResponse",
     "IaaStatsResponse",
     "IaaStatsResponseCommonTasks",
@@ -116,6 +129,10 @@ __all__ = [
     "IaaStatsResponseStd",
     "LeadTimeStatsResponse",
     "LeadTimeStatsResponseLeadTimeStatsItem",
+    "MemberPerformanceRowsStatsRequestTable",
+    "MemberPerformanceRowsStatsResponse",
+    "MemberPerformanceSummaryStatsRequestTable",
+    "MemberPerformanceSummaryStatsResponse",
     "ModelVersionAnnotatorAgreementStatsResponse",
     "ModelVersionGroundTruthAgreementStatsResponse",
     "ModelVersionPredictionAgreementStatsResponse",

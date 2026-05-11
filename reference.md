@@ -6200,6 +6200,30 @@ client.prompts.subset_tasks(
 <dl>
 <dd>
 
+**alignment_class:** `typing.Optional[str]` — Only include tasks whose prediction/reference alignment includes this class.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**alignment_from_name:** `typing.Optional[str]` — When alignment_class is set, limit matching to this output control tag.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**alignment_outcome:** `typing.Optional[SubsetTasksPromptsRequestAlignmentOutcome]` — Alignment outcome to drill into. Defaults to all TP, FP, and FN outcomes.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **include_total:** `typing.Optional[bool]` — If true (default), includes task_count in response; if false, omits it.
     
 </dd>
@@ -6216,7 +6240,31 @@ client.prompts.subset_tasks(
 <dl>
 <dd>
 
+**model_version:** `typing.Optional[int]` — Restrict prefetched predictions to this specific prompt version. Used with parent_model when no model_run is selected so a newly created version does not inherit predictions from prior versions.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **ordering:** `typing.Optional[str]` — Which field to use when ordering the results.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**output_class:** `typing.Optional[str]` — Only include tasks whose prediction contains this output class.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**output_from_name:** `typing.Optional[str]` — When output_class is set, limit matching to this output control tag.
     
 </dd>
 </dl>
@@ -6241,6 +6289,14 @@ client.prompts.subset_tasks(
 <dd>
 
 **parent_model:** `typing.Optional[int]` — The ID of the parent model (ModelInterface) for this Inference Run
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**prediction_version_ids:** `typing.Optional[str]` — Comma-separated model version IDs. Only include tasks that have predictions for every listed version.
     
 </dd>
 </dl>
@@ -6417,6 +6473,14 @@ client.prompts.list()
 <dd>
 
 **page:** `typing.Optional[int]` — A page number within the paginated result set.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**page_size:** `typing.Optional[int]` — Number of results to return per page.
     
 </dd>
 </dl>
@@ -7212,6 +7276,14 @@ client.organizations.update(
 <dl>
 <dd>
 
+**custom_interfaces_enabled:** `typing.Optional[bool]` — Enable or disable custom interfaces for this organization
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **custom_scripts_enabled:** `typing.Optional[bool]` — Plugins
     
 </dd>
@@ -7236,7 +7308,23 @@ client.organizations.update(
 <dl>
 <dd>
 
+**embed_enabled:** `typing.Optional[bool]` — Enable or disable embed functionality for this organization
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **embed_settings:** `typing.Optional[typing.Any]` — Public Verification Key and Public Verification Algorithms configuration
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**interface_settings:** `typing.Optional[typing.Any]` — Security settings for custom interfaces: CSP allowlists, script origins, iframe permissions
     
 </dd>
 </dl>
@@ -10202,7 +10290,7 @@ client.projects.list()
 <dl>
 <dd>
 
-**ids:** `typing.Optional[str]` — Filter id by in list
+**ids:** `typing.Optional[str]` — Multiple values may be separated by commas. (comma-separated values)
     
 </dd>
 </dl>
@@ -10497,6 +10585,14 @@ client.projects.create()
 <dl>
 <dd>
 
+**output_schema:** `typing.Optional[typing.Any]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **overlap_cohort_percentage:** `typing.Optional[int]` 
     
 </dd>
@@ -10593,7 +10689,7 @@ client.projects.create()
 <dl>
 <dd>
 
-**source_interface_version:** `typing.Optional[int]` 
+**source_interface_version:** `typing.Optional[int]` — Stable version ID of the saved interface used to create this project.
     
 </dd>
 </dl>
@@ -10720,7 +10816,7 @@ client.projects.list_counts()
 <dl>
 <dd>
 
-**ids:** `typing.Optional[str]` — Filter id by in list
+**ids:** `typing.Optional[str]` — Multiple values may be separated by commas. (comma-separated values)
     
 </dd>
 </dl>
@@ -11288,6 +11384,14 @@ Methodology (Consensus / Pairwise Averaging)
 <dl>
 <dd>
 
+**output_schema:** `typing.Optional[typing.Any]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **overlap_cohort_percentage:** `typing.Optional[int]` — Annotations per task coverage
     
 </dd>
@@ -11416,7 +11520,7 @@ Methodology (Consensus / Pairwise Averaging)
 <dl>
 <dd>
 
-**source_interface_version:** `typing.Optional[int]` 
+**source_interface_version:** `typing.Optional[int]` — Stable version ID of the saved interface snapshot used by this project.
     
 </dd>
 </dl>
@@ -30222,6 +30326,14 @@ client.organizations.member_tags.assign(
 <dl>
 <dd>
 
+**user_type:** `typing.Optional[str]` — Multiple values may be separated by commas. (comma-separated values)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **excluded:** `typing.Optional[typing.List[int]]` — List of user IDs to exclude from the assignment.
     
 </dd>
@@ -32074,7 +32186,7 @@ client.projects.roles.list()
 <dl>
 <dd>
 
-**ids:** `typing.Optional[int]` 
+**ids:** `typing.Optional[typing.Union[int, typing.Sequence[int]]]` — Multiple values may be separated by commas.
     
 </dd>
 </dl>
@@ -32364,1152 +32476,260 @@ client.projects.roles.get(
 </dl>
 </details>
 
-## Projects Exports
-<details><summary><code>client.projects.exports.<a href="src/label_studio_sdk/projects/exports/client.py">download_sync</a>(...) -> typing.Iterator[bytes]</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-
-        This endpoint is deprecated in Enterprise. Use the async export API instead:
-        POST /api/projects/{id}/exports/ (see [Create new export](/api#operation/api_projects_exports_create)).
-
-        In Label Studio Enterprise, this endpoint will always return a 404 Not Found response with instructions to use the async export API.
-
-        <i>Note: if you have a large project it's recommended to use
-        export snapshots, this easy export endpoint might have timeouts.</i><br/><br>
-        Export annotated tasks as a file in a specific format.
-        For example, to export JSON annotations for a project to a file called `annotations.json`,
-        run the following from the command line:
-        ```bash
-        curl -X GET http://localhost:8000/api/projects/{id}/export?exportType=JSON -H 'Authorization: Token abc123' --output 'annotations.json'
-        ```
-        To export all tasks, including skipped tasks and others without annotations, run the following from the command line:
-        ```bash
-        curl -X GET http://localhost:8000/api/projects/{id}/export?exportType=JSON&download_all_tasks=true -H 'Authorization: Token abc123' --output 'annotations.json'
-        ```
-        To export specific tasks with IDs of 123 and 345, run the following from the command line:
-        ```bash
-        curl -X GET 'http://localhost:8000/api/projects/{id}/export?ids[]=123&ids[]=345' -H 'Authorization: Token abc123' --output 'annotations.json'
-        ```
-        
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```python
-client.projects.exports.download_sync(...)
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**id:** `int` — A unique integer value identifying this project.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**download_all_tasks:** `typing.Optional[bool]` — If true, download all tasks regardless of status. If false, download only annotated tasks.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**download_resources:** `typing.Optional[bool]` — If true, download all resource files such as images, audio, and others relevant to the tasks.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**export_type:** `typing.Optional[str]` — Selected export format (JSON by default)
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**ids:** `typing.Optional[typing.Union[str, typing.Sequence[str]]]` — Specify a list of task IDs to retrieve only the details for those tasks.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.projects.exports.<a href="src/label_studio_sdk/projects/exports/client.py">list_formats</a>(...) -> typing.List[str]</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-
-        This endpoint is deprecated in Enterprise. Use the async export API instead:
-        POST /api/projects/{{id}}/exports/ (see [Create new export](/api#operation/api_projects_exports_create)).
-
-        In Label Studio Enterprise, this endpoint will always return a 404 Not Found response with instructions to use the async export API.
-
-        Retrieve the available export formats for the current project by ID.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```python
-from label_studio_sdk import LabelStudio
-from label_studio_sdk.environment import LabelStudioEnvironment
-
-client = LabelStudio(
-    api_key="<value>",
-    environment=LabelStudioEnvironment.DEFAULT,
-)
-
-client.projects.exports.list_formats(
-    id=1,
-)
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**id:** `int` — A unique integer value identifying this project.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.projects.exports.<a href="src/label_studio_sdk/projects/exports/client.py">list</a>(...) -> typing.List[Export]</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Returns a list of exported files for a specific project by ID.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```python
-from label_studio_sdk import LabelStudio
-from label_studio_sdk.environment import LabelStudioEnvironment
-
-client = LabelStudio(
-    api_key="<value>",
-    environment=LabelStudioEnvironment.DEFAULT,
-)
-
-client.projects.exports.list(
-    id=1,
-)
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**id:** `int` — A unique integer value identifying this project.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**ordering:** `typing.Optional[str]` — Which field to use when ordering the results.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.projects.exports.<a href="src/label_studio_sdk/projects/exports/client.py">create</a>(...) -> LseExportCreate</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Create a new export request to start a background task and generate an export file for a specific project by ID.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```python
-from label_studio_sdk import LabelStudio
-from label_studio_sdk.environment import LabelStudioEnvironment
-
-client = LabelStudio(
-    api_key="<value>",
-    environment=LabelStudioEnvironment.DEFAULT,
-)
-
-client.projects.exports.create(
-    id=1,
-)
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**id:** `int` — A unique integer value identifying this project.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**annotation_filter_options:** `typing.Optional[LseAnnotationFilterOptionsRequest]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**converted_formats:** `typing.Optional[typing.List[ConvertedFormatRequest]]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**counters:** `typing.Optional[typing.Any]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**created_by:** `typing.Optional[UserSimpleRequest]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**finished_at:** `typing.Optional[datetime.datetime]` — Complete or fail time
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**md5:** `typing.Optional[str]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**serialization_options:** `typing.Optional[SerializationOptionsRequest]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**status:** `typing.Optional[Status7BfEnum]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**task_filter_options:** `typing.Optional[LseTaskFilterOptionsRequest]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**title:** `typing.Optional[str]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.projects.exports.<a href="src/label_studio_sdk/projects/exports/client.py">get</a>(...) -> Export</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Retrieve information about an export file by export ID for a specific project.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```python
-from label_studio_sdk import LabelStudio
-from label_studio_sdk.environment import LabelStudioEnvironment
-
-client = LabelStudio(
-    api_key="<value>",
-    environment=LabelStudioEnvironment.DEFAULT,
-)
-
-client.projects.exports.get(
-    id=1,
-    export_pk=1,
-)
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**id:** `int` — A unique integer value identifying this project.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**export_pk:** `int` — Primary key identifying the export file.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.projects.exports.<a href="src/label_studio_sdk/projects/exports/client.py">delete</a>(...)</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Delete an export file by specified export ID.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```python
-from label_studio_sdk import LabelStudio
-from label_studio_sdk.environment import LabelStudioEnvironment
-
-client = LabelStudio(
-    api_key="<value>",
-    environment=LabelStudioEnvironment.DEFAULT,
-)
-
-client.projects.exports.delete(
-    id=1,
-    export_pk=1,
-)
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**id:** `int` — A unique integer value identifying this project.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**export_pk:** `int` — Primary key identifying the export file.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.projects.exports.<a href="src/label_studio_sdk/projects/exports/client.py">convert</a>(...) -> ConvertExportsResponse</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Convert export snapshot to selected format
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```python
-from label_studio_sdk import LabelStudio
-from label_studio_sdk.environment import LabelStudioEnvironment
-
-client = LabelStudio(
-    api_key="<value>",
-    environment=LabelStudioEnvironment.DEFAULT,
-)
-
-client.projects.exports.convert(
-    id=1,
-    export_pk=1,
-    export_type="export_type",
-)
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**id:** `int` — A unique integer value identifying this project.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**export_pk:** `int` — Primary key identifying the export file.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**export_type:** `str` — Export file format.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**download_resources:** `typing.Optional[bool]` — Download resources in converter.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.projects.exports.<a href="src/label_studio_sdk/projects/exports/client.py">download</a>(...) -> typing.Iterator[bytes]</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-
-        Download an export file in the specified format for a specific project. Specify the project ID with the `id`
-        parameter in the path and the ID of the export file you want to download using the `export_pk` parameter
-        in the path.
-
-        Get the `export_pk` from the response of the request to [Create new export](/api#operation/api_projects_exports_create)
-        or after [listing export files](/api#operation/api_projects_exports_list).
-        
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```python
-client.projects.exports.download(...)
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**id:** `int` — A unique integer value identifying this project.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**export_pk:** `int` — Primary key identifying the export file.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**export_type:** `typing.Optional[str]` — Selected export format
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-## Projects Members
-<details><summary><code>client.projects.members.<a href="src/label_studio_sdk/projects/members/client.py">add</a>(...) -> ProjectMember</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-<Card href="https://humansignal.com/goenterprise">
-        <img style="pointer-events: none; margin-left: 0px; margin-right: 0px;" src="https://docs.humansignal.com/images/badge.svg" alt="Label Studio Enterprise badge"/>
-        <p style="margin-top: 10px; font-size: 14px;">
-            This endpoint is not available in Label Studio Community Edition. [Learn more about Label Studio Enterprise](https://humansignal.com/goenterprise)
-        </p>
-    </Card>
-Add a member to a specific project.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```python
-from label_studio_sdk import LabelStudio
-from label_studio_sdk.environment import LabelStudioEnvironment
-
-client = LabelStudio(
-    api_key="<value>",
-    environment=LabelStudioEnvironment.DEFAULT,
-)
-
-client.projects.members.add(
-    id=1,
-    user=1,
-)
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**id:** `int` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**user:** `int` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.projects.members.<a href="src/label_studio_sdk/projects/members/client.py">remove</a>(...)</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-<Card href="https://humansignal.com/goenterprise">
-        <img style="pointer-events: none; margin-left: 0px; margin-right: 0px;" src="https://docs.humansignal.com/images/badge.svg" alt="Label Studio Enterprise badge"/>
-        <p style="margin-top: 10px; font-size: 14px;">
-            This endpoint is not available in Label Studio Community Edition. [Learn more about Label Studio Enterprise](https://humansignal.com/goenterprise)
-        </p>
-    </Card>
-Remove a member from a specific project. Pass the member ID via the `user` query parameter. For backward compatibility, a JSON body with `user` is still accepted.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```python
-from label_studio_sdk import LabelStudio
-from label_studio_sdk.environment import LabelStudioEnvironment
-
-client = LabelStudio(
-    api_key="<value>",
-    environment=LabelStudioEnvironment.DEFAULT,
-)
-
-client.projects.members.remove(
-    id=1,
-)
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**id:** `int` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**user:** `typing.Optional[int]` — User ID to remove from the project. Optional for backward compatibility with DELETE body.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-## Projects Metrics
-<details><summary><code>client.projects.metrics.<a href="src/label_studio_sdk/projects/metrics/client.py">get</a>(...) -> MetricParam</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-<Card href="https://humansignal.com/goenterprise">
-        <img style="pointer-events: none; margin-left: 0px; margin-right: 0px;" src="https://docs.humansignal.com/images/badge.svg" alt="Label Studio Enterprise badge"/>
-        <p style="margin-top: 10px; font-size: 14px;">
-            This endpoint is not available in Label Studio Community Edition. [Learn more about Label Studio Enterprise](https://humansignal.com/goenterprise)
-        </p>
-    </Card>
-Get the current metrics configuration for a project.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```python
-from label_studio_sdk import LabelStudio
-from label_studio_sdk.environment import LabelStudioEnvironment
-
-client = LabelStudio(
-    api_key="<value>",
-    environment=LabelStudioEnvironment.DEFAULT,
-)
-
-client.projects.metrics.get(
-    id=1,
-)
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**id:** `int` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.projects.metrics.<a href="src/label_studio_sdk/projects/metrics/client.py">update</a>(...) -> typing.Optional[MetricParam]</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-<Card href="https://humansignal.com/goenterprise">
-        <img style="pointer-events: none; margin-left: 0px; margin-right: 0px;" src="https://docs.humansignal.com/images/badge.svg" alt="Label Studio Enterprise badge"/>
-        <p style="margin-top: 10px; font-size: 14px;">
-            This endpoint is not available in Label Studio Community Edition. [Learn more about Label Studio Enterprise](https://humansignal.com/goenterprise)
-        </p>
-    </Card>
-Update metrics strategy and parameters for a project.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```python
-from label_studio_sdk import LabelStudio
-from label_studio_sdk.environment import LabelStudioEnvironment
-
-client = LabelStudio(
-    api_key="<value>",
-    environment=LabelStudioEnvironment.DEFAULT,
-)
-
-client.projects.metrics.update(
-    id=1,
-)
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**id:** `int` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**additional_params:** `typing.Optional[typing.Dict[str, typing.Any]]` — Agreement metric parameters
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**agreement_threshold:** `typing.Optional[int]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**max_additional_annotators_assignable:** `typing.Optional[int]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**metric_name:** `typing.Optional[str]` — Agreement metric
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
 ## Projects Stats
+<details><summary><code>client.projects.stats.<a href="src/label_studio_sdk/projects/stats/client.py">data_quality_agreement_confusion_matrix</a>(...) -> DataQualityAgreementConfusionMatrix</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+<Card href="https://humansignal.com/goenterprise">
+        <img style="pointer-events: none; margin-left: 0px; margin-right: 0px;" src="https://docs.humansignal.com/images/badge.svg" alt="Label Studio Enterprise badge"/>
+        <p style="margin-top: 10px; font-size: 14px;">
+            This endpoint is not available in Label Studio Community Edition. [Learn more about Label Studio Enterprise](https://humansignal.com/goenterprise)
+        </p>
+    </Card>
+Returns label confusion matrix with precision, recall, and top confusion pairs. In `ground_truth` mode the matrix is directional: rows are GT labels (actual), columns are annotator labels (predicted). In `all` and `accepted` modes — where no canonical "actual vs predicted" axis exists — the matrix is symmetric. When a task has multiple GT annotations the most recently updated one is used. `top_confusion_pairs.rate` is the share of off-diagonal mass.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+from label_studio_sdk.environment import LabelStudioEnvironment
+
+client = LabelStudio(
+    api_key="<value>",
+    environment=LabelStudioEnvironment.DEFAULT,
+)
+
+client.projects.stats.data_quality_agreement_confusion_matrix(
+    id=1,
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `int` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**from_name:** `typing.Optional[str]` — From name
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**mode:** `typing.Optional[DataQualityAgreementConfusionMatrixStatsRequestMode]` — Mode
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.projects.stats.<a href="src/label_studio_sdk/projects/stats/client.py">data_quality_agreement_dimensions</a>(...) -> typing.List[DataQualityAgreementDimensions]</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+<Card href="https://humansignal.com/goenterprise">
+        <img style="pointer-events: none; margin-left: 0px; margin-right: 0px;" src="https://docs.humansignal.com/images/badge.svg" alt="Label Studio Enterprise badge"/>
+        <p style="margin-top: 10px; font-size: 14px;">
+            This endpoint is not available in Label Studio Community Edition. [Learn more about Label Studio Enterprise](https://humansignal.com/goenterprise)
+        </p>
+    </Card>
+Returns per-dimension agreement scores for active dimensions.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+from label_studio_sdk.environment import LabelStudioEnvironment
+
+client = LabelStudio(
+    api_key="<value>",
+    environment=LabelStudioEnvironment.DEFAULT,
+)
+
+client.projects.stats.data_quality_agreement_dimensions(
+    id=1,
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `int` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.projects.stats.<a href="src/label_studio_sdk/projects/stats/client.py">data_quality_agreement_distribution</a>(...) -> DataQualityAgreementDistribution</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+<Card href="https://humansignal.com/goenterprise">
+        <img style="pointer-events: none; margin-left: 0px; margin-right: 0px;" src="https://docs.humansignal.com/images/badge.svg" alt="Label Studio Enterprise badge"/>
+        <p style="margin-top: 10px; font-size: 14px;">
+            This endpoint is not available in Label Studio Community Edition. [Learn more about Label Studio Enterprise](https://humansignal.com/goenterprise)
+        </p>
+    </Card>
+Returns average agreement, a 10-bucket histogram of `Task.precomputed_agreement` (filled on-the-fly from V2 dimension matrices when null), `low_agreement_count`, and `total_tasks`. The low-agreement threshold is `LseProject.agreement_threshold` (the same project setting Data Manager filters and review-routing rules consume); changing that setting moves the count for this endpoint as well.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+from label_studio_sdk.environment import LabelStudioEnvironment
+
+client = LabelStudio(
+    api_key="<value>",
+    environment=LabelStudioEnvironment.DEFAULT,
+)
+
+client.projects.stats.data_quality_agreement_distribution(
+    id=1,
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `int` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.projects.stats.<a href="src/label_studio_sdk/projects/stats/client.py">model_version_annotator_agreement</a>(...) -> ModelVersionAnnotatorAgreementStatsResponse</code></summary>
 <dl>
 <dd>
@@ -34600,6 +33820,220 @@ client.projects.stats.lead_time(
 </dl>
 </details>
 
+<details><summary><code>client.projects.stats.<a href="src/label_studio_sdk/projects/stats/client.py">member_performance_rows</a>(...) -> MemberPerformanceRowsStatsResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+<Card href="https://humansignal.com/goenterprise">
+        <img style="pointer-events: none; margin-left: 0px; margin-right: 0px;" src="https://docs.humansignal.com/images/badge.svg" alt="Label Studio Enterprise badge"/>
+        <p style="margin-top: 10px; font-size: 14px;">
+            This endpoint is not available in Label Studio Community Edition. [Learn more about Label Studio Enterprise](https://humansignal.com/goenterprise)
+        </p>
+    </Card>
+Paginated, sortable member performance rows for annotation/review tables. Guarded by <code>fflag_feat_lse_project_dashboards_v3_members_short</code>.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+from label_studio_sdk.environment import LabelStudioEnvironment
+
+client = LabelStudio(
+    api_key="<value>",
+    environment=LabelStudioEnvironment.DEFAULT,
+)
+
+client.projects.stats.member_performance_rows(
+    id=1,
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `int` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**ids:** `typing.Optional[str]` — Comma-separated participant IDs: numeric user IDs and/or synthetic members as <code>model:&lt;version&gt;</code> (annotations table only). When omitted, members and distinct model versions are derived from the project.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**ordering:** `typing.Optional[str]` — Sort field; prefix with "-" for descending (e.g. "-finished").
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**page:** `typing.Optional[int]` — 1-based page index.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**page_size:** `typing.Optional[int]` — Page size (1–100).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**table:** `typing.Optional[MemberPerformanceRowsStatsRequestTable]` — Which table to load: "annotations" or "reviews".
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.projects.stats.<a href="src/label_studio_sdk/projects/stats/client.py">member_performance_summary</a>(...) -> MemberPerformanceSummaryStatsResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+<Card href="https://humansignal.com/goenterprise">
+        <img style="pointer-events: none; margin-left: 0px; margin-right: 0px;" src="https://docs.humansignal.com/images/badge.svg" alt="Label Studio Enterprise badge"/>
+        <p style="margin-top: 10px; font-size: 14px;">
+            This endpoint is not available in Label Studio Community Edition. [Learn more about Label Studio Enterprise](https://humansignal.com/goenterprise)
+        </p>
+    </Card>
+Footer / Total aggregates for annotation or review member tables. Use with paginated <code>member_performance_rows</code>. Guarded by <code>fflag_feat_lse_project_dashboards_v3_members_short</code>.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+from label_studio_sdk.environment import LabelStudioEnvironment
+
+client = LabelStudio(
+    api_key="<value>",
+    environment=LabelStudioEnvironment.DEFAULT,
+)
+
+client.projects.stats.member_performance_summary(
+    id=1,
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `int` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**ids:** `typing.Optional[str]` — Comma-separated participant IDs: numeric user IDs and/or <code>model:&lt;version&gt;</code> for annotations. When omitted, derived from the project.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**table:** `typing.Optional[MemberPerformanceSummaryStatsRequestTable]` — Which table: "annotations" or "reviews".
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.projects.stats.<a href="src/label_studio_sdk/projects/stats/client.py">total_agreement</a>(...) -> typing.Optional[TotalAgreementStatsResponse]</code></summary>
 <dl>
 <dd>
@@ -35237,6 +34671,1331 @@ client.projects.stats.user_ground_truth_agreement(
 <dd>
 
 **per_label:** `typing.Optional[bool]` — Calculate agreement per label
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Projects Exports
+<details><summary><code>client.projects.exports.<a href="src/label_studio_sdk/projects/exports/client.py">download_sync</a>(...) -> typing.Iterator[bytes]</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+
+        This endpoint is deprecated in Enterprise. Use the async export API instead:
+        POST /api/projects/{id}/exports/ (see [Create new export](/api#operation/api_projects_exports_create)).
+
+        In Label Studio Enterprise, this endpoint will always return a 404 Not Found response with instructions to use the async export API.
+
+        <i>Note: if you have a large project it's recommended to use
+        export snapshots, this easy export endpoint might have timeouts.</i><br/><br>
+        Export annotated tasks as a file in a specific format.
+        For example, to export JSON annotations for a project to a file called `annotations.json`,
+        run the following from the command line:
+        ```bash
+        curl -X GET http://localhost:8000/api/projects/{id}/export?exportType=JSON -H 'Authorization: Token abc123' --output 'annotations.json'
+        ```
+        To export all tasks, including skipped tasks and others without annotations, run the following from the command line:
+        ```bash
+        curl -X GET http://localhost:8000/api/projects/{id}/export?exportType=JSON&download_all_tasks=true -H 'Authorization: Token abc123' --output 'annotations.json'
+        ```
+        To export specific tasks with IDs of 123 and 345, run the following from the command line:
+        ```bash
+        curl -X GET 'http://localhost:8000/api/projects/{id}/export?ids[]=123&ids[]=345' -H 'Authorization: Token abc123' --output 'annotations.json'
+        ```
+        
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+client.projects.exports.download_sync(...)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `int` — A unique integer value identifying this project.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**download_all_tasks:** `typing.Optional[bool]` — If true, download all tasks regardless of status. If false, download only annotated tasks.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**download_resources:** `typing.Optional[bool]` — If true, download all resource files such as images, audio, and others relevant to the tasks.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**export_type:** `typing.Optional[str]` — Selected export format (JSON by default)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**ids:** `typing.Optional[typing.Union[str, typing.Sequence[str]]]` — Specify a list of task IDs to retrieve only the details for those tasks.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.projects.exports.<a href="src/label_studio_sdk/projects/exports/client.py">list_formats</a>(...) -> typing.List[str]</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+
+This endpoint is deprecated in Enterprise. Use the async export API instead:
+POST /api/projects/{{id}}/exports/ (see [Create new export](/api#operation/api_projects_exports_create)).
+
+In Label Studio Enterprise, this endpoint will always return a 404 Not Found response with instructions to use the async export API.
+
+Retrieve the available export formats for the current project by ID.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+from label_studio_sdk.environment import LabelStudioEnvironment
+
+client = LabelStudio(
+    api_key="<value>",
+    environment=LabelStudioEnvironment.DEFAULT,
+)
+
+client.projects.exports.list_formats(
+    id=1,
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `int` — A unique integer value identifying this project.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.projects.exports.<a href="src/label_studio_sdk/projects/exports/client.py">list</a>(...) -> typing.List[Export]</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns a list of exported files for a specific project by ID.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+from label_studio_sdk.environment import LabelStudioEnvironment
+
+client = LabelStudio(
+    api_key="<value>",
+    environment=LabelStudioEnvironment.DEFAULT,
+)
+
+client.projects.exports.list(
+    id=1,
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `int` — A unique integer value identifying this project.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**ordering:** `typing.Optional[str]` — Which field to use when ordering the results.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.projects.exports.<a href="src/label_studio_sdk/projects/exports/client.py">create</a>(...) -> LseExportCreate</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Create a new export request to start a background task and generate an export file for a specific project by ID.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+from label_studio_sdk.environment import LabelStudioEnvironment
+
+client = LabelStudio(
+    api_key="<value>",
+    environment=LabelStudioEnvironment.DEFAULT,
+)
+
+client.projects.exports.create(
+    id=1,
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `int` — A unique integer value identifying this project.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**annotation_filter_options:** `typing.Optional[LseAnnotationFilterOptionsRequest]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**converted_formats:** `typing.Optional[typing.List[ConvertedFormatRequest]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**counters:** `typing.Optional[typing.Any]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**created_by:** `typing.Optional[UserSimpleRequest]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**finished_at:** `typing.Optional[datetime.datetime]` — Complete or fail time
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**md5:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**serialization_options:** `typing.Optional[SerializationOptionsRequest]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**status:** `typing.Optional[Status7BfEnum]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**task_filter_options:** `typing.Optional[LseTaskFilterOptionsRequest]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**title:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.projects.exports.<a href="src/label_studio_sdk/projects/exports/client.py">get</a>(...) -> Export</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieve information about an export file by export ID for a specific project.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+from label_studio_sdk.environment import LabelStudioEnvironment
+
+client = LabelStudio(
+    api_key="<value>",
+    environment=LabelStudioEnvironment.DEFAULT,
+)
+
+client.projects.exports.get(
+    id=1,
+    export_pk=1,
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `int` — A unique integer value identifying this project.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**export_pk:** `int` — Primary key identifying the export file.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.projects.exports.<a href="src/label_studio_sdk/projects/exports/client.py">delete</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Delete an export file by specified export ID.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+from label_studio_sdk.environment import LabelStudioEnvironment
+
+client = LabelStudio(
+    api_key="<value>",
+    environment=LabelStudioEnvironment.DEFAULT,
+)
+
+client.projects.exports.delete(
+    id=1,
+    export_pk=1,
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `int` — A unique integer value identifying this project.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**export_pk:** `int` — Primary key identifying the export file.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.projects.exports.<a href="src/label_studio_sdk/projects/exports/client.py">convert</a>(...) -> ConvertExportsResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Convert export snapshot to selected format
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+from label_studio_sdk.environment import LabelStudioEnvironment
+
+client = LabelStudio(
+    api_key="<value>",
+    environment=LabelStudioEnvironment.DEFAULT,
+)
+
+client.projects.exports.convert(
+    id=1,
+    export_pk=1,
+    export_type="export_type",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `int` — A unique integer value identifying this project.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**export_pk:** `int` — Primary key identifying the export file.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**export_type:** `str` — Export file format.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**download_resources:** `typing.Optional[bool]` — Download resources in converter.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.projects.exports.<a href="src/label_studio_sdk/projects/exports/client.py">download</a>(...) -> typing.Iterator[bytes]</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+
+        Download an export file in the specified format for a specific project. Specify the project ID with the `id`
+        parameter in the path and the ID of the export file you want to download using the `export_pk` parameter
+        in the path.
+
+        Get the `export_pk` from the response of the request to [Create new export](/api#operation/api_projects_exports_create)
+        or after [listing export files](/api#operation/api_projects_exports_list).
+        
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+client.projects.exports.download(...)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `int` — A unique integer value identifying this project.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**export_pk:** `int` — Primary key identifying the export file.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**export_type:** `typing.Optional[str]` — Selected export format
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Projects Members
+<details><summary><code>client.projects.members.<a href="src/label_studio_sdk/projects/members/client.py">add</a>(...) -> ProjectMember</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+<Card href="https://humansignal.com/goenterprise">
+        <img style="pointer-events: none; margin-left: 0px; margin-right: 0px;" src="https://docs.humansignal.com/images/badge.svg" alt="Label Studio Enterprise badge"/>
+        <p style="margin-top: 10px; font-size: 14px;">
+            This endpoint is not available in Label Studio Community Edition. [Learn more about Label Studio Enterprise](https://humansignal.com/goenterprise)
+        </p>
+    </Card>
+Add a member to a specific project.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+from label_studio_sdk.environment import LabelStudioEnvironment
+
+client = LabelStudio(
+    api_key="<value>",
+    environment=LabelStudioEnvironment.DEFAULT,
+)
+
+client.projects.members.add(
+    id=1,
+    user=1,
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `int` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**user:** `int` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.projects.members.<a href="src/label_studio_sdk/projects/members/client.py">remove</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+<Card href="https://humansignal.com/goenterprise">
+        <img style="pointer-events: none; margin-left: 0px; margin-right: 0px;" src="https://docs.humansignal.com/images/badge.svg" alt="Label Studio Enterprise badge"/>
+        <p style="margin-top: 10px; font-size: 14px;">
+            This endpoint is not available in Label Studio Community Edition. [Learn more about Label Studio Enterprise](https://humansignal.com/goenterprise)
+        </p>
+    </Card>
+Remove a member from a specific project. Pass the member ID via the `user` query parameter. For backward compatibility, a JSON body with `user` is still accepted.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+from label_studio_sdk.environment import LabelStudioEnvironment
+
+client = LabelStudio(
+    api_key="<value>",
+    environment=LabelStudioEnvironment.DEFAULT,
+)
+
+client.projects.members.remove(
+    id=1,
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `int` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**user:** `typing.Optional[int]` — User ID to remove from the project. Optional for backward compatibility with DELETE body.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Projects Metrics
+<details><summary><code>client.projects.metrics.<a href="src/label_studio_sdk/projects/metrics/client.py">get</a>(...) -> MetricParam</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+<Card href="https://humansignal.com/goenterprise">
+        <img style="pointer-events: none; margin-left: 0px; margin-right: 0px;" src="https://docs.humansignal.com/images/badge.svg" alt="Label Studio Enterprise badge"/>
+        <p style="margin-top: 10px; font-size: 14px;">
+            This endpoint is not available in Label Studio Community Edition. [Learn more about Label Studio Enterprise](https://humansignal.com/goenterprise)
+        </p>
+    </Card>
+Get the current metrics configuration for a project.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+from label_studio_sdk.environment import LabelStudioEnvironment
+
+client = LabelStudio(
+    api_key="<value>",
+    environment=LabelStudioEnvironment.DEFAULT,
+)
+
+client.projects.metrics.get(
+    id=1,
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `int` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.projects.metrics.<a href="src/label_studio_sdk/projects/metrics/client.py">update</a>(...) -> typing.Optional[MetricParam]</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+<Card href="https://humansignal.com/goenterprise">
+        <img style="pointer-events: none; margin-left: 0px; margin-right: 0px;" src="https://docs.humansignal.com/images/badge.svg" alt="Label Studio Enterprise badge"/>
+        <p style="margin-top: 10px; font-size: 14px;">
+            This endpoint is not available in Label Studio Community Edition. [Learn more about Label Studio Enterprise](https://humansignal.com/goenterprise)
+        </p>
+    </Card>
+Update metrics strategy and parameters for a project.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+from label_studio_sdk.environment import LabelStudioEnvironment
+
+client = LabelStudio(
+    api_key="<value>",
+    environment=LabelStudioEnvironment.DEFAULT,
+)
+
+client.projects.metrics.update(
+    id=1,
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `int` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**additional_params:** `typing.Optional[typing.Dict[str, typing.Any]]` — Agreement metric parameters
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**agreement_threshold:** `typing.Optional[int]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**max_additional_annotators_assignable:** `typing.Optional[int]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**metric_name:** `typing.Optional[str]` — Agreement metric
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Projects ReviewRoutingRules
+<details><summary><code>client.projects.review_routing_rules.<a href="src/label_studio_sdk/projects/review_routing_rules/client.py">list</a>(...) -> typing.List[ReviewRoutingRule]</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+<Card href="https://humansignal.com/goenterprise">
+        <img style="pointer-events: none; margin-left: 0px; margin-right: 0px;" src="https://docs.humansignal.com/images/badge.svg" alt="Label Studio Enterprise badge"/>
+        <p style="margin-top: 10px; font-size: 14px;">
+            This endpoint is not available in Label Studio Community Edition. [Learn more about Label Studio Enterprise](https://humansignal.com/goenterprise)
+        </p>
+    </Card>
+List ordered review routing rules for a project.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+from label_studio_sdk.environment import LabelStudioEnvironment
+
+client = LabelStudio(
+    api_key="<value>",
+    environment=LabelStudioEnvironment.DEFAULT,
+)
+
+client.projects.review_routing_rules.list(
+    id=1,
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `int` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**ordering:** `typing.Optional[str]` — Which field to use when ordering the results.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.projects.review_routing_rules.<a href="src/label_studio_sdk/projects/review_routing_rules/client.py">bulk_replace</a>(...) -> typing.List[ReviewRoutingRule]</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+<Card href="https://humansignal.com/goenterprise">
+        <img style="pointer-events: none; margin-left: 0px; margin-right: 0px;" src="https://docs.humansignal.com/images/badge.svg" alt="Label Studio Enterprise badge"/>
+        <p style="margin-top: 10px; font-size: 14px;">
+            This endpoint is not available in Label Studio Community Edition. [Learn more about Label Studio Enterprise](https://humansignal.com/goenterprise)
+        </p>
+    </Card>
+Atomically replace the ordered review routing rules for a project. Rules with an `id` update the existing project rule. Rules without an `id` are created. Existing project rules omitted from the request are deleted, and request order becomes rule order.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio, ReviewRoutingRuleRequestRequest
+from label_studio_sdk.environment import LabelStudioEnvironment
+
+client = LabelStudio(
+    api_key="<value>",
+    environment=LabelStudioEnvironment.DEFAULT,
+)
+
+client.projects.review_routing_rules.bulk_replace(
+    id=1,
+    rules=[
+        ReviewRoutingRuleRequestRequest(
+            sample_rate="sample_rate",
+        )
+    ],
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `int` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**rules:** `typing.List[ReviewRoutingRuleRequestRequest]` 
     
 </dd>
 </dl>
@@ -36418,6 +37177,14 @@ client.projects.members.bulk.post(
 <dl>
 <dd>
 
+**user_type:** `typing.Optional[str]` — Multiple values may be separated by commas. (comma-separated values)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **excluded:** `typing.Optional[typing.List[int]]` — Excluded user IDs
     
 </dd>
@@ -36578,6 +37345,14 @@ client.projects.members.bulk.delete(
 <dd>
 
 **tags:** `typing.Optional[str]` — Multiple values may be separated by commas. (comma-separated values)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**user_type:** `typing.Optional[str]` — Multiple values may be separated by commas. (comma-separated values)
     
 </dd>
 </dl>
