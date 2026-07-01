@@ -53,6 +53,11 @@ class Dimension(UncheckedBaseModel):
     Whether this dimension is used in agreement calculations.
     """
 
+    is_categorical: typing.Optional[bool] = pydantic.Field(default=None)
+    """
+    Whether this dimension produces categorical (primitive/scalar) values.
+    """
+
     is_user_defined: typing.Optional[bool] = pydantic.Field(default=None)
     """
     Whether this dimension was manually created by a user. System-generated dimensions have this set to False.
@@ -84,6 +89,10 @@ class Dimension(UncheckedBaseModel):
     """
 
     updated_at: typing.Optional[dt.datetime] = None
+    values_enum: typing.Optional[typing.Any] = pydantic.Field(default=None)
+    """
+    Schema-defined enum values for indexed value_counts. Refreshed only with label config changes.
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

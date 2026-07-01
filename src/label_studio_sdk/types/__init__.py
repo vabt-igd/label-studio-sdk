@@ -15,7 +15,7 @@ if typing.TYPE_CHECKING:
     from .agreement_selection_request import AgreementSelectionRequest
     from .agreement_v2backfill_cancel_response import AgreementV2BackfillCancelResponse
     from .agreement_v2backfill_job import AgreementV2BackfillJob
-    from .agreement_v2backfill_job_status_enum import AgreementV2BackfillJobStatusEnum
+    from .agreement_v2backfill_trigger_request_request import AgreementV2BackfillTriggerRequestRequest
     from .agreement_v2backfill_trigger_response import AgreementV2BackfillTriggerResponse
     from .all_roles_project_list import AllRolesProjectList
     from .annotated_enum import AnnotatedEnum
@@ -98,6 +98,11 @@ if typing.TYPE_CHECKING:
     from .lse_annotation_filter_options_request import LseAnnotationFilterOptionsRequest
     from .lse_export_create import LseExportCreate
     from .lse_fields import LseFields
+    from .lse_interface import LseInterface
+    from .lse_interface_append_version_request import LseInterfaceAppendVersionRequest
+    from .lse_interface_list import LseInterfaceList
+    from .lse_interface_request import LseInterfaceRequest
+    from .lse_interface_version_id_request import LseInterfaceVersionIdRequest
     from .lse_key_indicator_value import LseKeyIndicatorValue
     from .lse_organization import LseOrganization
     from .lse_organization_member_list import LseOrganizationMemberList
@@ -164,6 +169,7 @@ if typing.TYPE_CHECKING:
     from .organization_permission_request import OrganizationPermissionRequest
     from .paginated_all_roles_project_list_list import PaginatedAllRolesProjectListList
     from .paginated_annotation_history_list import PaginatedAnnotationHistoryList
+    from .paginated_lse_interface_list_list import PaginatedLseInterfaceListList
     from .paginated_lse_organization_member_list_list import PaginatedLseOrganizationMemberListList
     from .paginated_lse_project_counts_list import PaginatedLseProjectCountsList
     from .paginated_lse_user_list import PaginatedLseUserList
@@ -241,6 +247,7 @@ if typing.TYPE_CHECKING:
     from .state_model import StateModel
     from .state_triggered_by import StateTriggeredBy
     from .status7bf_enum import Status7BfEnum
+    from .status_a47enum import StatusA47Enum
     from .status_c5a_enum import StatusC5AEnum
     from .task_agreement_matrix_response import TaskAgreementMatrixResponse
     from .task_assignment import TaskAssignment
@@ -255,6 +262,7 @@ if typing.TYPE_CHECKING:
     from .user_simple import UserSimple
     from .user_simple_request import UserSimpleRequest
     from .validate_saml_metadata_url_response import ValidateSamlMetadataUrlResponse
+    from .value_counts_backfill_job import ValueCountsBackfillJob
     from .version_response import VersionResponse
     from .view import View
     from .webhook import Webhook
@@ -274,7 +282,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "AgreementSelectionRequest": ".agreement_selection_request",
     "AgreementV2BackfillCancelResponse": ".agreement_v2backfill_cancel_response",
     "AgreementV2BackfillJob": ".agreement_v2backfill_job",
-    "AgreementV2BackfillJobStatusEnum": ".agreement_v2backfill_job_status_enum",
+    "AgreementV2BackfillTriggerRequestRequest": ".agreement_v2backfill_trigger_request_request",
     "AgreementV2BackfillTriggerResponse": ".agreement_v2backfill_trigger_response",
     "AllRolesProjectList": ".all_roles_project_list",
     "AnnotatedEnum": ".annotated_enum",
@@ -357,6 +365,11 @@ _dynamic_imports: typing.Dict[str, str] = {
     "LseAnnotationFilterOptionsRequest": ".lse_annotation_filter_options_request",
     "LseExportCreate": ".lse_export_create",
     "LseFields": ".lse_fields",
+    "LseInterface": ".lse_interface",
+    "LseInterfaceAppendVersionRequest": ".lse_interface_append_version_request",
+    "LseInterfaceList": ".lse_interface_list",
+    "LseInterfaceRequest": ".lse_interface_request",
+    "LseInterfaceVersionIdRequest": ".lse_interface_version_id_request",
     "LseKeyIndicatorValue": ".lse_key_indicator_value",
     "LseOrganization": ".lse_organization",
     "LseOrganizationMemberList": ".lse_organization_member_list",
@@ -417,6 +430,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "OrganizationPermissionRequest": ".organization_permission_request",
     "PaginatedAllRolesProjectListList": ".paginated_all_roles_project_list_list",
     "PaginatedAnnotationHistoryList": ".paginated_annotation_history_list",
+    "PaginatedLseInterfaceListList": ".paginated_lse_interface_list_list",
     "PaginatedLseOrganizationMemberListList": ".paginated_lse_organization_member_list_list",
     "PaginatedLseProjectCountsList": ".paginated_lse_project_counts_list",
     "PaginatedLseUserList": ".paginated_lse_user_list",
@@ -494,6 +508,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "StateModel": ".state_model",
     "StateTriggeredBy": ".state_triggered_by",
     "Status7BfEnum": ".status7bf_enum",
+    "StatusA47Enum": ".status_a47enum",
     "StatusC5AEnum": ".status_c5a_enum",
     "TaskAgreementMatrixResponse": ".task_agreement_matrix_response",
     "TaskAssignment": ".task_assignment",
@@ -508,6 +523,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "UserSimple": ".user_simple",
     "UserSimpleRequest": ".user_simple_request",
     "ValidateSamlMetadataUrlResponse": ".validate_saml_metadata_url_response",
+    "ValueCountsBackfillJob": ".value_counts_backfill_job",
     "VersionResponse": ".version_response",
     "View": ".view",
     "Webhook": ".webhook",
@@ -551,7 +567,7 @@ __all__ = [
     "AgreementSelectionRequest",
     "AgreementV2BackfillCancelResponse",
     "AgreementV2BackfillJob",
-    "AgreementV2BackfillJobStatusEnum",
+    "AgreementV2BackfillTriggerRequestRequest",
     "AgreementV2BackfillTriggerResponse",
     "AllRolesProjectList",
     "AnnotatedEnum",
@@ -634,6 +650,11 @@ __all__ = [
     "LseAnnotationFilterOptionsRequest",
     "LseExportCreate",
     "LseFields",
+    "LseInterface",
+    "LseInterfaceAppendVersionRequest",
+    "LseInterfaceList",
+    "LseInterfaceRequest",
+    "LseInterfaceVersionIdRequest",
     "LseKeyIndicatorValue",
     "LseOrganization",
     "LseOrganizationMemberList",
@@ -694,6 +715,7 @@ __all__ = [
     "OrganizationPermissionRequest",
     "PaginatedAllRolesProjectListList",
     "PaginatedAnnotationHistoryList",
+    "PaginatedLseInterfaceListList",
     "PaginatedLseOrganizationMemberListList",
     "PaginatedLseProjectCountsList",
     "PaginatedLseUserList",
@@ -771,6 +793,7 @@ __all__ = [
     "StateModel",
     "StateTriggeredBy",
     "Status7BfEnum",
+    "StatusA47Enum",
     "StatusC5AEnum",
     "TaskAgreementMatrixResponse",
     "TaskAssignment",
@@ -785,6 +808,7 @@ __all__ = [
     "UserSimple",
     "UserSimpleRequest",
     "ValidateSamlMetadataUrlResponse",
+    "ValueCountsBackfillJob",
     "VersionResponse",
     "View",
     "Webhook",

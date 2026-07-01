@@ -5,13 +5,14 @@ import typing
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 from ..core.unchecked_base_model import UncheckedBaseModel
+from .lse_interface_list import LseInterfaceList
 
 
-class DataQualityAgreementDimensions(UncheckedBaseModel):
-    agreement: typing.Optional[float] = None
-    control_tag: typing.Optional[str] = None
-    from_name: str
-    name: str
+class PaginatedLseInterfaceListList(UncheckedBaseModel):
+    count: int
+    next: typing.Optional[str] = None
+    previous: typing.Optional[str] = None
+    results: typing.List[LseInterfaceList]
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

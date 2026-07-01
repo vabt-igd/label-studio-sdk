@@ -7,11 +7,11 @@ from ..core.pydantic_utilities import IS_PYDANTIC_V2
 from ..core.unchecked_base_model import UncheckedBaseModel
 
 
-class DataQualityAgreementDimensions(UncheckedBaseModel):
-    agreement: typing.Optional[float] = None
-    control_tag: typing.Optional[str] = None
-    from_name: str
-    name: str
+class LseInterfaceVersionIdRequest(UncheckedBaseModel):
+    version_id: int = pydantic.Field()
+    """
+    Stable interface version ID.
+    """
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

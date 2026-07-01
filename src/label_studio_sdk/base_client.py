@@ -23,6 +23,7 @@ if typing.TYPE_CHECKING:
     from .export_storage.client import AsyncExportStorageClient, ExportStorageClient
     from .files.client import AsyncFilesClient, FilesClient
     from .import_storage.client import AsyncImportStorageClient, ImportStorageClient
+    from .interfaces.client import AsyncInterfacesClient, InterfacesClient
     from .jwt_settings.client import AsyncJwtSettingsClient, JwtSettingsClient
     from .ml.client import AsyncMlClient, MlClient
     from .model_providers.client import AsyncModelProvidersClient, ModelProvidersClient
@@ -68,6 +69,9 @@ class LabelStudioBase:
     timeout : typing.Optional[float]
         The timeout to be used, in seconds, for requests. By default the timeout is 60 seconds, unless a custom httpx client is used, in which case this default is not enforced.
 
+    max_retries : typing.Optional[int]
+        The default maximum number of retries for failed requests. Defaults to 2. Per-request `max_retries` in `request_options` takes precedence over this value.
+
     follow_redirects : typing.Optional[bool]
         Whether the default httpx client follows redirects or not, this is irrelevant if a custom httpx client is passed in.
 
@@ -94,6 +98,7 @@ class LabelStudioBase:
         api_key: typing.Optional[str] = os.getenv("LABEL_STUDIO_API_KEY"),
         headers: typing.Optional[typing.Dict[str, str]] = None,
         timeout: typing.Optional[float] = None,
+        max_retries: typing.Optional[int] = None,
         follow_redirects: typing.Optional[bool] = True,
         httpx_client: typing.Optional[httpx.Client] = None,
         logging: typing.Optional[typing.Union[LogConfig, Logger]] = None,
@@ -101,6 +106,7 @@ class LabelStudioBase:
         _defaulted_timeout = (
             timeout if timeout is not None else 60 if httpx_client is None else httpx_client.timeout.read
         )
+        _defaulted_max_retries = max_retries if max_retries is not None else 2
         if api_key is None:
             raise ApiError(
                 body="The client must be instantiated be either passing in api_key or setting LABEL_STUDIO_API_KEY"
@@ -115,6 +121,7 @@ class LabelStudioBase:
             if follow_redirects is not None
             else httpx.Client(timeout=_defaulted_timeout),
             timeout=_defaulted_timeout,
+            max_retries=_defaulted_max_retries,
             logging=logging,
         )
         self._activity_logs: typing.Optional[ActivityLogsClient] = None
@@ -130,6 +137,7 @@ class LabelStudioBase:
         self._states: typing.Optional[StatesClient] = None
         self._files: typing.Optional[FilesClient] = None
         self._prompts: typing.Optional[PromptsClient] = None
+        self._interfaces: typing.Optional[InterfacesClient] = None
         self._organizations: typing.Optional[OrganizationsClient] = None
         self._jwt_settings: typing.Optional[JwtSettingsClient] = None
         self._ml: typing.Optional[MlClient] = None
@@ -250,6 +258,14 @@ class LabelStudioBase:
 
             self._prompts = PromptsClient(client_wrapper=self._client_wrapper)
         return self._prompts
+
+    @property
+    def interfaces(self):
+        if self._interfaces is None:
+            from .interfaces.client import InterfacesClient  # noqa: E402
+
+            self._interfaces = InterfacesClient(client_wrapper=self._client_wrapper)
+        return self._interfaces
 
     @property
     def organizations(self):
@@ -423,6 +439,9 @@ class AsyncLabelStudioBase:
     timeout : typing.Optional[float]
         The timeout to be used, in seconds, for requests. By default the timeout is 60 seconds, unless a custom httpx client is used, in which case this default is not enforced.
 
+    max_retries : typing.Optional[int]
+        The default maximum number of retries for failed requests. Defaults to 2. Per-request `max_retries` in `request_options` takes precedence over this value.
+
     follow_redirects : typing.Optional[bool]
         Whether the default httpx client follows redirects or not, this is irrelevant if a custom httpx client is passed in.
 
@@ -449,6 +468,7 @@ class AsyncLabelStudioBase:
         api_key: typing.Optional[str] = os.getenv("LABEL_STUDIO_API_KEY"),
         headers: typing.Optional[typing.Dict[str, str]] = None,
         timeout: typing.Optional[float] = None,
+        max_retries: typing.Optional[int] = None,
         follow_redirects: typing.Optional[bool] = True,
         httpx_client: typing.Optional[httpx.AsyncClient] = None,
         logging: typing.Optional[typing.Union[LogConfig, Logger]] = None,
@@ -456,6 +476,7 @@ class AsyncLabelStudioBase:
         _defaulted_timeout = (
             timeout if timeout is not None else 60 if httpx_client is None else httpx_client.timeout.read
         )
+        _defaulted_max_retries = max_retries if max_retries is not None else 2
         if api_key is None:
             raise ApiError(
                 body="The client must be instantiated be either passing in api_key or setting LABEL_STUDIO_API_KEY"
@@ -468,6 +489,7 @@ class AsyncLabelStudioBase:
             if httpx_client is not None
             else _make_default_async_client(timeout=_defaulted_timeout, follow_redirects=follow_redirects),
             timeout=_defaulted_timeout,
+            max_retries=_defaulted_max_retries,
             logging=logging,
         )
         self._activity_logs: typing.Optional[AsyncActivityLogsClient] = None
@@ -483,6 +505,7 @@ class AsyncLabelStudioBase:
         self._states: typing.Optional[AsyncStatesClient] = None
         self._files: typing.Optional[AsyncFilesClient] = None
         self._prompts: typing.Optional[AsyncPromptsClient] = None
+        self._interfaces: typing.Optional[AsyncInterfacesClient] = None
         self._organizations: typing.Optional[AsyncOrganizationsClient] = None
         self._jwt_settings: typing.Optional[AsyncJwtSettingsClient] = None
         self._ml: typing.Optional[AsyncMlClient] = None
@@ -603,6 +626,14 @@ class AsyncLabelStudioBase:
 
             self._prompts = AsyncPromptsClient(client_wrapper=self._client_wrapper)
         return self._prompts
+
+    @property
+    def interfaces(self):
+        if self._interfaces is None:
+            from .interfaces.client import AsyncInterfacesClient  # noqa: E402
+
+            self._interfaces = AsyncInterfacesClient(client_wrapper=self._client_wrapper)
+        return self._interfaces
 
     @property
     def organizations(self):
