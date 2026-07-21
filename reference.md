@@ -474,6 +474,22 @@ client.annotation_history.list_for_project(
 <dl>
 <dd>
 
+**created_at_from:** `typing.Optional[datetime.datetime]` — Filter for annotation history items created at or after the ISO 8601 formatted date (YYYY-MM-DDTHH:MM:SS)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**created_at_to:** `typing.Optional[datetime.datetime]` — Filter for annotation history items created at or before the ISO 8601 formatted date (YYYY-MM-DDTHH:MM:SS)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **page:** `typing.Optional[int]` — A page number within the paginated result set.
     
 </dd>
@@ -1152,7 +1168,7 @@ client.annotations.create_bulk()
 <dl>
 <dd>
 
-**last_action:** `typing.Optional[LastActionEnum]` 
+**last_action:** `typing.Optional[AnnotationHistoryActionEnum]` 
 
 Action which was performed in the last annotation history item
 
@@ -2246,7 +2262,7 @@ client = LabelStudio(
 )
 
 client.comments.get(
-    id="id",
+    id=1,
 )
 
 ```
@@ -2263,7 +2279,7 @@ client.comments.get(
 <dl>
 <dd>
 
-**id:** `str` 
+**id:** `int` — A unique integer value identifying this comment.
     
 </dd>
 </dl>
@@ -2333,7 +2349,7 @@ client = LabelStudio(
 )
 
 client.comments.delete(
-    id="id",
+    id=1,
 )
 
 ```
@@ -2350,7 +2366,7 @@ client.comments.delete(
 <dl>
 <dd>
 
-**id:** `str` 
+**id:** `int` — A unique integer value identifying this comment.
     
 </dd>
 </dl>
@@ -2420,7 +2436,7 @@ client = LabelStudio(
 )
 
 client.comments.update(
-    id="id",
+    id=1,
 )
 
 ```
@@ -2437,7 +2453,7 @@ client.comments.update(
 <dl>
 <dd>
 
-**id:** `str` 
+**id:** `int` — A unique integer value identifying this comment.
     
 </dd>
 </dl>
@@ -3520,7 +3536,7 @@ client.users.update(
 <dl>
 <dd>
 
-**update_users_request_id:** `typing.Optional[int]` — User ID
+**request_user_id:** `typing.Optional[int]` — User ID
     
 </dd>
 </dl>
@@ -6952,6 +6968,22 @@ client.prompts.compatible_projects()
 <dl>
 <dd>
 
+**archived:** `typing.Optional[bool]` — Filter by projects that belong to archived workspaces
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**ids:** `typing.Optional[typing.Union[int, typing.Sequence[int]]]` — Multiple values may be separated by commas.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **ordering:** `typing.Optional[str]` — Which field to use when ordering the results.
     
 </dd>
@@ -6977,6 +7009,38 @@ client.prompts.compatible_projects()
 <dd>
 
 **project_type:** `typing.Optional[CompatibleProjectsPromptsRequestProjectType]` — Skill to filter by
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**source_interface_id:** `typing.Optional[float]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**state:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**title:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**workspaces:** `typing.Optional[int]` 
     
 </dd>
 </dl>
@@ -7038,7 +7102,7 @@ client = LabelStudio(
 )
 
 client.prompts.get(
-    id="id",
+    id=1,
 )
 
 ```
@@ -7055,7 +7119,7 @@ client.prompts.get(
 <dl>
 <dd>
 
-**id:** `str` 
+**id:** `int` — A unique integer value identifying this model interface.
     
 </dd>
 </dl>
@@ -7117,7 +7181,7 @@ client = LabelStudio(
 )
 
 client.prompts.delete(
-    id="id",
+    id=1,
 )
 
 ```
@@ -7134,7 +7198,7 @@ client.prompts.delete(
 <dl>
 <dd>
 
-**id:** `str` 
+**id:** `int` — A unique integer value identifying this model interface.
     
 </dd>
 </dl>
@@ -7196,7 +7260,7 @@ client = LabelStudio(
 )
 
 client.prompts.update(
-    id="id",
+    id=1,
 )
 
 ```
@@ -7213,7 +7277,7 @@ client.prompts.update(
 <dl>
 <dd>
 
-**id:** `str` 
+**id:** `int` — A unique integer value identifying this model interface.
     
 </dd>
 </dl>
@@ -7379,7 +7443,23 @@ client.interfaces.list()
 <dl>
 <dd>
 
+**scope:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **search:** `typing.Optional[str]` — A search term.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**workspace:** `typing.Optional[int]` 
     
 </dd>
 </dl>
@@ -7522,7 +7602,7 @@ client = LabelStudio(
 )
 
 client.interfaces.get(
-    id="id",
+    id=1,
 )
 
 ```
@@ -7539,7 +7619,7 @@ client.interfaces.get(
 <dl>
 <dd>
 
-**id:** `str` 
+**id:** `int` — A unique integer value identifying this interface.
     
 </dd>
 </dl>
@@ -7601,7 +7681,7 @@ client = LabelStudio(
 )
 
 client.interfaces.update(
-    id="id",
+    id=1,
     code="code",
     compiled="compiled",
     title="title",
@@ -7621,7 +7701,7 @@ client.interfaces.update(
 <dl>
 <dd>
 
-**id:** `str` 
+**id:** `int` — A unique integer value identifying this interface.
     
 </dd>
 </dl>
@@ -7691,7 +7771,7 @@ client = LabelStudio(
 )
 
 client.interfaces.delete(
-    id="id",
+    id=1,
 )
 
 ```
@@ -7708,7 +7788,7 @@ client.interfaces.delete(
 <dl>
 <dd>
 
-**id:** `str` 
+**id:** `int` — A unique integer value identifying this interface.
     
 </dd>
 </dl>
@@ -7770,7 +7850,7 @@ client = LabelStudio(
 )
 
 client.interfaces.partial_update(
-    id="id",
+    id=1,
 )
 
 ```
@@ -7787,7 +7867,7 @@ client.interfaces.partial_update(
 <dl>
 <dd>
 
-**id:** `str` 
+**id:** `int` — A unique integer value identifying this interface.
     
 </dd>
 </dl>
@@ -7945,7 +8025,7 @@ client = LabelStudio(
 )
 
 client.interfaces.append_versions(
-    id="id",
+    id=1,
     versions=[
         LseInterfaceAppendVersionRequest(
             code="code",
@@ -7968,7 +8048,7 @@ client.interfaces.append_versions(
 <dl>
 <dd>
 
-**id:** `str` 
+**id:** `int` — A unique integer value identifying this interface.
     
 </dd>
 </dl>
@@ -8110,7 +8190,7 @@ client = LabelStudio(
 )
 
 client.interfaces.duplicate(
-    id="id",
+    id=1,
     code="code",
     compiled="compiled",
     title="title",
@@ -8130,7 +8210,7 @@ client.interfaces.duplicate(
 <dl>
 <dd>
 
-**id:** `str` 
+**id:** `int` — A unique integer value identifying this interface.
     
 </dd>
 </dl>
@@ -8200,7 +8280,7 @@ client = LabelStudio(
 )
 
 client.interfaces.publish_version(
-    id="id",
+    id=1,
     version_id=1,
 )
 
@@ -8218,7 +8298,7 @@ client.interfaces.publish_version(
 <dl>
 <dd>
 
-**id:** `str` 
+**id:** `int` — A unique integer value identifying this interface.
     
 </dd>
 </dl>
@@ -8288,7 +8368,7 @@ client = LabelStudio(
 )
 
 client.interfaces.unpublish_version(
-    id="id",
+    id=1,
     version_id=1,
 )
 
@@ -8306,7 +8386,7 @@ client.interfaces.unpublish_version(
 <dl>
 <dd>
 
-**id:** `str` 
+**id:** `int` — A unique integer value identifying this interface.
     
 </dd>
 </dl>
@@ -8376,7 +8456,7 @@ client = LabelStudio(
 )
 
 client.interfaces.update_version_description(
-    id="id",
+    id=1,
     description="description",
     version_id=1,
 )
@@ -8395,7 +8475,7 @@ client.interfaces.update_version_description(
 <dl>
 <dd>
 
-**id:** `str` 
+**id:** `int` — A unique integer value identifying this interface.
     
 </dd>
 </dl>
@@ -8907,7 +8987,7 @@ client.organizations.update_default_role(
 <dl>
 <dd>
 
-**default_role:** `typing.Optional[Role9E7Enum]` 
+**default_role:** `typing.Optional[OrganizationRoleEnum]` 
 
 Default membership role for invited users
 
@@ -9231,6 +9311,14 @@ client.ml.list()
 
 <dl>
 <dd>
+
+<dl>
+<dd>
+
+**is_interactive:** `typing.Optional[bool]` 
+    
+</dd>
+</dl>
 
 <dl>
 <dd>
@@ -10330,7 +10418,7 @@ client = LabelStudio(
 )
 
 client.model_providers.get(
-    id="id",
+    id=1,
 )
 
 ```
@@ -10347,7 +10435,7 @@ client.model_providers.get(
 <dl>
 <dd>
 
-**id:** `str` 
+**id:** `int` — A unique integer value identifying this model provider connection.
     
 </dd>
 </dl>
@@ -10409,7 +10497,7 @@ client = LabelStudio(
 )
 
 client.model_providers.delete(
-    id="id",
+    id=1,
 )
 
 ```
@@ -10426,7 +10514,7 @@ client.model_providers.delete(
 <dl>
 <dd>
 
-**id:** `str` 
+**id:** `int` — A unique integer value identifying this model provider connection.
     
 </dd>
 </dl>
@@ -10488,7 +10576,7 @@ client = LabelStudio(
 )
 
 client.model_providers.update(
-    id="id",
+    id=1,
 )
 
 ```
@@ -10505,7 +10593,7 @@ client.model_providers.update(
 <dl>
 <dd>
 
-**id:** `str` 
+**id:** `int` — A unique integer value identifying this model provider connection.
     
 </dd>
 </dl>
@@ -10682,6 +10770,14 @@ client.predictions.list()
 <dd>
 
 **task:** `typing.Optional[int]` — Filter predictions by task ID
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**task_project:** `typing.Optional[int]` 
     
 </dd>
 </dl>
@@ -11945,7 +12041,7 @@ client.projects.create()
 <dl>
 <dd>
 
-**description:** `typing.Optional[str]` — Project Description
+**description:** `typing.Optional[str]` — Description (Public)
     
 </dd>
 </dl>
@@ -11978,6 +12074,14 @@ client.projects.create()
 <dd>
 
 **input_schema:** `typing.Optional[typing.Any]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**internal_description:** `typing.Optional[typing.Any]` — Description (Internal)
     
 </dd>
 </dl>
@@ -12073,7 +12177,7 @@ client.projects.create()
 <dl>
 <dd>
 
-**sampling:** `typing.Optional[SamplingDe5Enum]` 
+**sampling:** `typing.Optional[ProjectSamplingEnum]` 
     
 </dd>
 </dl>
@@ -12518,7 +12622,7 @@ client.projects.delete(
 </dl>
 </details>
 
-<details><summary><code>client.projects.<a href="src/label_studio_sdk/projects/client.py">update</a>(...) -> LseProjectUpdate</code></summary>
+<details><summary><code>client.projects.<a href="src/label_studio_sdk/projects/client.py">update</a>(...) -> LseProjectResponse</code></summary>
 <dl>
 <dd>
 
@@ -12744,7 +12848,7 @@ Methodology (Consensus / Pairwise Averaging)
 <dl>
 <dd>
 
-**description:** `typing.Optional[str]` — Description
+**description:** `typing.Optional[str]` — Description (Public)
     
 </dd>
 </dl>
@@ -12777,6 +12881,14 @@ Methodology (Consensus / Pairwise Averaging)
 <dd>
 
 **input_schema:** `typing.Optional[typing.Any]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**internal_description:** `typing.Optional[typing.Any]` — Description (Internal)
     
 </dd>
 </dl>
@@ -12904,7 +13016,7 @@ Methodology (Consensus / Pairwise Averaging)
 <dl>
 <dd>
 
-**sampling:** `typing.Optional[SamplingDe5Enum]` 
+**sampling:** `typing.Optional[ProjectSamplingEnum]` 
     
 </dd>
 </dl>
@@ -15101,7 +15213,7 @@ client.tokens.create()
 </dl>
 </details>
 
-<details><summary><code>client.tokens.<a href="src/label_studio_sdk/tokens/client.py">blacklist</a>(...) -> typing.Dict[str, typing.Any]</code></summary>
+<details><summary><code>client.tokens.<a href="src/label_studio_sdk/tokens/client.py">blacklist</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -17638,7 +17750,7 @@ client.export_storage.azure_spi.update(
 <dl>
 <dd>
 
-**status:** `typing.Optional[StatusC5AEnum]` 
+**status:** `typing.Optional[StorageStatusEnum]` 
     
 </dd>
 </dl>
@@ -18398,7 +18510,7 @@ Authentication method: PAT, Databricks SP, or Azure AD SP
 <dl>
 <dd>
 
-**status:** `typing.Optional[StatusC5AEnum]` 
+**status:** `typing.Optional[StorageStatusEnum]` 
     
 </dd>
 </dl>
@@ -19828,7 +19940,7 @@ client.export_storage.gcs_sa.update(
 <dl>
 <dd>
 
-**status:** `typing.Optional[StatusC5AEnum]` 
+**status:** `typing.Optional[StorageStatusEnum]` 
     
 </dd>
 </dl>
@@ -20566,7 +20678,7 @@ client.export_storage.gcswif.update(
 <dl>
 <dd>
 
-**status:** `typing.Optional[StatusC5AEnum]` 
+**status:** `typing.Optional[StorageStatusEnum]` 
     
 </dd>
 </dl>
@@ -23494,7 +23606,7 @@ client.export_storage.s3s.update(
 <dl>
 <dd>
 
-**status:** `typing.Optional[StatusC5AEnum]` 
+**status:** `typing.Optional[StorageStatusEnum]` 
     
 </dd>
 </dl>
@@ -24988,7 +25100,7 @@ client.import_storage.azure_spi.update(
 <dl>
 <dd>
 
-**status:** `typing.Optional[StatusC5AEnum]` 
+**status:** `typing.Optional[StorageStatusEnum]` 
     
 </dd>
 </dl>
@@ -25764,7 +25876,7 @@ Authentication method: PAT, Databricks SP, or Azure AD SP
 <dl>
 <dd>
 
-**status:** `typing.Optional[StatusC5AEnum]` 
+**status:** `typing.Optional[StorageStatusEnum]` 
     
 </dd>
 </dl>
@@ -27282,7 +27394,7 @@ client.import_storage.gcs_sa.update(
 <dl>
 <dd>
 
-**status:** `typing.Optional[StatusC5AEnum]` 
+**status:** `typing.Optional[StorageStatusEnum]` 
     
 </dd>
 </dl>
@@ -28036,7 +28148,7 @@ client.import_storage.gcswif.update(
 <dl>
 <dd>
 
-**status:** `typing.Optional[StatusC5AEnum]` 
+**status:** `typing.Optional[StorageStatusEnum]` 
     
 </dd>
 </dl>
@@ -31076,7 +31188,7 @@ client.import_storage.s3s.update(
 <dl>
 <dd>
 
-**status:** `typing.Optional[StatusC5AEnum]` 
+**status:** `typing.Optional[StorageStatusEnum]` 
     
 </dd>
 </dl>
@@ -31420,7 +31532,7 @@ client.organizations.invites.send_email(
 <dl>
 <dd>
 
-**role:** `Role9E7Enum` 
+**role:** `OrganizationRoleEnum` 
 
 Organization role
 
@@ -32407,6 +32519,14 @@ client.organizations.members.list(
 <dl>
 <dd>
 
+**is_deleted:** `typing.Optional[bool]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **ordering:** `typing.Optional[str]` — Which field to use when ordering the results.
     
 </dd>
@@ -32478,6 +32598,30 @@ Filter members by organization role. Accepts single role or comma-separated list
 <dl>
 <dd>
 
+**user_last_activity_gte:** `typing.Optional[datetime.datetime]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**user_last_activity_lte:** `typing.Optional[datetime.datetime]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**user_type:** `typing.Optional[typing.Union[str, typing.Sequence[str]]]` — Multiple values may be separated by commas.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
@@ -32514,9 +32658,9 @@ Update organization membership or role for a specific user ID.
 
 To maintain compliance with our licensing terms and ensure optimal performance of HumanSignal's APIs, please consider the following guidelines when managing user assignments:
 
-* **Maintain a 7-Day Minimum Assignment**: Once a licensed seat is assigned to a user, maintain that assignment for at least seven consecutive days before rotating it to another user.
+* **Maintain the Minimum Assignment duration**: Once a licensed seat is assigned to a user, maintain that assignment for at least the minimum consecutive days before rotating the user. This duration can be found in your enterprise contract language.
 
-* **Automate, Monitor, and Log Rotations**: Implement automated scheduling and logging mechanisms to track the timing of user rotations. This helps ensure that rotations adhere to the seven-day minimum period.
+* **Automate, Monitor, and Log Rotations**: Implement automated scheduling and logging mechanisms to track the timing of user rotations. This helps ensure that rotations adhere to the aforementioned minimum period.
 
 * **Adhere to API Update Frequency and Wait Periods**: When updating user assignments via our APIs, follow the recommended frequency and wait period guidelines provided in the HumanSignal API documentation. Avoid sending rapid, successive requests that might overload the endpoint. Instead, incorporate appropriate delays between calls as specified in the documentation.
 
@@ -32570,7 +32714,7 @@ client.organizations.members.update(
 <dl>
 <dd>
 
-**role:** `typing.Optional[Role9E7Enum]` 
+**role:** `typing.Optional[OrganizationRoleEnum]` 
 
 Organization role
 
@@ -33086,7 +33230,7 @@ client = LabelStudio(
 
 client.organizations.permissions.get(
     id=1,
-    permission="permission",
+    permission_key="permission_key",
 )
 
 ```
@@ -33111,7 +33255,7 @@ client.organizations.permissions.get(
 <dl>
 <dd>
 
-**permission:** `str` 
+**permission_key:** `str` 
     
 </dd>
 </dl>
@@ -33174,7 +33318,7 @@ client = LabelStudio(
 
 client.organizations.permissions.replace(
     id=1,
-    permission_="permission",
+    permission_key="permission_key",
     permission="permission",
 )
 
@@ -33200,7 +33344,7 @@ client.organizations.permissions.replace(
 <dl>
 <dd>
 
-**permission:** `str` — Permission key to update within the organization.
+**permission_key:** `str` — Permission key to update within the organization.
     
 </dd>
 </dl>
@@ -33271,7 +33415,7 @@ client = LabelStudio(
 
 client.organizations.permissions.delete(
     id=1,
-    permission="permission",
+    permission_key="permission_key",
 )
 
 ```
@@ -33296,7 +33440,7 @@ client.organizations.permissions.delete(
 <dl>
 <dd>
 
-**permission:** `str` 
+**permission_key:** `str` 
     
 </dd>
 </dl>
@@ -33359,7 +33503,7 @@ client = LabelStudio(
 
 client.organizations.permissions.update(
     id=1,
-    permission="permission",
+    permission_key="permission_key",
 )
 
 ```
@@ -33384,7 +33528,7 @@ client.organizations.permissions.update(
 <dl>
 <dd>
 
-**permission:** `str` 
+**permission_key:** `str` — Permission key to update within the organization.
     
 </dd>
 </dl>
@@ -33392,7 +33536,7 @@ client.organizations.permissions.update(
 <dl>
 <dd>
 
-**patched_organization_permission_request_permission:** `typing.Optional[str]` 
+**permission:** `typing.Optional[str]` 
     
 </dd>
 </dl>
@@ -33400,7 +33544,7 @@ client.organizations.permissions.update(
 <dl>
 <dd>
 
-**roles:** `typing.Optional[typing.List[Role9E7Enum]]` — Organization roles
+**roles:** `typing.Optional[typing.List[OrganizationRoleEnum]]` — Organization roles
     
 </dd>
 </dl>
@@ -33757,7 +33901,7 @@ client.projects.roles.add(
 <dl>
 <dd>
 
-**role:** `Role9E7Enum` 
+**role:** `OrganizationRoleEnum` 
     
 </dd>
 </dl>
@@ -35292,6 +35436,93 @@ client.projects.stats.lead_time(
 </dl>
 </details>
 
+<details><summary><code>client.projects.stats.<a href="src/label_studio_sdk/projects/stats/client.py">member_performance_participants</a>(...) -> typing.List[UserSimple]</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+<Card href="https://humansignal.com/goenterprise">
+        <img style="pointer-events: none; margin-left: 0px; margin-right: 0px;" src="https://docs.humansignal.com/images/badge.svg" alt="Label Studio Enterprise badge"/>
+        <p style="margin-top: 10px; font-size: 14px;">
+            This endpoint is not available in Label Studio Community Edition. [Learn more about Label Studio Enterprise](https://humansignal.com/goenterprise)
+        </p>
+    </Card>
+Human participants for the Member Performance dropdown.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+from label_studio_sdk.environment import LabelStudioEnvironment
+
+client = LabelStudio(
+    api_key="<value>",
+    environment=LabelStudioEnvironment.DEFAULT,
+)
+
+client.projects.stats.member_performance_participants(
+    id=1,
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `int` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**table:** `typing.Optional[MemberPerformanceParticipantsStatsRequestTable]` — Which participant scope to load: "annotations" or "reviews".
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.projects.stats.<a href="src/label_studio_sdk/projects/stats/client.py">member_performance_rows</a>(...) -> MemberPerformanceRowsStatsResponse</code></summary>
 <dl>
 <dd>
@@ -36556,7 +36787,7 @@ client.projects.exports.create(
 <dl>
 <dd>
 
-**status:** `typing.Optional[Status7BfEnum]` 
+**status:** `typing.Optional[ProjectImportStatusEnum]` 
     
 </dd>
 </dl>
@@ -37097,6 +37328,154 @@ client.projects.members.remove(
 <dd>
 
 **user:** `typing.Optional[int]` — User ID to remove from the project. Optional for backward compatibility with DELETE body.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.projects.members.<a href="src/label_studio_sdk/projects/members/client.py">export_csv</a>(...) -> typing.Iterator[bytes]</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+<Card href="https://humansignal.com/goenterprise">
+        <img style="pointer-events: none; margin-left: 0px; margin-right: 0px;" src="https://docs.humansignal.com/images/badge.svg" alt="Label Studio Enterprise badge"/>
+        <p style="margin-top: 10px; font-size: 14px;">
+            This endpoint is not available in Label Studio Community Edition. [Learn more about Label Studio Enterprise](https://humansignal.com/goenterprise)
+        </p>
+    </Card>
+Download every member of a project matching the supplied member-list filters as a CSV file. This endpoint is restricted to users who can manage project settings.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+client.projects.members.export_csv(...)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `int` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**ids:** `typing.Optional[str]` — Filter id by in list
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**implicit:** `typing.Optional[bool]` — Set to false to export direct project members only.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**last_activity_gte:** `typing.Optional[str]` — Filter last_activity by greater than or equal to
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**last_activity_lte:** `typing.Optional[str]` — Filter last_activity by less than or equal to
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**ordering:** `typing.Optional[str]` — Member ordering; prefix a field with "-" for descending order.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**role:** `typing.Optional[str]` — Multiple values may be separated by commas. (comma-separated values)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**search:** `typing.Optional[str]` — Search members by name, email, or username.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**tags:** `typing.Optional[str]` — Multiple values may be separated by commas. (comma-separated values)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**user_type:** `typing.Optional[str]` — Multiple values may be separated by commas. (comma-separated values)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**with_deleted:** `typing.Optional[bool]` — Include deleted or disabled members.
     
 </dd>
 </dl>
@@ -38261,7 +38640,7 @@ client = LabelStudio(
 client.projects.pauses.get(
     project_pk=1,
     user_pk=1,
-    id="id",
+    id=1,
 )
 
 ```
@@ -38294,7 +38673,7 @@ client.projects.pauses.get(
 <dl>
 <dd>
 
-**id:** `str` 
+**id:** `int` — A unique integer value identifying this pause.
     
 </dd>
 </dl>
@@ -38358,7 +38737,7 @@ client = LabelStudio(
 client.projects.pauses.delete(
     project_pk=1,
     user_pk=1,
-    id="id",
+    id=1,
 )
 
 ```
@@ -38391,7 +38770,7 @@ client.projects.pauses.delete(
 <dl>
 <dd>
 
-**id:** `str` 
+**id:** `int` — A unique integer value identifying this pause.
     
 </dd>
 </dl>
@@ -38455,7 +38834,7 @@ client = LabelStudio(
 client.projects.pauses.update(
     project_pk=1,
     user_pk=1,
-    id="id",
+    id=1,
 )
 
 ```
@@ -38488,7 +38867,7 @@ client.projects.pauses.update(
 <dl>
 <dd>
 
-**id:** `str` 
+**id:** `int` — A unique integer value identifying this pause.
     
 </dd>
 </dl>
@@ -39030,6 +39409,14 @@ Returns users who have any of the specified roles either:
 <dd>
 
 **tags:** `typing.Optional[str]` — Filter members by tags. Use a comma-separated list of tag IDs.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**user_type:** `typing.Optional[typing.Union[str, typing.Sequence[str]]]` — Multiple values may be separated by commas.
     
 </dd>
 </dl>
@@ -40054,7 +40441,7 @@ client.prompts.indicators.get(
 </details>
 
 ## Prompts Versions
-<details><summary><code>client.prompts.versions.<a href="src/label_studio_sdk/prompts/versions/client.py">get_default_version_name</a>(...)</code></summary>
+<details><summary><code>client.prompts.versions.<a href="src/label_studio_sdk/prompts/versions/client.py">get_default_version_name</a>(...) -> DefaultModelVersionNameResponse</code></summary>
 <dl>
 <dd>
 

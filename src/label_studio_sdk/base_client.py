@@ -72,6 +72,12 @@ class LabelStudioBase:
     max_retries : typing.Optional[int]
         The default maximum number of retries for failed requests. Defaults to 2. Per-request `max_retries` in `request_options` takes precedence over this value.
 
+    stream_reconnection_enabled : typing.Optional[bool]
+        Whether to automatically reconnect on stream disconnection for resumable streaming endpoints. Defaults to True. Per-request `stream_reconnection_enabled` in `request_options` takes precedence over this value.
+
+    max_stream_reconnection_attempts : typing.Optional[int]
+        The maximum number of reconnection attempts for resumable streaming endpoints. Defaults to no limit. Per-request `max_stream_reconnection_attempts` in `request_options` takes precedence over this value.
+
     follow_redirects : typing.Optional[bool]
         Whether the default httpx client follows redirects or not, this is irrelevant if a custom httpx client is passed in.
 
@@ -99,13 +105,13 @@ class LabelStudioBase:
         headers: typing.Optional[typing.Dict[str, str]] = None,
         timeout: typing.Optional[float] = None,
         max_retries: typing.Optional[int] = None,
+        stream_reconnection_enabled: typing.Optional[bool] = None,
+        max_stream_reconnection_attempts: typing.Optional[int] = None,
         follow_redirects: typing.Optional[bool] = True,
         httpx_client: typing.Optional[httpx.Client] = None,
         logging: typing.Optional[typing.Union[LogConfig, Logger]] = None,
     ):
-        _defaulted_timeout = (
-            timeout if timeout is not None else 60 if httpx_client is None else httpx_client.timeout.read
-        )
+        _defaulted_timeout = timeout if timeout is not None else 60 if httpx_client is None else None
         _defaulted_max_retries = max_retries if max_retries is not None else 2
         if api_key is None:
             raise ApiError(
@@ -122,6 +128,8 @@ class LabelStudioBase:
             else httpx.Client(timeout=_defaulted_timeout),
             timeout=_defaulted_timeout,
             max_retries=_defaulted_max_retries,
+            stream_reconnection_enabled=stream_reconnection_enabled,
+            max_stream_reconnection_attempts=max_stream_reconnection_attempts,
             logging=logging,
         )
         self._activity_logs: typing.Optional[ActivityLogsClient] = None
@@ -146,6 +154,7 @@ class LabelStudioBase:
         self._project_templates: typing.Optional[ProjectTemplatesClient] = None
         self._projects: typing.Optional[ProjectsClient] = None
         self._tasks: typing.Optional[TasksClient] = None
+        self._sso: typing.Optional[SsoClient] = None
         self._session_policy: typing.Optional[SessionPolicyClient] = None
         self._import_storage: typing.Optional[ImportStorageClient] = None
         self._export_storage: typing.Optional[ExportStorageClient] = None
@@ -153,7 +162,6 @@ class LabelStudioBase:
         self._versions: typing.Optional[VersionsClient] = None
         self._webhooks: typing.Optional[WebhooksClient] = None
         self._workspaces: typing.Optional[WorkspacesClient] = None
-        self._sso: typing.Optional[SsoClient] = None
 
     @property
     def activity_logs(self):
@@ -332,6 +340,14 @@ class LabelStudioBase:
         return self._tasks
 
     @property
+    def sso(self):
+        if self._sso is None:
+            from .sso.client import SsoClient  # noqa: E402
+
+            self._sso = SsoClient(client_wrapper=self._client_wrapper)
+        return self._sso
+
+    @property
     def session_policy(self):
         if self._session_policy is None:
             from .session_policy.client import SessionPolicyClient  # noqa: E402
@@ -387,14 +403,6 @@ class LabelStudioBase:
             self._workspaces = WorkspacesClient(client_wrapper=self._client_wrapper)
         return self._workspaces
 
-    @property
-    def sso(self):
-        if self._sso is None:
-            from .sso.client import SsoClient  # noqa: E402
-
-            self._sso = SsoClient(client_wrapper=self._client_wrapper)
-        return self._sso
-
 
 def _make_default_async_client(
     timeout: typing.Optional[float],
@@ -442,6 +450,12 @@ class AsyncLabelStudioBase:
     max_retries : typing.Optional[int]
         The default maximum number of retries for failed requests. Defaults to 2. Per-request `max_retries` in `request_options` takes precedence over this value.
 
+    stream_reconnection_enabled : typing.Optional[bool]
+        Whether to automatically reconnect on stream disconnection for resumable streaming endpoints. Defaults to True. Per-request `stream_reconnection_enabled` in `request_options` takes precedence over this value.
+
+    max_stream_reconnection_attempts : typing.Optional[int]
+        The maximum number of reconnection attempts for resumable streaming endpoints. Defaults to no limit. Per-request `max_stream_reconnection_attempts` in `request_options` takes precedence over this value.
+
     follow_redirects : typing.Optional[bool]
         Whether the default httpx client follows redirects or not, this is irrelevant if a custom httpx client is passed in.
 
@@ -469,13 +483,13 @@ class AsyncLabelStudioBase:
         headers: typing.Optional[typing.Dict[str, str]] = None,
         timeout: typing.Optional[float] = None,
         max_retries: typing.Optional[int] = None,
+        stream_reconnection_enabled: typing.Optional[bool] = None,
+        max_stream_reconnection_attempts: typing.Optional[int] = None,
         follow_redirects: typing.Optional[bool] = True,
         httpx_client: typing.Optional[httpx.AsyncClient] = None,
         logging: typing.Optional[typing.Union[LogConfig, Logger]] = None,
     ):
-        _defaulted_timeout = (
-            timeout if timeout is not None else 60 if httpx_client is None else httpx_client.timeout.read
-        )
+        _defaulted_timeout = timeout if timeout is not None else 60 if httpx_client is None else None
         _defaulted_max_retries = max_retries if max_retries is not None else 2
         if api_key is None:
             raise ApiError(
@@ -490,6 +504,8 @@ class AsyncLabelStudioBase:
             else _make_default_async_client(timeout=_defaulted_timeout, follow_redirects=follow_redirects),
             timeout=_defaulted_timeout,
             max_retries=_defaulted_max_retries,
+            stream_reconnection_enabled=stream_reconnection_enabled,
+            max_stream_reconnection_attempts=max_stream_reconnection_attempts,
             logging=logging,
         )
         self._activity_logs: typing.Optional[AsyncActivityLogsClient] = None
@@ -514,6 +530,7 @@ class AsyncLabelStudioBase:
         self._project_templates: typing.Optional[AsyncProjectTemplatesClient] = None
         self._projects: typing.Optional[AsyncProjectsClient] = None
         self._tasks: typing.Optional[AsyncTasksClient] = None
+        self._sso: typing.Optional[AsyncSsoClient] = None
         self._session_policy: typing.Optional[AsyncSessionPolicyClient] = None
         self._import_storage: typing.Optional[AsyncImportStorageClient] = None
         self._export_storage: typing.Optional[AsyncExportStorageClient] = None
@@ -521,7 +538,6 @@ class AsyncLabelStudioBase:
         self._versions: typing.Optional[AsyncVersionsClient] = None
         self._webhooks: typing.Optional[AsyncWebhooksClient] = None
         self._workspaces: typing.Optional[AsyncWorkspacesClient] = None
-        self._sso: typing.Optional[AsyncSsoClient] = None
 
     @property
     def activity_logs(self):
@@ -700,6 +716,14 @@ class AsyncLabelStudioBase:
         return self._tasks
 
     @property
+    def sso(self):
+        if self._sso is None:
+            from .sso.client import AsyncSsoClient  # noqa: E402
+
+            self._sso = AsyncSsoClient(client_wrapper=self._client_wrapper)
+        return self._sso
+
+    @property
     def session_policy(self):
         if self._session_policy is None:
             from .session_policy.client import AsyncSessionPolicyClient  # noqa: E402
@@ -754,14 +778,6 @@ class AsyncLabelStudioBase:
 
             self._workspaces = AsyncWorkspacesClient(client_wrapper=self._client_wrapper)
         return self._workspaces
-
-    @property
-    def sso(self):
-        if self._sso is None:
-            from .sso.client import AsyncSsoClient  # noqa: E402
-
-            self._sso = AsyncSsoClient(client_wrapper=self._client_wrapper)
-        return self._sso
 
 
 def _get_base_url(*, base_url: typing.Optional[str] = None, environment: LabelStudioEnvironment) -> str:

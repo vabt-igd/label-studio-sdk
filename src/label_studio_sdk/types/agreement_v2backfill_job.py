@@ -6,7 +6,8 @@ import typing
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2
 from ..core.unchecked_base_model import UncheckedBaseModel
-from .status_a47enum import StatusA47Enum
+from .agreement_v2backfill_job_triggered_by_value import AgreementV2BackfillJobTriggeredByValue
+from .fsm_backfill_job_status_enum import FsmBackfillJobStatusEnum
 
 
 class AgreementV2BackfillJob(UncheckedBaseModel):
@@ -43,7 +44,7 @@ class AgreementV2BackfillJob(UncheckedBaseModel):
     """
 
     started_at: typing.Optional[dt.datetime] = None
-    status: typing.Optional[StatusA47Enum] = pydantic.Field(default=None)
+    status: typing.Optional[FsmBackfillJobStatusEnum] = pydantic.Field(default=None)
     """
     Current status of the backfill job
     
@@ -54,7 +55,9 @@ class AgreementV2BackfillJob(UncheckedBaseModel):
     * `FAILED` - Failed
     """
 
-    triggered_by: typing.Optional[str] = pydantic.Field(default=None)
+    triggered_by: typing.Optional[typing.Dict[str, typing.Optional[AgreementV2BackfillJobTriggeredByValue]]] = (
+        pydantic.Field(default=None)
+    )
     """
     User who triggered the backfill
     """

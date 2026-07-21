@@ -2,4 +2,4 @@
 
 import typing
 
-ReviewedEnum = typing.Union[typing.Literal["only", "exclude"], typing.Any]
+ValueCountsBackfillJobTriggeredByValue = typing.Union[int, str]

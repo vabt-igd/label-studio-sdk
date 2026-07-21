@@ -4,7 +4,7 @@ dynamic = ["version"]
 
 [tool.poetry]
 name = "label-studio-sdk"
-version = "2.0.24"
+version = "2.1.1"
 description = ""
 readme = "README.md"
 authors = []
@@ -38,16 +38,17 @@ Repository = 'https://github.com/HumanSignal/label-studio-sdk'
 [tool.poetry.dependencies]
 python = ">=3.10,<4"
 Pillow = ">=12.2.0"
-aiohttp = { version = ">=3.14.0,<4", optional = true, python = ">=3.10"}
+aiohttp = { version = ">=3.14.1,<4", optional = true, python = ">=3.10"}
 appdirs = ">=1.4.3"
 datamodel-code-generator = "0.26.1"
+doclang = ">=0.7.1"
 httpx = ">=0.21.2"
 httpx-aiohttp = { version = "0.1.8", optional = true, python = ">=3.10"}
 ijson = ">=3.2.3"
 jsf = "^0.11.2"
 jsonschema = ">=4.23.0"
 lxml = ">=6.1.0"
-nltk = "^3.9.4"
+nltk = "^3.10.0"
 numpy = ">=2.2,<3.0.0"
 opencv-python-headless = "^4.12.0,<4.13"
 pandas = ">=0.24.0"
@@ -78,6 +79,7 @@ ruff = "==0.11.5"
 [tool.pytest.ini_options]
 testpaths = [ "tests" ]
 asyncio_mode = "auto"
+norecursedirs = [ "src" ]
 markers = [
     "aiohttp: tests that require httpx_aiohttp to be installed",
 ]

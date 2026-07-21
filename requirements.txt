@@ -1,12 +1,13 @@
 Pillow>=12.2.0
 appdirs>=1.4.3
 datamodel-code-generator==0.26.1
+doclang>=0.7.1
 httpx>=0.21.2
 ijson>=3.2.3
 jsf==0.11.2
 jsonschema>=4.23.0
 lxml>=6.1.0
-nltk==3.9.4
+nltk==3.10.0
 numpy>=2.2,<3.0.0
 opencv-python-headless==4.12.0,<4.13
 pandas>=0.24.0

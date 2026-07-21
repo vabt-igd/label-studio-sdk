@@ -2,4 +2,4 @@
 
 import typing
 
-AnnotatedEnum = typing.Union[typing.Literal["only", "exclude"], typing.Any]
+AgreementV2BackfillJobTriggeredByValue = typing.Union[int, str]

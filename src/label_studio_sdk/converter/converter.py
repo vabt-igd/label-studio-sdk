@@ -5,20 +5,21 @@ import math
 import os
 import re
 import xml.dom
-import xml.dom.minidom
 from collections import defaultdict
 from copy import deepcopy
 from datetime import datetime
 from enum import Enum
 from glob import glob
 from shutil import copy2
-from typing import Optional, List, Tuple
+from typing import Optional
 
 import ijson
 import ujson as json
 from PIL import Image
 from label_studio_sdk.converter import brush
 from label_studio_sdk.converter.audio import convert_to_asr_json_manifest
+from label_studio_sdk.converter.exports.brush_to_coco import convert_to_coco
+from label_studio_sdk.converter.exports.doclang import convert_to_doclang
 from label_studio_sdk.converter.keypoints import (
     process_keypoints_for_coco,
     build_kp_order,
@@ -31,7 +32,6 @@ from label_studio_sdk.converter.utils import (
     parse_config,
     create_tokens_and_tags,
     download,
-    get_image_size,
     get_image_size_and_channels,
     ensure_dir,
     get_polygon_area,
@@ -41,8 +41,6 @@ from label_studio_sdk.converter.utils import (
     prettify_result,
     convert_annotation_to_yolo,
     convert_annotation_to_yolo_obb,
-    get_cocomask_area,
-    get_cocomask_bounding_box,
 )
 from label_studio_sdk._extensions.label_studio_tools.core.utils.io import get_local_path
 from label_studio_sdk.converter.exports.yolo import process_and_save_yolo_annotations
@@ -73,6 +71,7 @@ class Format(Enum):
     YOLO_OBB_WITH_IMAGES = 16
     BRUSH_TO_COCO = 17
     JSON_TS_WITH_DATA = 18
+    DOCLANG = 18
 
     def __str__(self):
         return self.name
@@ -194,6 +193,12 @@ class Converter(object):
             "Corresponding raw data is included in the raw_data/ folder.",
             "link": "https://labelstud.io/guide/export.html#JSON",
             "tags": ["timeseries analysis"],
+        },
+        Format.DOCLANG: {
+            "title": "DocLang (.dclx)",
+            "description": "Package annotations from the Docling Interface as DocLang OPC archives (document.xml + page image) for downstream Docling model training.",
+            "link": "https://github.com/doclang-project/doclang/blob/main/spec.md#doclang-archive-format",
+            "tags": ["document", "docling"],
         },
     }
 
@@ -337,10 +342,22 @@ class Converter(object):
                 if is_dir
                 else self.iter_from_json_file(input_data)
             )
-            from label_studio_sdk.converter.exports.brush_to_coco import convert_to_coco
-
             image_dir = kwargs.get("image_dir")
-            convert_to_coco(items, output_data, output_image_dir=image_dir)
+            convert_to_coco(
+                items,
+                output_data,
+                output_image_dir=image_dir
+            )
+        elif format == Format.DOCLANG:
+            convert_to_doclang(
+                input_data,
+                output_data,
+                is_dir=is_dir,
+                image_key=kwargs.get("image_key", "image"),
+                download_resources=self.download_resources,
+                project_dir=self.project_dir,
+                upload_dir=self.upload_dir,
+            )
 
     def _get_data_keys_and_output_tags(self, output_tags=None):
         data_keys = set()
@@ -367,13 +384,19 @@ class Converter(object):
 
     def _get_supported_formats(self):
         is_mig = False
+        supports_doclang = any(
+            info.get("type") in {"TextArea", "ReactCode", "CustomInterface"} for info in self._schema.values()
+        )
         if len(self._data_keys) > 1:
-            return [
+            formats = [
                 Format.JSON.name,
                 Format.JSON_MIN.name,
                 Format.CSV.name,
                 Format.TSV.name,
             ]
+            if supports_doclang:
+                formats.append(Format.DOCLANG.name)
+            return formats
         output_tag_types = set()
         input_tag_types = set()
         for info in self._schema.values():
@@ -387,6 +410,8 @@ class Converter(object):
                 input_tag_types.add(input_tag["type"])
 
         all_formats = [f.name for f in Format]
+        if not supports_doclang:
+            all_formats.remove(Format.DOCLANG.name)
 
         # Check if KeyPointLabels exists without RectangleLabels
         has_keypoint_labels = "KeyPointLabels" in output_tag_types
