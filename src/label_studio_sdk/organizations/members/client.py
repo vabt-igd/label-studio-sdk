@@ -5,10 +5,11 @@ import typing
 
 from ...core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ...core.request_options import RequestOptions
+from ...types.assignable_organization_role_enum import AssignableOrganizationRoleEnum
 from ...types.lse_organization_member_list import LseOrganizationMemberList
 from ...types.organization_member import OrganizationMember
-from ...types.organization_role_enum import OrganizationRoleEnum
 from ...types.paginated_lse_organization_member_list_list import PaginatedLseOrganizationMemberListList
+from ...types.standard_user_type_enum import StandardUserTypeEnum
 from .raw_client import AsyncRawMembersClient, RawMembersClient
 from .types.list_members_request_scope import ListMembersRequestScope
 
@@ -160,8 +161,9 @@ class MembersClient:
         self,
         id: int,
         *,
-        role: typing.Optional[OrganizationRoleEnum] = OMIT,
+        role: typing.Optional[AssignableOrganizationRoleEnum] = OMIT,
         user_id: typing.Optional[int] = OMIT,
+        user_type: typing.Optional[StandardUserTypeEnum] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> LseOrganizationMemberList:
         """
@@ -190,7 +192,7 @@ class MembersClient:
         id : int
             A unique integer value identifying this organization.
 
-        role : typing.Optional[OrganizationRoleEnum]
+        role : typing.Optional[AssignableOrganizationRoleEnum]
             Organization role
 
             * `OW` - Owner
@@ -203,6 +205,11 @@ class MembersClient:
 
         user_id : typing.Optional[int]
             Member
+
+        user_type : typing.Optional[StandardUserTypeEnum]
+            Membership seat type. Assigning a working role to a View-Only member upgrades them to a paid Standard seat. View-Only is not accepted because paid-to-View-Only downgrade is not supported.
+
+            * `standard` - Standard
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -223,7 +230,9 @@ class MembersClient:
             id=1,
         )
         """
-        _response = self._raw_client.update(id, role=role, user_id=user_id, request_options=request_options)
+        _response = self._raw_client.update(
+            id, role=role, user_id=user_id, user_type=user_type, request_options=request_options
+        )
         return _response.data
 
     def get(
@@ -458,8 +467,9 @@ class AsyncMembersClient:
         self,
         id: int,
         *,
-        role: typing.Optional[OrganizationRoleEnum] = OMIT,
+        role: typing.Optional[AssignableOrganizationRoleEnum] = OMIT,
         user_id: typing.Optional[int] = OMIT,
+        user_type: typing.Optional[StandardUserTypeEnum] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> LseOrganizationMemberList:
         """
@@ -488,7 +498,7 @@ class AsyncMembersClient:
         id : int
             A unique integer value identifying this organization.
 
-        role : typing.Optional[OrganizationRoleEnum]
+        role : typing.Optional[AssignableOrganizationRoleEnum]
             Organization role
 
             * `OW` - Owner
@@ -501,6 +511,11 @@ class AsyncMembersClient:
 
         user_id : typing.Optional[int]
             Member
+
+        user_type : typing.Optional[StandardUserTypeEnum]
+            Membership seat type. Assigning a working role to a View-Only member upgrades them to a paid Standard seat. View-Only is not accepted because paid-to-View-Only downgrade is not supported.
+
+            * `standard` - Standard
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -529,7 +544,9 @@ class AsyncMembersClient:
 
         asyncio.run(main())
         """
-        _response = await self._raw_client.update(id, role=role, user_id=user_id, request_options=request_options)
+        _response = await self._raw_client.update(
+            id, role=role, user_id=user_id, user_type=user_type, request_options=request_options
+        )
         return _response.data
 
     async def get(

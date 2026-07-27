@@ -24,6 +24,8 @@ if typing.TYPE_CHECKING:
     from .annotation_request import AnnotationRequest
     from .annotation_review import AnnotationReview
     from .annotation_review_request import AnnotationReviewRequest
+    from .assignable_organization_role_enum import AssignableOrganizationRoleEnum
+    from .assignable_user_type_enum import AssignableUserTypeEnum
     from .assignment_settings import AssignmentSettings
     from .assignment_settings_request import AssignmentSettingsRequest
     from .associated_project import AssociatedProject
@@ -194,6 +196,7 @@ if typing.TYPE_CHECKING:
     from .project_label_config import ProjectLabelConfig
     from .project_label_config_request import ProjectLabelConfigRequest
     from .project_member import ProjectMember
+    from .project_member_bulk_assign_response import ProjectMemberBulkAssignResponse
     from .project_member_bulk_assign_roles_request import ProjectMemberBulkAssignRolesRequest
     from .project_role import ProjectRole
     from .project_sampling_enum import ProjectSamplingEnum
@@ -233,6 +236,7 @@ if typing.TYPE_CHECKING:
     from .simple_organization_member_tag import SimpleOrganizationMemberTag
     from .skill_name_enum import SkillNameEnum
     from .skip_queue_enum import SkipQueueEnum
+    from .standard_user_type_enum import StandardUserTypeEnum
     from .state_backfill_cancel_response import StateBackfillCancelResponse
     from .state_backfill_job_item import StateBackfillJobItem
     from .state_backfill_job_item_response import StateBackfillJobItemResponse
@@ -289,6 +293,8 @@ _dynamic_imports: typing.Dict[str, str] = {
     "AnnotationRequest": ".annotation_request",
     "AnnotationReview": ".annotation_review",
     "AnnotationReviewRequest": ".annotation_review_request",
+    "AssignableOrganizationRoleEnum": ".assignable_organization_role_enum",
+    "AssignableUserTypeEnum": ".assignable_user_type_enum",
     "AssignmentSettings": ".assignment_settings",
     "AssignmentSettingsRequest": ".assignment_settings_request",
     "AssociatedProject": ".associated_project",
@@ -453,6 +459,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "ProjectLabelConfig": ".project_label_config",
     "ProjectLabelConfigRequest": ".project_label_config_request",
     "ProjectMember": ".project_member",
+    "ProjectMemberBulkAssignResponse": ".project_member_bulk_assign_response",
     "ProjectMemberBulkAssignRolesRequest": ".project_member_bulk_assign_roles_request",
     "ProjectRole": ".project_role",
     "ProjectSamplingEnum": ".project_sampling_enum",
@@ -492,6 +499,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "SimpleOrganizationMemberTag": ".simple_organization_member_tag",
     "SkillNameEnum": ".skill_name_enum",
     "SkipQueueEnum": ".skip_queue_enum",
+    "StandardUserTypeEnum": ".standard_user_type_enum",
     "StateBackfillCancelResponse": ".state_backfill_cancel_response",
     "StateBackfillJobItem": ".state_backfill_job_item",
     "StateBackfillJobItemResponse": ".state_backfill_job_item_response",
@@ -572,6 +580,8 @@ __all__ = [
     "AnnotationRequest",
     "AnnotationReview",
     "AnnotationReviewRequest",
+    "AssignableOrganizationRoleEnum",
+    "AssignableUserTypeEnum",
     "AssignmentSettings",
     "AssignmentSettingsRequest",
     "AssociatedProject",
@@ -736,6 +746,7 @@ __all__ = [
     "ProjectLabelConfig",
     "ProjectLabelConfigRequest",
     "ProjectMember",
+    "ProjectMemberBulkAssignResponse",
     "ProjectMemberBulkAssignRolesRequest",
     "ProjectRole",
     "ProjectSamplingEnum",
@@ -775,6 +786,7 @@ __all__ = [
     "SimpleOrganizationMemberTag",
     "SkillNameEnum",
     "SkipQueueEnum",
+    "StandardUserTypeEnum",
     "StateBackfillCancelResponse",
     "StateBackfillJobItem",
     "StateBackfillJobItemResponse",
