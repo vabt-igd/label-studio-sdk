@@ -71,7 +71,7 @@ class Format(Enum):
     YOLO_OBB_WITH_IMAGES = 16
     BRUSH_TO_COCO = 17
     JSON_TS_WITH_DATA = 18
-    DOCLANG = 18
+    DOCLANG = 19
 
     def __str__(self):
         return self.name
