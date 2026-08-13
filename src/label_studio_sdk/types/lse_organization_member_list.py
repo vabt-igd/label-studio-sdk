@@ -10,6 +10,8 @@ from .lse_organization_member_list_contributed_to_projects_item import (
 )
 from .lse_organization_member_list_created_projects_item import LseOrganizationMemberListCreatedProjectsItem
 from .lse_user_organization_member_list import LseUserOrganizationMemberList
+from .organization_role_enum import OrganizationRoleEnum
+from .role_source_enum import RoleSourceEnum
 from .simple_organization_member_tag import SimpleOrganizationMemberTag
 
 
@@ -22,14 +24,19 @@ class LseOrganizationMemberList(UncheckedBaseModel):
     concurrency: typing.Optional[typing.Dict[str, typing.Any]] = None
     contributed_to_projects: typing.Optional[typing.List[LseOrganizationMemberListContributedToProjectsItem]] = None
     created_projects: typing.Optional[typing.List[LseOrganizationMemberListCreatedProjectsItem]] = None
+    flex: typing.Optional[typing.Dict[str, typing.Any]] = pydantic.Field(default=None)
+    """
+    Per-member Flex claim/window state for Members UI (FIT-2339).
+    """
+
     id: typing.Optional[int] = None
     organization: int = pydantic.Field()
     """
     Organization ID
     """
 
-    role: typing.Optional[str] = None
-    role_source: typing.Optional[str] = None
+    role: typing.Optional[OrganizationRoleEnum] = None
+    role_source: typing.Optional[RoleSourceEnum] = None
     tags: typing.Optional[typing.List[SimpleOrganizationMemberTag]] = None
     user: LseUserOrganizationMemberList
     user_type: typing.Optional[str] = None
