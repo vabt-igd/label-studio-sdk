@@ -1,5 +1,6 @@
 import logging
 import os
+from label_studio_sdk.converter import brush
 from label_studio_sdk.converter.utils import convert_annotation_to_yolo, convert_annotation_to_yolo_obb
 from label_studio_sdk.converter.keypoints import build_kp_order
 
@@ -82,35 +83,40 @@ def process_and_save_yolo_annotations(labels, label_path, category_name_to_id, c
     tmp_path = f"{label_path}.tmp"
 
     try:
-        with open(tmp_path, "w") as f:
+        with open(tmp_path, "w", encoding="utf-8") as f:
             for label in labels:
-                category_name = None
-                category_names = []  # considering multi-label
-                for key in ["rectanglelabels", "polygonlabels", "labels"]:
-                    if key in label and len(label[key]) > 0:
-                        # change to save multi-label
-                        for category_name in label[key]:
-                            category_names.append(category_name)
+                category_names = []
 
-                if len(category_names) == 0:
-                    logger.debug(
-                        "Unknown label type or labels are empty: " + str(label)
-                    )
+                # Determine one or more classes assigned to this annotation.
+                for key in (
+                    "rectanglelabels",
+                    "polygonlabels",
+                    "brushlabels",
+                    "labels",
+                ):
+                    if label.get(key):
+                        category_names.extend(label[key])
+
+                if not category_names:
+                    logger.debug("Unknown label type or labels are empty: %s", label)
                     continue
 
                 for category_name in category_names:
                     if category_name not in category_name_to_id:
                         category_id = len(categories)
                         category_name_to_id[category_name] = category_id
-                        categories.append({"id": category_id, "name": category_name})
-                    category_id = category_name_to_id[category_name]
+                        categories.append(
+                            {"id": category_id, "name": category_name}
+                        )
+                    else:
+                        category_id = category_name_to_id[category_name]
 
+                    # Rectangle annotation
                     if (
                         "rectanglelabels" in label
                         or "rectangle" in label
                         or "labels" in label
                     ):
-                        # yolo obb
                         if is_obb:
                             obb_annotation = convert_annotation_to_yolo_obb(label)
                             if obb_annotation is None:
@@ -123,49 +129,104 @@ def process_and_save_yolo_annotations(labels, label_path, category_name_to_id, c
                             x2, y2 = top_right
                             x3, y3 = bottom_right
                             x4, y4 = bottom_left
-                            annotation_values = [category_id, x1, y1, x2, y2, x3, y3, x4, y4]
 
-                        # simple yolo
+                            annotation_values = [
+                                category_id,
+                                x1,
+                                y1,
+                                x2,
+                                y2,
+                                x3,
+                                y3,
+                                x4,
+                                y4,
+                            ]
                         else:
                             annotation = convert_annotation_to_yolo(label)
                             if annotation is None:
                                 continue
 
-                            (
-                                x,
-                                y,
-                                w,
-                                h,
-                            ) = annotation
+                            x, y, w, h = annotation
                             annotation_values = [category_id, x, y, w, h]
 
+                    # Polygon annotation
                     elif "polygonlabels" in label or "polygon" in label:
-                        if not ('points' in label):
+                        points = label.get("points")
+                        if not points:
                             continue
-                        points_abs = [(x / 100, y / 100) for x, y in label["points"]]
-                        annotation_values = (
-                            [category_id]
-                            + [coord for point in points_abs for coord in point]
+
+                        normalized_points = [
+                            coordinate
+                            for point_x, point_y in points
+                            for coordinate in (point_x / 100.0, point_y / 100.0)
+                        ]
+                        annotation_values = [category_id, *normalized_points]
+
+                    # Brush/mask annotation exported as a standard YOLO bbox.
+                    elif (
+                        "brushlabels" in label
+                        or label.get("type", "").lower()
+                        in ("brushlabels", "magicwand")
+                    ):
+                        if not brush.pycocotools_imported:
+                            logger.warning(
+                                "Skipping brush annotation because pycocotools "
+                                "is not installed."
+                            )
+                            continue
+
+                        rle = label.get("rle")
+                        image_width = label.get("original_width")
+                        image_height = label.get("original_height")
+
+                        if not rle or not image_width or not image_height:
+                            logger.warning(
+                                "Skipping brush annotation without RLE or image "
+                                "dimensions: %s",
+                                label,
+                            )
+                            continue
+
+                        coco_rle = brush.ls_rle_to_coco_rle(
+                            rle,
+                            image_height,
+                            image_width,
                         )
+                        x_min, y_min, box_width, box_height = (
+                            brush.get_cocomask_bounding_box(coco_rle)
+                        )
+
+                        if box_width <= 0 or box_height <= 0:
+                            logger.warning(
+                                "Skipping brush annotation with an empty mask: %s",
+                                label,
+                            )
+                            continue
+
+                        annotation_values = [
+                            category_id,
+                            (x_min + box_width / 2.0) / image_width,
+                            (y_min + box_height / 2.0) / image_height,
+                            box_width / image_width,
+                            box_height / image_height,
+                        ]
+
                     else:
-                        raise ValueError(f"Unknown label type {label}")
+                        logger.warning(
+                            "Unsupported YOLO annotation type: %s",
+                            label,
+                        )
+                        continue
 
-                    # Write the annotation line immediately
-                    for idx, val in enumerate(annotation_values):
-                        if idx == len(annotation_values) - 1:
-                            f.write(f"{val}\n")
-                        else:
-                            f.write(f"{val} ")
+                    f.write(" ".join(map(str, annotation_values)) + "\n")
 
-        # Replace the target file atomically after successful write
         os.replace(tmp_path, label_path)
 
     finally:
-        # Clean up the temp file in case of exceptions before replace
-        try:
-            if os.path.exists(tmp_path):
+        if os.path.exists(tmp_path):
+            try:
                 os.remove(tmp_path)
-        except Exception:
-            pass
+            except OSError:
+                pass
 
     return categories, category_name_to_id
