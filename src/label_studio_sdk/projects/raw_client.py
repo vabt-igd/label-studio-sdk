@@ -18,6 +18,7 @@ from ..types.agreement_methodology_enum import AgreementMethodologyEnum
 from ..types.all_roles_project_list import AllRolesProjectList
 from ..types.annotator_evaluation_metric_enum import AnnotatorEvaluationMetricEnum
 from ..types.assignment_settings_request import AssignmentSettingsRequest
+from ..types.collection_mode_enum import CollectionModeEnum
 from ..types.control_tag_weight_request import ControlTagWeightRequest
 from ..types.import_api_request import ImportApiRequest
 from ..types.lse_project_create import LseProjectCreate
@@ -64,7 +65,12 @@ class RawProjectsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> SyncPager[AllRolesProjectList, PaginatedAllRolesProjectListList]:
         """
-        Retrieve a list of projects.
+        Retrieve a list of projects. Counter fields in each result follow one of two scopes:
+
+        * **Per-user progress** — computed for the authenticated user and their project role (for example `reviewed_number`, `review_total_tasks`, `queue_done`, `queue_total`, `queue_left`). These power project-card progress in the UI and differ across users. Note: `queue_left` counts manual review assignments only; when it is `0`, the card uses `review_total_tasks` / `reviewed_number` for auto-review progress.
+        * **Project-wide totals** — the same for every caller (for example `task_number`, `finished_task_number`).
+
+        For organization-level reviewed-task totals (all reviewers combined), use `GET /api/analytics/kpis/tasks_reviewed?projects={id}&tz=UTC` rather than `reviewed_number`. See Analytics KPI `tasks_reviewed`, `tasks_pending_review`, `annotated_tasks`, and `total_tasks` for other project-wide metrics.
 
         Parameters
         ----------
@@ -178,6 +184,7 @@ class RawProjectsClient:
         self,
         *,
         annotator_evaluation_enabled: typing.Optional[bool] = OMIT,
+        collection_mode: typing.Optional[CollectionModeEnum] = OMIT,
         color: typing.Optional[str] = OMIT,
         control_weights: typing.Optional[typing.Dict[str, typing.Optional[ControlTagWeightRequest]]] = OMIT,
         created_by: typing.Optional[UserSimpleRequest] = OMIT,
@@ -225,6 +232,12 @@ class RawProjectsClient:
         ----------
         annotator_evaluation_enabled : typing.Optional[bool]
             Enable annotator evaluation for the project
+
+        collection_mode : typing.Optional[CollectionModeEnum]
+            Data Collection project mode (assigned or open). Set only at creation; immutable afterwards. Requires use_custom_interface.
+
+            * `assigned` - Assigned
+            * `open` - Open
 
         color : typing.Optional[str]
 
@@ -340,6 +353,7 @@ class RawProjectsClient:
             method="POST",
             json={
                 "annotator_evaluation_enabled": annotator_evaluation_enabled,
+                "collection_mode": collection_mode,
                 "color": color,
                 "control_weights": convert_and_respect_annotation_metadata(
                     object_=control_weights,
@@ -522,7 +536,7 @@ class RawProjectsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[LseProjectResponse]:
         """
-        Retrieve information about a project by project ID.
+        Retrieve information about a project by project ID. Counter fields use per-user or project-wide scope as documented on each field; for all reviewed tasks in the project use `GET /api/analytics/kpis/tasks_reviewed?projects={id}&tz=UTC`.
 
         Parameters
         ----------
@@ -1370,7 +1384,12 @@ class AsyncRawProjectsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncPager[AllRolesProjectList, PaginatedAllRolesProjectListList]:
         """
-        Retrieve a list of projects.
+        Retrieve a list of projects. Counter fields in each result follow one of two scopes:
+
+        * **Per-user progress** — computed for the authenticated user and their project role (for example `reviewed_number`, `review_total_tasks`, `queue_done`, `queue_total`, `queue_left`). These power project-card progress in the UI and differ across users. Note: `queue_left` counts manual review assignments only; when it is `0`, the card uses `review_total_tasks` / `reviewed_number` for auto-review progress.
+        * **Project-wide totals** — the same for every caller (for example `task_number`, `finished_task_number`).
+
+        For organization-level reviewed-task totals (all reviewers combined), use `GET /api/analytics/kpis/tasks_reviewed?projects={id}&tz=UTC` rather than `reviewed_number`. See Analytics KPI `tasks_reviewed`, `tasks_pending_review`, `annotated_tasks`, and `total_tasks` for other project-wide metrics.
 
         Parameters
         ----------
@@ -1487,6 +1506,7 @@ class AsyncRawProjectsClient:
         self,
         *,
         annotator_evaluation_enabled: typing.Optional[bool] = OMIT,
+        collection_mode: typing.Optional[CollectionModeEnum] = OMIT,
         color: typing.Optional[str] = OMIT,
         control_weights: typing.Optional[typing.Dict[str, typing.Optional[ControlTagWeightRequest]]] = OMIT,
         created_by: typing.Optional[UserSimpleRequest] = OMIT,
@@ -1534,6 +1554,12 @@ class AsyncRawProjectsClient:
         ----------
         annotator_evaluation_enabled : typing.Optional[bool]
             Enable annotator evaluation for the project
+
+        collection_mode : typing.Optional[CollectionModeEnum]
+            Data Collection project mode (assigned or open). Set only at creation; immutable afterwards. Requires use_custom_interface.
+
+            * `assigned` - Assigned
+            * `open` - Open
 
         color : typing.Optional[str]
 
@@ -1649,6 +1675,7 @@ class AsyncRawProjectsClient:
             method="POST",
             json={
                 "annotator_evaluation_enabled": annotator_evaluation_enabled,
+                "collection_mode": collection_mode,
                 "color": color,
                 "control_weights": convert_and_respect_annotation_metadata(
                     object_=control_weights,
@@ -1831,7 +1858,7 @@ class AsyncRawProjectsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[LseProjectResponse]:
         """
-        Retrieve information about a project by project ID.
+        Retrieve information about a project by project ID. Counter fields use per-user or project-wide scope as documented on each field; for all reviewed tasks in the project use `GET /api/analytics/kpis/tasks_reviewed?projects={id}&tz=UTC`.
 
         Parameters
         ----------

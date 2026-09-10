@@ -31,7 +31,6 @@ from label_studio_sdk.converter.exports import csv2
 from label_studio_sdk.converter.utils import (
     parse_config,
     create_tokens_and_tags,
-    download,
     get_image_size_and_channels,
     ensure_dir,
     get_polygon_area,
@@ -42,7 +41,10 @@ from label_studio_sdk.converter.utils import (
     convert_annotation_to_yolo,
     convert_annotation_to_yolo_obb,
 )
-from label_studio_sdk._extensions.label_studio_tools.core.utils.io import get_local_path
+from label_studio_sdk._extensions.label_studio_tools.core.utils.io import (
+    get_local_path,
+    is_cloud_storage_uri,
+)
 from label_studio_sdk.converter.exports.yolo import process_and_save_yolo_annotations
 
 logger = logging.getLogger(__name__)
@@ -196,9 +198,9 @@ class Converter(object):
         },
         Format.DOCLANG: {
             "title": "DocLang (.dclx)",
-            "description": "Package annotations from the Docling Interface as DocLang OPC archives (document.xml + page image) for downstream Docling model training.",
+            "description": "Package annotations from the Doclang Interface as DocLang OPC archives (document.xml + page image) for downstream Docling model training.",
             "link": "https://github.com/doclang-project/doclang/blob/main/spec.md#doclang-archive-format",
-            "tags": ["document", "docling"],
+            "tags": ["document", "doclang"],
         },
     }
 
@@ -345,18 +347,19 @@ class Converter(object):
                 else self.iter_from_json_file(input_data)
             )
             image_dir = kwargs.get("image_dir")
-            convert_to_coco(
-                items,
-                output_data,
-                output_image_dir=image_dir
-            )
+            convert_to_coco(items, output_data, output_image_dir=image_dir)
         elif format == Format.DOCLANG:
-            from label_studio_sdk.converter.exports.doclang import convert_to_doclang, resolve_image_data_keys
+            from label_studio_sdk.converter.exports.doclang import (
+                convert_to_doclang,
+                resolve_image_data_keys,
+            )
 
             image_key = kwargs.get("image_key")
             image_list_key = kwargs.get("image_list_key")
             if image_key is None:
-                single_key, list_key = resolve_image_data_keys(self._schema, self._config_string)
+                single_key, list_key = resolve_image_data_keys(
+                    self._schema, self._config_string
+                )
                 image_key = single_key or "image"
                 image_list_key = image_list_key or list_key
 
@@ -399,7 +402,8 @@ class Converter(object):
     def _get_supported_formats(self):
         is_mig = False
         supports_doclang = any(
-            info.get("type") in {"TextArea", "ReactCode", "CustomInterface"} for info in self._schema.values()
+            info.get("type") in {"TextArea", "ReactCode", "CustomInterface"}
+            for info in self._schema.values()
         )
         if len(self._data_keys) > 1:
             formats = [
@@ -638,6 +642,18 @@ class Converter(object):
                 elif from_name and r.get("type") == "chatmessage":
                     v = deepcopy(r.get("value", {}))
                     v["type"] = "chatmessage"
+                    outputs[from_name].append(v)
+
+                # Interface / custom-interface projects use an empty labeling schema
+                # (<View></View>), so regions never match a control tag. Keep them so
+                # json_min / csv / related exports still include annotation data.
+                elif from_name and not self._schema:
+                    v = deepcopy(r.get("value") or {})
+                    v["type"] = r.get("type") or "unknown"
+                    if "original_width" in r:
+                        v["original_width"] = r["original_width"]
+                    if "original_height" in r:
+                        v["original_height"] = r["original_height"]
                     outputs[from_name].append(v)
 
                 else:
@@ -1162,15 +1178,17 @@ class Converter(object):
             image_paths = item["input"][data_key]
             image_paths = [image_paths] if isinstance(image_paths, str) else image_paths
             # download image(s)
-            image_path = None
+            resolved_image_path = None
             task_id = item["id"]
             # TODO: for multi-page annotation, this code won't produce correct relationships between page and annotated shapes
             # fixing the issue in RND-84
-            for image_path in reversed(image_paths):
-                if not os.path.exists(image_path):
-                    try:
-                        image_path = get_local_path(
-                            url=image_path,
+            for candidate in reversed(image_paths):
+                try:
+                    if os.path.exists(candidate):
+                        resolved_image_path = candidate
+                    else:
+                        local_path = get_local_path(
+                            url=candidate,
                             hostname=self.hostname,
                             project_dir=self.project_dir,
                             image_dir=self.upload_dir,
@@ -1180,17 +1198,28 @@ class Converter(object):
                             task_id=task_id,
                         )
                         # make path relative to output_image_dir
-                        image_path = os.path.relpath(image_path, output_dir)
-                    except:
-                        logger.info(
-                            "Unable to download {image_path}. The item {item} will be skipped".format(
-                                image_path=image_path, item=item
-                            ),
-                            exc_info=True,
-                        )
-            if not image_path:
+                        resolved_image_path = os.path.relpath(local_path, output_dir)
+                    break
+                except Exception:
+                    logger.info(
+                        "Unable to download {image_path}. The item {item} will be skipped".format(
+                            image_path=candidate, item=item
+                        ),
+                        exc_info=True,
+                    )
+                    # FIT-2611: YOLO_*_WITH_IMAGES must not emit orphan labels when cloud
+                    # download fails. For label-only YOLO (or non-cloud paths), keep the
+                    # legacy fallback so label filenames still derive from the URI/path.
+                    if self.download_resources and is_cloud_storage_uri(candidate):
+                        resolved_image_path = None
+                        continue
+                    resolved_image_path = candidate
+                    break
+            if not resolved_image_path:
                 logger.error(f"No image path found for {task_id=}")
                 continue
+
+            image_path = resolved_image_path
 
             # create dedicated subfolder for each labeler if split_labelers=True
             labeler_subfolder = str(item["completed_by"]) if split_labelers else ""
@@ -1459,20 +1488,24 @@ class Converter(object):
             annotations_dir = os.path.join(output_dir, "Annotations")
             if not os.path.exists(annotations_dir):
                 os.makedirs(annotations_dir)
-            # Download image
+            # Download image (get_local_path: uploads, local storage, and cloud via presign — FIT-2611)
             channels = 3
             task_id = item["id"]
             if not os.path.exists(image_path):
                 try:
-                    image_path = download(
-                        image_path,
-                        output_image_dir,
+                    local_path = get_local_path(
+                        url=image_path,
+                        hostname=self.hostname,
                         project_dir=self.project_dir,
-                        upload_dir=self.upload_dir,
-                        return_relative_path=True,
+                        image_dir=self.upload_dir,
+                        cache_dir=output_image_dir,
                         download_resources=self.download_resources,
+                        access_token=self.access_token,
+                        task_id=task_id,
                     )
-                except:
+                    # make path relative to output_dir (same layout as COCO)
+                    image_path = os.path.relpath(local_path, output_dir)
+                except Exception:
                     logger.info(
                         "Unable to download {image_path}. The item {item} will be skipped".format(
                             image_path=image_path, item=item
@@ -1480,13 +1513,11 @@ class Converter(object):
                         exc_info=True,
                     )
                 else:
-                    full_image_path = os.path.join(
-                        output_image_dir, os.path.basename(image_path)
-                    )
+                    full_image_path = os.path.join(output_dir, image_path)
                     # retrieve number of channels from downloaded image
                     try:
                         _, _, channels = get_image_size_and_channels(full_image_path)
-                    except:
+                    except Exception:
                         logger.warning(f"Can't read channels from image {task_id=}")
 
             # skip tasks without annotations

@@ -956,6 +956,14 @@ client.annotation_reviews.update(
 <dl>
 <dd>
 
+**reject_action:** `typing.Optional[RejectActionEnum]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **remove_from_queue:** `typing.Optional[bool]` 
     
 </dd>
@@ -8634,14 +8642,6 @@ client.organizations.update(
 <dl>
 <dd>
 
-**created_by:** `typing.Optional[int]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
 **custom_interfaces_enabled:** `typing.Optional[bool]` — Enable or disable custom interfaces for this organization
     
 </dd>
@@ -8715,6 +8715,168 @@ client.organizations.update(
 <dd>
 
 **token:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.organizations.<a href="src/label_studio_sdk/organizations/client.py">api_organizations_memberships_filter_options_membership_list</a>(...) -> typing.List[OrganizationMemberMembershipOption]</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Return the actor-accessible workspaces, each with its projects, plus unparented projects.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+from label_studio_sdk.environment import LabelStudioEnvironment
+
+client = LabelStudio(
+    api_key="<value>",
+    environment=LabelStudioEnvironment.DEFAULT,
+)
+
+client.organizations.api_organizations_memberships_filter_options_membership_list(
+    id=1,
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `int` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**search:** `typing.Optional[str]` — Optional case-insensitive option label search.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.organizations.<a href="src/label_studio_sdk/organizations/client.py">api_organizations_memberships_filter_options_skills_list</a>(...) -> typing.List[OrganizationMemberSkillsOption]</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Return self-reported Skills values with Contributor Setup display metadata.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+from label_studio_sdk.environment import LabelStudioEnvironment
+
+client = LabelStudio(
+    api_key="<value>",
+    environment=LabelStudioEnvironment.DEFAULT,
+)
+
+client.organizations.api_organizations_memberships_filter_options_skills_list(
+    id=1,
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `int` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**search:** `typing.Optional[str]` — Optional case-insensitive option label search.
     
 </dd>
 </dl>
@@ -11656,7 +11818,12 @@ client.project_templates.create_project_from_template(
 <dl>
 <dd>
 
-Retrieve a list of projects.
+Retrieve a list of projects. Counter fields in each result follow one of two scopes:
+
+* **Per-user progress** — computed for the authenticated user and their project role (for example `reviewed_number`, `review_total_tasks`, `queue_done`, `queue_total`, `queue_left`). These power project-card progress in the UI and differ across users. Note: `queue_left` counts manual review assignments only; when it is `0`, the card uses `review_total_tasks` / `reviewed_number` for auto-review progress.
+* **Project-wide totals** — the same for every caller (for example `task_number`, `finished_task_number`).
+
+For organization-level reviewed-task totals (all reviewers combined), use `GET /api/analytics/kpis/tasks_reviewed?projects={id}&tz=UTC` rather than `reviewed_number`. See Analytics KPI `tasks_reviewed`, `tasks_pending_review`, `annotated_tasks`, and `total_tasks` for other project-wide metrics.
 </dd>
 </dl>
 </dd>
@@ -11863,6 +12030,19 @@ client.projects.create()
 <dd>
 
 **annotator_evaluation_enabled:** `typing.Optional[bool]` — Enable annotator evaluation for the project
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**collection_mode:** `typing.Optional[CollectionModeEnum]` 
+
+Data Collection project mode (assigned or open). Set only at creation; immutable afterwards. Requires use_custom_interface.
+
+* `assigned` - Assigned
+* `open` - Open
     
 </dd>
 </dl>
@@ -12357,7 +12537,7 @@ client.projects.list_counts()
 <dl>
 <dd>
 
-Retrieve information about a project by project ID.
+Retrieve information about a project by project ID. Counter fields use per-user or project-wide scope as documented on each field; for all reviewed tasks in the project use `GET /api/analytics/kpis/tasks_reviewed?projects={id}&tz=UTC`.
 </dd>
 </dl>
 </dd>
@@ -14655,6 +14835,14 @@ client.tasks.create_event(
 <dd>
 
 **annotation:** `typing.Optional[int]` — Annotation ID associated with this event
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**annotation_draft:** `typing.Optional[int]` — Draft annotation ID associated with this event (alias for annotation_draft_id)
     
 </dd>
 </dl>
@@ -32848,7 +33036,7 @@ Organization role. Required unless user_type is viewonly.
 
 **user_type:** `typing.Optional[AssignableUserTypeEnum]` 
 
-Seat type for the invited members. View-Only members are free read-only seats scoped to the invited projects/workspaces and cannot be combined with a role.
+Seat type for the invited members. View-Only members are free read-only seats scoped to the invited projects/workspaces and cannot be combined with a role. Flex members keep a normal working role and consume Flex capacity in assigned claim mode.
 
 * `standard` - Standard
 * `flex` - Flex
@@ -34015,9 +34203,342 @@ Organization role
 
 **user_type:** `typing.Optional[StandardUserTypeEnum]` 
 
-Membership seat type. Assigning a working role to a View-Only member upgrades them to a paid Standard seat. View-Only is not accepted because paid-to-View-Only downgrade is not supported.
+Membership seat type. Assigning a working role to a View-Only member upgrades them to a paid Standard seat. Flex seats keep the working role and consume Flex capacity in assigned claim mode. View-Only is not accepted because paid-to-View-Only downgrade is not supported.
 
 * `standard` - Standard
+* `flex` - Flex
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.organizations.members.<a href="src/label_studio_sdk/organizations/members/client.py">get_filter_schema</a>(...) -> OrganizationMemberFilterSchema</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Return the filter dimensions enabled for the current organization and actor.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+from label_studio_sdk.environment import LabelStudioEnvironment
+
+client = LabelStudio(
+    api_key="<value>",
+    environment=LabelStudioEnvironment.DEFAULT,
+)
+
+client.organizations.members.get_filter_schema(
+    id=1,
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `int` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.organizations.members.<a href="src/label_studio_sdk/organizations/members/client.py">list_filtered</a>(...) -> PaginatedLseOrganizationMemberListList</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieve a paginated organization-member list using the versioned `filters` query parameter.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+from label_studio_sdk.environment import LabelStudioEnvironment
+
+client = LabelStudio(
+    api_key="<value>",
+    environment=LabelStudioEnvironment.DEFAULT,
+)
+
+client.organizations.members.list_filtered(
+    id=1,
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `int` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**exclude_project_id:** `typing.Optional[float]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**exclude_workspace_id:** `typing.Optional[float]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**filters:** `typing.Optional[str]` — Versioned JSON organization-member filter payload.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**is_deleted:** `typing.Optional[bool]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**ordering:** `typing.Optional[str]` — Which field to use when ordering the results.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**page:** `typing.Optional[int]` — A page number within the paginated result set.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**page_size:** `typing.Optional[int]` — Number of results to return per page.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**role:** `typing.Optional[typing.Union[str, typing.Sequence[str]]]` — Multiple values may be separated by commas.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**search:** `typing.Optional[str]` — A search term.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**tags:** `typing.Optional[typing.Union[int, typing.Sequence[int]]]` — Multiple values may be separated by commas.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**user_last_activity_gte:** `typing.Optional[datetime.datetime]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**user_last_activity_lte:** `typing.Optional[datetime.datetime]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**user_type:** `typing.Optional[typing.Union[str, typing.Sequence[str]]]` — Multiple values may be separated by commas.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.organizations.members.<a href="src/label_studio_sdk/organizations/members/client.py">search</a>(...) -> LseOrganizationMemberList</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+POST transport for the versioned organization-member filter payload.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+from label_studio_sdk.environment import LabelStudioEnvironment
+
+client = LabelStudio(
+    api_key="<value>",
+    environment=LabelStudioEnvironment.DEFAULT,
+)
+
+client.organizations.members.search(
+    id=1,
+    filters={"key": "value"},
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `int` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**filters:** `typing.Any` 
     
 </dd>
 </dl>
@@ -36528,6 +37049,14 @@ client.projects.stats.label_distribution_counts(
 <dd>
 
 **choice_keys:** `typing.Optional[str]` — Explicit choice keys to fetch, joined by "___PIPE___" (for example: "label___SEP___pos___PIPE___quality___SEP___4"). When provided, pagination params are ignored.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**filters:** `typing.Optional[typing.Dict[str, typing.Any]]` — Optional JSON-encoded Data Manager Filters object (`conjunction` + `items[]`). Label Distribution accepts AND-only plans (no nested `child_filters`) with curated fields: `filter:tasks:id`, `filter:tasks:inner_id`, `filter:tasks:data.*`, `filter:tasks:annotators`, `filter:tasks:ground_truth`, `filter:tasks:reviews_accepted`, `filter:tasks:reviews_rejected`, `filter:tasks:reviewed`, `filter:tasks:predictions_model_versions`, `filter:tasks:annotations_updated_at`, and `filter:tasks:predictions_updated_at`. Source updated-at fields require an inclusive timezone-aware Datetime range (`operator: "in"`, `value: {"min": ..., "max": ...}`). An empty `items` list is treated as unfiltered.
     
 </dd>
 </dl>
@@ -43253,6 +43782,14 @@ client.sso.saml.update(
 <dl>
 <dd>
 
+**user_type_groups:** `typing.Optional[typing.List[typing.List[str]]]` — Seat Types to Groups Mapping. List of [seat_type, group_name] pairs.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **workspaces_groups:** `typing.Optional[typing.List[typing.List[str]]]` — Workspaces to Groups Mapping. List of [workspace_title, group_name] pairs.
     
 </dd>
@@ -43577,6 +44114,14 @@ client.sso.scim.update(
 <dd>
 
 **roles_groups:** `typing.Optional[typing.List[typing.List[str]]]` — Organization Roles to Groups Mapping. List of [role_name, group_name] pairs.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**user_type_groups:** `typing.Optional[typing.List[typing.List[str]]]` — Seat Types to Groups Mapping. List of [seat_type, group_name] pairs.
     
 </dd>
 </dl>
