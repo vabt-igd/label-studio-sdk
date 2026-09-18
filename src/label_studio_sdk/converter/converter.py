@@ -19,7 +19,6 @@ from PIL import Image
 from label_studio_sdk.converter import brush
 from label_studio_sdk.converter.audio import convert_to_asr_json_manifest
 from label_studio_sdk.converter.exports.brush_to_coco import convert_to_coco
-from label_studio_sdk.converter.exports.doclang import convert_to_doclang
 from label_studio_sdk.converter.keypoints import (
     process_keypoints_for_coco,
     build_kp_order,
@@ -29,6 +28,7 @@ from label_studio_sdk.converter.keypoints import (
 )
 from label_studio_sdk.converter.exports import csv2
 from label_studio_sdk.converter.utils import (
+    download,
     parse_config,
     create_tokens_and_tags,
     get_image_size_and_channels,
