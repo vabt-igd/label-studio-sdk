@@ -7265,6 +7265,14 @@ client.interfaces.list()
 <dl>
 <dd>
 
+**has_published_versions:** `typing.Optional[bool]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **ordering:** `typing.Optional[str]` — Which field to use when ordering the results.
     
 </dd>
@@ -17658,7 +17666,7 @@ client.export_storage.azure_spi.list(
             This endpoint is not available in Label Studio Community Edition. [Learn more about Label Studio Enterprise](https://humansignal.com/goenterprise)
         </p>
     </Card>
-Create an Azure export storage connection with Service Principal authentication to store annotations.
+Create an Azure export storage connection with Service Principal or workload-identity authentication to store annotations. Supports auth_mode=service_principal (default; requires tenant_id, client_id, and client_secret) and auth_mode=workload_identity (secretless; client_secret must be omitted, tenant_id is not required, optional client_id selects a user-assigned managed identity). GET responses never include client_secret.
 </dd>
 </dl>
 </dd>
@@ -17737,7 +17745,7 @@ client.export_storage.azure_spi.create(
             This endpoint is not available in Label Studio Community Edition. [Learn more about Label Studio Enterprise](https://humansignal.com/goenterprise)
         </p>
     </Card>
-Validate a specific Azure export storage connection that was set up with Service Principal authentication.
+Validate a specific Azure export storage connection (Service Principal or workload-identity). Supports auth_mode=service_principal (default; requires tenant_id, client_id, and client_secret) and auth_mode=workload_identity (secretless; client_secret must be omitted, tenant_id is not required, optional client_id selects a user-assigned managed identity). GET responses never include client_secret.
 </dd>
 </dl>
 </dd>
@@ -17974,7 +17982,7 @@ client.export_storage.azure_spi.delete(
             This endpoint is not available in Label Studio Community Edition. [Learn more about Label Studio Enterprise](https://humansignal.com/goenterprise)
         </p>
     </Card>
-Update a specific Azure export storage connection that was set up with Service Principal authentication.
+Update a specific Azure export storage connection (Service Principal or workload-identity). Supports auth_mode=service_principal (default; requires tenant_id, client_id, and client_secret) and auth_mode=workload_identity (secretless; client_secret must be omitted, tenant_id is not required, optional client_id selects a user-assigned managed identity). GET responses never include client_secret.
 </dd>
 </dl>
 </dd>
@@ -18031,6 +18039,19 @@ client.export_storage.azure_spi.update(
 <dl>
 <dd>
 
+**auth_mode:** `typing.Optional[AuthModeEnum]` 
+
+Authentication mode. service_principal uses a client secret. workload_identity uses constrained DefaultAzureCredential (workload identity + managed identity only). Defaults to service_principal.
+
+* `service_principal` - Service Principal
+* `workload_identity` - Workload identity
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **can_delete_objects:** `typing.Optional[bool]` — Deletion from storage enabled
     
 </dd>
@@ -18039,7 +18060,7 @@ client.export_storage.azure_spi.update(
 <dl>
 <dd>
 
-**client_id:** `typing.Optional[str]` — Azure Blob Service Principal Client ID
+**client_id:** `typing.Optional[str]` — For service_principal: Azure app registration client ID. For workload_identity: optional user-assigned managed identity client ID.
     
 </dd>
 </dl>
@@ -18047,7 +18068,7 @@ client.export_storage.azure_spi.update(
 <dl>
 <dd>
 
-**client_secret:** `typing.Optional[str]` — Azure Blob Service Principal Client Secret
+**client_secret:** `typing.Optional[str]` — Azure Blob Service Principal client secret. Required when auth_mode is service_principal (or omitted). Must be omitted when auth_mode is workload_identity.
     
 </dd>
 </dl>
@@ -18143,7 +18164,7 @@ client.export_storage.azure_spi.update(
 <dl>
 <dd>
 
-**tenant_id:** `typing.Optional[str]` — Azure Tenant ID
+**tenant_id:** `typing.Optional[str]` — Azure Tenant ID. Required for service_principal; not used for workload_identity.
     
 </dd>
 </dl>
@@ -25600,7 +25621,7 @@ client.import_storage.azure_spi.list(
             This endpoint is not available in Label Studio Community Edition. [Learn more about Label Studio Enterprise](https://humansignal.com/goenterprise)
         </p>
     </Card>
-Create Azure import storage with Service Principal authentication.
+Create Azure import storage with Service Principal or workload-identity authentication. Supports auth_mode=service_principal (default; requires tenant_id, client_id, and client_secret) and auth_mode=workload_identity (secretless; client_secret must be omitted, tenant_id is not required, optional client_id selects a user-assigned managed identity). GET responses never include client_secret.
 </dd>
 </dl>
 </dd>
@@ -25679,7 +25700,7 @@ client.import_storage.azure_spi.create(
             This endpoint is not available in Label Studio Community Edition. [Learn more about Label Studio Enterprise](https://humansignal.com/goenterprise)
         </p>
     </Card>
-Validate a specific Azure import storage connection that was set up with Service Principal authentication.
+Validate a specific Azure import storage connection (Service Principal or workload-identity). Supports auth_mode=service_principal (default; requires tenant_id, client_id, and client_secret) and auth_mode=workload_identity (secretless; client_secret must be omitted, tenant_id is not required, optional client_id selects a user-assigned managed identity). GET responses never include client_secret.
 </dd>
 </dl>
 </dd>
@@ -25916,7 +25937,7 @@ client.import_storage.azure_spi.delete(
             This endpoint is not available in Label Studio Community Edition. [Learn more about Label Studio Enterprise](https://humansignal.com/goenterprise)
         </p>
     </Card>
-Update a specific Azure import storage connection that was set up with Service Principal authentication.
+Update a specific Azure import storage connection (Service Principal or workload-identity). Supports auth_mode=service_principal (default; requires tenant_id, client_id, and client_secret) and auth_mode=workload_identity (secretless; client_secret must be omitted, tenant_id is not required, optional client_id selects a user-assigned managed identity). GET responses never include client_secret.
 </dd>
 </dl>
 </dd>
@@ -25973,7 +25994,12 @@ client.import_storage.azure_spi.update(
 <dl>
 <dd>
 
-**client_id:** `typing.Optional[str]` — Azure Blob Service Principal Client ID
+**auth_mode:** `typing.Optional[AuthModeEnum]` 
+
+Authentication mode. service_principal uses a client secret. workload_identity uses constrained DefaultAzureCredential (workload identity + managed identity only). Defaults to service_principal.
+
+* `service_principal` - Service Principal
+* `workload_identity` - Workload identity
     
 </dd>
 </dl>
@@ -25981,7 +26007,15 @@ client.import_storage.azure_spi.update(
 <dl>
 <dd>
 
-**client_secret:** `typing.Optional[str]` — Azure Blob Service Principal Client Secret
+**client_id:** `typing.Optional[str]` — For service_principal: Azure app registration client ID. For workload_identity: optional user-assigned managed identity client ID.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**client_secret:** `typing.Optional[str]` — Azure Blob Service Principal client secret. Required when auth_mode is service_principal (or omitted). Must be omitted when auth_mode is workload_identity.
     
 </dd>
 </dl>
@@ -26101,7 +26135,7 @@ client.import_storage.azure_spi.update(
 <dl>
 <dd>
 
-**tenant_id:** `typing.Optional[str]` — Azure Tenant ID
+**tenant_id:** `typing.Optional[str]` — Azure Tenant ID. Required for service_principal; not used for workload_identity.
     
 </dd>
 </dl>
@@ -36999,7 +37033,7 @@ client.projects.stats.finished_tasks(
             This endpoint is not available in Label Studio Community Edition. [Learn more about Label Studio Enterprise](https://humansignal.com/goenterprise)
         </p>
     </Card>
-Returns counts and percentages for requested label choices, from both annotations and predictions. Supports either pagination (`limit`, `offset`) or targeted fetches via explicit `choice_keys`.
+Returns counts and percentages for requested label choices, from both annotations and predictions. Supports either pagination (`limit`, `offset`) or targeted fetches via explicit `choice_keys`. Omitting `filters` preserves the unfiltered cached-count behavior.
 </dd>
 </dl>
 </dd>
@@ -37024,6 +37058,7 @@ client = LabelStudio(
 
 client.projects.stats.label_distribution_counts(
     id=1,
+    filters="{\"conjunction\":\"and\",\"items\":[{\"filter\":\"filter:tasks:annotators\",\"operator\":\"contains\",\"type\":\"List\",\"value\":[7]},{\"filter\":\"filter:tasks:ground_truth\",\"operator\":\"equal\",\"type\":\"Boolean\",\"value\":true}]}",
 )
 
 ```
@@ -37056,7 +37091,7 @@ client.projects.stats.label_distribution_counts(
 <dl>
 <dd>
 
-**filters:** `typing.Optional[typing.Dict[str, typing.Any]]` — Optional JSON-encoded Data Manager Filters object (`conjunction` + `items[]`). Label Distribution accepts AND-only plans (no nested `child_filters`) with curated fields: `filter:tasks:id`, `filter:tasks:inner_id`, `filter:tasks:data.*`, `filter:tasks:annotators`, `filter:tasks:ground_truth`, `filter:tasks:reviews_accepted`, `filter:tasks:reviews_rejected`, `filter:tasks:reviewed`, `filter:tasks:predictions_model_versions`, `filter:tasks:annotations_updated_at`, and `filter:tasks:predictions_updated_at`. Source updated-at fields require an inclusive timezone-aware Datetime range (`operator: "in"`, `value: {"min": ..., "max": ...}`). An empty `items` list is treated as unfiltered.
+**filters:** `typing.Optional[str]` — Optional JSON-encoded string containing a curated filter plan (not an exploded object). Pass one JSON string query value (for example `json.dumps(Filters.create(...))` from `label_studio_sdk.data_manager`); do not pass a nested object or Fern will explode `filters[...]` keys. The plan uses normalized AND semantics (`conjunction` must be `"and"`), contains at most 20 items, does not permit nested `child_filters`, and treats an empty `items` list as unfiltered. Supported filter fields are `filter:tasks:id`, `filter:tasks:inner_id`, `filter:tasks:data.*`, `filter:tasks:annotators`, `filter:tasks:ground_truth`, `filter:tasks:reviews_accepted`, `filter:tasks:reviews_rejected`, `filter:tasks:reviewed`, `filter:tasks:predictions_model_versions`, `filter:tasks:annotations_updated_at`, and `filter:tasks:predictions_updated_at`. Each item requires `filter`, `operator`, `type`, and `value`. Annotator filters require one or more positive integer IDs. Model-version filters require 1-100 non-empty strings. Source updated-at filters require an inclusive, ordered, timezone-aware range object with string `min` and `max` timestamps.
     
 </dd>
 </dl>
