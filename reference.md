@@ -12114,6 +12114,14 @@ Data Collection project mode (assigned or open). Set only at creation; immutable
 <dl>
 <dd>
 
+**dm_column_defaults:** `typing.Optional[LseProjectCreateRequestDmColumnDefaults]` — Soft Data Manager column visibility and order defaults. Returned on project reads for every role so Data Manager can apply them at runtime; Managers and above may set this. explore is the main grid (shared order, role-keyed visible lists). labeling is reserved for independent Quick View defaults. On update, omitted surfaces keep their stored values; send null to clear both surfaces.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **enable_empty_annotation:** `typing.Optional[bool]` — Allow annotators to submit empty annotations
     
 </dd>
@@ -12928,6 +12936,14 @@ Metric used to evaluate annotators. Defaults to gt_agreement.
 <dd>
 
 **description:** `typing.Optional[str]` — Description (Public)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**dm_column_defaults:** `typing.Optional[PatchedLseProjectUpdateRequestDmColumnDefaults]` — Soft Data Manager column visibility and order defaults. Returned on project reads for every role so Data Manager can apply them at runtime; Managers and above may set this. explore is the main grid (shared order, role-keyed visible lists). labeling is reserved for independent Quick View defaults. On update, omitted surfaces keep their stored values; send null to clear both surfaces.
     
 </dd>
 </dl>
@@ -14655,6 +14671,14 @@ client.tasks.update(
 <dd>
 
 **reviewed:** `typing.Optional[bool]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**reviewed_at:** `typing.Optional[datetime.datetime]` 
     
 </dd>
 </dl>
@@ -36653,7 +36677,7 @@ client.projects.stats.users_ground_truth_agreement(
 <dl>
 <dd>
 
-**per_label:** `typing.Optional[bool]` — Per label
+**per_label:** `typing.Optional[bool]` — Calculate agreement per label. Not supported for projects using dimension-based agreement (Agreement V2), which returns HTTP 400.
     
 </dd>
 </dl>
@@ -37033,7 +37057,7 @@ client.projects.stats.finished_tasks(
             This endpoint is not available in Label Studio Community Edition. [Learn more about Label Studio Enterprise](https://humansignal.com/goenterprise)
         </p>
     </Card>
-Returns counts and percentages for requested label choices, from both annotations and predictions. Supports either pagination (`limit`, `offset`) or targeted fetches via explicit `choice_keys`. Omitting `filters` preserves the unfiltered cached-count behavior.
+Returns counts and percentages for requested label choices, from both annotations and predictions. Supports either pagination (`limit`, `offset`) or targeted fetches via explicit `choice_keys`. Omitting `filters` preserves the unfiltered cached-count behavior. When a non-empty `filters` plan is provided, filtered aggregation is aggregation-complete and non-paginated: the response includes all structure choice keys and `next_offset` is always null (limit/offset are ignored for filtered requests).
 </dd>
 </dl>
 </dd>
@@ -37099,7 +37123,7 @@ client.projects.stats.label_distribution_counts(
 <dl>
 <dd>
 
-**limit:** `typing.Optional[int]` — Maximum number of choice keys to return for pagination. Ignored when `choice_keys` is provided.
+**limit:** `typing.Optional[int]` — Maximum number of choice keys to return for pagination. Ignored when `choice_keys` is provided. Also ignored for filtered requests (non-empty `filters`), which always return the full aggregation-complete choice set.
     
 </dd>
 </dl>
@@ -37107,7 +37131,7 @@ client.projects.stats.label_distribution_counts(
 <dl>
 <dd>
 
-**offset:** `typing.Optional[int]` — Zero-based offset into the structure `choice_keys` list. Used only when `choice_keys` is not provided.
+**offset:** `typing.Optional[int]` — Zero-based offset into the structure `choice_keys` list. Used only when `choice_keys` is not provided. Ignored for filtered requests (non-empty `filters`).
     
 </dd>
 </dl>
@@ -38222,7 +38246,7 @@ client.projects.stats.user_ground_truth_agreement(
 <dl>
 <dd>
 
-**per_label:** `typing.Optional[bool]` — Calculate agreement per label
+**per_label:** `typing.Optional[bool]` — Calculate agreement per label. Not supported for projects using dimension-based agreement (Agreement V2), which returns HTTP 400.
     
 </dd>
 </dl>
@@ -39668,6 +39692,9 @@ client.projects.review_routing_rules.bulk_replace(
     id=1,
     rules=[
         ReviewRoutingRuleRequestRequest(
+            agreement_threshold=None,
+            dimension=None,
+            operator=None,
             sample_rate="sample_rate",
         )
     ],
@@ -41177,6 +41204,14 @@ client.projects.members.paginated.list(
 <dd>
 
 **no_annotators:** `typing.Optional[bool]` — Exclude annotators from the results
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**no_view_only:** `typing.Optional[bool]` — Exclude view-only users from the results
     
 </dd>
 </dl>
