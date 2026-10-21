@@ -6830,6 +6830,14 @@ client.prompts.compatible_projects()
 <dl>
 <dd>
 
+**is_skill_assessment:** `typing.Optional[bool]` — Filter by skill assessments
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **ordering:** `typing.Optional[str]` — Which field to use when ordering the results.
     
 </dd>
@@ -8150,6 +8158,109 @@ client.interfaces.duplicate(
 </dl>
 </details>
 
+<details><summary><code>client.interfaces.<a href="src/label_studio_sdk/interfaces/client.py">move</a>(...) -> LseInterfaceMovePlan</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+<Card href="https://humansignal.com/goenterprise">
+        <img style="pointer-events: none; margin-left: 0px; margin-right: 0px;" src="https://docs.humansignal.com/images/badge.svg" alt="Label Studio Enterprise badge"/>
+        <p style="margin-top: 10px; font-size: 14px;">
+            This endpoint is not available in Label Studio Community Edition. [Learn more about Label Studio Enterprise](https://humansignal.com/goenterprise)
+        </p>
+    </Card>
+Move a saved interface to a workspace, your Personal Sandbox, or Shared (`workspace: null`). A workspace-scoped interface can only be used by projects in its workspace, so connected projects move with it when needed. Send `dry_run: true` first to get the move plan, then confirm with `dry_run: false` and the `expected_project_ids` from that plan. The response is the plan in every case; a blocked move or a changed plan returns 409 with the fresh plan.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+from label_studio_sdk.environment import LabelStudioEnvironment
+
+client = LabelStudio(
+    api_key="<value>",
+    environment=LabelStudioEnvironment.DEFAULT,
+)
+
+client.interfaces.move(
+    id=1,
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `int` — A unique integer value identifying this interface.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**dry_run:** `typing.Optional[bool]` — Return the move plan without changing anything.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**expected_project_ids:** `typing.Optional[typing.List[int]]` — Required when dry_run is false: IDs of the projects in workspace groups with outcome "move" from the dry run you confirmed. If the server computes a different set, it responds with 409 "interface_move_plan_changed" and the fresh plan.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**workspace:** `typing.Optional[int]` — Target workspace ID, or null to make the interface Shared.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.interfaces.<a href="src/label_studio_sdk/interfaces/client.py">publish_version</a>(...) -> LseInterface</code></summary>
 <dl>
 <dd>
@@ -8789,6 +8900,14 @@ client.organizations.update(
 <dd>
 
 **token:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**token_expires_at:** `typing.Optional[datetime.datetime]` — When the current invite link stops working; null works only while expiration is disabled
     
 </dd>
 </dl>
@@ -11675,14 +11794,6 @@ client.project_templates.update(
 <dl>
 <dd>
 
-**created_by:** `typing.Optional[int]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
 **custom_script:** `typing.Optional[str]` — custom script (Plugin) for projects created from this template
     
 </dd>
@@ -11700,14 +11811,6 @@ client.project_templates.update(
 <dd>
 
 **name:** `typing.Optional[str]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**organization:** `typing.Optional[int]` 
     
 </dd>
 </dl>
@@ -11968,6 +12071,14 @@ client.projects.list()
 <dl>
 <dd>
 
+**is_skill_assessment:** `typing.Optional[bool]` — Filter by skill assessments
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **members_limit:** `typing.Optional[int]` — Maximum number of members to return
     
 </dd>
@@ -12099,6 +12210,22 @@ client.projects.create()
 
 <dl>
 <dd>
+
+<dl>
+<dd>
+
+**annotator_column_access_grant:** `typing.Optional[typing.List[str]]` — Bulk column ids to grant or revoke Annotator/Reviewer Data Manager access in one request. Omitted or empty arrays are no-ops. Unknown ids are ignored. Managers+ only.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**annotator_column_access_revoke:** `typing.Optional[typing.List[str]]` — Bulk column ids to grant or revoke Annotator/Reviewer Data Manager access in one request. Omitted or empty arrays are no-ops. Unknown ids are ignored. Managers+ only.
+    
+</dd>
+</dl>
 
 <dl>
 <dd>
@@ -12316,6 +12443,22 @@ Data Collection project mode (assigned or open). Set only at creation; immutable
 <dl>
 <dd>
 
+**reviewer_column_access_grant:** `typing.Optional[typing.List[str]]` — Bulk column ids to grant or revoke Annotator/Reviewer Data Manager access in one request. Omitted or empty arrays are no-ops. Unknown ids are ignored. Managers+ only.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**reviewer_column_access_revoke:** `typing.Optional[typing.List[str]]` — Bulk column ids to grant or revoke Annotator/Reviewer Data Manager access in one request. Omitted or empty arrays are no-ops. Unknown ids are ignored. Managers+ only.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **sampling:** `typing.Optional[ProjectSamplingEnum]` 
     
 </dd>
@@ -12524,6 +12667,14 @@ client.projects.list_counts()
 <dd>
 
 **include:** `typing.Optional[str]` — Comma-separated list of count fields to include in the response to optimize performance. Available fields: task_number, finished_task_number, total_predictions_number, total_annotations_number, num_tasks_with_annotations, useful_annotation_number, ground_truth_number, skipped_annotations_number. If not specified, all count fields are included.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**is_skill_assessment:** `typing.Optional[bool]` — Filter by skill assessments
     
 </dd>
 </dl>
@@ -12867,6 +13018,22 @@ Methodology (Consensus / Pairwise Averaging)
 <dl>
 <dd>
 
+**annotator_column_access_grant:** `typing.Optional[typing.List[str]]` — Bulk column ids to grant or revoke Annotator/Reviewer Data Manager access in one request. Omitted or empty arrays are no-ops. Unknown ids are ignored. Managers+ only.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**annotator_column_access_revoke:** `typing.Optional[typing.List[str]]` — Bulk column ids to grant or revoke Annotator/Reviewer Data Manager access in one request. Omitted or empty arrays are no-ops. Unknown ids are ignored. Managers+ only.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **annotator_evaluation_continuous_tasks:** `typing.Optional[int]` — Continuous Evaluation: Required tasks
     
 </dd>
@@ -13073,6 +13240,14 @@ Metric used to evaluate annotators. Defaults to gt_agreement.
 <dl>
 <dd>
 
+**is_skill_assessment:** `typing.Optional[bool]` — Skill assessment: tests contributors instead of producing work
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **label_config:** `typing.Optional[str]` — Labeling Configuration
     
 </dd>
@@ -13170,6 +13345,22 @@ Metric used to evaluate annotators. Defaults to gt_agreement.
 <dd>
 
 **review_settings:** `typing.Optional[ReviewSettingsRequest]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**reviewer_column_access_grant:** `typing.Optional[typing.List[str]]` — Bulk column ids to grant or revoke Annotator/Reviewer Data Manager access in one request. Omitted or empty arrays are no-ops. Unknown ids are ignored. Managers+ only.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**reviewer_column_access_revoke:** `typing.Optional[typing.List[str]]` — Bulk column ids to grant or revoke Annotator/Reviewer Data Manager access in one request. Omitted or empty arrays are no-ops. Unknown ids are ignored. Managers+ only.
     
 </dd>
 </dl>
@@ -13898,6 +14089,8 @@ client.projects.validate_label_config(
             4. **Import errors and failures will only be visible in this GET response**, not in the original POST request
             
             This endpoint returns detailed information about the import including task counts, status, and any error messages.
+            While an import is running, `task_count` / annotation / prediction counts update as batches commit.
+            Counts are cumulative so far; there is no expected total, so percent-complete / ETA is not available from this API.
         
 </dd>
 </dl>
@@ -13940,7 +14133,7 @@ client.tasks.create_many_status(
 <dl>
 <dd>
 
-**id:** `int` — A unique integer value identifying this project import.
+**id:** `int` — A unique integer value identifying this project.
     
 </dd>
 </dl>
@@ -13948,7 +14141,7 @@ client.tasks.create_many_status(
 <dl>
 <dd>
 
-**import_pk:** `int` 
+**import_pk:** `int` — A unique integer value identifying this project import.
     
 </dd>
 </dl>
@@ -16740,7 +16933,7 @@ client.analytics.kpis.list()
             This endpoint is not available in Label Studio Community Edition. [Learn more about Label Studio Enterprise](https://humansignal.com/goenterprise)
         </p>
     </Card>
-Retrieve data for a specific KPI with support for filtering and segmentation. Can segment by time (hourly, daily, weekly, monthly, yearly), by user, or both (2D matrix). If no segmentation is specified, returns a single total value. Supports filtering by projects, members, and date range. Date filters are interpreted in the specified timezone (required parameter). Maximum 50 projects allowed per request for performance reasons.
+Retrieve data for a specific KPI with support for filtering and segmentation. Can segment by time (hourly, daily, weekly, monthly, yearly), by user, or both (2D matrix). Combining segment_by_user and segment_by_project returns a sparse user × project breakdown. If no segmentation is specified, returns a single total value. Supports filtering by projects, members, and date range. Date filters are interpreted in the specified timezone (required parameter). Maximum 50 projects allowed per request for performance reasons.
 </dd>
 </dl>
 </dd>
@@ -16830,7 +17023,7 @@ client.analytics.kpis.get(
 <dl>
 <dd>
 
-**segment_by_project:** `typing.Optional[bool]` — Whether to segment results by project
+**segment_by_project:** `typing.Optional[bool]` — Whether to segment results by project. Combine with segment_by_user for a user × project breakdown.
     
 </dd>
 </dl>
@@ -39110,6 +39303,104 @@ client.projects.exports.download(...)
 </dl>
 </details>
 
+## Projects Imports
+<details><summary><code>client.projects.imports.<a href="src/label_studio_sdk/projects/imports/client.py">list</a>(...) -> PaginatedProjectImportListList</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+List asynchronous import jobs for a project (paginated). Optionally filter by `status`. Use `page` / `page_size` query params.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+from label_studio_sdk.environment import LabelStudioEnvironment
+
+client = LabelStudio(
+    api_key="<value>",
+    environment=LabelStudioEnvironment.DEFAULT,
+)
+
+client.projects.imports.list(
+    id=1,
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `int` — A unique integer value identifying this project.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**page:** `typing.Optional[int]` — Page number within the paginated result set.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**page_size:** `typing.Optional[int]` — Number of results per page (max 100).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**status:** `typing.Optional[str]` — Filter by import status (created, in_progress, failed, completed).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Projects Members
 <details><summary><code>client.projects.members.<a href="src/label_studio_sdk/projects/members/client.py">add</a>(...) -> ProjectMember</code></summary>
 <dl>
@@ -39406,6 +39697,14 @@ client.projects.members.export_csv(...)
 <dl>
 <dd>
 
+**tags_operator:** `typing.Optional[str]` — How the `tags` ids combine: `any` (at least one tag), `all` (every tag, the default), `none` (no selected tag). Ignored without `tags`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **user_type:** `typing.Optional[str]` — Multiple values may be separated by commas. (comma-separated values)
     
 </dd>
@@ -39606,6 +39905,198 @@ client.projects.metrics.update(
 <dd>
 
 **metric_name:** `typing.Optional[str]` — Agreement metric
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Projects Reimports
+<details><summary><code>client.projects.reimports.<a href="src/label_studio_sdk/projects/reimports/client.py">list</a>(...) -> PaginatedProjectReimportListList</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+List asynchronous reimport jobs for a project (paginated). Optionally filter by `status`. Use `page` / `page_size` query params.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+from label_studio_sdk.environment import LabelStudioEnvironment
+
+client = LabelStudio(
+    api_key="<value>",
+    environment=LabelStudioEnvironment.DEFAULT,
+)
+
+client.projects.reimports.list(
+    id=1,
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `int` — A unique integer value identifying this project.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**page:** `typing.Optional[int]` — Page number within the paginated result set.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**page_size:** `typing.Optional[int]` — Number of results per page (max 100).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**status:** `typing.Optional[str]` — Filter by reimport status (created, in_progress, failed, completed).
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.projects.reimports.<a href="src/label_studio_sdk/projects/reimports/client.py">get</a>(...) -> ProjectReimport</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+
+            Poll the status of an asynchronous project reimport operation.
+            
+            **Usage:**
+            1. When you POST to reimport tasks, you'll receive a response with a reimport ID
+            2. Use that `reimport_id` with this GET endpoint to check the reimport status
+            3. Poll this endpoint to see if the reimport has completed, is still processing, or has failed
+            4. **Reimport errors and failures will only be visible in this GET response**, not in the original POST request
+            
+            This endpoint returns detailed information about the reimport including task counts, status, and any error messages.
+            While a reimport is running, `task_count` / annotation / prediction counts update as batches commit.
+            Counts are cumulative so far; there is no expected total, so percent-complete / ETA is not available from this API.
+        
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+from label_studio_sdk.environment import LabelStudioEnvironment
+
+client = LabelStudio(
+    api_key="<value>",
+    environment=LabelStudioEnvironment.DEFAULT,
+)
+
+client.projects.reimports.get(
+    id=1,
+    reimport_pk=1,
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `int` — A unique integer value identifying this project.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**reimport_pk:** `int` — A unique integer value identifying this project reimport.
     
 </dd>
 </dl>
@@ -40966,6 +41457,14 @@ client.projects.members.bulk.post(
 <dl>
 <dd>
 
+**tags_operator:** `typing.Optional[str]` — How the `tags` ids combine: `any` (at least one tag), `all` (every tag, the default), `none` (no selected tag). Ignored without `tags`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **user_type:** `typing.Optional[str]` — Multiple values may be separated by commas. (comma-separated values)
     
 </dd>
@@ -41134,6 +41633,14 @@ client.projects.members.bulk.delete(
 <dd>
 
 **tags:** `typing.Optional[str]` — Multiple values may be separated by commas. (comma-separated values)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**tags_operator:** `typing.Optional[str]` — How the `tags` ids combine: `any` (at least one tag), `all` (every tag, the default), `none` (no selected tag). Ignored without `tags`.
     
 </dd>
 </dl>
@@ -41355,6 +41862,14 @@ Returns users who have any of the specified roles either:
 <dd>
 
 **tags:** `typing.Optional[str]` — Filter members by tags. Use a comma-separated list of tag IDs.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**tags_operator:** `typing.Optional[ListPaginatedRequestTagsOperator]` — How the `tags` ids combine: `any` (at least one tag), `all` (every tag, the default), `none` (no selected tag).
     
 </dd>
 </dl>
@@ -42904,14 +43419,6 @@ client.prompts.versions.update(
 <dd>
 
 **model_provider_connection:** `typing.Optional[int]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**organization:** `typing.Optional[int]` 
     
 </dd>
 </dl>

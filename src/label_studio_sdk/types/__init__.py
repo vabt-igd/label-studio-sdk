@@ -97,6 +97,11 @@ if typing.TYPE_CHECKING:
     from .hotkeys import Hotkeys
     from .import_api_request import ImportApiRequest
     from .inference_run_cost_estimate import InferenceRunCostEstimate
+    from .interface_move_blocker_enum import InterfaceMoveBlockerEnum
+    from .interface_move_blocking_reason_enum import InterfaceMoveBlockingReasonEnum
+    from .interface_move_code_enum import InterfaceMoveCodeEnum
+    from .interface_move_notice_enum import InterfaceMoveNoticeEnum
+    from .interface_move_outcome_enum import InterfaceMoveOutcomeEnum
     from .kpi_detail_response import KpiDetailResponse
     from .kpi_matrix_segment import KpiMatrixSegment
     from .kpi_metadata import KpiMetadata
@@ -106,6 +111,8 @@ if typing.TYPE_CHECKING:
     from .kpi_project_segment_values_item import KpiProjectSegmentValuesItem
     from .kpi_time_segment import KpiTimeSegment
     from .kpi_user_info import KpiUserInfo
+    from .kpi_user_project_info import KpiUserProjectInfo
+    from .kpi_user_project_segment import KpiUserProjectSegment
     from .kpi_user_segment import KpiUserSegment
     from .kpi_value import KpiValue
     from .label_distribution_counts_response import LabelDistributionCountsResponse
@@ -124,6 +131,10 @@ if typing.TYPE_CHECKING:
     from .lse_interface_append_version_request import LseInterfaceAppendVersionRequest
     from .lse_interface_duplicate_request_mode_enum import LseInterfaceDuplicateRequestModeEnum
     from .lse_interface_list import LseInterfaceList
+    from .lse_interface_move_plan import LseInterfaceMovePlan
+    from .lse_interface_move_project import LseInterfaceMoveProject
+    from .lse_interface_move_workspace import LseInterfaceMoveWorkspace
+    from .lse_interface_move_workspace_group import LseInterfaceMoveWorkspaceGroup
     from .lse_interface_request import LseInterfaceRequest
     from .lse_interface_version_id_request import LseInterfaceVersionIdRequest
     from .lse_key_indicator_value import LseKeyIndicatorValue
@@ -216,7 +227,9 @@ if typing.TYPE_CHECKING:
     from .paginated_model_interface_serializer_get_list import PaginatedModelInterfaceSerializerGetList
     from .paginated_organization_member_tag_list import PaginatedOrganizationMemberTagList
     from .paginated_paginated_project_member_list import PaginatedPaginatedProjectMemberList
+    from .paginated_project_import_list_list import PaginatedProjectImportListList
     from .paginated_project_member import PaginatedProjectMember
+    from .paginated_project_reimport_list_list import PaginatedProjectReimportListList
     from .paginated_project_subset_tasks_response_list import PaginatedProjectSubsetTasksResponseList
     from .paginated_role_based_task_list import PaginatedRoleBasedTaskList
     from .paginated_state_model_list import PaginatedStateModelList
@@ -250,12 +263,15 @@ if typing.TYPE_CHECKING:
     from .project_group_request import ProjectGroupRequest
     from .project_group_role_enum import ProjectGroupRoleEnum
     from .project_import import ProjectImport
+    from .project_import_list import ProjectImportList
     from .project_import_status_enum import ProjectImportStatusEnum
     from .project_label_config import ProjectLabelConfig
     from .project_label_config_request import ProjectLabelConfigRequest
     from .project_member import ProjectMember
     from .project_member_bulk_assign_response import ProjectMemberBulkAssignResponse
     from .project_member_bulk_assign_roles_request import ProjectMemberBulkAssignRolesRequest
+    from .project_reimport import ProjectReimport
+    from .project_reimport_list import ProjectReimportList
     from .project_role import ProjectRole
     from .project_sampling_enum import ProjectSamplingEnum
     from .project_subset_enum import ProjectSubsetEnum
@@ -427,6 +443,11 @@ _dynamic_imports: typing.Dict[str, str] = {
     "Hotkeys": ".hotkeys",
     "ImportApiRequest": ".import_api_request",
     "InferenceRunCostEstimate": ".inference_run_cost_estimate",
+    "InterfaceMoveBlockerEnum": ".interface_move_blocker_enum",
+    "InterfaceMoveBlockingReasonEnum": ".interface_move_blocking_reason_enum",
+    "InterfaceMoveCodeEnum": ".interface_move_code_enum",
+    "InterfaceMoveNoticeEnum": ".interface_move_notice_enum",
+    "InterfaceMoveOutcomeEnum": ".interface_move_outcome_enum",
     "KpiDetailResponse": ".kpi_detail_response",
     "KpiMatrixSegment": ".kpi_matrix_segment",
     "KpiMetadata": ".kpi_metadata",
@@ -436,6 +457,8 @@ _dynamic_imports: typing.Dict[str, str] = {
     "KpiProjectSegmentValuesItem": ".kpi_project_segment_values_item",
     "KpiTimeSegment": ".kpi_time_segment",
     "KpiUserInfo": ".kpi_user_info",
+    "KpiUserProjectInfo": ".kpi_user_project_info",
+    "KpiUserProjectSegment": ".kpi_user_project_segment",
     "KpiUserSegment": ".kpi_user_segment",
     "KpiValue": ".kpi_value",
     "LabelDistributionCountsResponse": ".label_distribution_counts_response",
@@ -454,6 +477,10 @@ _dynamic_imports: typing.Dict[str, str] = {
     "LseInterfaceAppendVersionRequest": ".lse_interface_append_version_request",
     "LseInterfaceDuplicateRequestModeEnum": ".lse_interface_duplicate_request_mode_enum",
     "LseInterfaceList": ".lse_interface_list",
+    "LseInterfaceMovePlan": ".lse_interface_move_plan",
+    "LseInterfaceMoveProject": ".lse_interface_move_project",
+    "LseInterfaceMoveWorkspace": ".lse_interface_move_workspace",
+    "LseInterfaceMoveWorkspaceGroup": ".lse_interface_move_workspace_group",
     "LseInterfaceRequest": ".lse_interface_request",
     "LseInterfaceVersionIdRequest": ".lse_interface_version_id_request",
     "LseKeyIndicatorValue": ".lse_key_indicator_value",
@@ -538,7 +565,9 @@ _dynamic_imports: typing.Dict[str, str] = {
     "PaginatedModelInterfaceSerializerGetList": ".paginated_model_interface_serializer_get_list",
     "PaginatedOrganizationMemberTagList": ".paginated_organization_member_tag_list",
     "PaginatedPaginatedProjectMemberList": ".paginated_paginated_project_member_list",
+    "PaginatedProjectImportListList": ".paginated_project_import_list_list",
     "PaginatedProjectMember": ".paginated_project_member",
+    "PaginatedProjectReimportListList": ".paginated_project_reimport_list_list",
     "PaginatedProjectSubsetTasksResponseList": ".paginated_project_subset_tasks_response_list",
     "PaginatedRoleBasedTaskList": ".paginated_role_based_task_list",
     "PaginatedStateModelList": ".paginated_state_model_list",
@@ -564,12 +593,15 @@ _dynamic_imports: typing.Dict[str, str] = {
     "ProjectGroupRequest": ".project_group_request",
     "ProjectGroupRoleEnum": ".project_group_role_enum",
     "ProjectImport": ".project_import",
+    "ProjectImportList": ".project_import_list",
     "ProjectImportStatusEnum": ".project_import_status_enum",
     "ProjectLabelConfig": ".project_label_config",
     "ProjectLabelConfigRequest": ".project_label_config_request",
     "ProjectMember": ".project_member",
     "ProjectMemberBulkAssignResponse": ".project_member_bulk_assign_response",
     "ProjectMemberBulkAssignRolesRequest": ".project_member_bulk_assign_roles_request",
+    "ProjectReimport": ".project_reimport",
+    "ProjectReimportList": ".project_reimport_list",
     "ProjectRole": ".project_role",
     "ProjectSamplingEnum": ".project_sampling_enum",
     "ProjectSubsetEnum": ".project_subset_enum",
@@ -765,6 +797,11 @@ __all__ = [
     "Hotkeys",
     "ImportApiRequest",
     "InferenceRunCostEstimate",
+    "InterfaceMoveBlockerEnum",
+    "InterfaceMoveBlockingReasonEnum",
+    "InterfaceMoveCodeEnum",
+    "InterfaceMoveNoticeEnum",
+    "InterfaceMoveOutcomeEnum",
     "KpiDetailResponse",
     "KpiMatrixSegment",
     "KpiMetadata",
@@ -774,6 +811,8 @@ __all__ = [
     "KpiProjectSegmentValuesItem",
     "KpiTimeSegment",
     "KpiUserInfo",
+    "KpiUserProjectInfo",
+    "KpiUserProjectSegment",
     "KpiUserSegment",
     "KpiValue",
     "LabelDistributionCountsResponse",
@@ -792,6 +831,10 @@ __all__ = [
     "LseInterfaceAppendVersionRequest",
     "LseInterfaceDuplicateRequestModeEnum",
     "LseInterfaceList",
+    "LseInterfaceMovePlan",
+    "LseInterfaceMoveProject",
+    "LseInterfaceMoveWorkspace",
+    "LseInterfaceMoveWorkspaceGroup",
     "LseInterfaceRequest",
     "LseInterfaceVersionIdRequest",
     "LseKeyIndicatorValue",
@@ -876,7 +919,9 @@ __all__ = [
     "PaginatedModelInterfaceSerializerGetList",
     "PaginatedOrganizationMemberTagList",
     "PaginatedPaginatedProjectMemberList",
+    "PaginatedProjectImportListList",
     "PaginatedProjectMember",
+    "PaginatedProjectReimportListList",
     "PaginatedProjectSubsetTasksResponseList",
     "PaginatedRoleBasedTaskList",
     "PaginatedStateModelList",
@@ -902,12 +947,15 @@ __all__ = [
     "ProjectGroupRequest",
     "ProjectGroupRoleEnum",
     "ProjectImport",
+    "ProjectImportList",
     "ProjectImportStatusEnum",
     "ProjectLabelConfig",
     "ProjectLabelConfigRequest",
     "ProjectMember",
     "ProjectMemberBulkAssignResponse",
     "ProjectMemberBulkAssignRolesRequest",
+    "ProjectReimport",
+    "ProjectReimportList",
     "ProjectRole",
     "ProjectSamplingEnum",
     "ProjectSubsetEnum",
