@@ -6,11 +6,12 @@ from pathlib import Path
 from types import SimpleNamespace
 from typing import Any
 
+import httpx
+import label_studio_sdk
 from .preview_fakes import FakePreviewCache, FakePreviewServer
-from typer.testing import CliRunner
-
 from label_studio_sdk._extensions.cli.main import app as root_app
 from label_studio_sdk._extensions.interface import cli as interface_cli
+from typer.testing import CliRunner
 
 runner = CliRunner()
 
@@ -19,7 +20,9 @@ def _jwt_token(token_type: str) -> str:
     def encode(value: dict[str, Any]) -> str:
         return base64.urlsafe_b64encode(json.dumps(value).encode("utf-8")).rstrip(b"=").decode("ascii")
 
-    return f"{encode({'alg': 'HS256', 'typ': 'JWT'})}.{encode({'token_type': token_type})}.{encode({'sig': True})}"
+    # Label Studio tokens always carry `exp`; the SDK client rejects JWTs without one.
+    claims = {"token_type": token_type, "exp": 4102444800}
+    return f"{encode({'alg': 'HS256', 'typ': 'JWT'})}.{encode(claims)}.{encode({'sig': True})}"
 
 
 def test_root_cli_includes_interface_group() -> None:
@@ -54,6 +57,62 @@ def test_init_screen_template_uses_shell_region_callbacks(tmp_path: Path) -> Non
     assert "setRegions" not in screen
     assert "addRegion" in screen and "updateRegion" in screen
     assert screen.rstrip().endswith("})")
+
+
+def test_init_scaffolds_design_system_controls(monkeypatch: Any, tmp_path: Path) -> None:
+    # FIT-3447: offline or on hosts without interfaces_components (e.g. 2.37), the starter stays free of
+    # window.InterfaceComponents so `interface validate` works without an editor-standalone bundle. When the target
+    # host reports `interfaces_components` enabled via authoring-capabilities, init scaffolds the ChoiceGroup
+    # variant and reads it by property (never destructuring the lazy window.InterfaceComponents Proxy).
+    monkeypatch.delenv("LABEL_STUDIO_URL", raising=False)
+    monkeypatch.delenv("LS_URL", raising=False)
+    monkeypatch.delenv("LABEL_STUDIO_API_KEY", raising=False)
+
+    offline_dir = tmp_path / "offline"
+    res_offline = runner.invoke(interface_cli.app, ["init", str(offline_dir)])
+    assert res_offline.exit_code == 0, res_offline.output
+    offline_screen = (offline_dir / "Screen.jsx").read_text(encoding="utf-8")
+    offline_scenarios = (offline_dir / "scenarios.js").read_text(encoding="utf-8")
+    assert "<button" in offline_screen
+    assert "InterfaceComponents" not in offline_screen
+    assert 'getByRole("button", { name: "Positive" })' in offline_scenarios
+
+    _reset_fake_http()
+    FakeHttpClient.interface_payload = {
+        "schema_version": 1,
+        "capabilities": {"interfaces_components": False, "collection": False, "scenarios": True},
+    }
+    monkeypatch.setattr(interface_cli.httpx, "Client", FakeHttpClient)
+
+    flag_off_dir = tmp_path / "flag_off"
+    res_off = runner.invoke(
+        interface_cli.app,
+        ["init", str(flag_off_dir), "--lse-url", "http://ls", "--token", "token"],
+    )
+    assert res_off.exit_code == 0, res_off.output
+    assert "InterfaceComponents" not in (flag_off_dir / "Screen.jsx").read_text(encoding="utf-8")
+
+    _reset_fake_http()
+    FakeHttpClient.interface_payload = {
+        "schema_version": 1,
+        "capabilities": {"interfaces_components": True, "collection": False, "scenarios": True},
+    }
+    flag_on_dir = tmp_path / "flag_on"
+    res_on = runner.invoke(
+        interface_cli.app,
+        ["init", str(flag_on_dir), "--lse-url", "http://ls", "--token", "token"],
+    )
+    assert res_on.exit_code == 0, res_on.output
+    assert FakeHttpClient.instances[-1].calls == [("GET", "http://ls/api/interfaces/authoring-capabilities/", None)]
+    screen = (flag_on_dir / "Screen.jsx").read_text(encoding="utf-8")
+    scenarios = (flag_on_dir / "scenarios.js").read_text(encoding="utf-8")
+
+    assert "<button" not in screen
+    assert "window.InterfaceComponents.ChoiceGroup" in screen
+    assert "} = window.InterfaceComponents" not in screen
+    assert 'getByRole("radio", { name: "Positive" })' in scenarios
+    assert 'getByRole("button"' not in scenarios
+
 
 class FakeResponse:
     def __init__(self, payload: dict[str, Any], status_code: int = 200) -> None:
@@ -110,6 +169,10 @@ class FakeHttpClient:
         self.calls.append(("GET", url, None))
         return FakeResponse(deepcopy(FakeHttpClient.interface_payload))
 
+    def request(self, method: str, url: str, json: dict[str, Any] | None = None, **kwargs: Any) -> FakeResponse:
+        # The SDK client's token refresh goes through `request`.
+        return self.post(url, json=json) if method == "POST" else self.get(url)
+
     def post(self, url: str, json: dict[str, Any] | None = None, **kwargs: Any) -> FakeResponse:
         self.calls.append(("POST", url, json))
         if url.endswith("/api/token/refresh/"):
@@ -132,6 +195,8 @@ class FakeHttpClient:
                 "title",
                 "code",
                 "compiled",
+                "scenarios",
+                "data_sample",
                 "messages",
                 "artifacts",
                 "input_schema",
@@ -859,3 +924,315 @@ def test_doctor_reports_cache_identity_and_separates_reachability_from_api_auth(
     assert "OK preview origin key: origin-key" in result.output
     assert "OK preview fingerprint: artifact-fingerprint" in result.output
     assert "OK preview last fetch: 2026-09-17T12:00:00+00:00" in result.output
+
+
+def test_start_omits_workspace_when_workspace_id_is_none(monkeypatch: Any, tmp_path: Path) -> None:
+    """FIT-3445: Personal Sandbox / shared interfaces have workspace=None; POST /api/projects/ must omit workspace."""
+    file = tmp_path / "Screen.jsx"
+    file.write_text("({ default: function Screen() { return null; } })\n", encoding="utf-8")
+
+    project_bodies: list[dict[str, Any]] = []
+    real_httpx_client = httpx.Client
+    real_label_studio = label_studio_sdk.LabelStudio
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        if request.url.path == "/api/interfaces/":
+            body = json.loads(request.content.decode("utf-8"))
+            return httpx.Response(
+                201,
+                json={
+                    "id": 82,
+                    "title": body["title"],
+                    "code": body["code"],
+                    "compiled": body["compiled"],
+                    "workspace": None,
+                    "versions": [{**body["versions"][0], "id": 0}],
+                },
+            )
+        if request.url.path == "/api/projects/":
+            body = json.loads(request.content.decode("utf-8"))
+            project_bodies.append(body)
+            if "workspace" in body and body["workspace"] is None:
+                return httpx.Response(
+                    400,
+                    json={
+                        "detail": "Validation error",
+                        "validation_errors": {"workspace": ["This field may not be null."]},
+                    },
+                )
+            return httpx.Response(201, json={"id": 101, "title": body.get("title")})
+        return httpx.Response(404)
+
+    transport = httpx.MockTransport(handler)
+    monkeypatch.setattr(interface_cli, "_run_validator", lambda _file: _validator_report())
+    monkeypatch.setattr(
+        interface_cli.httpx,
+        "Client",
+        lambda *args, **kwargs: real_httpx_client(*args, transport=transport, **kwargs),
+    )
+    monkeypatch.setattr(
+        label_studio_sdk,
+        "LabelStudio",
+        lambda *args, **kwargs: real_label_studio(
+            *args,
+            httpx_client=real_httpx_client(transport=transport),
+            **kwargs,
+        ),
+    )
+
+    result = runner.invoke(
+        interface_cli.app,
+        [
+            "start",
+            str(file),
+            "--no-validate",
+            "--no-open",
+            "--token",
+            "token",
+            "--lse-url",
+            "http://ls",
+        ],
+    )
+
+    assert result.exit_code == 0, f"{result.output}\n{result.exception!r}"
+    assert "created project #101" in result.output
+    assert len(project_bodies) == 1
+    assert "workspace" not in project_bodies[0]
+    assert project_bodies[0]["source_interface_id"] == 82
+    assert project_bodies[0]["source_interface_version"] == 0
+
+    explicit_project = interface_cli._create_project(
+        api_key="token",
+        base_url="http://ls",
+        title="Explicit Workspace Project",
+        description="",
+        workspace_id=7,
+        interface_id=82,
+        source_version=0,
+        params=None,
+    )
+    assert getattr(explicit_project, "id", None) == 101
+    assert project_bodies[1]["workspace"] == 7
+
+
+def test_sync_uploads_scenarios_and_tracks_scenarios_in_hash(monkeypatch: Any, tmp_path: Path) -> None:
+    """FIT-3445: sibling scenarios.js uploads to /api/interfaces/ and participates in change detection."""
+    file = tmp_path / "Screen.jsx"
+    code = "({ default: function Screen() { return null; } })"
+    file.write_text(code + "\n", encoding="utf-8")
+    scenarios_file = tmp_path / "scenarios.js"
+    initial_scenarios = 'export default [{ name: "initial" }];'
+    scenarios_file.write_text(initial_scenarios + "\n", encoding="utf-8")
+
+    _reset_fake_http()
+    monkeypatch.setattr(interface_cli, "_run_validator", lambda _file: _validator_report())
+    monkeypatch.setattr(interface_cli.httpx, "Client", FakeHttpClient)
+
+    create_res = runner.invoke(
+        interface_cli.app,
+        ["sync", str(file), "--title", "Scenario UI", "--token", "token", "--lse-url", "http://ls"],
+    )
+    assert create_res.exit_code == 0, create_res.output
+    create_payload = FakeHttpClient.instances[-1].calls[0][2]
+    assert create_payload is not None
+    assert create_payload["scenarios"] == initial_scenarios
+    assert create_payload["versions"][0]["scenarios"] == initial_scenarios
+
+    # Unchanged code + unchanged scenarios.js skips without hitting the API.
+    skip_res = runner.invoke(
+        interface_cli.app,
+        ["sync", str(file), "--token", "token", "--lse-url", "http://ls"],
+    )
+    assert skip_res.exit_code == 0, skip_res.output
+    assert "no changes" in skip_res.output
+
+    # Editing only scenarios.js changes the sidecar hash and triggers append_versions.
+    FakeHttpClient.interface_payload = {
+        **deepcopy(DEFAULT_INTERFACE_PAYLOAD),
+        "id": 12,
+        "title": "Scenario UI",
+        "code": code,
+        "scenarios": initial_scenarios,
+        "versions": [
+            {
+                "id": 0,
+                "code": code,
+                "compiled": "compiled-body",
+                "scenarios": initial_scenarios,
+                "createdAt": "2026-01-01T00:00:00Z",
+            }
+        ],
+    }
+    updated_scenarios = 'export default [{ name: "updated" }];'
+    scenarios_file.write_text(updated_scenarios + "\n", encoding="utf-8")
+
+    update_res = runner.invoke(
+        interface_cli.app,
+        ["sync", str(file), "--token", "token", "--lse-url", "http://ls"],
+    )
+    assert update_res.exit_code == 0, update_res.output
+    update_calls = FakeHttpClient.instances[-1].calls
+    assert update_calls[1][1] == "http://ls/api/interfaces/12/append_versions/"
+    update_payload = update_calls[1][2]
+    assert update_payload is not None
+    assert update_payload["scenarios"] == updated_scenarios
+    assert update_payload["versions"][0]["scenarios"] == updated_scenarios
+
+    # Editing scenarios.js again also triggers --publish (does not match older published version).
+    FakeHttpClient.interface_payload = {
+        **FakeHttpClient.interface_payload,
+        "scenarios": updated_scenarios,
+        "versions": [
+            {
+                "id": 0,
+                "code": code,
+                "compiled": "compiled-body",
+                "scenarios": updated_scenarios,
+                "createdAt": "2026-01-01T00:00:00Z",
+            }
+        ],
+    }
+    published_scenarios = 'export default [{ name: "published" }];'
+    scenarios_file.write_text(published_scenarios + "\n", encoding="utf-8")
+
+    publish_res = runner.invoke(
+        interface_cli.app,
+        ["sync", str(file), "--publish", "--token", "token", "--lse-url", "http://ls"],
+    )
+    assert publish_res.exit_code == 0, publish_res.output
+    publish_calls = FakeHttpClient.instances[-1].calls
+    assert publish_calls[1][1] == "http://ls/api/interfaces/12/append_versions/"
+    publish_payload = publish_calls[1][2]
+    assert publish_payload is not None
+    assert publish_payload["scenarios"] == published_scenarios
+    assert publish_payload["versions"][0]["scenarios"] == published_scenarios
+
+
+def test_pull_writes_scenarios_and_preserves_round_trip(monkeypatch: Any, tmp_path: Path) -> None:
+    """FIT-3445: sync -> pull preserves scenarios.js with matching content hash; empty scenarios omits scenarios.js."""
+    src_dir = tmp_path / "src"
+    src_dir.mkdir()
+    code = "({ default: function Screen() { return <div>ok</div>; } })"
+    scenarios = 'export default [\n  { name: "round-trip" }\n];'
+    (src_dir / "Screen.jsx").write_text(code + "\n", encoding="utf-8")
+    (src_dir / "task.json").write_text('{"text": "Hello"}\n', encoding="utf-8")
+    (src_dir / "scenarios.js").write_text(scenarios + "\n", encoding="utf-8")
+
+    stored: dict[str, Any] = {}
+    real_httpx_client = httpx.Client
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        if request.method == "POST" and request.url.path == "/api/interfaces/":
+            body = json.loads(request.content.decode("utf-8"))
+            stored.update(
+                {
+                    "id": 55,
+                    "title": body["title"],
+                    "code": body["code"],
+                    "compiled": body["compiled"],
+                    "scenarios": body.get("scenarios", ""),
+                    "data_sample": body.get("data_sample") or {},
+                    "metadata": body.get("metadata") or {},
+                    "workspace": body.get("workspace"),
+                    "versions": [{**body["versions"][0], "id": 0}],
+                }
+            )
+            return httpx.Response(201, json=stored)
+        if request.method == "GET" and request.url.path == "/api/interfaces/55/":
+            return httpx.Response(200, json=stored)
+        return httpx.Response(404)
+
+    transport = httpx.MockTransport(handler)
+    monkeypatch.setattr(interface_cli, "_run_validator", lambda _file: _validator_report())
+    monkeypatch.setattr(
+        interface_cli.httpx,
+        "Client",
+        lambda *args, **kwargs: real_httpx_client(*args, transport=transport, **kwargs),
+    )
+
+    sync_res = runner.invoke(
+        interface_cli.app,
+        ["sync", str(src_dir), "--publish", "--token", "token", "--lse-url", "http://ls"],
+    )
+    assert sync_res.exit_code == 0, sync_res.output
+
+    pulled_dir = tmp_path / "pulled"
+    pull_res = runner.invoke(
+        interface_cli.app,
+        ["pull", str(pulled_dir), "--id", "55", "--token", "token", "--lse-url", "http://ls"],
+    )
+    assert pull_res.exit_code == 0, pull_res.output
+    assert (pulled_dir / "scenarios.js").read_text(encoding="utf-8") == scenarios + "\n"
+
+    # Existing scenarios.js is protected from overwrite unless --force is passed.
+    refuse_res = runner.invoke(
+        interface_cli.app,
+        ["pull", str(pulled_dir), "--id", "55", "--token", "token", "--lse-url", "http://ls"],
+    )
+    assert refuse_res.exit_code == 2
+    assert "scenarios.js" in refuse_res.output
+
+    # Syncing the pulled directory without edits skips cleanly (both draft and --publish).
+    noop_sync = runner.invoke(
+        interface_cli.app,
+        ["sync", str(pulled_dir), "--token", "token", "--lse-url", "http://ls"],
+    )
+    assert noop_sync.exit_code == 0, noop_sync.output
+    assert "no changes" in noop_sync.output
+
+    noop_publish_sync = runner.invoke(
+        interface_cli.app,
+        ["sync", str(pulled_dir), "--publish", "--token", "token", "--lse-url", "http://ls"],
+    )
+    assert noop_publish_sync.exit_code == 0, noop_publish_sync.output
+    assert "no changes vs published interface #55" in noop_publish_sync.output
+
+    # Pulling without --version prefers the latest version's scenarios (including local drafts)
+    # even when top-level interface.scenarios still holds an earlier published version's suite.
+    draft_scenarios = 'export default [{ name: "local-draft" }];'
+    stored["versions"].append(
+        {
+            **stored["versions"][0],
+            "id": 1,
+            "unpublished": True,
+            "scenarios": draft_scenarios,
+        }
+    )
+    draft_dir = tmp_path / "pulled_latest_draft"
+    draft_pull = runner.invoke(
+        interface_cli.app,
+        ["pull", str(draft_dir), "--id", "55", "--token", "token", "--lse-url", "http://ls"],
+    )
+    assert draft_pull.exit_code == 0, draft_pull.output
+    assert (draft_dir / "scenarios.js").read_text(encoding="utf-8") == draft_scenarios + "\n"
+
+    # Pulling an explicit --version uses that version's snapshotted scenarios.
+    stored["scenarios"] = 'export default [{ name: "newer-top-level" }];'
+    versioned_dir = tmp_path / "pulled_v0"
+    v0_pull = runner.invoke(
+        interface_cli.app,
+        ["pull", str(versioned_dir), "--id", "55", "--version", "0", "--token", "token", "--lse-url", "http://ls"],
+    )
+    assert v0_pull.exit_code == 0, v0_pull.output
+    assert (versioned_dir / "scenarios.js").read_text(encoding="utf-8") == scenarios + "\n"
+
+    # Legacy/system interfaces with no version-level scenarios fall back to top-level scenarios.
+    stored["versions"] = [{k: v for k, v in stored["versions"][0].items() if k != "scenarios"}]
+    fallback_dir = tmp_path / "pulled_fallback"
+    fallback_pull = runner.invoke(
+        interface_cli.app,
+        ["pull", str(fallback_dir), "--id", "55", "--token", "token", "--lse-url", "http://ls"],
+    )
+    assert fallback_pull.exit_code == 0, fallback_pull.output
+    assert (fallback_dir / "scenarios.js").read_text(encoding="utf-8") == 'export default [{ name: "newer-top-level" }];\n'
+
+    # Empty remote scenarios does not materialize scenarios.js.
+    stored["scenarios"] = "   "
+    stored["versions"] = [{k: v for k, v in stored["versions"][0].items() if k != "scenarios"}]
+    empty_dir = tmp_path / "empty_scenarios"
+    empty_pull = runner.invoke(
+        interface_cli.app,
+        ["pull", str(empty_dir), "--id", "55", "--token", "token", "--lse-url", "http://ls"],
+    )
+    assert empty_pull.exit_code == 0, empty_pull.output
+    assert not (empty_dir / "scenarios.js").exists()

@@ -81,6 +81,7 @@ class RawUsersClient:
         *,
         active_organization: typing.Optional[int] = OMIT,
         allow_newsletters: typing.Optional[bool] = OMIT,
+        current_password: typing.Optional[str] = OMIT,
         custom_hotkeys: typing.Optional[typing.Any] = OMIT,
         date_joined: typing.Optional[dt.datetime] = OMIT,
         email_notification_settings: typing.Optional[typing.Any] = OMIT,
@@ -90,7 +91,6 @@ class RawUsersClient:
         onboarding_state: typing.Optional[str] = OMIT,
         password: typing.Optional[str] = OMIT,
         phone: typing.Optional[str] = OMIT,
-        username: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[LseUserApi]:
         """
@@ -108,6 +108,9 @@ class RawUsersClient:
 
         allow_newsletters : typing.Optional[bool]
             Allow sending newsletters to user
+
+        current_password : typing.Optional[str]
+            Your current password. Required when you change your own password.
 
         custom_hotkeys : typing.Optional[typing.Any]
             Custom keyboard shortcuts configuration for the user interface
@@ -128,8 +131,6 @@ class RawUsersClient:
 
         phone : typing.Optional[str]
 
-        username : typing.Optional[str]
-
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
@@ -144,6 +145,7 @@ class RawUsersClient:
             json={
                 "active_organization": active_organization,
                 "allow_newsletters": allow_newsletters,
+                "current_password": current_password,
                 "custom_hotkeys": custom_hotkeys,
                 "date_joined": date_joined,
                 "email_notification_settings": email_notification_settings,
@@ -153,7 +155,6 @@ class RawUsersClient:
                 "onboarding_state": onboarding_state,
                 "password": password,
                 "phone": phone,
-                "username": username,
             },
             request_options=request_options,
             omit=OMIT,
@@ -728,6 +729,7 @@ class RawUsersClient:
         *,
         active_organization: typing.Optional[int] = OMIT,
         allow_newsletters: typing.Optional[bool] = OMIT,
+        current_password: typing.Optional[str] = OMIT,
         custom_hotkeys: typing.Optional[typing.Any] = OMIT,
         date_joined: typing.Optional[dt.datetime] = OMIT,
         email_notification_settings: typing.Optional[typing.Any] = OMIT,
@@ -737,7 +739,6 @@ class RawUsersClient:
         onboarding_state: typing.Optional[str] = OMIT,
         password: typing.Optional[str] = OMIT,
         phone: typing.Optional[str] = OMIT,
-        username: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[LseUser]:
         """
@@ -754,6 +755,9 @@ class RawUsersClient:
 
         allow_newsletters : typing.Optional[bool]
             Allow sending newsletters to user
+
+        current_password : typing.Optional[str]
+            Your current password. Required when you change your own password.
 
         custom_hotkeys : typing.Optional[typing.Any]
             Custom keyboard shortcuts configuration for the user interface
@@ -774,8 +778,6 @@ class RawUsersClient:
 
         phone : typing.Optional[str]
 
-        username : typing.Optional[str]
-
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
@@ -790,6 +792,7 @@ class RawUsersClient:
             json={
                 "active_organization": active_organization,
                 "allow_newsletters": allow_newsletters,
+                "current_password": current_password,
                 "custom_hotkeys": custom_hotkeys,
                 "date_joined": date_joined,
                 "email_notification_settings": email_notification_settings,
@@ -799,7 +802,6 @@ class RawUsersClient:
                 "onboarding_state": onboarding_state,
                 "password": password,
                 "phone": phone,
-                "username": username,
             },
             headers={
                 "content-type": "application/json",
@@ -882,6 +884,7 @@ class AsyncRawUsersClient:
         *,
         active_organization: typing.Optional[int] = OMIT,
         allow_newsletters: typing.Optional[bool] = OMIT,
+        current_password: typing.Optional[str] = OMIT,
         custom_hotkeys: typing.Optional[typing.Any] = OMIT,
         date_joined: typing.Optional[dt.datetime] = OMIT,
         email_notification_settings: typing.Optional[typing.Any] = OMIT,
@@ -891,7 +894,6 @@ class AsyncRawUsersClient:
         onboarding_state: typing.Optional[str] = OMIT,
         password: typing.Optional[str] = OMIT,
         phone: typing.Optional[str] = OMIT,
-        username: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[LseUserApi]:
         """
@@ -909,6 +911,9 @@ class AsyncRawUsersClient:
 
         allow_newsletters : typing.Optional[bool]
             Allow sending newsletters to user
+
+        current_password : typing.Optional[str]
+            Your current password. Required when you change your own password.
 
         custom_hotkeys : typing.Optional[typing.Any]
             Custom keyboard shortcuts configuration for the user interface
@@ -929,8 +934,6 @@ class AsyncRawUsersClient:
 
         phone : typing.Optional[str]
 
-        username : typing.Optional[str]
-
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
@@ -945,6 +948,7 @@ class AsyncRawUsersClient:
             json={
                 "active_organization": active_organization,
                 "allow_newsletters": allow_newsletters,
+                "current_password": current_password,
                 "custom_hotkeys": custom_hotkeys,
                 "date_joined": date_joined,
                 "email_notification_settings": email_notification_settings,
@@ -954,7 +958,6 @@ class AsyncRawUsersClient:
                 "onboarding_state": onboarding_state,
                 "password": password,
                 "phone": phone,
-                "username": username,
             },
             request_options=request_options,
             omit=OMIT,
@@ -1533,6 +1536,7 @@ class AsyncRawUsersClient:
         *,
         active_organization: typing.Optional[int] = OMIT,
         allow_newsletters: typing.Optional[bool] = OMIT,
+        current_password: typing.Optional[str] = OMIT,
         custom_hotkeys: typing.Optional[typing.Any] = OMIT,
         date_joined: typing.Optional[dt.datetime] = OMIT,
         email_notification_settings: typing.Optional[typing.Any] = OMIT,
@@ -1542,7 +1546,6 @@ class AsyncRawUsersClient:
         onboarding_state: typing.Optional[str] = OMIT,
         password: typing.Optional[str] = OMIT,
         phone: typing.Optional[str] = OMIT,
-        username: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[LseUser]:
         """
@@ -1559,6 +1562,9 @@ class AsyncRawUsersClient:
 
         allow_newsletters : typing.Optional[bool]
             Allow sending newsletters to user
+
+        current_password : typing.Optional[str]
+            Your current password. Required when you change your own password.
 
         custom_hotkeys : typing.Optional[typing.Any]
             Custom keyboard shortcuts configuration for the user interface
@@ -1579,8 +1585,6 @@ class AsyncRawUsersClient:
 
         phone : typing.Optional[str]
 
-        username : typing.Optional[str]
-
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
@@ -1595,6 +1599,7 @@ class AsyncRawUsersClient:
             json={
                 "active_organization": active_organization,
                 "allow_newsletters": allow_newsletters,
+                "current_password": current_password,
                 "custom_hotkeys": custom_hotkeys,
                 "date_joined": date_joined,
                 "email_notification_settings": email_notification_settings,
@@ -1604,7 +1609,6 @@ class AsyncRawUsersClient:
                 "onboarding_state": onboarding_state,
                 "password": password,
                 "phone": phone,
-                "username": username,
             },
             headers={
                 "content-type": "application/json",

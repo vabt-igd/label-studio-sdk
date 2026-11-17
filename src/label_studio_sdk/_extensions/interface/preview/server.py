@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import mimetypes
+import os
 import re
 import secrets
 import threading
@@ -10,7 +11,7 @@ from collections.abc import Callable
 from http import HTTPStatus
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path, PurePosixPath
-from typing import Any
+from typing import Any, Protocol
 from urllib.parse import urlencode, urlsplit
 
 import httpx
@@ -24,6 +25,21 @@ _ALLOWED_BFF_ROUTES = (
 _PATCH_INTERFACE_RE = re.compile(r"^/api/interfaces/([0-9]+)/$")
 _MAX_BFF_BODY_BYTES = 5 * 1024 * 1024
 _PERMISSION_DENIED_FALLBACK = "You do not have permission to perform this action in Label Studio."
+# Interface Components files the sandbox may fetch on first use (FIT-3237): content-hashed chunks, CSS,
+# workers and wasm (`<name>.<hash>.<ext>`, also under assets/) and the Phosphor icon chunks
+# (`icons/<Name>.js`). The components manifest is never fetched here; it comes from the verified snapshot.
+_COMPONENT_FILE_RE = re.compile(r"(?:assets/)?[\w.-]+\.[A-Za-z0-9_-]{8}\.(?:js|css|wasm)|icons/[A-Z][A-Za-z0-9]*\.js")
+_MAX_COMPONENT_FILE_BYTES = 64 * 1024 * 1024
+
+
+class AuthHeaderProvider(Protocol):
+    """Upstream auth headers for the next request; ``refresh=True`` renews them after an upstream 401."""
+
+    def __call__(self, *, refresh: bool = False) -> dict[str, str]: ...
+
+
+class _AuthUnavailable(Exception):
+    """The auth header provider failed (for example the PAT was revoked or has expired)."""
 
 
 def _is_safe_asset_relative(value: str) -> bool:
@@ -55,23 +71,29 @@ class LocalPreviewServer:
         *,
         asset_root: Path,
         upstream_origin: str,
-        auth_headers: dict[str, str] | None = None,
+        auth_header_provider: AuthHeaderProvider | None = None,
         upstream_client: httpx.Client | None = None,
         capability: str | None = None,
         host_capability: str | None = None,
         sandbox_capability: str | None = None,
         bound_interface_id: int | None = None,
         on_interface_bound: Callable[[dict[str, Any]], None] | None = None,
+        fetch_components: bool = False,
     ) -> None:
         self.asset_root = Path(asset_root).resolve()
         self.upstream_origin = upstream_origin.rstrip("/")
-        self.auth_headers = dict(auth_headers or {})
+        # Called for every upstream request, so a long-running preview never sends an expired access token
+        # (FIT-3310). The CLI backs it with the SDK client's token handling (`LabelStudio.get_auth_headers`).
+        self._auth_header_provider = auth_header_provider
         # Host and sandbox use distinct capability tokens so a leaked sandbox URL
         # cannot authorize host SSE / Save BFF (ticket: per-origin capability).
         self.host_capability = host_capability or capability or secrets.token_urlsafe(32)
         self.sandbox_capability = sandbox_capability or secrets.token_urlsafe(32)
         if self.host_capability == self.sandbox_capability:
             self.sandbox_capability = secrets.token_urlsafe(32)
+        # Download Interface Components files into the active snapshot on first use. Off for --offline,
+        # where only files a previous run fetched are served.
+        self.fetch_components = fetch_components
         self._bound_interface_id = _coerce_interface_id(bound_interface_id)
         self._on_interface_bound = on_interface_bound
         self._upstream_client = upstream_client
@@ -120,7 +142,7 @@ class LocalPreviewServer:
 
     @property
     def save_enabled(self) -> bool:
-        return bool(self.auth_headers.get("Authorization"))
+        return self._auth_header_provider is not None
 
     @property
     def url(self) -> str:
@@ -239,7 +261,7 @@ class LocalPreviewServer:
         if self._on_interface_bound is not None:
             self._on_interface_bound(payload)
 
-    def _permission_denied_detail(self, content: bytes) -> str:
+    def _permission_denied_detail(self, content: bytes, sent_headers: dict[str, str]) -> str:
         """Upstream 403 ``detail`` for the Save UI, or a generic message if unusable or credential-bearing."""
         try:
             payload = json.loads(content)
@@ -249,7 +271,7 @@ class LocalPreviewServer:
         if not isinstance(detail, str) or not detail.strip():
             return _PERMISSION_DENIED_FALLBACK
         secrets_in_headers = {
-            part for value in self.auth_headers.values() for part in (value, *value.split()) if len(part) >= 8
+            part for value in sent_headers.values() for part in (value, *value.split()) if len(part) >= 8
         }
         if any(secret in detail for secret in secrets_in_headers):
             return _PERMISSION_DENIED_FALLBACK
@@ -383,7 +405,7 @@ class LocalPreviewServer:
                 if not owner._bff_route_allowed(method, upstream_path):
                     self._json_error(HTTPStatus.FORBIDDEN, "operation is not allowed by the preview gateway")
                     return
-                if not owner.auth_headers.get("Authorization"):
+                if owner._auth_header_provider is None:
                     self._json_error(HTTPStatus.UNAUTHORIZED, "Label Studio authentication failed")
                     return
                 try:
@@ -395,14 +417,12 @@ class LocalPreviewServer:
                     self._json_error(HTTPStatus.REQUEST_ENTITY_TOO_LARGE, "request body is too large")
                     return
                 body = self.rfile.read(length) if length else None
-                headers = {**owner.auth_headers}
-                if body is not None:
-                    headers["Content-Type"] = "application/json"
                 # Forward query strings only for read routes; Save mutations are path-bound.
                 url = owner.upstream_origin + upstream_path
                 if method == "GET" and query:
                     url += f"?{query}"
                 assert owner._upstream_client is not None
+                upstream_client = owner._upstream_client
                 create_locked = False
                 if method == "POST" and upstream_path == "/api/interfaces/":
                     with owner._condition:
@@ -411,13 +431,44 @@ class LocalPreviewServer:
                             return
                         owner._create_in_flight = True
                         create_locked = True
+
+                def send(auth_headers: dict[str, str]) -> httpx.Response:
+                    headers = dict(auth_headers)
+                    if body is not None:
+                        headers["Content-Type"] = "application/json"
+                    return upstream_client.request(method, url, content=body, headers=headers)
+
+                provider = owner._auth_header_provider
+
+                def auth(*, refresh: bool = False) -> dict[str, str]:
+                    try:
+                        return provider(refresh=refresh)
+                    except httpx.HTTPError:
+                        raise
+                    except Exception as exc:
+                        raise _AuthUnavailable from exc
+
                 try:
-                    response = owner._upstream_client.request(method, url, content=body, headers=headers)
+                    sent_auth = auth()
+                    response = send(sent_auth)
+                    if response.status_code == HTTPStatus.UNAUTHORIZED:
+                        # Upstream considers the token expired while the local clock does not (clock skew). A 401
+                        # is returned before the view runs, so one retry (even of a create) cannot duplicate it.
+                        retry_auth = auth(refresh=True)
+                        if retry_auth != sent_auth:
+                            sent_auth = retry_auth
+                            response = send(sent_auth)
                 except httpx.HTTPError:
                     if create_locked:
                         with owner._condition:
                             owner._create_in_flight = False
                     self._json_error(HTTPStatus.BAD_GATEWAY, "upstream request failed")
+                    return
+                except _AuthUnavailable:
+                    if create_locked:
+                        with owner._condition:
+                            owner._create_in_flight = False
+                    self._json_error(HTTPStatus.UNAUTHORIZED, "Label Studio authentication failed")
                     return
                 if response.status_code in (HTTPStatus.UNAUTHORIZED, HTTPStatus.FORBIDDEN):
                     if create_locked:
@@ -425,7 +476,9 @@ class LocalPreviewServer:
                             owner._create_in_flight = False
                     if response.status_code == HTTPStatus.FORBIDDEN:
                         # 403 is a permission verdict (e.g. missing interfaces.author), not an auth failure.
-                        self._json_error(HTTPStatus.FORBIDDEN, owner._permission_denied_detail(response.content))
+                        self._json_error(
+                            HTTPStatus.FORBIDDEN, owner._permission_denied_detail(response.content, sent_auth)
+                        )
                     else:
                         self._json_error(HTTPStatus.UNAUTHORIZED, "Label Studio authentication failed")
                     return
@@ -476,7 +529,10 @@ class LocalPreviewServer:
                 pure = PurePosixPath(relative)
                 target = (owner.asset_root / "editor-standalone" / pure).resolve()
                 editor_root = (owner.asset_root / "editor-standalone").resolve()
-                if not target.is_relative_to(editor_root) or not target.is_file():
+                if not target.is_relative_to(editor_root):
+                    self.send_error(HTTPStatus.NOT_FOUND)
+                    return
+                if not target.is_file() and not owner._fetch_component(relative):
                     self.send_error(HTTPStatus.NOT_FOUND)
                     return
                 content = target.read_bytes()
@@ -496,6 +552,39 @@ class LocalPreviewServer:
                 return
 
         return SandboxHandler
+
+    def _fetch_component(self, relative: str) -> bool:
+        """Download one Interface Components file into the active snapshot; False when it is unavailable.
+
+        Only component paths the sandbox loads are eligible, and they are public static assets, so the
+        request carries no API token. Hashed names never change content; icon chunks are re-fetched per
+        snapshot, i.e. per deploy.
+        """
+        name = relative.removeprefix("components/")
+        if not self.fetch_components or name == relative or not _COMPONENT_FILE_RE.fullmatch(name):
+            return False
+        assert self._upstream_client is not None
+        url = f"{self.upstream_origin}/react-app/editor-standalone/{relative}"
+        body = bytearray()
+        try:
+            with self._upstream_client.stream("GET", url, follow_redirects=False) as response:
+                if response.status_code != HTTPStatus.OK:
+                    return False
+                for chunk in response.iter_bytes():
+                    body.extend(chunk)
+                    if len(body) > _MAX_COMPONENT_FILE_BYTES:
+                        return False
+        except httpx.HTTPError:
+            return False
+        target = self.asset_root / "editor-standalone" / relative
+        target.parent.mkdir(parents=True, exist_ok=True)
+        staging = target.with_name(f".{target.name}.{secrets.token_hex(8)}.tmp")
+        try:
+            staging.write_bytes(bytes(body))
+            os.replace(staging, target)
+        finally:
+            staging.unlink(missing_ok=True)
+        return True
 
     def _sandbox_csp(self) -> str:
         return "; ".join(

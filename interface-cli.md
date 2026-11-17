@@ -149,20 +149,21 @@ Run offline validation.
 label-studio-sdk interface validate ./my-interface
 label-studio-sdk interface validate Screen.jsx
 label-studio-sdk interface validate Screen.jsx --scenario scenarios.js
+label-studio-sdk interface validate Screen.jsx --scenario scenarios.js --lse-url http://localhost:8080
 label-studio-sdk interface validate Screen.jsx --json
 ```
 
 Static validation checks:
 
 - JSX compilation
-- undefined JSX component references
+- undefined JSX component references (recognizing components destructured from `window.InterfaceComponents`)
 - final module object shape
 - schema export shape
 - missing optional exports
-- `getResults` and `parseResults` smoke tests
+- `getResults` and `parseResults` smoke tests (with a built-in pure-helper shim for `window.InterfaceComponents` `to*Results` / `from*Results` converters)
 - `outputSchema` and `parseResults` consistency
 
-Scenario validation uses Playwright in a minimal React harness. Scenario files must default-export an array of scenario objects:
+Scenario validation uses Playwright in a browser harness. For screens that reference `window.InterfaceComponents`, `validate --scenario` loads the Label Studio `editor-standalone` sandbox shell and preloads the referenced component chunks automatically—reusing a verified local `interface preview` cache snapshot when available, or fetching the bundle on demand when `LABEL_STUDIO_URL` (or `--lse-url`) is configured. Scenario files must default-export an array of scenario objects:
 
 ```js
 export default [
@@ -210,6 +211,8 @@ label-studio-sdk interface preview Screen.jsx --offline
 `preview` downloads the version-compatible playground and sandbox artifacts from the configured Label Studio instance,
 verifies them, and stores them in an origin- and protocol-scoped user cache. The first uncached run requires
 `LABEL_STUDIO_API_KEY`; the CLI sends it with the same `Token` or `Bearer` authentication used by other SDK commands.
+A personal access token is exchanged for a short-lived access token, which the preview renews before it expires, so
+Save keeps working however long the preview runs.
 Before downloading public static assets, it probes `GET /api/current-user/whoami` and fails closed on `401`/`403` when
 no verified cache exists. It never retries an authenticated asset request anonymously.
 
@@ -228,6 +231,15 @@ returns an authentication error and a verified cache exists, preview starts from
 warning. `--offline` skips all network access and requires an existing verified cache. A protocol mismatch fails before
 the browser opens. The server's selected artifact path does not change during the process; cache cleanup retains the
 active snapshot and one prior snapshot.
+
+The hashed editor bundle names come from `GET /api/interfaces/editor-bundle/`, which the app resolves on every request,
+so a CDN copy of `/react-app/editor-standalone/manifest.json` left stale by a deploy cannot pin an old editor. Instances
+without that endpoint, or keys without the Interfaces permission, fall back to `manifest.json`.
+
+Interface Components (`window.InterfaceComponents`, `EditorUI.Icons`) are not downloaded up front. The cache stores the
+instance's components manifest, and the preview fetches each component chunk, stylesheet, worker, wasm file or icon the
+first time an interface uses it, keeping it with the cached snapshot for later runs. With `--offline`, only components a
+previous run already loaded are available.
 
 View-Only users cannot mint the PAT needed for first-run bootstrap. Cookie SSO, OAuth proxies, and IAP browser bootstrap
 are out of scope; allow access to `/react-app/local-playground/` and `/react-app/editor-standalone/`, or populate the
@@ -249,10 +261,11 @@ label-studio-sdk interface sync Screen.jsx --dry-run
 By default, `sync`:
 
 - validates and compiles the file
+- uploads sibling `task.json` (`data_sample`) and `scenarios.js` (`scenarios`) when present
 - creates a new interface when no id or sidecar entry exists
 - updates the existing interface when `--id` or a sidecar entry is available
 - appends a new draft version without replacing existing versions
-- skips upload when the local source hash has not changed
+- skips upload when the local content hash (`Screen.jsx` plus `scenarios.js` when present) has not changed
 - writes a sidecar file next to the JSX source
 
 Useful options:
@@ -277,7 +290,7 @@ label-studio-sdk interface pull --id 12 --version 4 ./review-ui
 label-studio-sdk interface pull --id 12 ./review-ui --force
 ```
 
-`pull` writes `Screen.jsx`, `task.json`, optional `params.json` defaults from `paramsSchema`, and a sidecar file. Without `--version`, it pulls the latest version, including local drafts.
+`pull` writes `Screen.jsx`, `task.json`, optional `scenarios.js` when the remote interface has non-empty scenarios, optional `params.json` defaults from `paramsSchema`, and a sidecar file. Without `--version`, it pulls the latest version, including local drafts.
 
 ### `start`
 

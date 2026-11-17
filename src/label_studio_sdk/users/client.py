@@ -69,6 +69,7 @@ class UsersClient:
         *,
         active_organization: typing.Optional[int] = OMIT,
         allow_newsletters: typing.Optional[bool] = OMIT,
+        current_password: typing.Optional[str] = OMIT,
         custom_hotkeys: typing.Optional[typing.Any] = OMIT,
         date_joined: typing.Optional[dt.datetime] = OMIT,
         email_notification_settings: typing.Optional[typing.Any] = OMIT,
@@ -78,7 +79,6 @@ class UsersClient:
         onboarding_state: typing.Optional[str] = OMIT,
         password: typing.Optional[str] = OMIT,
         phone: typing.Optional[str] = OMIT,
-        username: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> LseUserApi:
         """
@@ -96,6 +96,9 @@ class UsersClient:
 
         allow_newsletters : typing.Optional[bool]
             Allow sending newsletters to user
+
+        current_password : typing.Optional[str]
+            Your current password. Required when you change your own password.
 
         custom_hotkeys : typing.Optional[typing.Any]
             Custom keyboard shortcuts configuration for the user interface
@@ -115,8 +118,6 @@ class UsersClient:
         password : typing.Optional[str]
 
         phone : typing.Optional[str]
-
-        username : typing.Optional[str]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -138,6 +139,7 @@ class UsersClient:
         _response = self._raw_client.update_current_user(
             active_organization=active_organization,
             allow_newsletters=allow_newsletters,
+            current_password=current_password,
             custom_hotkeys=custom_hotkeys,
             date_joined=date_joined,
             email_notification_settings=email_notification_settings,
@@ -147,7 +149,6 @@ class UsersClient:
             onboarding_state=onboarding_state,
             password=password,
             phone=phone,
-            username=username,
             request_options=request_options,
         )
         return _response.data
@@ -476,6 +477,7 @@ class UsersClient:
         *,
         active_organization: typing.Optional[int] = OMIT,
         allow_newsletters: typing.Optional[bool] = OMIT,
+        current_password: typing.Optional[str] = OMIT,
         custom_hotkeys: typing.Optional[typing.Any] = OMIT,
         date_joined: typing.Optional[dt.datetime] = OMIT,
         email_notification_settings: typing.Optional[typing.Any] = OMIT,
@@ -485,7 +487,6 @@ class UsersClient:
         onboarding_state: typing.Optional[str] = OMIT,
         password: typing.Optional[str] = OMIT,
         phone: typing.Optional[str] = OMIT,
-        username: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> LseUser:
         """
@@ -502,6 +503,9 @@ class UsersClient:
 
         allow_newsletters : typing.Optional[bool]
             Allow sending newsletters to user
+
+        current_password : typing.Optional[str]
+            Your current password. Required when you change your own password.
 
         custom_hotkeys : typing.Optional[typing.Any]
             Custom keyboard shortcuts configuration for the user interface
@@ -521,8 +525,6 @@ class UsersClient:
         password : typing.Optional[str]
 
         phone : typing.Optional[str]
-
-        username : typing.Optional[str]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -547,6 +549,7 @@ class UsersClient:
             id,
             active_organization=active_organization,
             allow_newsletters=allow_newsletters,
+            current_password=current_password,
             custom_hotkeys=custom_hotkeys,
             date_joined=date_joined,
             email_notification_settings=email_notification_settings,
@@ -556,7 +559,6 @@ class UsersClient:
             onboarding_state=onboarding_state,
             password=password,
             phone=phone,
-            username=username,
             request_options=request_options,
         )
         return _response.data
@@ -622,6 +624,7 @@ class AsyncUsersClient:
         *,
         active_organization: typing.Optional[int] = OMIT,
         allow_newsletters: typing.Optional[bool] = OMIT,
+        current_password: typing.Optional[str] = OMIT,
         custom_hotkeys: typing.Optional[typing.Any] = OMIT,
         date_joined: typing.Optional[dt.datetime] = OMIT,
         email_notification_settings: typing.Optional[typing.Any] = OMIT,
@@ -631,7 +634,6 @@ class AsyncUsersClient:
         onboarding_state: typing.Optional[str] = OMIT,
         password: typing.Optional[str] = OMIT,
         phone: typing.Optional[str] = OMIT,
-        username: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> LseUserApi:
         """
@@ -649,6 +651,9 @@ class AsyncUsersClient:
 
         allow_newsletters : typing.Optional[bool]
             Allow sending newsletters to user
+
+        current_password : typing.Optional[str]
+            Your current password. Required when you change your own password.
 
         custom_hotkeys : typing.Optional[typing.Any]
             Custom keyboard shortcuts configuration for the user interface
@@ -668,8 +673,6 @@ class AsyncUsersClient:
         password : typing.Optional[str]
 
         phone : typing.Optional[str]
-
-        username : typing.Optional[str]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -699,6 +702,7 @@ class AsyncUsersClient:
         _response = await self._raw_client.update_current_user(
             active_organization=active_organization,
             allow_newsletters=allow_newsletters,
+            current_password=current_password,
             custom_hotkeys=custom_hotkeys,
             date_joined=date_joined,
             email_notification_settings=email_notification_settings,
@@ -708,7 +712,6 @@ class AsyncUsersClient:
             onboarding_state=onboarding_state,
             password=password,
             phone=phone,
-            username=username,
             request_options=request_options,
         )
         return _response.data
@@ -1109,6 +1112,7 @@ class AsyncUsersClient:
         *,
         active_organization: typing.Optional[int] = OMIT,
         allow_newsletters: typing.Optional[bool] = OMIT,
+        current_password: typing.Optional[str] = OMIT,
         custom_hotkeys: typing.Optional[typing.Any] = OMIT,
         date_joined: typing.Optional[dt.datetime] = OMIT,
         email_notification_settings: typing.Optional[typing.Any] = OMIT,
@@ -1118,7 +1122,6 @@ class AsyncUsersClient:
         onboarding_state: typing.Optional[str] = OMIT,
         password: typing.Optional[str] = OMIT,
         phone: typing.Optional[str] = OMIT,
-        username: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> LseUser:
         """
@@ -1135,6 +1138,9 @@ class AsyncUsersClient:
 
         allow_newsletters : typing.Optional[bool]
             Allow sending newsletters to user
+
+        current_password : typing.Optional[str]
+            Your current password. Required when you change your own password.
 
         custom_hotkeys : typing.Optional[typing.Any]
             Custom keyboard shortcuts configuration for the user interface
@@ -1154,8 +1160,6 @@ class AsyncUsersClient:
         password : typing.Optional[str]
 
         phone : typing.Optional[str]
-
-        username : typing.Optional[str]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -1188,6 +1192,7 @@ class AsyncUsersClient:
             id,
             active_organization=active_organization,
             allow_newsletters=allow_newsletters,
+            current_password=current_password,
             custom_hotkeys=custom_hotkeys,
             date_joined=date_joined,
             email_notification_settings=email_notification_settings,
@@ -1197,7 +1202,6 @@ class AsyncUsersClient:
             onboarding_state=onboarding_state,
             password=password,
             phone=phone,
-            username=username,
             request_options=request_options,
         )
         return _response.data

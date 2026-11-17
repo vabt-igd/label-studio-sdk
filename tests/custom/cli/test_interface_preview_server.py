@@ -13,6 +13,11 @@ from .preview_fakes import preview_asset_root
 from label_studio_sdk._extensions.interface.preview import LocalPreviewServer
 
 
+def _static_auth(headers: dict[str, str]) -> Any:
+    """A provider whose refresh returns the same headers, like a legacy `Token` key."""
+    return lambda *, refresh=False: dict(headers)
+
+
 def _assets(tmp_path: Path) -> Path:
     return preview_asset_root(tmp_path)
 
@@ -62,7 +67,7 @@ def test_sse_replays_current_file_and_publishes_updates(tmp_path: Path) -> None:
     with LocalPreviewServer(
         asset_root=_assets(tmp_path),
         upstream_origin="https://ls.example",
-        auth_headers={"Authorization": "Token must-not-leak"},
+        auth_header_provider=_static_auth({"Authorization": "Token must-not-leak"}),
     ) as server:
         first = server.publish_file_update(
             code="first", task={"text": "one"}, interface_id=12, lse_url="https://ls.example"
@@ -105,7 +110,7 @@ def test_create_bind_is_pushed_on_sse_for_fe_consumer(tmp_path: Path) -> None:
         LocalPreviewServer(
             asset_root=_assets(tmp_path),
             upstream_origin="https://ls.example",
-            auth_headers={"Authorization": "Bearer server-secret"},
+            auth_header_provider=_static_auth({"Authorization": "Bearer server-secret"}),
             upstream_client=upstream_client,
         ) as server,
     ):
@@ -144,7 +149,7 @@ def test_create_before_first_file_update_does_not_publish_empty_code(tmp_path: P
         LocalPreviewServer(
             asset_root=_assets(tmp_path),
             upstream_origin="https://ls.example",
-            auth_headers={"Authorization": "Bearer server-secret"},
+            auth_header_provider=_static_auth({"Authorization": "Bearer server-secret"}),
             upstream_client=upstream_client,
         ) as server,
     ):
@@ -179,7 +184,7 @@ def test_save_bff_allowlist_auth_and_bind_durability(tmp_path: Path) -> None:
         LocalPreviewServer(
             asset_root=_assets(tmp_path),
             upstream_origin="https://ls.example",
-            auth_headers={"Authorization": "Bearer server-secret"},
+            auth_header_provider=_static_auth({"Authorization": "Bearer server-secret"}),
             upstream_client=upstream_client,
         ) as server,
     ):
@@ -220,7 +225,7 @@ def test_save_bff_rejects_oversized_bodies(tmp_path: Path) -> None:
     with LocalPreviewServer(
         asset_root=_assets(tmp_path),
         upstream_origin="https://ls.example",
-        auth_headers={"Authorization": "Bearer server-secret"},
+        auth_header_provider=_static_auth({"Authorization": "Bearer server-secret"}),
     ) as server:
         response = httpx.post(
             f"{server.host_origin}/{server.capability}/bff/api/interfaces/",
@@ -278,7 +283,7 @@ def test_save_bff_sanitizes_auth_failures_and_upstream_timeouts(tmp_path: Path) 
         LocalPreviewServer(
             asset_root=_assets(tmp_path),
             upstream_origin="https://ls.example",
-            auth_headers={"Authorization": "Bearer server-secret"},
+            auth_header_provider=_static_auth({"Authorization": "Bearer server-secret"}),
             upstream_client=upstream_client,
         ) as server,
     ):
@@ -296,7 +301,7 @@ def test_save_bff_sanitizes_auth_failures_and_upstream_timeouts(tmp_path: Path) 
         LocalPreviewServer(
             asset_root=_assets(tmp_path),
             upstream_origin="https://ls.example",
-            auth_headers={"Authorization": "Bearer server-secret"},
+            auth_header_provider=_static_auth({"Authorization": "Bearer server-secret"}),
             upstream_client=upstream_client,
         ) as server,
     ):
@@ -332,7 +337,7 @@ def test_save_bff_surfaces_upstream_permission_denied_detail(tmp_path: Path) -> 
         LocalPreviewServer(
             asset_root=_assets(tmp_path),
             upstream_origin="https://ls.example",
-            auth_headers={"Authorization": "Bearer server-secret"},
+            auth_header_provider=_static_auth({"Authorization": "Bearer server-secret"}),
             upstream_client=upstream_client,
         ) as server,
     ):
@@ -367,7 +372,7 @@ def test_save_bff_falls_back_for_unusable_permission_denied_detail(tmp_path: Pat
         LocalPreviewServer(
             asset_root=_assets(tmp_path),
             upstream_origin="https://ls.example",
-            auth_headers={"Authorization": "Bearer server-secret"},
+            auth_header_provider=_static_auth({"Authorization": "Bearer server-secret"}),
             upstream_client=upstream_client,
         ) as server,
     ):
@@ -400,3 +405,308 @@ def test_sse_waiter_receives_later_update(tmp_path: Path) -> None:
 
     assert received["code"] == "later"
     assert received["interfaceId"] is None
+
+
+# FIT-3237: Interface Components are not in the verified snapshot (1.5k files, mostly icon chunks), so the
+# sandbox server fetches them on first use from the instance and keeps them inside the active snapshot.
+
+
+def _component_upstream(requests: list[httpx.Request], files: dict[str, bytes] | None = None):
+    files = files or {
+        "/react-app/editor-standalone/components/ImageCanvas.CJxrEQ-S.js": b"export const ImageCanvas = 1;",
+        "/react-app/editor-standalone/components/icons/Star.js": b"export const StarIcon = 1;",
+        "/react-app/editor-standalone/components/assets/decode-audio.Cq_l2TZw.wasm": b"\0asm",
+    }
+
+    def upstream(request: httpx.Request) -> httpx.Response:
+        requests.append(request)
+        body = files.get(request.url.path)
+        if body is None:
+            return httpx.Response(404, content=b"missing", request=request)
+        return httpx.Response(200, content=body, request=request)
+
+    return upstream
+
+
+def _component_server(tmp_path: Path, upstream, *, fetch_components: bool = True):
+    client = httpx.Client(transport=httpx.MockTransport(upstream))
+    server = LocalPreviewServer(
+        asset_root=_assets(tmp_path),
+        upstream_origin="https://ls.example",
+        auth_header_provider=_static_auth({"Authorization": "Bearer server-secret"}),
+        upstream_client=client,
+        fetch_components=fetch_components,
+    )
+    return client, server
+
+
+def test_sandbox_fetches_component_files_on_first_use_and_caches_them(tmp_path: Path) -> None:
+    requests: list[httpx.Request] = []
+    client, server = _component_server(tmp_path, _component_upstream(requests))
+    with client, server:
+        base = f"{server.sandbox_origin}/{server.sandbox_capability}/components"
+        for path, body in (
+            ("ImageCanvas.CJxrEQ-S.js", b"export const ImageCanvas = 1;"),
+            ("icons/Star.js", b"export const StarIcon = 1;"),
+            ("assets/decode-audio.Cq_l2TZw.wasm", b"\0asm"),
+        ):
+            first = httpx.get(f"{base}/{path}")
+            assert first.status_code == 200, path
+            assert first.content == body
+            assert first.headers["Cache-Control"] == "no-store"
+            assert httpx.get(f"{base}/{path}").content == body
+
+        assert httpx.get(f"{base}/assets/decode-audio.Cq_l2TZw.wasm").headers["Content-Type"] == "application/wasm"
+        assert httpx.get(f"{base}/ImageCanvas.CJxrEQ-S.js").headers["Content-Type"].startswith("text/javascript")
+        # One upstream request per file; the repeats were served from the snapshot.
+        assert sorted(request.url.path for request in requests) == sorted(
+            [
+                "/react-app/editor-standalone/components/ImageCanvas.CJxrEQ-S.js",
+                "/react-app/editor-standalone/components/icons/Star.js",
+                "/react-app/editor-standalone/components/assets/decode-audio.Cq_l2TZw.wasm",
+            ]
+        )
+        # Public static assets: never send the API token upstream.
+        assert all("Authorization" not in request.headers for request in requests)
+        cached = server.asset_root / "editor-standalone/components/ImageCanvas.CJxrEQ-S.js"
+        assert cached.read_bytes() == b"export const ImageCanvas = 1;"
+
+
+def test_sandbox_serves_components_manifest_only_from_the_snapshot(tmp_path: Path) -> None:
+    requests: list[httpx.Request] = []
+    client, server = _component_server(
+        tmp_path,
+        _component_upstream(requests, {"/react-app/editor-standalone/components/manifest.json": b'{"stale": 1}'}),
+    )
+    with client, server:
+        url = f"{server.sandbox_origin}/{server.sandbox_capability}/components/manifest.json"
+        assert httpx.get(url).status_code == 404
+        assert requests == []
+
+        (server.asset_root / "editor-standalone/components").mkdir(parents=True, exist_ok=True)
+        (server.asset_root / "editor-standalone/components/manifest.json").write_bytes(b'{"components": {}}')
+        assert httpx.get(url).content == b'{"components": {}}'
+        assert requests == []
+
+
+@pytest.mark.parametrize(
+    "path",
+    [
+        "ImageCanvas.js",  # un-hashed chunk name
+        "manifest-a1b2c3d4.json",  # the hashed manifest copy is fetched by the cache, not here
+        "ImageCanvas.CJxrEQ-S.html",  # unexpected extension
+        "%2e%2e/%2e%2e/interface-shell.html",
+        "icons/%2e%2e/ImageCanvas.CJxrEQ-S.js",
+        "icons/star.js",  # icon names are PascalCase
+    ],
+)
+def test_sandbox_rejects_unexpected_component_paths_without_fetching(tmp_path: Path, path: str) -> None:
+    requests: list[httpx.Request] = []
+    client, server = _component_server(tmp_path, _component_upstream(requests))
+    with client, server:
+        response = httpx.get(f"{server.sandbox_origin}/{server.sandbox_capability}/components/{path}")
+        assert response.status_code in (403, 404)
+        assert requests == []
+
+
+def test_sandbox_does_not_cache_upstream_errors(tmp_path: Path) -> None:
+    requests: list[httpx.Request] = []
+    client, server = _component_server(tmp_path, _component_upstream(requests, {}))
+    with client, server:
+        url = f"{server.sandbox_origin}/{server.sandbox_capability}/components/Missing.AbCdEf12.js"
+        assert httpx.get(url).status_code == 404
+        assert httpx.get(url).status_code == 404
+        assert len(requests) == 2
+        assert not (server.asset_root / "editor-standalone/components/Missing.AbCdEf12.js").exists()
+
+
+def test_sandbox_offline_serves_only_cached_components(tmp_path: Path) -> None:
+    requests: list[httpx.Request] = []
+    client, server = _component_server(tmp_path, _component_upstream(requests), fetch_components=False)
+    with client, server:
+        base = f"{server.sandbox_origin}/{server.sandbox_capability}/components"
+        assert httpx.get(f"{base}/ImageCanvas.CJxrEQ-S.js").status_code == 404
+        (server.asset_root / "editor-standalone/components").mkdir(parents=True, exist_ok=True)
+        (server.asset_root / "editor-standalone/components/ImageCanvas.CJxrEQ-S.js").write_bytes(b"cached")
+        assert httpx.get(f"{base}/ImageCanvas.CJxrEQ-S.js").content == b"cached"
+        assert requests == []
+
+
+def test_save_bff_asks_the_provider_for_headers_on_every_request(tmp_path: Path) -> None:
+    """FIT-3310: headers are not fixed at startup, so a renewed access token reaches the next Save."""
+    requests: list[httpx.Request] = []
+    issued: list[str] = []
+
+    def provider(*, refresh: bool = False) -> dict[str, str]:
+        issued.append(f"Bearer access-{len(issued)}")
+        return {"Authorization": issued[-1]}
+
+    def upstream(request: httpx.Request) -> httpx.Response:
+        requests.append(request)
+        if request.method == "POST":
+            return httpx.Response(201, json={"id": 88, "title": "Created"}, request=request)
+        return httpx.Response(200, json=[], request=request)
+
+    with (
+        httpx.Client(transport=httpx.MockTransport(upstream)) as upstream_client,
+        LocalPreviewServer(
+            asset_root=_assets(tmp_path),
+            upstream_origin="https://ls.example",
+            auth_header_provider=provider,
+            upstream_client=upstream_client,
+        ) as server,
+    ):
+        assert parse_qs(urlsplit(server.url).query)["saveEnabled"] == ["1"]
+        bff = f"{server.host_origin}/{server.capability}/bff"
+        statuses = [
+            httpx.get(f"{bff}/api/workspaces/").status_code,
+            httpx.post(f"{bff}/api/interfaces/", json={"title": "Demo"}).status_code,
+            httpx.patch(f"{bff}/api/interfaces/88/", json={"title": "Demo"}).status_code,
+        ]
+
+    assert statuses == [200, 201, 200]
+    assert (
+        [r.headers["Authorization"] for r in requests]
+        == issued
+        == ["Bearer access-0", "Bearer access-1", "Bearer access-2"]
+    )
+
+
+def _skewed_provider(calls: list[bool]):
+    """Provider whose cached token the server already considers expired (local clock behind)."""
+
+    def provider(*, refresh: bool = False) -> dict[str, str]:
+        calls.append(refresh)
+        return {"Authorization": "Bearer fresh-access" if refresh else "Bearer server-expired"}
+
+    return provider
+
+
+def _accepts_only(valid: str, requests: list[httpx.Request]):
+    def upstream(request: httpx.Request) -> httpx.Response:
+        requests.append(request)
+        if request.headers.get("Authorization") != valid:
+            return httpx.Response(401, json={"detail": request.headers.get("Authorization")}, request=request)
+        if request.method == "POST":
+            return httpx.Response(201, json={"id": 88, "title": "Created", "workspace": 3}, request=request)
+        return httpx.Response(200, json={"ok": True}, request=request)
+
+    return upstream
+
+
+def test_save_bff_retries_once_with_renewed_headers_after_upstream_401(tmp_path: Path) -> None:
+    requests: list[httpx.Request] = []
+    calls: list[bool] = []
+
+    with (
+        httpx.Client(transport=httpx.MockTransport(_accepts_only("Bearer fresh-access", requests))) as upstream_client,
+        LocalPreviewServer(
+            asset_root=_assets(tmp_path),
+            upstream_origin="https://ls.example",
+            auth_header_provider=_skewed_provider(calls),
+            upstream_client=upstream_client,
+        ) as server,
+    ):
+        bff = f"{server.host_origin}/{server.capability}/bff"
+        created = httpx.post(f"{bff}/api/interfaces/", json={"title": "Demo"})
+        # The create that succeeded on retry still binds the interface, so a PATCH to it is allowed.
+        updated = httpx.patch(f"{bff}/api/interfaces/88/", json={"title": "Demo"})
+
+    assert created.status_code == 201
+    assert updated.status_code == 200
+    assert calls == [False, True, False, True]
+    assert [(r.method, r.headers["Authorization"]) for r in requests] == [
+        ("POST", "Bearer server-expired"),
+        ("POST", "Bearer fresh-access"),
+        ("PATCH", "Bearer server-expired"),
+        ("PATCH", "Bearer fresh-access"),
+    ]
+    assert [json.loads(r.content) for r in requests if r.method == "POST"] == [{"title": "Demo"}] * 2
+
+
+def test_save_bff_reports_auth_failure_when_the_retry_is_rejected_too(tmp_path: Path) -> None:
+    requests: list[httpx.Request] = []
+
+    with (
+        httpx.Client(transport=httpx.MockTransport(_accepts_only("Bearer nothing", requests))) as upstream_client,
+        LocalPreviewServer(
+            asset_root=_assets(tmp_path),
+            upstream_origin="https://ls.example",
+            auth_header_provider=_skewed_provider([]),
+            upstream_client=upstream_client,
+        ) as server,
+    ):
+        bff = f"{server.host_origin}/{server.capability}/bff"
+        response = httpx.post(f"{bff}/api/interfaces/", json={"title": "Demo"})
+        # The create lock is released, so a later attempt reaches upstream instead of 409.
+        again = httpx.post(f"{bff}/api/interfaces/", json={"title": "Demo"})
+
+    assert response.status_code == again.status_code == 401
+    assert response.json() == {"detail": "Label Studio authentication failed"}
+    assert "access" not in response.text and "expired" not in response.text
+    assert len(requests) == 4
+
+
+def test_save_bff_does_not_retry_when_refresh_returns_the_same_headers(tmp_path: Path) -> None:
+    requests: list[httpx.Request] = []
+
+    with (
+        httpx.Client(transport=httpx.MockTransport(_accepts_only("Bearer nothing", requests))) as upstream_client,
+        LocalPreviewServer(
+            asset_root=_assets(tmp_path),
+            upstream_origin="https://ls.example",
+            auth_header_provider=_static_auth({"Authorization": "Token legacy-key"}),
+            upstream_client=upstream_client,
+        ) as server,
+    ):
+        response = httpx.get(f"{server.host_origin}/{server.capability}/bff/api/workspaces/")
+
+    assert response.status_code == 401
+    assert len(requests) == 1
+
+
+@pytest.mark.parametrize("fail_on_refresh", [False, True], ids=["first-call", "retry"])
+def test_save_bff_reports_auth_failure_when_the_provider_fails(tmp_path: Path, fail_on_refresh: bool) -> None:
+    """A revoked or expired PAT makes the provider raise; Save reports it instead of dropping the connection."""
+    requests: list[httpx.Request] = []
+
+    def provider(*, refresh: bool = False) -> dict[str, str]:
+        if refresh or not fail_on_refresh:
+            raise ValueError("API key has expired. Please obtain a new refresh token.")
+        return {"Authorization": "Bearer server-expired"}
+
+    with (
+        httpx.Client(transport=httpx.MockTransport(_accepts_only("Bearer nothing", requests))) as upstream_client,
+        LocalPreviewServer(
+            asset_root=_assets(tmp_path),
+            upstream_origin="https://ls.example",
+            auth_header_provider=provider,
+            upstream_client=upstream_client,
+        ) as server,
+    ):
+        bff = f"{server.host_origin}/{server.capability}/bff"
+        response = httpx.post(f"{bff}/api/interfaces/", json={"title": "Demo"})
+        again = httpx.post(f"{bff}/api/interfaces/", json={"title": "Demo"})
+
+    assert response.status_code == again.status_code == 401
+    assert response.json() == {"detail": "Label Studio authentication failed"}
+    assert len(requests) == (2 if fail_on_refresh else 0)
+
+
+def test_save_bff_permission_detail_scrubs_the_provided_token(tmp_path: Path) -> None:
+    def forbidden(request: httpx.Request) -> httpx.Response:
+        return httpx.Response(403, json={"detail": f"denied for {request.headers['Authorization']}"}, request=request)
+
+    with (
+        httpx.Client(transport=httpx.MockTransport(forbidden)) as upstream_client,
+        LocalPreviewServer(
+            asset_root=_assets(tmp_path),
+            upstream_origin="https://ls.example",
+            auth_header_provider=lambda *, refresh=False: {"Authorization": "Bearer provided-secret-token"},
+            upstream_client=upstream_client,
+        ) as server,
+    ):
+        response = httpx.post(f"{server.host_origin}/{server.capability}/bff/api/interfaces/", json={"title": "x"})
+
+    assert response.status_code == 403
+    assert "provided-secret-token" not in response.text

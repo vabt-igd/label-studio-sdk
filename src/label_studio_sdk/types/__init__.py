@@ -72,6 +72,7 @@ if typing.TYPE_CHECKING:
     from .databricks_import_storage import DatabricksImportStorage
     from .default_model_version_name_response import DefaultModelVersionNameResponse
     from .default_role import DefaultRole
+    from .default_role_default_role_enum import DefaultRoleDefaultRoleEnum
     from .dimension import Dimension
     from .dimension_list import DimensionList
     from .edition_enum import EditionEnum
@@ -79,7 +80,6 @@ if typing.TYPE_CHECKING:
     from .file_upload import FileUpload
     from .filter import Filter
     from .filter_group import FilterGroup
-    from .filtered_label_distribution_unavailable import FilteredLabelDistributionUnavailable
     from .flex_active_block import FlexActiveBlock
     from .flex_checks import FlexChecks
     from .fsm_backfill_job_status_enum import FsmBackfillJobStatusEnum
@@ -185,6 +185,8 @@ if typing.TYPE_CHECKING:
     from .lseapi_token_list import LseapiTokenList
     from .lsejwt_settings import LsejwtSettings
     from .maybe_expanded_comment import MaybeExpandedComment
+    from .member_skill import MemberSkill
+    from .member_skill_status_enum import MemberSkillStatusEnum
     from .metric_param import MetricParam
     from .ml_backend import MlBackend
     from .model_interface import ModelInterface
@@ -270,6 +272,7 @@ if typing.TYPE_CHECKING:
     from .project_member import ProjectMember
     from .project_member_bulk_assign_response import ProjectMemberBulkAssignResponse
     from .project_member_bulk_assign_roles_request import ProjectMemberBulkAssignRolesRequest
+    from .project_member_bulk_assign_roles_role_enum import ProjectMemberBulkAssignRolesRoleEnum
     from .project_reimport import ProjectReimport
     from .project_reimport_list import ProjectReimportList
     from .project_role import ProjectRole
@@ -323,6 +326,7 @@ if typing.TYPE_CHECKING:
     from .state_backfill_status_response import StateBackfillStatusResponse
     from .state_enum import StateEnum
     from .state_model import StateModel
+    from .state_source_enum import StateSourceEnum
     from .state_triggered_by import StateTriggeredBy
     from .storage_status_enum import StorageStatusEnum
     from .task_agreement_matrix_response import TaskAgreementMatrixResponse
@@ -418,6 +422,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "DatabricksImportStorage": ".databricks_import_storage",
     "DefaultModelVersionNameResponse": ".default_model_version_name_response",
     "DefaultRole": ".default_role",
+    "DefaultRoleDefaultRoleEnum": ".default_role_default_role_enum",
     "Dimension": ".dimension",
     "DimensionList": ".dimension_list",
     "EditionEnum": ".edition_enum",
@@ -425,7 +430,6 @@ _dynamic_imports: typing.Dict[str, str] = {
     "FileUpload": ".file_upload",
     "Filter": ".filter",
     "FilterGroup": ".filter_group",
-    "FilteredLabelDistributionUnavailable": ".filtered_label_distribution_unavailable",
     "FlexActiveBlock": ".flex_active_block",
     "FlexChecks": ".flex_checks",
     "FsmBackfillJobStatusEnum": ".fsm_backfill_job_status_enum",
@@ -525,6 +529,8 @@ _dynamic_imports: typing.Dict[str, str] = {
     "LseapiTokenList": ".lseapi_token_list",
     "LsejwtSettings": ".lsejwt_settings",
     "MaybeExpandedComment": ".maybe_expanded_comment",
+    "MemberSkill": ".member_skill",
+    "MemberSkillStatusEnum": ".member_skill_status_enum",
     "MetricParam": ".metric_param",
     "MlBackend": ".ml_backend",
     "ModelInterface": ".model_interface",
@@ -600,6 +606,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "ProjectMember": ".project_member",
     "ProjectMemberBulkAssignResponse": ".project_member_bulk_assign_response",
     "ProjectMemberBulkAssignRolesRequest": ".project_member_bulk_assign_roles_request",
+    "ProjectMemberBulkAssignRolesRoleEnum": ".project_member_bulk_assign_roles_role_enum",
     "ProjectReimport": ".project_reimport",
     "ProjectReimportList": ".project_reimport_list",
     "ProjectRole": ".project_role",
@@ -653,6 +660,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "StateBackfillStatusResponse": ".state_backfill_status_response",
     "StateEnum": ".state_enum",
     "StateModel": ".state_model",
+    "StateSourceEnum": ".state_source_enum",
     "StateTriggeredBy": ".state_triggered_by",
     "StorageStatusEnum": ".storage_status_enum",
     "TaskAgreementMatrixResponse": ".task_agreement_matrix_response",
@@ -772,6 +780,7 @@ __all__ = [
     "DatabricksImportStorage",
     "DefaultModelVersionNameResponse",
     "DefaultRole",
+    "DefaultRoleDefaultRoleEnum",
     "Dimension",
     "DimensionList",
     "EditionEnum",
@@ -779,7 +788,6 @@ __all__ = [
     "FileUpload",
     "Filter",
     "FilterGroup",
-    "FilteredLabelDistributionUnavailable",
     "FlexActiveBlock",
     "FlexChecks",
     "FsmBackfillJobStatusEnum",
@@ -879,6 +887,8 @@ __all__ = [
     "LseapiTokenList",
     "LsejwtSettings",
     "MaybeExpandedComment",
+    "MemberSkill",
+    "MemberSkillStatusEnum",
     "MetricParam",
     "MlBackend",
     "ModelInterface",
@@ -954,6 +964,7 @@ __all__ = [
     "ProjectMember",
     "ProjectMemberBulkAssignResponse",
     "ProjectMemberBulkAssignRolesRequest",
+    "ProjectMemberBulkAssignRolesRoleEnum",
     "ProjectReimport",
     "ProjectReimportList",
     "ProjectRole",
@@ -1007,6 +1018,7 @@ __all__ = [
     "StateBackfillStatusResponse",
     "StateEnum",
     "StateModel",
+    "StateSourceEnum",
     "StateTriggeredBy",
     "StorageStatusEnum",
     "TaskAgreementMatrixResponse",

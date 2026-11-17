@@ -1,6 +1,6 @@
 # Reference
 ## ActivityLogs
-<details><summary><code>client.activity_logs.<a href="src/label_studio_sdk/activity_logs/client.py">list</a>(...) -> typing.List[ActivityLogResponse]</code></summary>
+<details><summary><code>client.activity_logs.<a href="src/label_studio_sdk/activity_logs/client.py#L27-L113">list</a>(...) -> typing.List[ActivityLogResponse]</code></summary>
 <dl>
 <dd>
 
@@ -150,7 +150,7 @@ client.activity_logs.list()
 </details>
 
 ## AnnotationHistory
-<details><summary><code>client.annotation_history.<a href="src/label_studio_sdk/annotation_history/client.py">list</a>(...) -> typing.List[AnnotationHistory]</code></summary>
+<details><summary><code>client.annotation_history.<a href="src/label_studio_sdk/annotation_history/client.py#L29-L71">list</a>(...) -> typing.List[AnnotationHistory]</code></summary>
 <dl>
 <dd>
 
@@ -235,7 +235,7 @@ client.annotation_history.list()
 </dl>
 </details>
 
-<details><summary><code>client.annotation_history.<a href="src/label_studio_sdk/annotation_history/client.py">delete</a>(...) -> DeleteAnnotationHistoryResponse</code></summary>
+<details><summary><code>client.annotation_history.<a href="src/label_studio_sdk/annotation_history/client.py#L73-L121">delete</a>(...) -> DeleteAnnotationHistoryResponse</code></summary>
 <dl>
 <dd>
 
@@ -328,7 +328,7 @@ client.annotation_history.delete()
 </dl>
 </details>
 
-<details><summary><code>client.annotation_history.<a href="src/label_studio_sdk/annotation_history/client.py">retrieve</a>(...) -> AnnotationHistory</code></summary>
+<details><summary><code>client.annotation_history.<a href="src/label_studio_sdk/annotation_history/client.py#L123-L157">retrieve</a>(...) -> AnnotationHistory</code></summary>
 <dl>
 <dd>
 
@@ -346,7 +346,7 @@ client.annotation_history.delete()
             This endpoint is not available in Label Studio Community Edition. [Learn more about Label Studio Enterprise](https://humansignal.com/goenterprise)
         </p>
     </Card>
-Get one annotation history item by ID with full result. Used when FIT-720 lazy load is on and the user clicks a stubbed history item to hydrate it.
+Get one annotation history item by ID with full result. Used when the user clicks a stubbed history item to hydrate it.
 </dd>
 </dl>
 </dd>
@@ -407,7 +407,7 @@ client.annotation_history.retrieve(
 </dl>
 </details>
 
-<details><summary><code>client.annotation_history.<a href="src/label_studio_sdk/annotation_history/client.py">list_for_project</a>(...) -> PaginatedAnnotationHistoryList</code></summary>
+<details><summary><code>client.annotation_history.<a href="src/label_studio_sdk/annotation_history/client.py#L159-L221">list_for_project</a>(...) -> PaginatedAnnotationHistoryList</code></summary>
 <dl>
 <dd>
 
@@ -519,7 +519,7 @@ client.annotation_history.list_for_project(
 </details>
 
 ## AnnotationReviews
-<details><summary><code>client.annotation_reviews.<a href="src/label_studio_sdk/annotation_reviews/client.py">list</a>(...) -> typing.List[AnnotationReview]</code></summary>
+<details><summary><code>client.annotation_reviews.<a href="src/label_studio_sdk/annotation_reviews/client.py#L31-L80">list</a>(...) -> typing.List[AnnotationReview]</code></summary>
 <dl>
 <dd>
 
@@ -612,7 +612,7 @@ client.annotation_reviews.list()
 </dl>
 </details>
 
-<details><summary><code>client.annotation_reviews.<a href="src/label_studio_sdk/annotation_reviews/client.py">create</a>(...) -> AnnotationReview</code></summary>
+<details><summary><code>client.annotation_reviews.<a href="src/label_studio_sdk/annotation_reviews/client.py#L82-L159">create</a>(...) -> AnnotationReview</code></summary>
 <dl>
 <dd>
 
@@ -699,7 +699,7 @@ client.annotation_reviews.create(
 </dl>
 </details>
 
-<details><summary><code>client.annotation_reviews.<a href="src/label_studio_sdk/annotation_reviews/client.py">get</a>(...) -> AnnotationReview</code></summary>
+<details><summary><code>client.annotation_reviews.<a href="src/label_studio_sdk/annotation_reviews/client.py#L161-L196">get</a>(...) -> AnnotationReview</code></summary>
 <dl>
 <dd>
 
@@ -778,7 +778,7 @@ client.annotation_reviews.get(
 </dl>
 </details>
 
-<details><summary><code>client.annotation_reviews.<a href="src/label_studio_sdk/annotation_reviews/client.py">delete</a>(...)</code></summary>
+<details><summary><code>client.annotation_reviews.<a href="src/label_studio_sdk/annotation_reviews/client.py#L198-L232">delete</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -857,7 +857,7 @@ client.annotation_reviews.delete(
 </dl>
 </details>
 
-<details><summary><code>client.annotation_reviews.<a href="src/label_studio_sdk/annotation_reviews/client.py">update</a>(...) -> AnnotationReview</code></summary>
+<details><summary><code>client.annotation_reviews.<a href="src/label_studio_sdk/annotation_reviews/client.py#L234-L311">update</a>(...) -> AnnotationReview</code></summary>
 <dl>
 <dd>
 
@@ -1001,7 +1001,7 @@ client.annotation_reviews.update(
 </details>
 
 ## Annotations
-<details><summary><code>client.annotations.<a href="src/label_studio_sdk/annotations/client.py">delete_bulk</a>(...) -> DeleteBulkAnnotationsResponse</code></summary>
+<details><summary><code>client.annotations.<a href="src/label_studio_sdk/annotations/client.py#L36-L70">delete_bulk</a>(...) -> DeleteBulkAnnotationsResponse</code></summary>
 <dl>
 <dd>
 
@@ -1085,7 +1085,7 @@ client.annotations.delete_bulk(
 </dl>
 </details>
 
-<details><summary><code>client.annotations.<a href="src/label_studio_sdk/annotations/client.py">create_bulk</a>(...) -> typing.List[CreateBulkAnnotationsResponseItem]</code></summary>
+<details><summary><code>client.annotations.<a href="src/label_studio_sdk/annotations/client.py#L72-L200">create_bulk</a>(...) -> typing.List[CreateBulkAnnotationsResponseItem]</code></summary>
 <dl>
 <dd>
 
@@ -1305,7 +1305,7 @@ Action which was performed in the last annotation history item
 </dl>
 </details>
 
-<details><summary><code>client.annotations.<a href="src/label_studio_sdk/annotations/client.py">get</a>(...) -> Annotation</code></summary>
+<details><summary><code>client.annotations.<a href="src/label_studio_sdk/annotations/client.py#L202-L230">get</a>(...) -> Annotation</code></summary>
 <dl>
 <dd>
 
@@ -1378,7 +1378,7 @@ client.annotations.get(
 </dl>
 </details>
 
-<details><summary><code>client.annotations.<a href="src/label_studio_sdk/annotations/client.py">delete</a>(...)</code></summary>
+<details><summary><code>client.annotations.<a href="src/label_studio_sdk/annotations/client.py#L232-L259">delete</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -1451,7 +1451,7 @@ client.annotations.delete(
 </dl>
 </details>
 
-<details><summary><code>client.annotations.<a href="src/label_studio_sdk/annotations/client.py">update</a>(...) -> Annotation</code></summary>
+<details><summary><code>client.annotations.<a href="src/label_studio_sdk/annotations/client.py#L261-L386">update</a>(...) -> Annotation</code></summary>
 <dl>
 <dd>
 
@@ -1665,7 +1665,7 @@ Action which was performed in the last annotation history item
 </dl>
 </details>
 
-<details><summary><code>client.annotations.<a href="src/label_studio_sdk/annotations/client.py">list</a>(...) -> typing.List[Annotation]</code></summary>
+<details><summary><code>client.annotations.<a href="src/label_studio_sdk/annotations/client.py#L388-L422">list</a>(...) -> typing.List[Annotation]</code></summary>
 <dl>
 <dd>
 
@@ -1746,7 +1746,7 @@ client.annotations.list(
 </dl>
 </details>
 
-<details><summary><code>client.annotations.<a href="src/label_studio_sdk/annotations/client.py">create</a>(...) -> Annotation</code></summary>
+<details><summary><code>client.annotations.<a href="src/label_studio_sdk/annotations/client.py#L424-L565">create</a>(...) -> Annotation</code></summary>
 <dl>
 <dd>
 
@@ -1843,7 +1843,7 @@ client.annotations.create(
 </details>
 
 ## Billing
-<details><summary><code>client.billing.<a href="src/label_studio_sdk/billing/client.py">info</a>() -> BillingInfoResponse</code></summary>
+<details><summary><code>client.billing.<a href="src/label_studio_sdk/billing/client.py#L26-L56">info</a>() -> BillingInfoResponse</code></summary>
 <dl>
 <dd>
 
@@ -1913,7 +1913,7 @@ client.billing.info()
 </details>
 
 ## Comments
-<details><summary><code>client.comments.<a href="src/label_studio_sdk/comments/client.py">list</a>(...) -> typing.List[MaybeExpandedComment]</code></summary>
+<details><summary><code>client.comments.<a href="src/label_studio_sdk/comments/client.py#L29-L90">list</a>(...) -> typing.List[MaybeExpandedComment]</code></summary>
 <dl>
 <dd>
 
@@ -2030,7 +2030,7 @@ client.comments.list()
 </dl>
 </details>
 
-<details><summary><code>client.comments.<a href="src/label_studio_sdk/comments/client.py">create</a>(...) -> MaybeExpandedComment</code></summary>
+<details><summary><code>client.comments.<a href="src/label_studio_sdk/comments/client.py#L92-L161">create</a>(...) -> MaybeExpandedComment</code></summary>
 <dl>
 <dd>
 
@@ -2115,7 +2115,7 @@ client.comments.create()
 </dl>
 </details>
 
-<details><summary><code>client.comments.<a href="src/label_studio_sdk/comments/client.py">export</a>(...) -> typing.Iterator[bytes]</code></summary>
+<details><summary><code>client.comments.<a href="src/label_studio_sdk/comments/client.py#L163-L215">export</a>(...) -> typing.Iterator[bytes]</code></summary>
 <dl>
 <dd>
 
@@ -2223,7 +2223,7 @@ client.comments.export(...)
 </dl>
 </details>
 
-<details><summary><code>client.comments.<a href="src/label_studio_sdk/comments/client.py">get</a>(...) -> MaybeExpandedComment</code></summary>
+<details><summary><code>client.comments.<a href="src/label_studio_sdk/comments/client.py#L217-L261">get</a>(...) -> MaybeExpandedComment</code></summary>
 <dl>
 <dd>
 
@@ -2310,7 +2310,7 @@ client.comments.get(
 </dl>
 </details>
 
-<details><summary><code>client.comments.<a href="src/label_studio_sdk/comments/client.py">delete</a>(...)</code></summary>
+<details><summary><code>client.comments.<a href="src/label_studio_sdk/comments/client.py#L263-L306">delete</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -2397,7 +2397,7 @@ client.comments.delete(
 </dl>
 </details>
 
-<details><summary><code>client.comments.<a href="src/label_studio_sdk/comments/client.py">update</a>(...) -> MaybeExpandedComment</code></summary>
+<details><summary><code>client.comments.<a href="src/label_studio_sdk/comments/client.py#L308-L384">update</a>(...) -> MaybeExpandedComment</code></summary>
 <dl>
 <dd>
 
@@ -2533,7 +2533,7 @@ client.comments.update(
 </details>
 
 ## Users
-<details><summary><code>client.users.<a href="src/label_studio_sdk/users/client.py">get_current_user</a>() -> LseUserApi</code></summary>
+<details><summary><code>client.users.<a href="src/label_studio_sdk/users/client.py#L35-L65">get_current_user</a>() -> LseUserApi</code></summary>
 <dl>
 <dd>
 
@@ -2602,7 +2602,7 @@ client.users.get_current_user()
 </dl>
 </details>
 
-<details><summary><code>client.users.<a href="src/label_studio_sdk/users/client.py">update_current_user</a>(...) -> LseUserApi</code></summary>
+<details><summary><code>client.users.<a href="src/label_studio_sdk/users/client.py#L67-L154">update_current_user</a>(...) -> LseUserApi</code></summary>
 <dl>
 <dd>
 
@@ -2679,7 +2679,7 @@ client.users.update_current_user()
 </dl>
 </details>
 
-<details><summary><code>client.users.<a href="src/label_studio_sdk/users/client.py">get_hotkeys</a>(...) -> Hotkeys</code></summary>
+<details><summary><code>client.users.<a href="src/label_studio_sdk/users/client.py#L156-L185">get_hotkeys</a>(...) -> Hotkeys</code></summary>
 <dl>
 <dd>
 
@@ -2750,7 +2750,7 @@ client.users.get_hotkeys()
 </dl>
 </details>
 
-<details><summary><code>client.users.<a href="src/label_studio_sdk/users/client.py">update_hotkeys</a>(...) -> Hotkeys</code></summary>
+<details><summary><code>client.users.<a href="src/label_studio_sdk/users/client.py#L187-L224">update_hotkeys</a>(...) -> Hotkeys</code></summary>
 <dl>
 <dd>
 
@@ -2829,7 +2829,7 @@ client.users.update_hotkeys()
 </dl>
 </details>
 
-<details><summary><code>client.users.<a href="src/label_studio_sdk/users/client.py">reset_token</a>() -> ResetTokenUsersResponse</code></summary>
+<details><summary><code>client.users.<a href="src/label_studio_sdk/users/client.py#L226-L250">reset_token</a>() -> ResetTokenUsersResponse</code></summary>
 <dl>
 <dd>
 
@@ -2892,7 +2892,7 @@ client.users.reset_token()
 </dl>
 </details>
 
-<details><summary><code>client.users.<a href="src/label_studio_sdk/users/client.py">get_token</a>() -> GetTokenUsersResponse</code></summary>
+<details><summary><code>client.users.<a href="src/label_studio_sdk/users/client.py#L252-L276">get_token</a>() -> GetTokenUsersResponse</code></summary>
 <dl>
 <dd>
 
@@ -2955,7 +2955,7 @@ client.users.get_token()
 </dl>
 </details>
 
-<details><summary><code>client.users.<a href="src/label_studio_sdk/users/client.py">whoami</a>() -> WhoAmIUser</code></summary>
+<details><summary><code>client.users.<a href="src/label_studio_sdk/users/client.py#L278-L302">whoami</a>() -> WhoAmIUser</code></summary>
 <dl>
 <dd>
 
@@ -3018,7 +3018,7 @@ client.users.whoami()
 </dl>
 </details>
 
-<details><summary><code>client.users.<a href="src/label_studio_sdk/users/client.py">list</a>(...) -> typing.List[LseUserApi]</code></summary>
+<details><summary><code>client.users.<a href="src/label_studio_sdk/users/client.py#L304-L333">list</a>(...) -> typing.List[LseUserApi]</code></summary>
 <dl>
 <dd>
 
@@ -3089,7 +3089,7 @@ client.users.list()
 </dl>
 </details>
 
-<details><summary><code>client.users.<a href="src/label_studio_sdk/users/client.py">create</a>(...) -> LseUser</code></summary>
+<details><summary><code>client.users.<a href="src/label_studio_sdk/users/client.py#L335-L409">create</a>(...) -> LseUser</code></summary>
 <dl>
 <dd>
 
@@ -3234,7 +3234,7 @@ client.users.create(
 </dl>
 </details>
 
-<details><summary><code>client.users.<a href="src/label_studio_sdk/users/client.py">get</a>(...) -> LseUser</code></summary>
+<details><summary><code>client.users.<a href="src/label_studio_sdk/users/client.py#L411-L440">get</a>(...) -> LseUser</code></summary>
 <dl>
 <dd>
 
@@ -3307,7 +3307,7 @@ client.users.get(
 </dl>
 </details>
 
-<details><summary><code>client.users.<a href="src/label_studio_sdk/users/client.py">delete</a>(...)</code></summary>
+<details><summary><code>client.users.<a href="src/label_studio_sdk/users/client.py#L442-L472">delete</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -3382,7 +3382,7 @@ client.users.delete(
 </dl>
 </details>
 
-<details><summary><code>client.users.<a href="src/label_studio_sdk/users/client.py">update</a>(...) -> LseUser</code></summary>
+<details><summary><code>client.users.<a href="src/label_studio_sdk/users/client.py#L474-L564">update</a>(...) -> LseUser</code></summary>
 <dl>
 <dd>
 
@@ -3466,7 +3466,7 @@ client.users.update(
 </details>
 
 ## Dimensions
-<details><summary><code>client.dimensions.<a href="src/label_studio_sdk/dimensions/client.py">trigger_backfill</a>(...) -> AgreementV2BackfillTriggerResponse</code></summary>
+<details><summary><code>client.dimensions.<a href="src/label_studio_sdk/dimensions/client.py#L34-L88">trigger_backfill</a>(...) -> AgreementV2BackfillTriggerResponse</code></summary>
 <dl>
 <dd>
 
@@ -3549,7 +3549,7 @@ client.dimensions.trigger_backfill()
 </dl>
 </details>
 
-<details><summary><code>client.dimensions.<a href="src/label_studio_sdk/dimensions/client.py">cancel_backfill</a>(...) -> AgreementV2BackfillCancelResponse</code></summary>
+<details><summary><code>client.dimensions.<a href="src/label_studio_sdk/dimensions/client.py#L90-L134">cancel_backfill</a>(...) -> AgreementV2BackfillCancelResponse</code></summary>
 <dl>
 <dd>
 
@@ -3634,7 +3634,7 @@ client.dimensions.cancel_backfill()
 </dl>
 </details>
 
-<details><summary><code>client.dimensions.<a href="src/label_studio_sdk/dimensions/client.py">list_backfills</a>(...) -> typing.List[AgreementV2BackfillJob]</code></summary>
+<details><summary><code>client.dimensions.<a href="src/label_studio_sdk/dimensions/client.py#L136-L171">list_backfills</a>(...) -> typing.List[AgreementV2BackfillJob]</code></summary>
 <dl>
 <dd>
 
@@ -3711,7 +3711,7 @@ client.dimensions.list_backfills()
 </dl>
 </details>
 
-<details><summary><code>client.dimensions.<a href="src/label_studio_sdk/dimensions/client.py">get_backfill_status</a>(...) -> AgreementV2BackfillJob</code></summary>
+<details><summary><code>client.dimensions.<a href="src/label_studio_sdk/dimensions/client.py#L173-L217">get_backfill_status</a>(...) -> AgreementV2BackfillJob</code></summary>
 <dl>
 <dd>
 
@@ -3796,7 +3796,7 @@ client.dimensions.get_backfill_status()
 </dl>
 </details>
 
-<details><summary><code>client.dimensions.<a href="src/label_studio_sdk/dimensions/client.py">trigger_value_counts_backfill</a>(...) -> AgreementV2BackfillTriggerResponse</code></summary>
+<details><summary><code>client.dimensions.<a href="src/label_studio_sdk/dimensions/client.py#L219-L273">trigger_value_counts_backfill</a>(...) -> AgreementV2BackfillTriggerResponse</code></summary>
 <dl>
 <dd>
 
@@ -3879,7 +3879,7 @@ client.dimensions.trigger_value_counts_backfill()
 </dl>
 </details>
 
-<details><summary><code>client.dimensions.<a href="src/label_studio_sdk/dimensions/client.py">cancel_value_counts_backfill</a>(...) -> AgreementV2BackfillCancelResponse</code></summary>
+<details><summary><code>client.dimensions.<a href="src/label_studio_sdk/dimensions/client.py#L275-L319">cancel_value_counts_backfill</a>(...) -> AgreementV2BackfillCancelResponse</code></summary>
 <dl>
 <dd>
 
@@ -3964,7 +3964,7 @@ client.dimensions.cancel_value_counts_backfill()
 </dl>
 </details>
 
-<details><summary><code>client.dimensions.<a href="src/label_studio_sdk/dimensions/client.py">list_value_counts_backfills</a>(...) -> typing.List[ValueCountsBackfillJob]</code></summary>
+<details><summary><code>client.dimensions.<a href="src/label_studio_sdk/dimensions/client.py#L321-L356">list_value_counts_backfills</a>(...) -> typing.List[ValueCountsBackfillJob]</code></summary>
 <dl>
 <dd>
 
@@ -4041,7 +4041,7 @@ client.dimensions.list_value_counts_backfills()
 </dl>
 </details>
 
-<details><summary><code>client.dimensions.<a href="src/label_studio_sdk/dimensions/client.py">get_value_counts_backfill_status</a>(...) -> ValueCountsBackfillJob</code></summary>
+<details><summary><code>client.dimensions.<a href="src/label_studio_sdk/dimensions/client.py#L358-L402">get_value_counts_backfill_status</a>(...) -> ValueCountsBackfillJob</code></summary>
 <dl>
 <dd>
 
@@ -4126,7 +4126,7 @@ client.dimensions.get_value_counts_backfill_status()
 </dl>
 </details>
 
-<details><summary><code>client.dimensions.<a href="src/label_studio_sdk/dimensions/client.py">list</a>(...) -> typing.List[DimensionList]</code></summary>
+<details><summary><code>client.dimensions.<a href="src/label_studio_sdk/dimensions/client.py#L404-L462">list</a>(...) -> typing.List[DimensionList]</code></summary>
 <dl>
 <dd>
 
@@ -4229,7 +4229,7 @@ client.dimensions.list(
 </dl>
 </details>
 
-<details><summary><code>client.dimensions.<a href="src/label_studio_sdk/dimensions/client.py">get</a>(...) -> Dimension</code></summary>
+<details><summary><code>client.dimensions.<a href="src/label_studio_sdk/dimensions/client.py#L464-L503">get</a>(...) -> Dimension</code></summary>
 <dl>
 <dd>
 
@@ -4318,7 +4318,7 @@ client.dimensions.get(
 </details>
 
 ## Actions
-<details><summary><code>client.actions.<a href="src/label_studio_sdk/actions/client.py">list</a>(...) -> typing.List[ListActionsResponseItem]</code></summary>
+<details><summary><code>client.actions.<a href="src/label_studio_sdk/actions/client.py#L33-L64">list</a>(...) -> typing.List[ListActionsResponseItem]</code></summary>
 <dl>
 <dd>
 
@@ -4391,7 +4391,7 @@ client.actions.list(
 </dl>
 </details>
 
-<details><summary><code>client.actions.<a href="src/label_studio_sdk/actions/client.py">create</a>(...)</code></summary>
+<details><summary><code>client.actions.<a href="src/label_studio_sdk/actions/client.py#L66-L126">create</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -4506,7 +4506,7 @@ client.actions.create(
 </details>
 
 ## Views
-<details><summary><code>client.views.<a href="src/label_studio_sdk/views/client.py">list</a>(...) -> typing.List[View]</code></summary>
+<details><summary><code>client.views.<a href="src/label_studio_sdk/views/client.py#L30-L59">list</a>(...) -> typing.List[View]</code></summary>
 <dl>
 <dd>
 
@@ -4577,7 +4577,7 @@ client.views.list()
 </dl>
 </details>
 
-<details><summary><code>client.views.<a href="src/label_studio_sdk/views/client.py">create</a>(...) -> View</code></summary>
+<details><summary><code>client.views.<a href="src/label_studio_sdk/views/client.py#L61-L96">create</a>(...) -> View</code></summary>
 <dl>
 <dd>
 
@@ -4648,7 +4648,7 @@ client.views.create()
 </dl>
 </details>
 
-<details><summary><code>client.views.<a href="src/label_studio_sdk/views/client.py">update_order</a>(...)</code></summary>
+<details><summary><code>client.views.<a href="src/label_studio_sdk/views/client.py#L98-L131">update_order</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -4732,7 +4732,7 @@ client.views.update_order(
 </dl>
 </details>
 
-<details><summary><code>client.views.<a href="src/label_studio_sdk/views/client.py">delete_all</a>(...)</code></summary>
+<details><summary><code>client.views.<a href="src/label_studio_sdk/views/client.py#L133-L161">delete_all</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -4805,7 +4805,7 @@ client.views.delete_all(
 </dl>
 </details>
 
-<details><summary><code>client.views.<a href="src/label_studio_sdk/views/client.py">get</a>(...) -> View</code></summary>
+<details><summary><code>client.views.<a href="src/label_studio_sdk/views/client.py#L163-L192">get</a>(...) -> View</code></summary>
 <dl>
 <dd>
 
@@ -4878,7 +4878,7 @@ client.views.get(
 </dl>
 </details>
 
-<details><summary><code>client.views.<a href="src/label_studio_sdk/views/client.py">delete</a>(...)</code></summary>
+<details><summary><code>client.views.<a href="src/label_studio_sdk/views/client.py#L194-L222">delete</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -4951,7 +4951,7 @@ client.views.delete(
 </dl>
 </details>
 
-<details><summary><code>client.views.<a href="src/label_studio_sdk/views/client.py">update</a>(...) -> View</code></summary>
+<details><summary><code>client.views.<a href="src/label_studio_sdk/views/client.py#L224-L265">update</a>(...) -> View</code></summary>
 <dl>
 <dd>
 
@@ -5041,7 +5041,7 @@ client.views.update(
 </details>
 
 ## States
-<details><summary><code>client.states.<a href="src/label_studio_sdk/states/client.py">trigger_backfill</a>(...) -> StateBackfillResponse</code></summary>
+<details><summary><code>client.states.<a href="src/label_studio_sdk/states/client.py#L36-L71">trigger_backfill</a>(...) -> StateBackfillResponse</code></summary>
 <dl>
 <dd>
 
@@ -5118,7 +5118,7 @@ client.states.trigger_backfill()
 </dl>
 </details>
 
-<details><summary><code>client.states.<a href="src/label_studio_sdk/states/client.py">cancel_backfill</a>(...) -> StateBackfillCancelResponse</code></summary>
+<details><summary><code>client.states.<a href="src/label_studio_sdk/states/client.py#L73-L117">cancel_backfill</a>(...) -> StateBackfillCancelResponse</code></summary>
 <dl>
 <dd>
 
@@ -5203,7 +5203,7 @@ client.states.cancel_backfill()
 </dl>
 </details>
 
-<details><summary><code>client.states.<a href="src/label_studio_sdk/states/client.py">list_backfills</a>() -> StateBackfillJobListResponse</code></summary>
+<details><summary><code>client.states.<a href="src/label_studio_sdk/states/client.py#L119-L151">list_backfills</a>() -> StateBackfillJobListResponse</code></summary>
 <dl>
 <dd>
 
@@ -5272,7 +5272,7 @@ client.states.list_backfills()
 </dl>
 </details>
 
-<details><summary><code>client.states.<a href="src/label_studio_sdk/states/client.py">get_backfill_status</a>(...) -> StateBackfillStatusResponse</code></summary>
+<details><summary><code>client.states.<a href="src/label_studio_sdk/states/client.py#L153-L197">get_backfill_status</a>(...) -> StateBackfillStatusResponse</code></summary>
 <dl>
 <dd>
 
@@ -5357,7 +5357,7 @@ client.states.get_backfill_status()
 </dl>
 </details>
 
-<details><summary><code>client.states.<a href="src/label_studio_sdk/states/client.py">state_history</a>(...) -> PaginatedStateModelList</code></summary>
+<details><summary><code>client.states.<a href="src/label_studio_sdk/states/client.py#L199-L295">state_history</a>(...) -> PaginatedStateModelList</code></summary>
 <dl>
 <dd>
 
@@ -5517,7 +5517,7 @@ client.states.state_history(
 </dl>
 </details>
 
-<details><summary><code>client.states.<a href="src/label_studio_sdk/states/client.py">execute_transition</a>(...) -> FsmTransitionExecuteResponse</code></summary>
+<details><summary><code>client.states.<a href="src/label_studio_sdk/states/client.py#L297-L353">execute_transition</a>(...) -> FsmTransitionExecuteResponse</code></summary>
 <dl>
 <dd>
 
@@ -5623,7 +5623,7 @@ client.states.execute_transition(
 </details>
 
 ## Files
-<details><summary><code>client.files.<a href="src/label_studio_sdk/files/client.py">get</a>(...) -> FileUpload</code></summary>
+<details><summary><code>client.files.<a href="src/label_studio_sdk/files/client.py#L30-L58">get</a>(...) -> FileUpload</code></summary>
 <dl>
 <dd>
 
@@ -5696,7 +5696,7 @@ client.files.get(
 </dl>
 </details>
 
-<details><summary><code>client.files.<a href="src/label_studio_sdk/files/client.py">delete</a>(...)</code></summary>
+<details><summary><code>client.files.<a href="src/label_studio_sdk/files/client.py#L60-L87">delete</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -5769,7 +5769,7 @@ client.files.delete(
 </dl>
 </details>
 
-<details><summary><code>client.files.<a href="src/label_studio_sdk/files/client.py">update</a>(...) -> FileUpload</code></summary>
+<details><summary><code>client.files.<a href="src/label_studio_sdk/files/client.py#L89-L126">update</a>(...) -> FileUpload</code></summary>
 <dl>
 <dd>
 
@@ -5851,7 +5851,7 @@ client.files.update(
 </dl>
 </details>
 
-<details><summary><code>client.files.<a href="src/label_studio_sdk/files/client.py">list</a>(...) -> typing.List[FileUpload]</code></summary>
+<details><summary><code>client.files.<a href="src/label_studio_sdk/files/client.py#L128-L175">list</a>(...) -> typing.List[FileUpload]</code></summary>
 <dl>
 <dd>
 
@@ -5950,7 +5950,7 @@ client.files.list(
 </dl>
 </details>
 
-<details><summary><code>client.files.<a href="src/label_studio_sdk/files/client.py">delete_many</a>(...)</code></summary>
+<details><summary><code>client.files.<a href="src/label_studio_sdk/files/client.py#L177-L206">delete_many</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -6025,7 +6025,7 @@ client.files.delete_many(
 </dl>
 </details>
 
-<details><summary><code>client.files.<a href="src/label_studio_sdk/files/client.py">download</a>(...)</code></summary>
+<details><summary><code>client.files.<a href="src/label_studio_sdk/files/client.py#L208-L235">download</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -6099,7 +6099,7 @@ client.files.download(
 </details>
 
 ## Prompts
-<details><summary><code>client.prompts.<a href="src/label_studio_sdk/prompts/client.py">batch_failed_predictions</a>(...) -> BatchFailedPredictions</code></summary>
+<details><summary><code>client.prompts.<a href="src/label_studio_sdk/prompts/client.py#L50-L106">batch_failed_predictions</a>(...) -> BatchFailedPredictions</code></summary>
 <dl>
 <dd>
 
@@ -6203,7 +6203,7 @@ client.prompts.batch_failed_predictions(
 </dl>
 </details>
 
-<details><summary><code>client.prompts.<a href="src/label_studio_sdk/prompts/client.py">batch_predictions</a>(...) -> BatchPredictions</code></summary>
+<details><summary><code>client.prompts.<a href="src/label_studio_sdk/prompts/client.py#L108-L164">batch_predictions</a>(...) -> BatchPredictions</code></summary>
 <dl>
 <dd>
 
@@ -6307,7 +6307,7 @@ client.prompts.batch_predictions(
 </dl>
 </details>
 
-<details><summary><code>client.prompts.<a href="src/label_studio_sdk/prompts/client.py">subset_tasks</a>(...) -> PaginatedProjectSubsetTasksResponseList</code></summary>
+<details><summary><code>client.prompts.<a href="src/label_studio_sdk/prompts/client.py#L166-L280">subset_tasks</a>(...) -> PaginatedProjectSubsetTasksResponseList</code></summary>
 <dl>
 <dd>
 
@@ -6500,7 +6500,7 @@ client.prompts.subset_tasks(
 </dl>
 </details>
 
-<details><summary><code>client.prompts.<a href="src/label_studio_sdk/prompts/client.py">subsets</a>(...) -> typing.List[ProjectSubsetItem]</code></summary>
+<details><summary><code>client.prompts.<a href="src/label_studio_sdk/prompts/client.py#L282-L327">subsets</a>(...) -> typing.List[ProjectSubsetItem]</code></summary>
 <dl>
 <dd>
 
@@ -6589,7 +6589,7 @@ client.prompts.subsets(
 </dl>
 </details>
 
-<details><summary><code>client.prompts.<a href="src/label_studio_sdk/prompts/client.py">list</a>(...) -> PaginatedModelInterfaceSerializerGetList</code></summary>
+<details><summary><code>client.prompts.<a href="src/label_studio_sdk/prompts/client.py#L329-L375">list</a>(...) -> PaginatedModelInterfaceSerializerGetList</code></summary>
 <dl>
 <dd>
 
@@ -6684,7 +6684,7 @@ client.prompts.list()
 </dl>
 </details>
 
-<details><summary><code>client.prompts.<a href="src/label_studio_sdk/prompts/client.py">create</a>(...) -> ModelInterface</code></summary>
+<details><summary><code>client.prompts.<a href="src/label_studio_sdk/prompts/client.py#L377-L450">create</a>(...) -> ModelInterface</code></summary>
 <dl>
 <dd>
 
@@ -6763,7 +6763,7 @@ client.prompts.create(
 </dl>
 </details>
 
-<details><summary><code>client.prompts.<a href="src/label_studio_sdk/prompts/client.py">compatible_projects</a>(...) -> PaginatedAllRolesProjectListList</code></summary>
+<details><summary><code>client.prompts.<a href="src/label_studio_sdk/prompts/client.py#L452-L533">compatible_projects</a>(...) -> PaginatedAllRolesProjectListList</code></summary>
 <dl>
 <dd>
 
@@ -6914,7 +6914,7 @@ client.prompts.compatible_projects()
 </dl>
 </details>
 
-<details><summary><code>client.prompts.<a href="src/label_studio_sdk/prompts/client.py">get</a>(...) -> ModelInterfaceSerializerGet</code></summary>
+<details><summary><code>client.prompts.<a href="src/label_studio_sdk/prompts/client.py#L535-L570">get</a>(...) -> ModelInterfaceSerializerGet</code></summary>
 <dl>
 <dd>
 
@@ -6993,7 +6993,7 @@ client.prompts.get(
 </dl>
 </details>
 
-<details><summary><code>client.prompts.<a href="src/label_studio_sdk/prompts/client.py">delete</a>(...)</code></summary>
+<details><summary><code>client.prompts.<a href="src/label_studio_sdk/prompts/client.py#L572-L606">delete</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -7072,7 +7072,7 @@ client.prompts.delete(
 </dl>
 </details>
 
-<details><summary><code>client.prompts.<a href="src/label_studio_sdk/prompts/client.py">update</a>(...) -> ModelInterface</code></summary>
+<details><summary><code>client.prompts.<a href="src/label_studio_sdk/prompts/client.py#L608-L686">update</a>(...) -> ModelInterface</code></summary>
 <dl>
 <dd>
 
@@ -7216,7 +7216,7 @@ client.prompts.update(
 </details>
 
 ## Interfaces
-<details><summary><code>client.interfaces.<a href="src/label_studio_sdk/interfaces/client.py">list</a>(...) -> PaginatedLseInterfaceListList</code></summary>
+<details><summary><code>client.interfaces.<a href="src/label_studio_sdk/interfaces/client.py#L33-L101">list</a>(...) -> PaginatedLseInterfaceListList</code></summary>
 <dl>
 <dd>
 
@@ -7341,7 +7341,7 @@ client.interfaces.list()
 </dl>
 </details>
 
-<details><summary><code>client.interfaces.<a href="src/label_studio_sdk/interfaces/client.py">create</a>(...) -> LseInterface</code></summary>
+<details><summary><code>client.interfaces.<a href="src/label_studio_sdk/interfaces/client.py#L103-L203">create</a>(...) -> LseInterface</code></summary>
 <dl>
 <dd>
 
@@ -7422,7 +7422,7 @@ client.interfaces.create(
 </dl>
 </details>
 
-<details><summary><code>client.interfaces.<a href="src/label_studio_sdk/interfaces/client.py">get</a>(...) -> LseInterface</code></summary>
+<details><summary><code>client.interfaces.<a href="src/label_studio_sdk/interfaces/client.py#L205-L240">get</a>(...) -> LseInterface</code></summary>
 <dl>
 <dd>
 
@@ -7501,7 +7501,7 @@ client.interfaces.get(
 </dl>
 </details>
 
-<details><summary><code>client.interfaces.<a href="src/label_studio_sdk/interfaces/client.py">update</a>(...) -> LseInterface</code></summary>
+<details><summary><code>client.interfaces.<a href="src/label_studio_sdk/interfaces/client.py#L242-L348">update</a>(...) -> LseInterface</code></summary>
 <dl>
 <dd>
 
@@ -7591,7 +7591,7 @@ client.interfaces.update(
 </dl>
 </details>
 
-<details><summary><code>client.interfaces.<a href="src/label_studio_sdk/interfaces/client.py">delete</a>(...)</code></summary>
+<details><summary><code>client.interfaces.<a href="src/label_studio_sdk/interfaces/client.py#L350-L384">delete</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -7670,7 +7670,7 @@ client.interfaces.delete(
 </dl>
 </details>
 
-<details><summary><code>client.interfaces.<a href="src/label_studio_sdk/interfaces/client.py">partial_update</a>(...) -> LseInterface</code></summary>
+<details><summary><code>client.interfaces.<a href="src/label_studio_sdk/interfaces/client.py#L386-L489">partial_update</a>(...) -> LseInterface</code></summary>
 <dl>
 <dd>
 
@@ -7853,7 +7853,7 @@ client.interfaces.partial_update(
 </dl>
 </details>
 
-<details><summary><code>client.interfaces.<a href="src/label_studio_sdk/interfaces/client.py">append_versions</a>(...) -> LseInterface</code></summary>
+<details><summary><code>client.interfaces.<a href="src/label_studio_sdk/interfaces/client.py#L491-L584">append_versions</a>(...) -> LseInterface</code></summary>
 <dl>
 <dd>
 
@@ -8026,7 +8026,7 @@ client.interfaces.append_versions(
 </dl>
 </details>
 
-<details><summary><code>client.interfaces.<a href="src/label_studio_sdk/interfaces/client.py">duplicate</a>(...) -> LseInterface</code></summary>
+<details><summary><code>client.interfaces.<a href="src/label_studio_sdk/interfaces/client.py#L586-L662">duplicate</a>(...) -> LseInterface</code></summary>
 <dl>
 <dd>
 
@@ -8158,7 +8158,7 @@ client.interfaces.duplicate(
 </dl>
 </details>
 
-<details><summary><code>client.interfaces.<a href="src/label_studio_sdk/interfaces/client.py">move</a>(...) -> LseInterfaceMovePlan</code></summary>
+<details><summary><code>client.interfaces.<a href="src/label_studio_sdk/interfaces/client.py#L664-L722">move</a>(...) -> LseInterfaceMovePlan</code></summary>
 <dl>
 <dd>
 
@@ -8261,7 +8261,7 @@ client.interfaces.move(
 </dl>
 </details>
 
-<details><summary><code>client.interfaces.<a href="src/label_studio_sdk/interfaces/client.py">publish_version</a>(...) -> LseInterface</code></summary>
+<details><summary><code>client.interfaces.<a href="src/label_studio_sdk/interfaces/client.py#L724-L765">publish_version</a>(...) -> LseInterface</code></summary>
 <dl>
 <dd>
 
@@ -8349,7 +8349,7 @@ client.interfaces.publish_version(
 </dl>
 </details>
 
-<details><summary><code>client.interfaces.<a href="src/label_studio_sdk/interfaces/client.py">unpublish_version</a>(...) -> LseInterface</code></summary>
+<details><summary><code>client.interfaces.<a href="src/label_studio_sdk/interfaces/client.py#L767-L808">unpublish_version</a>(...) -> LseInterface</code></summary>
 <dl>
 <dd>
 
@@ -8437,7 +8437,7 @@ client.interfaces.unpublish_version(
 </dl>
 </details>
 
-<details><summary><code>client.interfaces.<a href="src/label_studio_sdk/interfaces/client.py">update_version_description</a>(...) -> LseInterface</code></summary>
+<details><summary><code>client.interfaces.<a href="src/label_studio_sdk/interfaces/client.py#L810-L857">update_version_description</a>(...) -> LseInterface</code></summary>
 <dl>
 <dd>
 
@@ -8535,7 +8535,7 @@ client.interfaces.update_version_description(
 </details>
 
 ## Organizations
-<details><summary><code>client.organizations.<a href="src/label_studio_sdk/organizations/client.py">reset_token</a>() -> OrganizationInvite</code></summary>
+<details><summary><code>client.organizations.<a href="src/label_studio_sdk/organizations/client.py#L48-L72">reset_token</a>() -> OrganizationInvite</code></summary>
 <dl>
 <dd>
 
@@ -8598,7 +8598,7 @@ client.organizations.reset_token()
 </dl>
 </details>
 
-<details><summary><code>client.organizations.<a href="src/label_studio_sdk/organizations/client.py">list</a>(...) -> typing.List[OrganizationId]</code></summary>
+<details><summary><code>client.organizations.<a href="src/label_studio_sdk/organizations/client.py#L74-L105">list</a>(...) -> typing.List[OrganizationId]</code></summary>
 <dl>
 <dd>
 
@@ -8671,7 +8671,7 @@ client.organizations.list()
 </dl>
 </details>
 
-<details><summary><code>client.organizations.<a href="src/label_studio_sdk/organizations/client.py">get</a>(...) -> LseOrganization</code></summary>
+<details><summary><code>client.organizations.<a href="src/label_studio_sdk/organizations/client.py#L107-L135">get</a>(...) -> LseOrganization</code></summary>
 <dl>
 <dd>
 
@@ -8744,7 +8744,7 @@ client.organizations.get(
 </dl>
 </details>
 
-<details><summary><code>client.organizations.<a href="src/label_studio_sdk/organizations/client.py">update</a>(...) -> LseOrganization</code></summary>
+<details><summary><code>client.organizations.<a href="src/label_studio_sdk/organizations/client.py#L137-L242">update</a>(...) -> LseOrganization</code></summary>
 <dl>
 <dd>
 
@@ -8927,7 +8927,7 @@ client.organizations.update(
 </dl>
 </details>
 
-<details><summary><code>client.organizations.<a href="src/label_studio_sdk/organizations/client.py">api_organizations_memberships_filter_options_membership_list</a>(...) -> typing.List[OrganizationMemberMembershipOption]</code></summary>
+<details><summary><code>client.organizations.<a href="src/label_studio_sdk/organizations/client.py#L244-L279">api_organizations_memberships_filter_options_membership_list</a>(...) -> typing.List[OrganizationMemberMembershipOption]</code></summary>
 <dl>
 <dd>
 
@@ -9008,7 +9008,7 @@ client.organizations.api_organizations_memberships_filter_options_membership_lis
 </dl>
 </details>
 
-<details><summary><code>client.organizations.<a href="src/label_studio_sdk/organizations/client.py">api_organizations_memberships_filter_options_skills_list</a>(...) -> typing.List[OrganizationMemberSkillsOption]</code></summary>
+<details><summary><code>client.organizations.<a href="src/label_studio_sdk/organizations/client.py#L281-L316">api_organizations_memberships_filter_options_skills_list</a>(...) -> typing.List[OrganizationMemberSkillsOption]</code></summary>
 <dl>
 <dd>
 
@@ -9020,7 +9020,7 @@ client.organizations.api_organizations_memberships_filter_options_membership_lis
 <dl>
 <dd>
 
-Return self-reported Skills values with Contributor Setup display metadata.
+Return Skills values held by members, self-reported or set by a skill assessment, with Contributor Setup display metadata. Owners, Administrators and Managers only.
 </dd>
 </dl>
 </dd>
@@ -9089,7 +9089,7 @@ client.organizations.api_organizations_memberships_filter_options_skills_list(
 </dl>
 </details>
 
-<details><summary><code>client.organizations.<a href="src/label_studio_sdk/organizations/client.py">update_default_role</a>(...) -> DefaultRole</code></summary>
+<details><summary><code>client.organizations.<a href="src/label_studio_sdk/organizations/client.py#L318-L367">update_default_role</a>(...) -> DefaultRole</code></summary>
 <dl>
 <dd>
 
@@ -9156,130 +9156,15 @@ client.organizations.update_default_role(
 <dl>
 <dd>
 
-**annotator_reviewer_firewall_enabled_at:** `typing.Optional[datetime.datetime]` — Set to current time to restrict data sharing between annotators and reviewers in the label stream, review stream, and notifications (which will be disabled). In these settings, information about annotator and reviewer identity is suppressed in the UI.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**custom_interfaces_enabled:** `typing.Optional[bool]` — Enable custom interfaces for this organization. When disabled, projects with use_custom_interface=True will not render custom interfaces anywhere in the product (label stream, embed, data manager, interfaces dashboard).
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**custom_scripts_enabled_at:** `typing.Optional[datetime.datetime]` — Set to current time to enable custom scripts (Plugins) for this organization. Can only be enabled if no organization members are active members of any other organizations; otherwise an error will be raised. If this occurs, contact the LEAP team for assistance with enabling custom scripts (Plugins).
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**default_role:** `typing.Optional[OrganizationRoleEnum]` 
+**default_role:** `typing.Optional[DefaultRoleDefaultRoleEnum]` 
 
 Default membership role for invited users
 
-* `OW` - Owner
 * `AD` - Administrator
 * `MA` - Manager
 * `RE` - Reviewer
 * `AN` - Annotator
-* `DI` - Deactivated
 * `NO` - Not Activated
-* `VO` - View Only
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**email_notification_settings:** `typing.Optional[typing.Any]` — Email notification settings for this organization. Controls which email notifications users can receive. Structure: {"notifications_allowed": {"notification_type": bool}}
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**embed_domains:** `typing.Optional[typing.Any]` — List of objects: {"domain": "example.com"}. Used for CSP header on /embed routes.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**embed_enabled:** `typing.Optional[bool]` — Enable embed functionality for this organization
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**embed_settings:** `typing.Optional[typing.Any]` — Embed settings for this organization
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**external_id:** `typing.Optional[str]` — External ID to uniquely identify this organization
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**extra_data_on_activity_logs:** `typing.Optional[bool]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**interface_settings:** `typing.Optional[typing.Any]` — Security settings for custom interfaces: CSP allowlists, script origins, iframe permissions.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**label_stream_navigation_disabled_at:** `typing.Optional[datetime.datetime]` — Set to current time to disable the label stream navigation for this organization. This will prevent users from going back in the label stream to view previous labels.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**organization:** `typing.Optional[int]` — A unique integer value identifying this organization.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**react_code_settings:** `typing.Optional[typing.Any]` — ReactCode tag security settings. Structure: {"mode": "disabled"|"src_only"|"everything", "allowed_origins": ["https://..."], "allowed_permissions": ["camera", ...]}
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**read_only_quick_view_enabled_at:** `typing.Optional[datetime.datetime]` — Set to current time to prevent creating or editing annotations in quick view.
     
 </dd>
 </dl>
@@ -9300,7 +9185,7 @@ Default membership role for invited users
 </details>
 
 ## JwtSettings
-<details><summary><code>client.jwt_settings.<a href="src/label_studio_sdk/jwt_settings/client.py">get</a>() -> LsejwtSettings</code></summary>
+<details><summary><code>client.jwt_settings.<a href="src/label_studio_sdk/jwt_settings/client.py#L29-L53">get</a>() -> LsejwtSettings</code></summary>
 <dl>
 <dd>
 
@@ -9363,7 +9248,7 @@ client.jwt_settings.get()
 </dl>
 </details>
 
-<details><summary><code>client.jwt_settings.<a href="src/label_studio_sdk/jwt_settings/client.py">update</a>(...) -> LsejwtSettings</code></summary>
+<details><summary><code>client.jwt_settings.<a href="src/label_studio_sdk/jwt_settings/client.py#L55-L101">update</a>(...) -> LsejwtSettings</code></summary>
 <dl>
 <dd>
 
@@ -9453,7 +9338,7 @@ client.jwt_settings.update(
 </details>
 
 ## Ml
-<details><summary><code>client.ml.<a href="src/label_studio_sdk/ml/client.py">list</a>(...) -> typing.List[MlBackend]</code></summary>
+<details><summary><code>client.ml.<a href="src/label_studio_sdk/ml/client.py#L31-L73">list</a>(...) -> typing.List[MlBackend]</code></summary>
 <dl>
 <dd>
 
@@ -9537,7 +9422,7 @@ client.ml.list()
 </dl>
 </details>
 
-<details><summary><code>client.ml.<a href="src/label_studio_sdk/ml/client.py">create</a>(...) -> MlBackend</code></summary>
+<details><summary><code>client.ml.<a href="src/label_studio_sdk/ml/client.py#L75-L171">create</a>(...) -> MlBackend</code></summary>
 <dl>
 <dd>
 
@@ -9705,7 +9590,7 @@ client.ml.create(
 </dl>
 </details>
 
-<details><summary><code>client.ml.<a href="src/label_studio_sdk/ml/client.py">get</a>(...) -> MlBackend</code></summary>
+<details><summary><code>client.ml.<a href="src/label_studio_sdk/ml/client.py#L173-L206">get</a>(...) -> MlBackend</code></summary>
 <dl>
 <dd>
 
@@ -9783,7 +9668,7 @@ client.ml.get(
 </dl>
 </details>
 
-<details><summary><code>client.ml.<a href="src/label_studio_sdk/ml/client.py">delete</a>(...)</code></summary>
+<details><summary><code>client.ml.<a href="src/label_studio_sdk/ml/client.py#L208-L240">delete</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -9861,7 +9746,7 @@ client.ml.delete(
 </dl>
 </details>
 
-<details><summary><code>client.ml.<a href="src/label_studio_sdk/ml/client.py">update</a>(...) -> MlBackend</code></summary>
+<details><summary><code>client.ml.<a href="src/label_studio_sdk/ml/client.py#L242-L340">update</a>(...) -> MlBackend</code></summary>
 <dl>
 <dd>
 
@@ -10035,7 +9920,7 @@ client.ml.update(
 </dl>
 </details>
 
-<details><summary><code>client.ml.<a href="src/label_studio_sdk/ml/client.py">predict_interactive</a>(...)</code></summary>
+<details><summary><code>client.ml.<a href="src/label_studio_sdk/ml/client.py#L342-L390">predict_interactive</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -10129,7 +10014,7 @@ client.ml.predict_interactive(
 </dl>
 </details>
 
-<details><summary><code>client.ml.<a href="src/label_studio_sdk/ml/client.py">predict_all_tasks</a>(...)</code></summary>
+<details><summary><code>client.ml.<a href="src/label_studio_sdk/ml/client.py#L392-L441">predict_all_tasks</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -10222,7 +10107,7 @@ client.ml.predict_all_tasks(
 </dl>
 </details>
 
-<details><summary><code>client.ml.<a href="src/label_studio_sdk/ml/client.py">train</a>(...)</code></summary>
+<details><summary><code>client.ml.<a href="src/label_studio_sdk/ml/client.py#L443-L485">train</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -10308,7 +10193,7 @@ client.ml.train(
 </dl>
 </details>
 
-<details><summary><code>client.ml.<a href="src/label_studio_sdk/ml/client.py">list_model_versions</a>(...) -> ListModelVersionsMlResponse</code></summary>
+<details><summary><code>client.ml.<a href="src/label_studio_sdk/ml/client.py#L487-L517">list_model_versions</a>(...) -> ListModelVersionsMlResponse</code></summary>
 <dl>
 <dd>
 
@@ -10382,7 +10267,7 @@ client.ml.list_model_versions(
 </details>
 
 ## ModelProviders
-<details><summary><code>client.model_providers.<a href="src/label_studio_sdk/model_providers/client.py">list</a>(...) -> typing.List[ModelProviderConnection]</code></summary>
+<details><summary><code>client.model_providers.<a href="src/label_studio_sdk/model_providers/client.py#L32-L67">list</a>(...) -> typing.List[ModelProviderConnection]</code></summary>
 <dl>
 <dd>
 
@@ -10459,7 +10344,7 @@ client.model_providers.list()
 </dl>
 </details>
 
-<details><summary><code>client.model_providers.<a href="src/label_studio_sdk/model_providers/client.py">create</a>(...) -> ModelProviderConnection</code></summary>
+<details><summary><code>client.model_providers.<a href="src/label_studio_sdk/model_providers/client.py#L69-L163">create</a>(...) -> ModelProviderConnection</code></summary>
 <dl>
 <dd>
 
@@ -10536,7 +10421,7 @@ client.model_providers.create()
 </dl>
 </details>
 
-<details><summary><code>client.model_providers.<a href="src/label_studio_sdk/model_providers/client.py">list_model_provider_choices</a>() -> ListModelProviderChoicesModelProvidersResponse</code></summary>
+<details><summary><code>client.model_providers.<a href="src/label_studio_sdk/model_providers/client.py#L165-L197">list_model_provider_choices</a>() -> ListModelProviderChoicesModelProvidersResponse</code></summary>
 <dl>
 <dd>
 
@@ -10605,7 +10490,7 @@ client.model_providers.list_model_provider_choices()
 </dl>
 </details>
 
-<details><summary><code>client.model_providers.<a href="src/label_studio_sdk/model_providers/client.py">get</a>(...) -> ModelProviderConnection</code></summary>
+<details><summary><code>client.model_providers.<a href="src/label_studio_sdk/model_providers/client.py#L199-L234">get</a>(...) -> ModelProviderConnection</code></summary>
 <dl>
 <dd>
 
@@ -10684,7 +10569,7 @@ client.model_providers.get(
 </dl>
 </details>
 
-<details><summary><code>client.model_providers.<a href="src/label_studio_sdk/model_providers/client.py">delete</a>(...)</code></summary>
+<details><summary><code>client.model_providers.<a href="src/label_studio_sdk/model_providers/client.py#L236-L270">delete</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -10763,7 +10648,7 @@ client.model_providers.delete(
 </dl>
 </details>
 
-<details><summary><code>client.model_providers.<a href="src/label_studio_sdk/model_providers/client.py">update</a>(...) -> ModelProviderConnection</code></summary>
+<details><summary><code>client.model_providers.<a href="src/label_studio_sdk/model_providers/client.py#L272-L373">update</a>(...) -> ModelProviderConnection</code></summary>
 <dl>
 <dd>
 
@@ -10939,7 +10824,7 @@ client.model_providers.update(
 </details>
 
 ## Predictions
-<details><summary><code>client.predictions.<a href="src/label_studio_sdk/predictions/client.py">list</a>(...) -> typing.List[Prediction]</code></summary>
+<details><summary><code>client.predictions.<a href="src/label_studio_sdk/predictions/client.py#L29-L70">list</a>(...) -> typing.List[Prediction]</code></summary>
 <dl>
 <dd>
 
@@ -11026,7 +10911,7 @@ client.predictions.list()
 </dl>
 </details>
 
-<details><summary><code>client.predictions.<a href="src/label_studio_sdk/predictions/client.py">create</a>(...) -> Prediction</code></summary>
+<details><summary><code>client.predictions.<a href="src/label_studio_sdk/predictions/client.py#L72-L153">create</a>(...) -> Prediction</code></summary>
 <dl>
 <dd>
 
@@ -11104,7 +10989,7 @@ client.predictions.create(
 </dl>
 </details>
 
-<details><summary><code>client.predictions.<a href="src/label_studio_sdk/predictions/client.py">get</a>(...) -> Prediction</code></summary>
+<details><summary><code>client.predictions.<a href="src/label_studio_sdk/predictions/client.py#L155-L184">get</a>(...) -> Prediction</code></summary>
 <dl>
 <dd>
 
@@ -11177,7 +11062,7 @@ client.predictions.get(
 </dl>
 </details>
 
-<details><summary><code>client.predictions.<a href="src/label_studio_sdk/predictions/client.py">delete</a>(...)</code></summary>
+<details><summary><code>client.predictions.<a href="src/label_studio_sdk/predictions/client.py#L186-L214">delete</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -11250,7 +11135,7 @@ client.predictions.delete(
 </dl>
 </details>
 
-<details><summary><code>client.predictions.<a href="src/label_studio_sdk/predictions/client.py">update</a>(...) -> Prediction</code></summary>
+<details><summary><code>client.predictions.<a href="src/label_studio_sdk/predictions/client.py#L216-L301">update</a>(...) -> Prediction</code></summary>
 <dl>
 <dd>
 
@@ -11404,7 +11289,7 @@ client.predictions.update(
 </details>
 
 ## ProjectTemplates
-<details><summary><code>client.project_templates.<a href="src/label_studio_sdk/project_templates/client.py">list</a>(...) -> typing.List[ProjectTemplate]</code></summary>
+<details><summary><code>client.project_templates.<a href="src/label_studio_sdk/project_templates/client.py#L30-L65">list</a>(...) -> typing.List[ProjectTemplate]</code></summary>
 <dl>
 <dd>
 
@@ -11481,7 +11366,7 @@ client.project_templates.list()
 </dl>
 </details>
 
-<details><summary><code>client.project_templates.<a href="src/label_studio_sdk/project_templates/client.py">create</a>(...) -> ProjectTemplate</code></summary>
+<details><summary><code>client.project_templates.<a href="src/label_studio_sdk/project_templates/client.py#L67-L151">create</a>(...) -> ProjectTemplate</code></summary>
 <dl>
 <dd>
 
@@ -11561,7 +11446,7 @@ client.project_templates.create(
 </dl>
 </details>
 
-<details><summary><code>client.project_templates.<a href="src/label_studio_sdk/project_templates/client.py">get</a>(...) -> ProjectTemplate</code></summary>
+<details><summary><code>client.project_templates.<a href="src/label_studio_sdk/project_templates/client.py#L153-L187">get</a>(...) -> ProjectTemplate</code></summary>
 <dl>
 <dd>
 
@@ -11640,7 +11525,7 @@ client.project_templates.get(
 </dl>
 </details>
 
-<details><summary><code>client.project_templates.<a href="src/label_studio_sdk/project_templates/client.py">delete</a>(...)</code></summary>
+<details><summary><code>client.project_templates.<a href="src/label_studio_sdk/project_templates/client.py#L189-L222">delete</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -11719,7 +11604,7 @@ client.project_templates.delete(
 </dl>
 </details>
 
-<details><summary><code>client.project_templates.<a href="src/label_studio_sdk/project_templates/client.py">update</a>(...) -> ProjectTemplate</code></summary>
+<details><summary><code>client.project_templates.<a href="src/label_studio_sdk/project_templates/client.py#L224-L311">update</a>(...) -> ProjectTemplate</code></summary>
 <dl>
 <dd>
 
@@ -11878,7 +11763,7 @@ client.project_templates.update(
 </dl>
 </details>
 
-<details><summary><code>client.project_templates.<a href="src/label_studio_sdk/project_templates/client.py">create_project_from_template</a>(...) -> LseProject</code></summary>
+<details><summary><code>client.project_templates.<a href="src/label_studio_sdk/project_templates/client.py#L313-L367">create_project_from_template</a>(...) -> LseProject</code></summary>
 <dl>
 <dd>
 
@@ -11983,7 +11868,7 @@ client.project_templates.create_project_from_template(
 </details>
 
 ## Projects
-<details><summary><code>client.projects.<a href="src/label_studio_sdk/projects/client.py">list</a>(...) -> PaginatedAllRolesProjectListList</code></summary>
+<details><summary><code>client.projects.<a href="src/label_studio_sdk/projects/client.py#L78-L187">list</a>(...) -> PaginatedAllRolesProjectListList</code></summary>
 <dl>
 <dd>
 
@@ -12163,7 +12048,7 @@ client.projects.list()
 </dl>
 </details>
 
-<details><summary><code>client.projects.<a href="src/label_studio_sdk/projects/client.py">create</a>(...) -> LseProjectCreate</code></summary>
+<details><summary><code>client.projects.<a href="src/label_studio_sdk/projects/client.py#L189-L430">create</a>(...) -> LseProjectCreate</code></summary>
 <dl>
 <dd>
 
@@ -12403,14 +12288,6 @@ Data Collection project mode (assigned or open). Set only at creation; immutable
 <dl>
 <dd>
 
-**organization:** `typing.Optional[int]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
 **output_schema:** `typing.Optional[typing.Any]` 
     
 </dd>
@@ -12591,7 +12468,7 @@ Data Collection project mode (assigned or open). Set only at creation; immutable
 </dl>
 </details>
 
-<details><summary><code>client.projects.<a href="src/label_studio_sdk/projects/client.py">list_counts</a>(...) -> PaginatedLseProjectCountsList</code></summary>
+<details><summary><code>client.projects.<a href="src/label_studio_sdk/projects/client.py#L432-L527">list_counts</a>(...) -> PaginatedLseProjectCountsList</code></summary>
 <dl>
 <dd>
 
@@ -12758,7 +12635,7 @@ client.projects.list_counts()
 </dl>
 </details>
 
-<details><summary><code>client.projects.<a href="src/label_studio_sdk/projects/client.py">get</a>(...) -> LseProjectResponse</code></summary>
+<details><summary><code>client.projects.<a href="src/label_studio_sdk/projects/client.py#L529-L566">get</a>(...) -> LseProjectResponse</code></summary>
 <dl>
 <dd>
 
@@ -12839,7 +12716,7 @@ client.projects.get(
 </dl>
 </details>
 
-<details><summary><code>client.projects.<a href="src/label_studio_sdk/projects/client.py">delete</a>(...)</code></summary>
+<details><summary><code>client.projects.<a href="src/label_studio_sdk/projects/client.py#L568-L595">delete</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -12912,7 +12789,7 @@ client.projects.delete(
 </dl>
 </details>
 
-<details><summary><code>client.projects.<a href="src/label_studio_sdk/projects/client.py">update</a>(...) -> LseProjectResponse</code></summary>
+<details><summary><code>client.projects.<a href="src/label_studio_sdk/projects/client.py#L597-L948">update</a>(...) -> LseProjectResponse</code></summary>
 <dl>
 <dd>
 
@@ -13288,14 +13165,6 @@ Metric used to evaluate annotators. Defaults to gt_agreement.
 <dl>
 <dd>
 
-**organization:** `typing.Optional[int]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
 **output_schema:** `typing.Optional[typing.Any]` 
     
 </dd>
@@ -13516,7 +13385,7 @@ Metric used to evaluate annotators. Defaults to gt_agreement.
 </dl>
 </details>
 
-<details><summary><code>client.projects.<a href="src/label_studio_sdk/projects/client.py">list_unique_annotators</a>(...) -> typing.List[UserSimple]</code></summary>
+<details><summary><code>client.projects.<a href="src/label_studio_sdk/projects/client.py#L950-L980">list_unique_annotators</a>(...) -> typing.List[UserSimple]</code></summary>
 <dl>
 <dd>
 
@@ -13589,7 +13458,7 @@ client.projects.list_unique_annotators(
 </dl>
 </details>
 
-<details><summary><code>client.projects.<a href="src/label_studio_sdk/projects/client.py">duplicate</a>(...) -> DuplicateProjectsResponse</code></summary>
+<details><summary><code>client.projects.<a href="src/label_studio_sdk/projects/client.py#L982-L1055">duplicate</a>(...) -> DuplicateProjectsResponse</code></summary>
 <dl>
 <dd>
 
@@ -13716,7 +13585,7 @@ What to Duplicate (Project configuration only / Project configuration and tasks)
 </dl>
 </details>
 
-<details><summary><code>client.projects.<a href="src/label_studio_sdk/projects/client.py">import_tasks</a>(...) -> ImportTasksProjectsResponse</code></summary>
+<details><summary><code>client.projects.<a href="src/label_studio_sdk/projects/client.py#L1057-L1183">import_tasks</a>(...) -> ImportTasksProjectsResponse</code></summary>
 <dl>
 <dd>
 
@@ -13893,7 +13762,7 @@ client.projects.import_tasks(
 </dl>
 </details>
 
-<details><summary><code>client.projects.<a href="src/label_studio_sdk/projects/client.py">import_predictions</a>(...) -> ImportPredictionsProjectsResponse</code></summary>
+<details><summary><code>client.projects.<a href="src/label_studio_sdk/projects/client.py#L1185-L1228">import_predictions</a>(...) -> ImportPredictionsProjectsResponse</code></summary>
 <dl>
 <dd>
 
@@ -13984,7 +13853,7 @@ client.projects.import_predictions(
 </dl>
 </details>
 
-<details><summary><code>client.projects.<a href="src/label_studio_sdk/projects/client.py">validate_label_config</a>(...) -> ProjectLabelConfig</code></summary>
+<details><summary><code>client.projects.<a href="src/label_studio_sdk/projects/client.py#L1230-L1267">validate_label_config</a>(...) -> ProjectLabelConfig</code></summary>
 <dl>
 <dd>
 
@@ -14067,101 +13936,7 @@ client.projects.validate_label_config(
 </details>
 
 ## Tasks
-<details><summary><code>client.tasks.<a href="src/label_studio_sdk/tasks/client.py">create_many_status</a>(...) -> ProjectImport</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-
-            Poll the status of an asynchronous project import operation.
-            
-            **Usage:**
-            1. When you POST to `/api/projects/{project_id}/import`, you'll receive a response like `{"import": <import_id>}`
-            2. Use that `import_id` with this GET endpoint to check the import status
-            3. Poll this endpoint to see if the import has completed, is still processing, or has failed
-            4. **Import errors and failures will only be visible in this GET response**, not in the original POST request
-            
-            This endpoint returns detailed information about the import including task counts, status, and any error messages.
-            While an import is running, `task_count` / annotation / prediction counts update as batches commit.
-            Counts are cumulative so far; there is no expected total, so percent-complete / ETA is not available from this API.
-        
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```python
-from label_studio_sdk import LabelStudio
-from label_studio_sdk.environment import LabelStudioEnvironment
-
-client = LabelStudio(
-    api_key="<value>",
-    environment=LabelStudioEnvironment.DEFAULT,
-)
-
-client.tasks.create_many_status(
-    id=1,
-    import_pk=1,
-)
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**id:** `int` — A unique integer value identifying this project.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**import_pk:** `int` — A unique integer value identifying this project import.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.tasks.<a href="src/label_studio_sdk/tasks/client.py">delete_all_tasks</a>(...)</code></summary>
+<details><summary><code>client.tasks.<a href="src/label_studio_sdk/tasks/client.py#L41-L69">delete_all_tasks</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -14234,7 +14009,7 @@ client.tasks.delete_all_tasks(
 </dl>
 </details>
 
-<details><summary><code>client.tasks.<a href="src/label_studio_sdk/tasks/client.py">list</a>(...) -> PaginatedRoleBasedTaskList</code></summary>
+<details><summary><code>client.tasks.<a href="src/label_studio_sdk/tasks/client.py#L71-L170">list</a>(...) -> PaginatedRoleBasedTaskList</code></summary>
 <dl>
 <dd>
 
@@ -14397,7 +14172,7 @@ Example: ["completed_at"]
 </dl>
 </details>
 
-<details><summary><code>client.tasks.<a href="src/label_studio_sdk/tasks/client.py">create</a>(...) -> LseTask</code></summary>
+<details><summary><code>client.tasks.<a href="src/label_studio_sdk/tasks/client.py#L172-L285">create</a>(...) -> LseTask</code></summary>
 <dl>
 <dd>
 
@@ -14594,7 +14369,7 @@ client.tasks.create(
 </dl>
 </details>
 
-<details><summary><code>client.tasks.<a href="src/label_studio_sdk/tasks/client.py">get</a>(...) -> RoleBasedTask</code></summary>
+<details><summary><code>client.tasks.<a href="src/label_studio_sdk/tasks/client.py#L287-L316">get</a>(...) -> RoleBasedTask</code></summary>
 <dl>
 <dd>
 
@@ -14667,7 +14442,7 @@ client.tasks.get(
 </dl>
 </details>
 
-<details><summary><code>client.tasks.<a href="src/label_studio_sdk/tasks/client.py">delete</a>(...)</code></summary>
+<details><summary><code>client.tasks.<a href="src/label_studio_sdk/tasks/client.py#L318-L346">delete</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -14740,7 +14515,7 @@ client.tasks.delete(
 </dl>
 </details>
 
-<details><summary><code>client.tasks.<a href="src/label_studio_sdk/tasks/client.py">update</a>(...) -> RoleBasedTask</code></summary>
+<details><summary><code>client.tasks.<a href="src/label_studio_sdk/tasks/client.py#L348-L487">update</a>(...) -> RoleBasedTask</code></summary>
 <dl>
 <dd>
 
@@ -14997,7 +14772,7 @@ client.tasks.update(
 </dl>
 </details>
 
-<details><summary><code>client.tasks.<a href="src/label_studio_sdk/tasks/client.py">create_event</a>(...) -> TaskEvent</code></summary>
+<details><summary><code>client.tasks.<a href="src/label_studio_sdk/tasks/client.py#L489-L615">create_event</a>(...) -> TaskEvent</code></summary>
 <dl>
 <dd>
 
@@ -15178,7 +14953,7 @@ client.tasks.create_event(
 </details>
 
 ## SessionPolicy
-<details><summary><code>client.session_policy.<a href="src/label_studio_sdk/session_policy/client.py">get</a>() -> SessionTimeoutPolicy</code></summary>
+<details><summary><code>client.session_policy.<a href="src/label_studio_sdk/session_policy/client.py#L29-L53">get</a>() -> SessionTimeoutPolicy</code></summary>
 <dl>
 <dd>
 
@@ -15241,7 +15016,7 @@ client.session_policy.get()
 </dl>
 </details>
 
-<details><summary><code>client.session_policy.<a href="src/label_studio_sdk/session_policy/client.py">update</a>(...) -> SessionTimeoutPolicy</code></summary>
+<details><summary><code>client.session_policy.<a href="src/label_studio_sdk/session_policy/client.py#L55-L95">update</a>(...) -> SessionTimeoutPolicy</code></summary>
 <dl>
 <dd>
 
@@ -15321,7 +15096,7 @@ client.session_policy.update()
 </details>
 
 ## ImportStorage
-<details><summary><code>client.import_storage.<a href="src/label_studio_sdk/import_storage/client.py">list_types</a>() -> typing.List[ListTypesImportStorageResponseItem]</code></summary>
+<details><summary><code>client.import_storage.<a href="src/label_studio_sdk/import_storage/client.py#L51-L77">list_types</a>() -> typing.List[ListTypesImportStorageResponseItem]</code></summary>
 <dl>
 <dd>
 
@@ -15385,7 +15160,7 @@ client.import_storage.list_types()
 </details>
 
 ## ExportStorage
-<details><summary><code>client.export_storage.<a href="src/label_studio_sdk/export_storage/client.py">list_types</a>() -> typing.List[ListTypesExportStorageResponseItem]</code></summary>
+<details><summary><code>client.export_storage.<a href="src/label_studio_sdk/export_storage/client.py#L51-L77">list_types</a>() -> typing.List[ListTypesExportStorageResponseItem]</code></summary>
 <dl>
 <dd>
 
@@ -15449,7 +15224,7 @@ client.export_storage.list_types()
 </details>
 
 ## Tokens
-<details><summary><code>client.tokens.<a href="src/label_studio_sdk/tokens/client.py">list</a>(...) -> typing.List[LseapiTokenList]</code></summary>
+<details><summary><code>client.tokens.<a href="src/label_studio_sdk/tokens/client.py#L32-L61">list</a>(...) -> typing.List[LseapiTokenList]</code></summary>
 <dl>
 <dd>
 
@@ -15520,7 +15295,7 @@ client.tokens.list()
 </dl>
 </details>
 
-<details><summary><code>client.tokens.<a href="src/label_studio_sdk/tokens/client.py">create</a>() -> LseapiTokenCreate</code></summary>
+<details><summary><code>client.tokens.<a href="src/label_studio_sdk/tokens/client.py#L63-L87">create</a>() -> LseapiTokenCreate</code></summary>
 <dl>
 <dd>
 
@@ -15583,7 +15358,7 @@ client.tokens.create()
 </dl>
 </details>
 
-<details><summary><code>client.tokens.<a href="src/label_studio_sdk/tokens/client.py">blacklist</a>(...)</code></summary>
+<details><summary><code>client.tokens.<a href="src/label_studio_sdk/tokens/client.py#L89-L116">blacklist</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -15656,7 +15431,7 @@ client.tokens.blacklist(
 </dl>
 </details>
 
-<details><summary><code>client.tokens.<a href="src/label_studio_sdk/tokens/client.py">refresh</a>(...) -> TokenRefreshResponse</code></summary>
+<details><summary><code>client.tokens.<a href="src/label_studio_sdk/tokens/client.py#L118-L146">refresh</a>(...) -> TokenRefreshResponse</code></summary>
 <dl>
 <dd>
 
@@ -15729,7 +15504,7 @@ client.tokens.refresh(
 </dl>
 </details>
 
-<details><summary><code>client.tokens.<a href="src/label_studio_sdk/tokens/client.py">rotate</a>(...) -> TokenRotateResponse</code></summary>
+<details><summary><code>client.tokens.<a href="src/label_studio_sdk/tokens/client.py#L148-L176">rotate</a>(...) -> TokenRotateResponse</code></summary>
 <dl>
 <dd>
 
@@ -15803,7 +15578,7 @@ client.tokens.rotate(
 </details>
 
 ## Versions
-<details><summary><code>client.versions.<a href="src/label_studio_sdk/versions/client.py">get</a>() -> VersionResponse</code></summary>
+<details><summary><code>client.versions.<a href="src/label_studio_sdk/versions/client.py#L26-L50">get</a>() -> VersionResponse</code></summary>
 <dl>
 <dd>
 
@@ -15867,7 +15642,7 @@ client.versions.get()
 </details>
 
 ## Webhooks
-<details><summary><code>client.webhooks.<a href="src/label_studio_sdk/webhooks/client.py">list</a>(...) -> typing.List[Webhook]</code></summary>
+<details><summary><code>client.webhooks.<a href="src/label_studio_sdk/webhooks/client.py#L32-L61">list</a>(...) -> typing.List[Webhook]</code></summary>
 <dl>
 <dd>
 
@@ -15938,7 +15713,7 @@ client.webhooks.list()
 </dl>
 </details>
 
-<details><summary><code>client.webhooks.<a href="src/label_studio_sdk/webhooks/client.py">create</a>(...) -> Webhook</code></summary>
+<details><summary><code>client.webhooks.<a href="src/label_studio_sdk/webhooks/client.py#L63-L128">create</a>(...) -> Webhook</code></summary>
 <dl>
 <dd>
 
@@ -16059,7 +15834,7 @@ client.webhooks.create(
 </dl>
 </details>
 
-<details><summary><code>client.webhooks.<a href="src/label_studio_sdk/webhooks/client.py">info</a>(...) -> InfoWebhooksResponse</code></summary>
+<details><summary><code>client.webhooks.<a href="src/label_studio_sdk/webhooks/client.py#L130-L162">info</a>(...) -> InfoWebhooksResponse</code></summary>
 <dl>
 <dd>
 
@@ -16130,7 +15905,7 @@ client.webhooks.info()
 </dl>
 </details>
 
-<details><summary><code>client.webhooks.<a href="src/label_studio_sdk/webhooks/client.py">get</a>(...) -> Webhook</code></summary>
+<details><summary><code>client.webhooks.<a href="src/label_studio_sdk/webhooks/client.py#L164-L190">get</a>(...) -> Webhook</code></summary>
 <dl>
 <dd>
 
@@ -16189,7 +15964,7 @@ client.webhooks.get(
 </dl>
 </details>
 
-<details><summary><code>client.webhooks.<a href="src/label_studio_sdk/webhooks/client.py">delete</a>(...)</code></summary>
+<details><summary><code>client.webhooks.<a href="src/label_studio_sdk/webhooks/client.py#L192-L217">delete</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -16248,7 +16023,7 @@ client.webhooks.delete(
 </dl>
 </details>
 
-<details><summary><code>client.webhooks.<a href="src/label_studio_sdk/webhooks/client.py">update</a>(...) -> WebhookSerializerForUpdate</code></summary>
+<details><summary><code>client.webhooks.<a href="src/label_studio_sdk/webhooks/client.py#L219-L282">update</a>(...) -> WebhookSerializerForUpdate</code></summary>
 <dl>
 <dd>
 
@@ -16356,7 +16131,7 @@ client.webhooks.update(
 </details>
 
 ## Workspaces
-<details><summary><code>client.workspaces.<a href="src/label_studio_sdk/workspaces/client.py">list</a>(...) -> typing.List[Workspace]</code></summary>
+<details><summary><code>client.workspaces.<a href="src/label_studio_sdk/workspaces/client.py#L37-L98">list</a>(...) -> typing.List[Workspace]</code></summary>
 <dl>
 <dd>
 
@@ -16421,6 +16196,14 @@ client.workspaces.list()
 <dl>
 <dd>
 
+**interface_targets:** `typing.Optional[bool]` — Only workspaces you can save an interface into: the workspaces you may manage, plus your Personal Sandbox if interfaces are allowed there.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **is_archived:** `typing.Optional[bool]` — Filter by archived status. Set to false to exclude archived workspaces.
     
 </dd>
@@ -16457,7 +16240,7 @@ client.workspaces.list()
 </dl>
 </details>
 
-<details><summary><code>client.workspaces.<a href="src/label_studio_sdk/workspaces/client.py">create</a>(...) -> Workspace</code></summary>
+<details><summary><code>client.workspaces.<a href="src/label_studio_sdk/workspaces/client.py#L100-L163">create</a>(...) -> Workspace</code></summary>
 <dl>
 <dd>
 
@@ -16568,7 +16351,7 @@ client.workspaces.create(
 </dl>
 </details>
 
-<details><summary><code>client.workspaces.<a href="src/label_studio_sdk/workspaces/client.py">get</a>(...) -> Workspace</code></summary>
+<details><summary><code>client.workspaces.<a href="src/label_studio_sdk/workspaces/client.py#L165-L199">get</a>(...) -> Workspace</code></summary>
 <dl>
 <dd>
 
@@ -16647,7 +16430,7 @@ client.workspaces.get(
 </dl>
 </details>
 
-<details><summary><code>client.workspaces.<a href="src/label_studio_sdk/workspaces/client.py">delete</a>(...)</code></summary>
+<details><summary><code>client.workspaces.<a href="src/label_studio_sdk/workspaces/client.py#L201-L234">delete</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -16726,7 +16509,7 @@ client.workspaces.delete(
 </dl>
 </details>
 
-<details><summary><code>client.workspaces.<a href="src/label_studio_sdk/workspaces/client.py">update</a>(...) -> Workspace</code></summary>
+<details><summary><code>client.workspaces.<a href="src/label_studio_sdk/workspaces/client.py#L236-L303">update</a>(...) -> Workspace</code></summary>
 <dl>
 <dd>
 
@@ -16846,7 +16629,7 @@ client.workspaces.update(
 </details>
 
 ## Analytics Kpis
-<details><summary><code>client.analytics.kpis.<a href="src/label_studio_sdk/analytics/kpis/client.py">list</a>() -> typing.List[KpiMetadata]</code></summary>
+<details><summary><code>client.analytics.kpis.<a href="src/label_studio_sdk/analytics/kpis/client.py#L29-L59">list</a>() -> typing.List[KpiMetadata]</code></summary>
 <dl>
 <dd>
 
@@ -16915,7 +16698,7 @@ client.analytics.kpis.list()
 </dl>
 </details>
 
-<details><summary><code>client.analytics.kpis.<a href="src/label_studio_sdk/analytics/kpis/client.py">get</a>(...) -> KpiDetailResponse</code></summary>
+<details><summary><code>client.analytics.kpis.<a href="src/label_studio_sdk/analytics/kpis/client.py#L61-L150">get</a>(...) -> KpiDetailResponse</code></summary>
 <dl>
 <dd>
 
@@ -17068,7 +16851,7 @@ client.analytics.kpis.get(
 </details>
 
 ## ExportStorage Azure
-<details><summary><code>client.export_storage.azure.<a href="src/label_studio_sdk/export_storage/azure/client.py">list</a>(...) -> typing.List[AzureBlobExportStorage]</code></summary>
+<details><summary><code>client.export_storage.azure.<a href="src/label_studio_sdk/export_storage/azure/client.py#L29-L67">list</a>(...) -> typing.List[AzureBlobExportStorage]</code></summary>
 <dl>
 <dd>
 
@@ -17149,7 +16932,7 @@ client.export_storage.azure.list(
 </dl>
 </details>
 
-<details><summary><code>client.export_storage.azure.<a href="src/label_studio_sdk/export_storage/azure/client.py">create</a>(...) -> AzureBlobExportStorage</code></summary>
+<details><summary><code>client.export_storage.azure.<a href="src/label_studio_sdk/export_storage/azure/client.py#L69-L155">create</a>(...) -> AzureBlobExportStorage</code></summary>
 <dl>
 <dd>
 
@@ -17302,7 +17085,7 @@ client.export_storage.azure.create(
 </dl>
 </details>
 
-<details><summary><code>client.export_storage.azure.<a href="src/label_studio_sdk/export_storage/azure/client.py">validate</a>(...)</code></summary>
+<details><summary><code>client.export_storage.azure.<a href="src/label_studio_sdk/export_storage/azure/client.py#L157-L247">validate</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -17463,7 +17246,7 @@ client.export_storage.azure.validate(
 </dl>
 </details>
 
-<details><summary><code>client.export_storage.azure.<a href="src/label_studio_sdk/export_storage/azure/client.py">get</a>(...) -> AzureBlobExportStorage</code></summary>
+<details><summary><code>client.export_storage.azure.<a href="src/label_studio_sdk/export_storage/azure/client.py#L249-L277">get</a>(...) -> AzureBlobExportStorage</code></summary>
 <dl>
 <dd>
 
@@ -17536,7 +17319,7 @@ client.export_storage.azure.get(
 </dl>
 </details>
 
-<details><summary><code>client.export_storage.azure.<a href="src/label_studio_sdk/export_storage/azure/client.py">delete</a>(...)</code></summary>
+<details><summary><code>client.export_storage.azure.<a href="src/label_studio_sdk/export_storage/azure/client.py#L279-L306">delete</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -17609,7 +17392,7 @@ client.export_storage.azure.delete(
 </dl>
 </details>
 
-<details><summary><code>client.export_storage.azure.<a href="src/label_studio_sdk/export_storage/azure/client.py">update</a>(...) -> AzureBlobExportStorage</code></summary>
+<details><summary><code>client.export_storage.azure.<a href="src/label_studio_sdk/export_storage/azure/client.py#L308-L398">update</a>(...) -> AzureBlobExportStorage</code></summary>
 <dl>
 <dd>
 
@@ -17770,7 +17553,7 @@ client.export_storage.azure.update(
 </dl>
 </details>
 
-<details><summary><code>client.export_storage.azure.<a href="src/label_studio_sdk/export_storage/azure/client.py">sync</a>(...) -> AzureBlobExportStorage</code></summary>
+<details><summary><code>client.export_storage.azure.<a href="src/label_studio_sdk/export_storage/azure/client.py#L400-L428">sync</a>(...) -> AzureBlobExportStorage</code></summary>
 <dl>
 <dd>
 
@@ -17844,7 +17627,7 @@ client.export_storage.azure.sync(
 </details>
 
 ## ExportStorage AzureSpi
-<details><summary><code>client.export_storage.azure_spi.<a href="src/label_studio_sdk/export_storage/azure_spi/client.py">list</a>(...) -> typing.List[AzureServicePrincipalExportStorage]</code></summary>
+<details><summary><code>client.export_storage.azure_spi.<a href="src/label_studio_sdk/export_storage/azure_spi/client.py#L32-L76">list</a>(...) -> typing.List[AzureServicePrincipalExportStorage]</code></summary>
 <dl>
 <dd>
 
@@ -17931,7 +17714,7 @@ client.export_storage.azure_spi.list(
 </dl>
 </details>
 
-<details><summary><code>client.export_storage.azure_spi.<a href="src/label_studio_sdk/export_storage/azure_spi/client.py">create</a>(...) -> AzureServicePrincipalExportStorage</code></summary>
+<details><summary><code>client.export_storage.azure_spi.<a href="src/label_studio_sdk/export_storage/azure_spi/client.py#L78-L222">create</a>(...) -> AzureServicePrincipalExportStorage</code></summary>
 <dl>
 <dd>
 
@@ -18010,7 +17793,7 @@ client.export_storage.azure_spi.create(
 </dl>
 </details>
 
-<details><summary><code>client.export_storage.azure_spi.<a href="src/label_studio_sdk/export_storage/azure_spi/client.py">validate</a>(...)</code></summary>
+<details><summary><code>client.export_storage.azure_spi.<a href="src/label_studio_sdk/export_storage/azure_spi/client.py#L224-L367">validate</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -18089,7 +17872,7 @@ client.export_storage.azure_spi.validate(
 </dl>
 </details>
 
-<details><summary><code>client.export_storage.azure_spi.<a href="src/label_studio_sdk/export_storage/azure_spi/client.py">get</a>(...) -> AzureServicePrincipalExportStorage</code></summary>
+<details><summary><code>client.export_storage.azure_spi.<a href="src/label_studio_sdk/export_storage/azure_spi/client.py#L369-L405">get</a>(...) -> AzureServicePrincipalExportStorage</code></summary>
 <dl>
 <dd>
 
@@ -18168,7 +17951,7 @@ client.export_storage.azure_spi.get(
 </dl>
 </details>
 
-<details><summary><code>client.export_storage.azure_spi.<a href="src/label_studio_sdk/export_storage/azure_spi/client.py">delete</a>(...)</code></summary>
+<details><summary><code>client.export_storage.azure_spi.<a href="src/label_studio_sdk/export_storage/azure_spi/client.py#L407-L440">delete</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -18247,7 +18030,7 @@ client.export_storage.azure_spi.delete(
 </dl>
 </details>
 
-<details><summary><code>client.export_storage.azure_spi.<a href="src/label_studio_sdk/export_storage/azure_spi/client.py">update</a>(...) -> AzureServicePrincipalExportStorage</code></summary>
+<details><summary><code>client.export_storage.azure_spi.<a href="src/label_studio_sdk/export_storage/azure_spi/client.py#L442-L590">update</a>(...) -> AzureServicePrincipalExportStorage</code></summary>
 <dl>
 <dd>
 
@@ -18499,7 +18282,7 @@ Authentication mode. service_principal uses a client secret. workload_identity u
 </dl>
 </details>
 
-<details><summary><code>client.export_storage.azure_spi.<a href="src/label_studio_sdk/export_storage/azure_spi/client.py">sync</a>(...) -> AzureServicePrincipalExportStorage</code></summary>
+<details><summary><code>client.export_storage.azure_spi.<a href="src/label_studio_sdk/export_storage/azure_spi/client.py#L592-L628">sync</a>(...) -> AzureServicePrincipalExportStorage</code></summary>
 <dl>
 <dd>
 
@@ -18579,7 +18362,7 @@ client.export_storage.azure_spi.sync(
 </details>
 
 ## ExportStorage Databricks
-<details><summary><code>client.export_storage.databricks.<a href="src/label_studio_sdk/export_storage/databricks/client.py">list</a>(...) -> typing.List[DatabricksExportStorage]</code></summary>
+<details><summary><code>client.export_storage.databricks.<a href="src/label_studio_sdk/export_storage/databricks/client.py#L30-L74">list</a>(...) -> typing.List[DatabricksExportStorage]</code></summary>
 <dl>
 <dd>
 
@@ -18666,7 +18449,7 @@ client.export_storage.databricks.list(
 </dl>
 </details>
 
-<details><summary><code>client.export_storage.databricks.<a href="src/label_studio_sdk/export_storage/databricks/client.py">create</a>(...) -> DatabricksExportStorage</code></summary>
+<details><summary><code>client.export_storage.databricks.<a href="src/label_studio_sdk/export_storage/databricks/client.py#L76-L219">create</a>(...) -> DatabricksExportStorage</code></summary>
 <dl>
 <dd>
 
@@ -18907,7 +18690,7 @@ Authentication method: PAT, Databricks SP, or Azure AD SP
 </dl>
 </details>
 
-<details><summary><code>client.export_storage.databricks.<a href="src/label_studio_sdk/export_storage/databricks/client.py">validate</a>(...)</code></summary>
+<details><summary><code>client.export_storage.databricks.<a href="src/label_studio_sdk/export_storage/databricks/client.py#L221-L368">validate</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -19156,7 +18939,7 @@ Authentication method: PAT, Databricks SP, or Azure AD SP
 </dl>
 </details>
 
-<details><summary><code>client.export_storage.databricks.<a href="src/label_studio_sdk/export_storage/databricks/client.py">get</a>(...) -> DatabricksExportStorage</code></summary>
+<details><summary><code>client.export_storage.databricks.<a href="src/label_studio_sdk/export_storage/databricks/client.py#L370-L404">get</a>(...) -> DatabricksExportStorage</code></summary>
 <dl>
 <dd>
 
@@ -19235,7 +19018,7 @@ client.export_storage.databricks.get(
 </dl>
 </details>
 
-<details><summary><code>client.export_storage.databricks.<a href="src/label_studio_sdk/export_storage/databricks/client.py">delete</a>(...)</code></summary>
+<details><summary><code>client.export_storage.databricks.<a href="src/label_studio_sdk/export_storage/databricks/client.py#L406-L439">delete</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -19314,7 +19097,7 @@ client.export_storage.databricks.delete(
 </dl>
 </details>
 
-<details><summary><code>client.export_storage.databricks.<a href="src/label_studio_sdk/export_storage/databricks/client.py">update</a>(...) -> DatabricksExportStorage</code></summary>
+<details><summary><code>client.export_storage.databricks.<a href="src/label_studio_sdk/export_storage/databricks/client.py#L441-L584">update</a>(...) -> DatabricksExportStorage</code></summary>
 <dl>
 <dd>
 
@@ -19559,7 +19342,7 @@ Authentication method: PAT, Databricks SP, or Azure AD SP
 </dl>
 </details>
 
-<details><summary><code>client.export_storage.databricks.<a href="src/label_studio_sdk/export_storage/databricks/client.py">sync</a>(...) -> DatabricksExportStorage</code></summary>
+<details><summary><code>client.export_storage.databricks.<a href="src/label_studio_sdk/export_storage/databricks/client.py#L586-L620">sync</a>(...) -> DatabricksExportStorage</code></summary>
 <dl>
 <dd>
 
@@ -19639,7 +19422,7 @@ client.export_storage.databricks.sync(
 </details>
 
 ## ExportStorage Gcs
-<details><summary><code>client.export_storage.gcs.<a href="src/label_studio_sdk/export_storage/gcs/client.py">list</a>(...) -> typing.List[GcsExportStorage]</code></summary>
+<details><summary><code>client.export_storage.gcs.<a href="src/label_studio_sdk/export_storage/gcs/client.py#L29-L67">list</a>(...) -> typing.List[GcsExportStorage]</code></summary>
 <dl>
 <dd>
 
@@ -19720,7 +19503,7 @@ client.export_storage.gcs.list(
 </dl>
 </details>
 
-<details><summary><code>client.export_storage.gcs.<a href="src/label_studio_sdk/export_storage/gcs/client.py">create</a>(...) -> GcsExportStorage</code></summary>
+<details><summary><code>client.export_storage.gcs.<a href="src/label_studio_sdk/export_storage/gcs/client.py#L69-L155">create</a>(...) -> GcsExportStorage</code></summary>
 <dl>
 <dd>
 
@@ -19873,7 +19656,7 @@ client.export_storage.gcs.create(
 </dl>
 </details>
 
-<details><summary><code>client.export_storage.gcs.<a href="src/label_studio_sdk/export_storage/gcs/client.py">validate</a>(...)</code></summary>
+<details><summary><code>client.export_storage.gcs.<a href="src/label_studio_sdk/export_storage/gcs/client.py#L157-L247">validate</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -20034,7 +19817,7 @@ client.export_storage.gcs.validate(
 </dl>
 </details>
 
-<details><summary><code>client.export_storage.gcs.<a href="src/label_studio_sdk/export_storage/gcs/client.py">get</a>(...) -> GcsExportStorage</code></summary>
+<details><summary><code>client.export_storage.gcs.<a href="src/label_studio_sdk/export_storage/gcs/client.py#L249-L277">get</a>(...) -> GcsExportStorage</code></summary>
 <dl>
 <dd>
 
@@ -20107,7 +19890,7 @@ client.export_storage.gcs.get(
 </dl>
 </details>
 
-<details><summary><code>client.export_storage.gcs.<a href="src/label_studio_sdk/export_storage/gcs/client.py">delete</a>(...)</code></summary>
+<details><summary><code>client.export_storage.gcs.<a href="src/label_studio_sdk/export_storage/gcs/client.py#L279-L306">delete</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -20180,7 +19963,7 @@ client.export_storage.gcs.delete(
 </dl>
 </details>
 
-<details><summary><code>client.export_storage.gcs.<a href="src/label_studio_sdk/export_storage/gcs/client.py">update</a>(...) -> GcsExportStorage</code></summary>
+<details><summary><code>client.export_storage.gcs.<a href="src/label_studio_sdk/export_storage/gcs/client.py#L308-L398">update</a>(...) -> GcsExportStorage</code></summary>
 <dl>
 <dd>
 
@@ -20341,7 +20124,7 @@ client.export_storage.gcs.update(
 </dl>
 </details>
 
-<details><summary><code>client.export_storage.gcs.<a href="src/label_studio_sdk/export_storage/gcs/client.py">sync</a>(...) -> GcsExportStorage</code></summary>
+<details><summary><code>client.export_storage.gcs.<a href="src/label_studio_sdk/export_storage/gcs/client.py#L400-L428">sync</a>(...) -> GcsExportStorage</code></summary>
 <dl>
 <dd>
 
@@ -20415,7 +20198,7 @@ client.export_storage.gcs.sync(
 </details>
 
 ## ExportStorage GcsSa
-<details><summary><code>client.export_storage.gcs_sa.<a href="src/label_studio_sdk/export_storage/gcs_sa/client.py">list</a>(...) -> typing.List[GcssaExportStorage]</code></summary>
+<details><summary><code>client.export_storage.gcs_sa.<a href="src/label_studio_sdk/export_storage/gcs_sa/client.py#L31-L75">list</a>(...) -> typing.List[GcssaExportStorage]</code></summary>
 <dl>
 <dd>
 
@@ -20502,7 +20285,7 @@ client.export_storage.gcs_sa.list(
 </dl>
 </details>
 
-<details><summary><code>client.export_storage.gcs_sa.<a href="src/label_studio_sdk/export_storage/gcs_sa/client.py">create</a>(...) -> GcssaExportStorage</code></summary>
+<details><summary><code>client.export_storage.gcs_sa.<a href="src/label_studio_sdk/export_storage/gcs_sa/client.py#L77-L198">create</a>(...) -> GcssaExportStorage</code></summary>
 <dl>
 <dd>
 
@@ -20581,7 +20364,7 @@ client.export_storage.gcs_sa.create(
 </dl>
 </details>
 
-<details><summary><code>client.export_storage.gcs_sa.<a href="src/label_studio_sdk/export_storage/gcs_sa/client.py">validate</a>(...)</code></summary>
+<details><summary><code>client.export_storage.gcs_sa.<a href="src/label_studio_sdk/export_storage/gcs_sa/client.py#L200-L320">validate</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -20660,7 +20443,7 @@ client.export_storage.gcs_sa.validate(
 </dl>
 </details>
 
-<details><summary><code>client.export_storage.gcs_sa.<a href="src/label_studio_sdk/export_storage/gcs_sa/client.py">get</a>(...) -> GcssaExportStorage</code></summary>
+<details><summary><code>client.export_storage.gcs_sa.<a href="src/label_studio_sdk/export_storage/gcs_sa/client.py#L322-L356">get</a>(...) -> GcssaExportStorage</code></summary>
 <dl>
 <dd>
 
@@ -20739,7 +20522,7 @@ client.export_storage.gcs_sa.get(
 </dl>
 </details>
 
-<details><summary><code>client.export_storage.gcs_sa.<a href="src/label_studio_sdk/export_storage/gcs_sa/client.py">delete</a>(...)</code></summary>
+<details><summary><code>client.export_storage.gcs_sa.<a href="src/label_studio_sdk/export_storage/gcs_sa/client.py#L358-L391">delete</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -20818,7 +20601,7 @@ client.export_storage.gcs_sa.delete(
 </dl>
 </details>
 
-<details><summary><code>client.export_storage.gcs_sa.<a href="src/label_studio_sdk/export_storage/gcs_sa/client.py">update</a>(...) -> GcssaExportStorage</code></summary>
+<details><summary><code>client.export_storage.gcs_sa.<a href="src/label_studio_sdk/export_storage/gcs_sa/client.py#L393-L518">update</a>(...) -> GcssaExportStorage</code></summary>
 <dl>
 <dd>
 
@@ -21033,7 +20816,7 @@ client.export_storage.gcs_sa.update(
 </dl>
 </details>
 
-<details><summary><code>client.export_storage.gcs_sa.<a href="src/label_studio_sdk/export_storage/gcs_sa/client.py">sync</a>(...) -> GcssaExportStorage</code></summary>
+<details><summary><code>client.export_storage.gcs_sa.<a href="src/label_studio_sdk/export_storage/gcs_sa/client.py#L520-L554">sync</a>(...) -> GcssaExportStorage</code></summary>
 <dl>
 <dd>
 
@@ -21113,7 +20896,7 @@ client.export_storage.gcs_sa.sync(
 </details>
 
 ## ExportStorage Gcswif
-<details><summary><code>client.export_storage.gcswif.<a href="src/label_studio_sdk/export_storage/gcswif/client.py">list</a>(...) -> typing.List[GcswifExportStorage]</code></summary>
+<details><summary><code>client.export_storage.gcswif.<a href="src/label_studio_sdk/export_storage/gcswif/client.py#L31-L75">list</a>(...) -> typing.List[GcswifExportStorage]</code></summary>
 <dl>
 <dd>
 
@@ -21200,7 +20983,7 @@ client.export_storage.gcswif.list(
 </dl>
 </details>
 
-<details><summary><code>client.export_storage.gcswif.<a href="src/label_studio_sdk/export_storage/gcswif/client.py">create</a>(...) -> GcswifExportStorage</code></summary>
+<details><summary><code>client.export_storage.gcswif.<a href="src/label_studio_sdk/export_storage/gcswif/client.py#L77-L218">create</a>(...) -> GcswifExportStorage</code></summary>
 <dl>
 <dd>
 
@@ -21279,7 +21062,7 @@ client.export_storage.gcswif.create(
 </dl>
 </details>
 
-<details><summary><code>client.export_storage.gcswif.<a href="src/label_studio_sdk/export_storage/gcswif/client.py">validate</a>(...)</code></summary>
+<details><summary><code>client.export_storage.gcswif.<a href="src/label_studio_sdk/export_storage/gcswif/client.py#L220-L360">validate</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -21358,7 +21141,7 @@ client.export_storage.gcswif.validate(
 </dl>
 </details>
 
-<details><summary><code>client.export_storage.gcswif.<a href="src/label_studio_sdk/export_storage/gcswif/client.py">get</a>(...) -> GcswifExportStorage</code></summary>
+<details><summary><code>client.export_storage.gcswif.<a href="src/label_studio_sdk/export_storage/gcswif/client.py#L362-L396">get</a>(...) -> GcswifExportStorage</code></summary>
 <dl>
 <dd>
 
@@ -21437,7 +21220,7 @@ client.export_storage.gcswif.get(
 </dl>
 </details>
 
-<details><summary><code>client.export_storage.gcswif.<a href="src/label_studio_sdk/export_storage/gcswif/client.py">delete</a>(...)</code></summary>
+<details><summary><code>client.export_storage.gcswif.<a href="src/label_studio_sdk/export_storage/gcswif/client.py#L398-L431">delete</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -21516,7 +21299,7 @@ client.export_storage.gcswif.delete(
 </dl>
 </details>
 
-<details><summary><code>client.export_storage.gcswif.<a href="src/label_studio_sdk/export_storage/gcswif/client.py">update</a>(...) -> GcswifExportStorage</code></summary>
+<details><summary><code>client.export_storage.gcswif.<a href="src/label_studio_sdk/export_storage/gcswif/client.py#L433-L578">update</a>(...) -> GcswifExportStorage</code></summary>
 <dl>
 <dd>
 
@@ -21763,7 +21546,7 @@ client.export_storage.gcswif.update(
 </dl>
 </details>
 
-<details><summary><code>client.export_storage.gcswif.<a href="src/label_studio_sdk/export_storage/gcswif/client.py">sync</a>(...) -> GcswifExportStorage</code></summary>
+<details><summary><code>client.export_storage.gcswif.<a href="src/label_studio_sdk/export_storage/gcswif/client.py#L580-L614">sync</a>(...) -> GcswifExportStorage</code></summary>
 <dl>
 <dd>
 
@@ -21843,7 +21626,7 @@ client.export_storage.gcswif.sync(
 </details>
 
 ## ExportStorage Local
-<details><summary><code>client.export_storage.local.<a href="src/label_studio_sdk/export_storage/local/client.py">list</a>(...) -> typing.List[LocalFilesExportStorage]</code></summary>
+<details><summary><code>client.export_storage.local.<a href="src/label_studio_sdk/export_storage/local/client.py#L29-L67">list</a>(...) -> typing.List[LocalFilesExportStorage]</code></summary>
 <dl>
 <dd>
 
@@ -21924,7 +21707,7 @@ client.export_storage.local.list(
 </dl>
 </details>
 
-<details><summary><code>client.export_storage.local.<a href="src/label_studio_sdk/export_storage/local/client.py">create</a>(...) -> LocalFilesExportStorage</code></summary>
+<details><summary><code>client.export_storage.local.<a href="src/label_studio_sdk/export_storage/local/client.py#L69-L140">create</a>(...) -> LocalFilesExportStorage</code></summary>
 <dl>
 <dd>
 
@@ -22053,7 +21836,7 @@ client.export_storage.local.create(
 </dl>
 </details>
 
-<details><summary><code>client.export_storage.local.<a href="src/label_studio_sdk/export_storage/local/client.py">validate</a>(...)</code></summary>
+<details><summary><code>client.export_storage.local.<a href="src/label_studio_sdk/export_storage/local/client.py#L142-L217">validate</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -22190,7 +21973,7 @@ client.export_storage.local.validate(
 </dl>
 </details>
 
-<details><summary><code>client.export_storage.local.<a href="src/label_studio_sdk/export_storage/local/client.py">get</a>(...) -> LocalFilesExportStorage</code></summary>
+<details><summary><code>client.export_storage.local.<a href="src/label_studio_sdk/export_storage/local/client.py#L219-L247">get</a>(...) -> LocalFilesExportStorage</code></summary>
 <dl>
 <dd>
 
@@ -22263,7 +22046,7 @@ client.export_storage.local.get(
 </dl>
 </details>
 
-<details><summary><code>client.export_storage.local.<a href="src/label_studio_sdk/export_storage/local/client.py">delete</a>(...)</code></summary>
+<details><summary><code>client.export_storage.local.<a href="src/label_studio_sdk/export_storage/local/client.py#L249-L276">delete</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -22336,7 +22119,7 @@ client.export_storage.local.delete(
 </dl>
 </details>
 
-<details><summary><code>client.export_storage.local.<a href="src/label_studio_sdk/export_storage/local/client.py">update</a>(...) -> LocalFilesExportStorage</code></summary>
+<details><summary><code>client.export_storage.local.<a href="src/label_studio_sdk/export_storage/local/client.py#L278-L353">update</a>(...) -> LocalFilesExportStorage</code></summary>
 <dl>
 <dd>
 
@@ -22473,7 +22256,7 @@ client.export_storage.local.update(
 </dl>
 </details>
 
-<details><summary><code>client.export_storage.local.<a href="src/label_studio_sdk/export_storage/local/client.py">sync</a>(...) -> LocalFilesExportStorage</code></summary>
+<details><summary><code>client.export_storage.local.<a href="src/label_studio_sdk/export_storage/local/client.py#L355-L383">sync</a>(...) -> LocalFilesExportStorage</code></summary>
 <dl>
 <dd>
 
@@ -22547,7 +22330,7 @@ client.export_storage.local.sync(
 </details>
 
 ## ExportStorage Redis
-<details><summary><code>client.export_storage.redis.<a href="src/label_studio_sdk/export_storage/redis/client.py">list</a>(...) -> typing.List[RedisExportStorage]</code></summary>
+<details><summary><code>client.export_storage.redis.<a href="src/label_studio_sdk/export_storage/redis/client.py#L29-L67">list</a>(...) -> typing.List[RedisExportStorage]</code></summary>
 <dl>
 <dd>
 
@@ -22628,7 +22411,7 @@ client.export_storage.redis.list(
 </dl>
 </details>
 
-<details><summary><code>client.export_storage.redis.<a href="src/label_studio_sdk/export_storage/redis/client.py">create</a>(...) -> RedisExportStorage</code></summary>
+<details><summary><code>client.export_storage.redis.<a href="src/label_studio_sdk/export_storage/redis/client.py#L69-L160">create</a>(...) -> RedisExportStorage</code></summary>
 <dl>
 <dd>
 
@@ -22789,7 +22572,7 @@ client.export_storage.redis.create(
 </dl>
 </details>
 
-<details><summary><code>client.export_storage.redis.<a href="src/label_studio_sdk/export_storage/redis/client.py">validate</a>(...)</code></summary>
+<details><summary><code>client.export_storage.redis.<a href="src/label_studio_sdk/export_storage/redis/client.py#L162-L257">validate</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -22958,7 +22741,7 @@ client.export_storage.redis.validate(
 </dl>
 </details>
 
-<details><summary><code>client.export_storage.redis.<a href="src/label_studio_sdk/export_storage/redis/client.py">get</a>(...) -> RedisExportStorage</code></summary>
+<details><summary><code>client.export_storage.redis.<a href="src/label_studio_sdk/export_storage/redis/client.py#L259-L287">get</a>(...) -> RedisExportStorage</code></summary>
 <dl>
 <dd>
 
@@ -23031,7 +22814,7 @@ client.export_storage.redis.get(
 </dl>
 </details>
 
-<details><summary><code>client.export_storage.redis.<a href="src/label_studio_sdk/export_storage/redis/client.py">delete</a>(...)</code></summary>
+<details><summary><code>client.export_storage.redis.<a href="src/label_studio_sdk/export_storage/redis/client.py#L289-L316">delete</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -23104,7 +22887,7 @@ client.export_storage.redis.delete(
 </dl>
 </details>
 
-<details><summary><code>client.export_storage.redis.<a href="src/label_studio_sdk/export_storage/redis/client.py">update</a>(...) -> RedisExportStorage</code></summary>
+<details><summary><code>client.export_storage.redis.<a href="src/label_studio_sdk/export_storage/redis/client.py#L318-L413">update</a>(...) -> RedisExportStorage</code></summary>
 <dl>
 <dd>
 
@@ -23273,7 +23056,7 @@ client.export_storage.redis.update(
 </dl>
 </details>
 
-<details><summary><code>client.export_storage.redis.<a href="src/label_studio_sdk/export_storage/redis/client.py">sync</a>(...) -> RedisExportStorage</code></summary>
+<details><summary><code>client.export_storage.redis.<a href="src/label_studio_sdk/export_storage/redis/client.py#L415-L443">sync</a>(...) -> RedisExportStorage</code></summary>
 <dl>
 <dd>
 
@@ -23347,7 +23130,7 @@ client.export_storage.redis.sync(
 </details>
 
 ## ExportStorage S3
-<details><summary><code>client.export_storage.s3.<a href="src/label_studio_sdk/export_storage/s3/client.py">list</a>(...) -> typing.List[S3ExportStorage]</code></summary>
+<details><summary><code>client.export_storage.s3.<a href="src/label_studio_sdk/export_storage/s3/client.py#L29-L67">list</a>(...) -> typing.List[S3ExportStorage]</code></summary>
 <dl>
 <dd>
 
@@ -23428,7 +23211,7 @@ client.export_storage.s3.list(
 </dl>
 </details>
 
-<details><summary><code>client.export_storage.s3.<a href="src/label_studio_sdk/export_storage/s3/client.py">create</a>(...) -> S3ExportStorage</code></summary>
+<details><summary><code>client.export_storage.s3.<a href="src/label_studio_sdk/export_storage/s3/client.py#L69-L175">create</a>(...) -> S3ExportStorage</code></summary>
 <dl>
 <dd>
 
@@ -23613,7 +23396,7 @@ client.export_storage.s3.create(
 </dl>
 </details>
 
-<details><summary><code>client.export_storage.s3.<a href="src/label_studio_sdk/export_storage/s3/client.py">validate</a>(...)</code></summary>
+<details><summary><code>client.export_storage.s3.<a href="src/label_studio_sdk/export_storage/s3/client.py#L177-L287">validate</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -23806,7 +23589,7 @@ client.export_storage.s3.validate(
 </dl>
 </details>
 
-<details><summary><code>client.export_storage.s3.<a href="src/label_studio_sdk/export_storage/s3/client.py">get</a>(...) -> S3ExportStorage</code></summary>
+<details><summary><code>client.export_storage.s3.<a href="src/label_studio_sdk/export_storage/s3/client.py#L289-L317">get</a>(...) -> S3ExportStorage</code></summary>
 <dl>
 <dd>
 
@@ -23879,7 +23662,7 @@ client.export_storage.s3.get(
 </dl>
 </details>
 
-<details><summary><code>client.export_storage.s3.<a href="src/label_studio_sdk/export_storage/s3/client.py">delete</a>(...)</code></summary>
+<details><summary><code>client.export_storage.s3.<a href="src/label_studio_sdk/export_storage/s3/client.py#L319-L346">delete</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -23952,7 +23735,7 @@ client.export_storage.s3.delete(
 </dl>
 </details>
 
-<details><summary><code>client.export_storage.s3.<a href="src/label_studio_sdk/export_storage/s3/client.py">update</a>(...) -> S3ExportStorage</code></summary>
+<details><summary><code>client.export_storage.s3.<a href="src/label_studio_sdk/export_storage/s3/client.py#L348-L458">update</a>(...) -> S3ExportStorage</code></summary>
 <dl>
 <dd>
 
@@ -24145,7 +23928,7 @@ client.export_storage.s3.update(
 </dl>
 </details>
 
-<details><summary><code>client.export_storage.s3.<a href="src/label_studio_sdk/export_storage/s3/client.py">sync</a>(...) -> S3ExportStorage</code></summary>
+<details><summary><code>client.export_storage.s3.<a href="src/label_studio_sdk/export_storage/s3/client.py#L460-L488">sync</a>(...) -> S3ExportStorage</code></summary>
 <dl>
 <dd>
 
@@ -24219,7 +24002,7 @@ client.export_storage.s3.sync(
 </details>
 
 ## ExportStorage S3S
-<details><summary><code>client.export_storage.s3s.<a href="src/label_studio_sdk/export_storage/s3s/client.py">list</a>(...) -> typing.List[LseS3ExportStorage]</code></summary>
+<details><summary><code>client.export_storage.s3s.<a href="src/label_studio_sdk/export_storage/s3s/client.py#L31-L75">list</a>(...) -> typing.List[LseS3ExportStorage]</code></summary>
 <dl>
 <dd>
 
@@ -24306,7 +24089,7 @@ client.export_storage.s3s.list(
 </dl>
 </details>
 
-<details><summary><code>client.export_storage.s3s.<a href="src/label_studio_sdk/export_storage/s3s/client.py">create</a>(...) -> LseS3ExportStorage</code></summary>
+<details><summary><code>client.export_storage.s3s.<a href="src/label_studio_sdk/export_storage/s3s/client.py#L77-L228">create</a>(...) -> LseS3ExportStorage</code></summary>
 <dl>
 <dd>
 
@@ -24386,7 +24169,7 @@ client.export_storage.s3s.create(
 </dl>
 </details>
 
-<details><summary><code>client.export_storage.s3s.<a href="src/label_studio_sdk/export_storage/s3s/client.py">validate</a>(...)</code></summary>
+<details><summary><code>client.export_storage.s3s.<a href="src/label_studio_sdk/export_storage/s3s/client.py#L230-L380">validate</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -24466,7 +24249,7 @@ client.export_storage.s3s.validate(
 </dl>
 </details>
 
-<details><summary><code>client.export_storage.s3s.<a href="src/label_studio_sdk/export_storage/s3s/client.py">get</a>(...) -> LseS3ExportStorage</code></summary>
+<details><summary><code>client.export_storage.s3s.<a href="src/label_studio_sdk/export_storage/s3s/client.py#L382-L416">get</a>(...) -> LseS3ExportStorage</code></summary>
 <dl>
 <dd>
 
@@ -24545,7 +24328,7 @@ client.export_storage.s3s.get(
 </dl>
 </details>
 
-<details><summary><code>client.export_storage.s3s.<a href="src/label_studio_sdk/export_storage/s3s/client.py">delete</a>(...)</code></summary>
+<details><summary><code>client.export_storage.s3s.<a href="src/label_studio_sdk/export_storage/s3s/client.py#L418-L451">delete</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -24624,7 +24407,7 @@ client.export_storage.s3s.delete(
 </dl>
 </details>
 
-<details><summary><code>client.export_storage.s3s.<a href="src/label_studio_sdk/export_storage/s3s/client.py">update</a>(...) -> LseS3ExportStorage</code></summary>
+<details><summary><code>client.export_storage.s3s.<a href="src/label_studio_sdk/export_storage/s3s/client.py#L453-L607">update</a>(...) -> LseS3ExportStorage</code></summary>
 <dl>
 <dd>
 
@@ -24740,14 +24523,6 @@ client.export_storage.s3s.update(
 <dd>
 
 **description:** `typing.Optional[str]` — Cloud storage description
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**external_id:** `typing.Optional[str]` — AWS ExternalId
     
 </dd>
 </dl>
@@ -24895,7 +24670,7 @@ client.export_storage.s3s.update(
 </dl>
 </details>
 
-<details><summary><code>client.export_storage.s3s.<a href="src/label_studio_sdk/export_storage/s3s/client.py">sync</a>(...) -> LseS3ExportStorage</code></summary>
+<details><summary><code>client.export_storage.s3s.<a href="src/label_studio_sdk/export_storage/s3s/client.py#L609-L643">sync</a>(...) -> LseS3ExportStorage</code></summary>
 <dl>
 <dd>
 
@@ -24975,7 +24750,7 @@ client.export_storage.s3s.sync(
 </details>
 
 ## ImportStorage Azure
-<details><summary><code>client.import_storage.azure.<a href="src/label_studio_sdk/import_storage/azure/client.py">list</a>(...) -> typing.List[AzureBlobImportStorage]</code></summary>
+<details><summary><code>client.import_storage.azure.<a href="src/label_studio_sdk/import_storage/azure/client.py#L29-L67">list</a>(...) -> typing.List[AzureBlobImportStorage]</code></summary>
 <dl>
 <dd>
 
@@ -25056,7 +24831,7 @@ client.import_storage.azure.list(
 </dl>
 </details>
 
-<details><summary><code>client.import_storage.azure.<a href="src/label_studio_sdk/import_storage/azure/client.py">create</a>(...) -> AzureBlobImportStorage</code></summary>
+<details><summary><code>client.import_storage.azure.<a href="src/label_studio_sdk/import_storage/azure/client.py#L69-L164">create</a>(...) -> AzureBlobImportStorage</code></summary>
 <dl>
 <dd>
 
@@ -25225,7 +25000,7 @@ client.import_storage.azure.create(
 </dl>
 </details>
 
-<details><summary><code>client.import_storage.azure.<a href="src/label_studio_sdk/import_storage/azure/client.py">validate</a>(...)</code></summary>
+<details><summary><code>client.import_storage.azure.<a href="src/label_studio_sdk/import_storage/azure/client.py#L166-L265">validate</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -25402,7 +25177,7 @@ client.import_storage.azure.validate(
 </dl>
 </details>
 
-<details><summary><code>client.import_storage.azure.<a href="src/label_studio_sdk/import_storage/azure/client.py">get</a>(...) -> AzureBlobImportStorage</code></summary>
+<details><summary><code>client.import_storage.azure.<a href="src/label_studio_sdk/import_storage/azure/client.py#L267-L295">get</a>(...) -> AzureBlobImportStorage</code></summary>
 <dl>
 <dd>
 
@@ -25475,7 +25250,7 @@ client.import_storage.azure.get(
 </dl>
 </details>
 
-<details><summary><code>client.import_storage.azure.<a href="src/label_studio_sdk/import_storage/azure/client.py">delete</a>(...)</code></summary>
+<details><summary><code>client.import_storage.azure.<a href="src/label_studio_sdk/import_storage/azure/client.py#L297-L324">delete</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -25548,7 +25323,7 @@ client.import_storage.azure.delete(
 </dl>
 </details>
 
-<details><summary><code>client.import_storage.azure.<a href="src/label_studio_sdk/import_storage/azure/client.py">update</a>(...) -> AzureBlobImportStorage</code></summary>
+<details><summary><code>client.import_storage.azure.<a href="src/label_studio_sdk/import_storage/azure/client.py#L326-L425">update</a>(...) -> AzureBlobImportStorage</code></summary>
 <dl>
 <dd>
 
@@ -25725,7 +25500,7 @@ client.import_storage.azure.update(
 </dl>
 </details>
 
-<details><summary><code>client.import_storage.azure.<a href="src/label_studio_sdk/import_storage/azure/client.py">sync</a>(...) -> AzureBlobImportStorage</code></summary>
+<details><summary><code>client.import_storage.azure.<a href="src/label_studio_sdk/import_storage/azure/client.py#L427-L456">sync</a>(...) -> AzureBlobImportStorage</code></summary>
 <dl>
 <dd>
 
@@ -25799,7 +25574,7 @@ client.import_storage.azure.sync(
 </details>
 
 ## ImportStorage AzureSpi
-<details><summary><code>client.import_storage.azure_spi.<a href="src/label_studio_sdk/import_storage/azure_spi/client.py">list</a>(...) -> typing.List[AzureServicePrincipalImportStorage]</code></summary>
+<details><summary><code>client.import_storage.azure_spi.<a href="src/label_studio_sdk/import_storage/azure_spi/client.py#L32-L76">list</a>(...) -> typing.List[AzureServicePrincipalImportStorage]</code></summary>
 <dl>
 <dd>
 
@@ -25886,7 +25661,7 @@ client.import_storage.azure_spi.list(
 </dl>
 </details>
 
-<details><summary><code>client.import_storage.azure_spi.<a href="src/label_studio_sdk/import_storage/azure_spi/client.py">create</a>(...) -> AzureServicePrincipalImportStorage</code></summary>
+<details><summary><code>client.import_storage.azure_spi.<a href="src/label_studio_sdk/import_storage/azure_spi/client.py#L78-L231">create</a>(...) -> AzureServicePrincipalImportStorage</code></summary>
 <dl>
 <dd>
 
@@ -25965,7 +25740,7 @@ client.import_storage.azure_spi.create(
 </dl>
 </details>
 
-<details><summary><code>client.import_storage.azure_spi.<a href="src/label_studio_sdk/import_storage/azure_spi/client.py">validate</a>(...)</code></summary>
+<details><summary><code>client.import_storage.azure_spi.<a href="src/label_studio_sdk/import_storage/azure_spi/client.py#L233-L385">validate</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -26044,7 +25819,7 @@ client.import_storage.azure_spi.validate(
 </dl>
 </details>
 
-<details><summary><code>client.import_storage.azure_spi.<a href="src/label_studio_sdk/import_storage/azure_spi/client.py">get</a>(...) -> AzureServicePrincipalImportStorage</code></summary>
+<details><summary><code>client.import_storage.azure_spi.<a href="src/label_studio_sdk/import_storage/azure_spi/client.py#L387-L423">get</a>(...) -> AzureServicePrincipalImportStorage</code></summary>
 <dl>
 <dd>
 
@@ -26123,7 +25898,7 @@ client.import_storage.azure_spi.get(
 </dl>
 </details>
 
-<details><summary><code>client.import_storage.azure_spi.<a href="src/label_studio_sdk/import_storage/azure_spi/client.py">delete</a>(...)</code></summary>
+<details><summary><code>client.import_storage.azure_spi.<a href="src/label_studio_sdk/import_storage/azure_spi/client.py#L425-L458">delete</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -26202,7 +25977,7 @@ client.import_storage.azure_spi.delete(
 </dl>
 </details>
 
-<details><summary><code>client.import_storage.azure_spi.<a href="src/label_studio_sdk/import_storage/azure_spi/client.py">update</a>(...) -> AzureServicePrincipalImportStorage</code></summary>
+<details><summary><code>client.import_storage.azure_spi.<a href="src/label_studio_sdk/import_storage/azure_spi/client.py#L460-L617">update</a>(...) -> AzureServicePrincipalImportStorage</code></summary>
 <dl>
 <dd>
 
@@ -26470,7 +26245,7 @@ Authentication mode. service_principal uses a client secret. workload_identity u
 </dl>
 </details>
 
-<details><summary><code>client.import_storage.azure_spi.<a href="src/label_studio_sdk/import_storage/azure_spi/client.py">sync</a>(...) -> AzureServicePrincipalImportStorage</code></summary>
+<details><summary><code>client.import_storage.azure_spi.<a href="src/label_studio_sdk/import_storage/azure_spi/client.py#L619-L655">sync</a>(...) -> AzureServicePrincipalImportStorage</code></summary>
 <dl>
 <dd>
 
@@ -26550,7 +26325,7 @@ client.import_storage.azure_spi.sync(
 </details>
 
 ## ImportStorage Databricks
-<details><summary><code>client.import_storage.databricks.<a href="src/label_studio_sdk/import_storage/databricks/client.py">list</a>(...) -> typing.List[DatabricksImportStorage]</code></summary>
+<details><summary><code>client.import_storage.databricks.<a href="src/label_studio_sdk/import_storage/databricks/client.py#L30-L74">list</a>(...) -> typing.List[DatabricksImportStorage]</code></summary>
 <dl>
 <dd>
 
@@ -26637,7 +26412,7 @@ client.import_storage.databricks.list(
 </dl>
 </details>
 
-<details><summary><code>client.import_storage.databricks.<a href="src/label_studio_sdk/import_storage/databricks/client.py">create</a>(...) -> DatabricksImportStorage</code></summary>
+<details><summary><code>client.import_storage.databricks.<a href="src/label_studio_sdk/import_storage/databricks/client.py#L76-L229">create</a>(...) -> DatabricksImportStorage</code></summary>
 <dl>
 <dd>
 
@@ -26894,7 +26669,7 @@ Authentication method: PAT, Databricks SP, or Azure AD SP
 </dl>
 </details>
 
-<details><summary><code>client.import_storage.databricks.<a href="src/label_studio_sdk/import_storage/databricks/client.py">validate</a>(...)</code></summary>
+<details><summary><code>client.import_storage.databricks.<a href="src/label_studio_sdk/import_storage/databricks/client.py#L231-L388">validate</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -27159,7 +26934,7 @@ Authentication method: PAT, Databricks SP, or Azure AD SP
 </dl>
 </details>
 
-<details><summary><code>client.import_storage.databricks.<a href="src/label_studio_sdk/import_storage/databricks/client.py">get</a>(...) -> DatabricksImportStorage</code></summary>
+<details><summary><code>client.import_storage.databricks.<a href="src/label_studio_sdk/import_storage/databricks/client.py#L390-L424">get</a>(...) -> DatabricksImportStorage</code></summary>
 <dl>
 <dd>
 
@@ -27238,7 +27013,7 @@ client.import_storage.databricks.get(
 </dl>
 </details>
 
-<details><summary><code>client.import_storage.databricks.<a href="src/label_studio_sdk/import_storage/databricks/client.py">delete</a>(...)</code></summary>
+<details><summary><code>client.import_storage.databricks.<a href="src/label_studio_sdk/import_storage/databricks/client.py#L426-L459">delete</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -27317,7 +27092,7 @@ client.import_storage.databricks.delete(
 </dl>
 </details>
 
-<details><summary><code>client.import_storage.databricks.<a href="src/label_studio_sdk/import_storage/databricks/client.py">update</a>(...) -> DatabricksImportStorage</code></summary>
+<details><summary><code>client.import_storage.databricks.<a href="src/label_studio_sdk/import_storage/databricks/client.py#L461-L614">update</a>(...) -> DatabricksImportStorage</code></summary>
 <dl>
 <dd>
 
@@ -27578,7 +27353,7 @@ Authentication method: PAT, Databricks SP, or Azure AD SP
 </dl>
 </details>
 
-<details><summary><code>client.import_storage.databricks.<a href="src/label_studio_sdk/import_storage/databricks/client.py">sync</a>(...) -> DatabricksImportStorage</code></summary>
+<details><summary><code>client.import_storage.databricks.<a href="src/label_studio_sdk/import_storage/databricks/client.py#L616-L650">sync</a>(...) -> DatabricksImportStorage</code></summary>
 <dl>
 <dd>
 
@@ -27658,7 +27433,7 @@ client.import_storage.databricks.sync(
 </details>
 
 ## ImportStorage Gcs
-<details><summary><code>client.import_storage.gcs.<a href="src/label_studio_sdk/import_storage/gcs/client.py">list</a>(...) -> typing.List[GcsImportStorage]</code></summary>
+<details><summary><code>client.import_storage.gcs.<a href="src/label_studio_sdk/import_storage/gcs/client.py#L29-L67">list</a>(...) -> typing.List[GcsImportStorage]</code></summary>
 <dl>
 <dd>
 
@@ -27739,7 +27514,7 @@ client.import_storage.gcs.list(
 </dl>
 </details>
 
-<details><summary><code>client.import_storage.gcs.<a href="src/label_studio_sdk/import_storage/gcs/client.py">create</a>(...) -> GcsImportStorage</code></summary>
+<details><summary><code>client.import_storage.gcs.<a href="src/label_studio_sdk/import_storage/gcs/client.py#L69-L164">create</a>(...) -> GcsImportStorage</code></summary>
 <dl>
 <dd>
 
@@ -27908,7 +27683,7 @@ client.import_storage.gcs.create(
 </dl>
 </details>
 
-<details><summary><code>client.import_storage.gcs.<a href="src/label_studio_sdk/import_storage/gcs/client.py">validate</a>(...)</code></summary>
+<details><summary><code>client.import_storage.gcs.<a href="src/label_studio_sdk/import_storage/gcs/client.py#L166-L265">validate</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -28085,7 +27860,7 @@ client.import_storage.gcs.validate(
 </dl>
 </details>
 
-<details><summary><code>client.import_storage.gcs.<a href="src/label_studio_sdk/import_storage/gcs/client.py">get</a>(...) -> GcsImportStorage</code></summary>
+<details><summary><code>client.import_storage.gcs.<a href="src/label_studio_sdk/import_storage/gcs/client.py#L267-L295">get</a>(...) -> GcsImportStorage</code></summary>
 <dl>
 <dd>
 
@@ -28158,7 +27933,7 @@ client.import_storage.gcs.get(
 </dl>
 </details>
 
-<details><summary><code>client.import_storage.gcs.<a href="src/label_studio_sdk/import_storage/gcs/client.py">delete</a>(...)</code></summary>
+<details><summary><code>client.import_storage.gcs.<a href="src/label_studio_sdk/import_storage/gcs/client.py#L297-L324">delete</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -28231,7 +28006,7 @@ client.import_storage.gcs.delete(
 </dl>
 </details>
 
-<details><summary><code>client.import_storage.gcs.<a href="src/label_studio_sdk/import_storage/gcs/client.py">update</a>(...) -> GcsImportStorage</code></summary>
+<details><summary><code>client.import_storage.gcs.<a href="src/label_studio_sdk/import_storage/gcs/client.py#L326-L425">update</a>(...) -> GcsImportStorage</code></summary>
 <dl>
 <dd>
 
@@ -28408,7 +28183,7 @@ client.import_storage.gcs.update(
 </dl>
 </details>
 
-<details><summary><code>client.import_storage.gcs.<a href="src/label_studio_sdk/import_storage/gcs/client.py">sync</a>(...) -> GcsImportStorage</code></summary>
+<details><summary><code>client.import_storage.gcs.<a href="src/label_studio_sdk/import_storage/gcs/client.py#L427-L456">sync</a>(...) -> GcsImportStorage</code></summary>
 <dl>
 <dd>
 
@@ -28482,7 +28257,7 @@ client.import_storage.gcs.sync(
 </details>
 
 ## ImportStorage GcsSa
-<details><summary><code>client.import_storage.gcs_sa.<a href="src/label_studio_sdk/import_storage/gcs_sa/client.py">list</a>(...) -> typing.List[GcssaImportStorage]</code></summary>
+<details><summary><code>client.import_storage.gcs_sa.<a href="src/label_studio_sdk/import_storage/gcs_sa/client.py#L31-L75">list</a>(...) -> typing.List[GcssaImportStorage]</code></summary>
 <dl>
 <dd>
 
@@ -28569,7 +28344,7 @@ client.import_storage.gcs_sa.list(
 </dl>
 </details>
 
-<details><summary><code>client.import_storage.gcs_sa.<a href="src/label_studio_sdk/import_storage/gcs_sa/client.py">create</a>(...) -> GcssaImportStorage</code></summary>
+<details><summary><code>client.import_storage.gcs_sa.<a href="src/label_studio_sdk/import_storage/gcs_sa/client.py#L77-L207">create</a>(...) -> GcssaImportStorage</code></summary>
 <dl>
 <dd>
 
@@ -28648,7 +28423,7 @@ client.import_storage.gcs_sa.create(
 </dl>
 </details>
 
-<details><summary><code>client.import_storage.gcs_sa.<a href="src/label_studio_sdk/import_storage/gcs_sa/client.py">validate</a>(...)</code></summary>
+<details><summary><code>client.import_storage.gcs_sa.<a href="src/label_studio_sdk/import_storage/gcs_sa/client.py#L209-L338">validate</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -28727,7 +28502,7 @@ client.import_storage.gcs_sa.validate(
 </dl>
 </details>
 
-<details><summary><code>client.import_storage.gcs_sa.<a href="src/label_studio_sdk/import_storage/gcs_sa/client.py">get</a>(...) -> GcssaImportStorage</code></summary>
+<details><summary><code>client.import_storage.gcs_sa.<a href="src/label_studio_sdk/import_storage/gcs_sa/client.py#L340-L374">get</a>(...) -> GcssaImportStorage</code></summary>
 <dl>
 <dd>
 
@@ -28806,7 +28581,7 @@ client.import_storage.gcs_sa.get(
 </dl>
 </details>
 
-<details><summary><code>client.import_storage.gcs_sa.<a href="src/label_studio_sdk/import_storage/gcs_sa/client.py">delete</a>(...)</code></summary>
+<details><summary><code>client.import_storage.gcs_sa.<a href="src/label_studio_sdk/import_storage/gcs_sa/client.py#L376-L409">delete</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -28885,7 +28660,7 @@ client.import_storage.gcs_sa.delete(
 </dl>
 </details>
 
-<details><summary><code>client.import_storage.gcs_sa.<a href="src/label_studio_sdk/import_storage/gcs_sa/client.py">update</a>(...) -> GcssaImportStorage</code></summary>
+<details><summary><code>client.import_storage.gcs_sa.<a href="src/label_studio_sdk/import_storage/gcs_sa/client.py#L411-L545">update</a>(...) -> GcssaImportStorage</code></summary>
 <dl>
 <dd>
 
@@ -29116,7 +28891,7 @@ client.import_storage.gcs_sa.update(
 </dl>
 </details>
 
-<details><summary><code>client.import_storage.gcs_sa.<a href="src/label_studio_sdk/import_storage/gcs_sa/client.py">sync</a>(...) -> GcssaImportStorage</code></summary>
+<details><summary><code>client.import_storage.gcs_sa.<a href="src/label_studio_sdk/import_storage/gcs_sa/client.py#L547-L581">sync</a>(...) -> GcssaImportStorage</code></summary>
 <dl>
 <dd>
 
@@ -29196,7 +28971,7 @@ client.import_storage.gcs_sa.sync(
 </details>
 
 ## ImportStorage Gcswif
-<details><summary><code>client.import_storage.gcswif.<a href="src/label_studio_sdk/import_storage/gcswif/client.py">list</a>(...) -> typing.List[GcswifImportStorage]</code></summary>
+<details><summary><code>client.import_storage.gcswif.<a href="src/label_studio_sdk/import_storage/gcswif/client.py#L31-L75">list</a>(...) -> typing.List[GcswifImportStorage]</code></summary>
 <dl>
 <dd>
 
@@ -29283,7 +29058,7 @@ client.import_storage.gcswif.list(
 </dl>
 </details>
 
-<details><summary><code>client.import_storage.gcswif.<a href="src/label_studio_sdk/import_storage/gcswif/client.py">create</a>(...) -> GcswifImportStorage</code></summary>
+<details><summary><code>client.import_storage.gcswif.<a href="src/label_studio_sdk/import_storage/gcswif/client.py#L77-L227">create</a>(...) -> GcswifImportStorage</code></summary>
 <dl>
 <dd>
 
@@ -29362,7 +29137,7 @@ client.import_storage.gcswif.create(
 </dl>
 </details>
 
-<details><summary><code>client.import_storage.gcswif.<a href="src/label_studio_sdk/import_storage/gcswif/client.py">validate</a>(...)</code></summary>
+<details><summary><code>client.import_storage.gcswif.<a href="src/label_studio_sdk/import_storage/gcswif/client.py#L229-L378">validate</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -29441,7 +29216,7 @@ client.import_storage.gcswif.validate(
 </dl>
 </details>
 
-<details><summary><code>client.import_storage.gcswif.<a href="src/label_studio_sdk/import_storage/gcswif/client.py">get</a>(...) -> GcswifImportStorage</code></summary>
+<details><summary><code>client.import_storage.gcswif.<a href="src/label_studio_sdk/import_storage/gcswif/client.py#L380-L414">get</a>(...) -> GcswifImportStorage</code></summary>
 <dl>
 <dd>
 
@@ -29520,7 +29295,7 @@ client.import_storage.gcswif.get(
 </dl>
 </details>
 
-<details><summary><code>client.import_storage.gcswif.<a href="src/label_studio_sdk/import_storage/gcswif/client.py">delete</a>(...)</code></summary>
+<details><summary><code>client.import_storage.gcswif.<a href="src/label_studio_sdk/import_storage/gcswif/client.py#L416-L449">delete</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -29599,7 +29374,7 @@ client.import_storage.gcswif.delete(
 </dl>
 </details>
 
-<details><summary><code>client.import_storage.gcswif.<a href="src/label_studio_sdk/import_storage/gcswif/client.py">update</a>(...) -> GcswifImportStorage</code></summary>
+<details><summary><code>client.import_storage.gcswif.<a href="src/label_studio_sdk/import_storage/gcswif/client.py#L451-L605">update</a>(...) -> GcswifImportStorage</code></summary>
 <dl>
 <dd>
 
@@ -29862,7 +29637,7 @@ client.import_storage.gcswif.update(
 </dl>
 </details>
 
-<details><summary><code>client.import_storage.gcswif.<a href="src/label_studio_sdk/import_storage/gcswif/client.py">sync</a>(...) -> GcswifImportStorage</code></summary>
+<details><summary><code>client.import_storage.gcswif.<a href="src/label_studio_sdk/import_storage/gcswif/client.py#L607-L641">sync</a>(...) -> GcswifImportStorage</code></summary>
 <dl>
 <dd>
 
@@ -29942,7 +29717,7 @@ client.import_storage.gcswif.sync(
 </details>
 
 ## ImportStorage Local
-<details><summary><code>client.import_storage.local.<a href="src/label_studio_sdk/import_storage/local/client.py">list</a>(...) -> typing.List[LocalFilesImportStorage]</code></summary>
+<details><summary><code>client.import_storage.local.<a href="src/label_studio_sdk/import_storage/local/client.py#L29-L67">list</a>(...) -> typing.List[LocalFilesImportStorage]</code></summary>
 <dl>
 <dd>
 
@@ -30023,7 +29798,7 @@ client.import_storage.local.list(
 </dl>
 </details>
 
-<details><summary><code>client.import_storage.local.<a href="src/label_studio_sdk/import_storage/local/client.py">create</a>(...) -> LocalFilesImportStorage</code></summary>
+<details><summary><code>client.import_storage.local.<a href="src/label_studio_sdk/import_storage/local/client.py#L69-L140">create</a>(...) -> LocalFilesImportStorage</code></summary>
 <dl>
 <dd>
 
@@ -30152,7 +29927,7 @@ client.import_storage.local.create(
 </dl>
 </details>
 
-<details><summary><code>client.import_storage.local.<a href="src/label_studio_sdk/import_storage/local/client.py">validate</a>(...)</code></summary>
+<details><summary><code>client.import_storage.local.<a href="src/label_studio_sdk/import_storage/local/client.py#L142-L217">validate</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -30289,7 +30064,7 @@ client.import_storage.local.validate(
 </dl>
 </details>
 
-<details><summary><code>client.import_storage.local.<a href="src/label_studio_sdk/import_storage/local/client.py">get</a>(...) -> LocalFilesImportStorage</code></summary>
+<details><summary><code>client.import_storage.local.<a href="src/label_studio_sdk/import_storage/local/client.py#L219-L247">get</a>(...) -> LocalFilesImportStorage</code></summary>
 <dl>
 <dd>
 
@@ -30362,7 +30137,7 @@ client.import_storage.local.get(
 </dl>
 </details>
 
-<details><summary><code>client.import_storage.local.<a href="src/label_studio_sdk/import_storage/local/client.py">delete</a>(...)</code></summary>
+<details><summary><code>client.import_storage.local.<a href="src/label_studio_sdk/import_storage/local/client.py#L249-L276">delete</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -30435,7 +30210,7 @@ client.import_storage.local.delete(
 </dl>
 </details>
 
-<details><summary><code>client.import_storage.local.<a href="src/label_studio_sdk/import_storage/local/client.py">update</a>(...) -> LocalFilesImportStorage</code></summary>
+<details><summary><code>client.import_storage.local.<a href="src/label_studio_sdk/import_storage/local/client.py#L278-L353">update</a>(...) -> LocalFilesImportStorage</code></summary>
 <dl>
 <dd>
 
@@ -30572,7 +30347,7 @@ client.import_storage.local.update(
 </dl>
 </details>
 
-<details><summary><code>client.import_storage.local.<a href="src/label_studio_sdk/import_storage/local/client.py">sync</a>(...) -> LocalFilesImportStorage</code></summary>
+<details><summary><code>client.import_storage.local.<a href="src/label_studio_sdk/import_storage/local/client.py#L355-L384">sync</a>(...) -> LocalFilesImportStorage</code></summary>
 <dl>
 <dd>
 
@@ -30646,7 +30421,7 @@ client.import_storage.local.sync(
 </details>
 
 ## ImportStorage Redis
-<details><summary><code>client.import_storage.redis.<a href="src/label_studio_sdk/import_storage/redis/client.py">list</a>(...) -> typing.List[RedisImportStorage]</code></summary>
+<details><summary><code>client.import_storage.redis.<a href="src/label_studio_sdk/import_storage/redis/client.py#L29-L67">list</a>(...) -> typing.List[RedisImportStorage]</code></summary>
 <dl>
 <dd>
 
@@ -30727,7 +30502,7 @@ client.import_storage.redis.list(
 </dl>
 </details>
 
-<details><summary><code>client.import_storage.redis.<a href="src/label_studio_sdk/import_storage/redis/client.py">create</a>(...) -> RedisImportStorage</code></summary>
+<details><summary><code>client.import_storage.redis.<a href="src/label_studio_sdk/import_storage/redis/client.py#L69-L155">create</a>(...) -> RedisImportStorage</code></summary>
 <dl>
 <dd>
 
@@ -30880,7 +30655,7 @@ client.import_storage.redis.create(
 </dl>
 </details>
 
-<details><summary><code>client.import_storage.redis.<a href="src/label_studio_sdk/import_storage/redis/client.py">validate</a>(...)</code></summary>
+<details><summary><code>client.import_storage.redis.<a href="src/label_studio_sdk/import_storage/redis/client.py#L157-L247">validate</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -31041,7 +30816,7 @@ client.import_storage.redis.validate(
 </dl>
 </details>
 
-<details><summary><code>client.import_storage.redis.<a href="src/label_studio_sdk/import_storage/redis/client.py">get</a>(...) -> RedisImportStorage</code></summary>
+<details><summary><code>client.import_storage.redis.<a href="src/label_studio_sdk/import_storage/redis/client.py#L249-L277">get</a>(...) -> RedisImportStorage</code></summary>
 <dl>
 <dd>
 
@@ -31114,7 +30889,7 @@ client.import_storage.redis.get(
 </dl>
 </details>
 
-<details><summary><code>client.import_storage.redis.<a href="src/label_studio_sdk/import_storage/redis/client.py">delete</a>(...)</code></summary>
+<details><summary><code>client.import_storage.redis.<a href="src/label_studio_sdk/import_storage/redis/client.py#L279-L306">delete</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -31187,7 +30962,7 @@ client.import_storage.redis.delete(
 </dl>
 </details>
 
-<details><summary><code>client.import_storage.redis.<a href="src/label_studio_sdk/import_storage/redis/client.py">update</a>(...) -> RedisImportStorage</code></summary>
+<details><summary><code>client.import_storage.redis.<a href="src/label_studio_sdk/import_storage/redis/client.py#L308-L398">update</a>(...) -> RedisImportStorage</code></summary>
 <dl>
 <dd>
 
@@ -31348,7 +31123,7 @@ client.import_storage.redis.update(
 </dl>
 </details>
 
-<details><summary><code>client.import_storage.redis.<a href="src/label_studio_sdk/import_storage/redis/client.py">sync</a>(...) -> RedisImportStorage</code></summary>
+<details><summary><code>client.import_storage.redis.<a href="src/label_studio_sdk/import_storage/redis/client.py#L400-L429">sync</a>(...) -> RedisImportStorage</code></summary>
 <dl>
 <dd>
 
@@ -31422,7 +31197,7 @@ client.import_storage.redis.sync(
 </details>
 
 ## ImportStorage S3
-<details><summary><code>client.import_storage.s3.<a href="src/label_studio_sdk/import_storage/s3/client.py">list</a>(...) -> typing.List[S3ImportStorage]</code></summary>
+<details><summary><code>client.import_storage.s3.<a href="src/label_studio_sdk/import_storage/s3/client.py#L29-L67">list</a>(...) -> typing.List[S3ImportStorage]</code></summary>
 <dl>
 <dd>
 
@@ -31503,7 +31278,7 @@ client.import_storage.s3.list(
 </dl>
 </details>
 
-<details><summary><code>client.import_storage.s3.<a href="src/label_studio_sdk/import_storage/s3/client.py">create</a>(...) -> S3ImportStorage</code></summary>
+<details><summary><code>client.import_storage.s3.<a href="src/label_studio_sdk/import_storage/s3/client.py#L69-L184">create</a>(...) -> S3ImportStorage</code></summary>
 <dl>
 <dd>
 
@@ -31704,7 +31479,7 @@ client.import_storage.s3.create(
 </dl>
 </details>
 
-<details><summary><code>client.import_storage.s3.<a href="src/label_studio_sdk/import_storage/s3/client.py">validate</a>(...)</code></summary>
+<details><summary><code>client.import_storage.s3.<a href="src/label_studio_sdk/import_storage/s3/client.py#L186-L305">validate</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -31913,7 +31688,7 @@ client.import_storage.s3.validate(
 </dl>
 </details>
 
-<details><summary><code>client.import_storage.s3.<a href="src/label_studio_sdk/import_storage/s3/client.py">get</a>(...) -> S3ImportStorage</code></summary>
+<details><summary><code>client.import_storage.s3.<a href="src/label_studio_sdk/import_storage/s3/client.py#L307-L335">get</a>(...) -> S3ImportStorage</code></summary>
 <dl>
 <dd>
 
@@ -31986,7 +31761,7 @@ client.import_storage.s3.get(
 </dl>
 </details>
 
-<details><summary><code>client.import_storage.s3.<a href="src/label_studio_sdk/import_storage/s3/client.py">delete</a>(...)</code></summary>
+<details><summary><code>client.import_storage.s3.<a href="src/label_studio_sdk/import_storage/s3/client.py#L337-L364">delete</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -32059,7 +31834,7 @@ client.import_storage.s3.delete(
 </dl>
 </details>
 
-<details><summary><code>client.import_storage.s3.<a href="src/label_studio_sdk/import_storage/s3/client.py">update</a>(...) -> S3ImportStorage</code></summary>
+<details><summary><code>client.import_storage.s3.<a href="src/label_studio_sdk/import_storage/s3/client.py#L366-L485">update</a>(...) -> S3ImportStorage</code></summary>
 <dl>
 <dd>
 
@@ -32268,7 +32043,7 @@ client.import_storage.s3.update(
 </dl>
 </details>
 
-<details><summary><code>client.import_storage.s3.<a href="src/label_studio_sdk/import_storage/s3/client.py">sync</a>(...) -> S3ImportStorage</code></summary>
+<details><summary><code>client.import_storage.s3.<a href="src/label_studio_sdk/import_storage/s3/client.py#L487-L516">sync</a>(...) -> S3ImportStorage</code></summary>
 <dl>
 <dd>
 
@@ -32342,7 +32117,7 @@ client.import_storage.s3.sync(
 </details>
 
 ## ImportStorage S3S
-<details><summary><code>client.import_storage.s3s.<a href="src/label_studio_sdk/import_storage/s3s/client.py">list</a>(...) -> typing.List[LseS3ImportStorage]</code></summary>
+<details><summary><code>client.import_storage.s3s.<a href="src/label_studio_sdk/import_storage/s3s/client.py#L31-L75">list</a>(...) -> typing.List[LseS3ImportStorage]</code></summary>
 <dl>
 <dd>
 
@@ -32429,7 +32204,7 @@ client.import_storage.s3s.list(
 </dl>
 </details>
 
-<details><summary><code>client.import_storage.s3s.<a href="src/label_studio_sdk/import_storage/s3s/client.py">create</a>(...) -> LseS3ImportStorage</code></summary>
+<details><summary><code>client.import_storage.s3s.<a href="src/label_studio_sdk/import_storage/s3s/client.py#L77-L237">create</a>(...) -> LseS3ImportStorage</code></summary>
 <dl>
 <dd>
 
@@ -32509,7 +32284,7 @@ client.import_storage.s3s.create(
 </dl>
 </details>
 
-<details><summary><code>client.import_storage.s3s.<a href="src/label_studio_sdk/import_storage/s3s/client.py">validate</a>(...)</code></summary>
+<details><summary><code>client.import_storage.s3s.<a href="src/label_studio_sdk/import_storage/s3s/client.py#L239-L398">validate</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -32589,7 +32364,7 @@ client.import_storage.s3s.validate(
 </dl>
 </details>
 
-<details><summary><code>client.import_storage.s3s.<a href="src/label_studio_sdk/import_storage/s3s/client.py">get</a>(...) -> LseS3ImportStorage</code></summary>
+<details><summary><code>client.import_storage.s3s.<a href="src/label_studio_sdk/import_storage/s3s/client.py#L400-L434">get</a>(...) -> LseS3ImportStorage</code></summary>
 <dl>
 <dd>
 
@@ -32668,7 +32443,7 @@ client.import_storage.s3s.get(
 </dl>
 </details>
 
-<details><summary><code>client.import_storage.s3s.<a href="src/label_studio_sdk/import_storage/s3s/client.py">delete</a>(...)</code></summary>
+<details><summary><code>client.import_storage.s3s.<a href="src/label_studio_sdk/import_storage/s3s/client.py#L436-L469">delete</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -32747,7 +32522,7 @@ client.import_storage.s3s.delete(
 </dl>
 </details>
 
-<details><summary><code>client.import_storage.s3s.<a href="src/label_studio_sdk/import_storage/s3s/client.py">update</a>(...) -> LseS3ImportStorage</code></summary>
+<details><summary><code>client.import_storage.s3s.<a href="src/label_studio_sdk/import_storage/s3s/client.py#L471-L634">update</a>(...) -> LseS3ImportStorage</code></summary>
 <dl>
 <dd>
 
@@ -32855,14 +32630,6 @@ client.import_storage.s3s.update(
 <dd>
 
 **description:** `typing.Optional[str]` — Cloud storage description
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**external_id:** `typing.Optional[str]` — AWS ExternalId
     
 </dd>
 </dl>
@@ -33034,7 +32801,7 @@ client.import_storage.s3s.update(
 </dl>
 </details>
 
-<details><summary><code>client.import_storage.s3s.<a href="src/label_studio_sdk/import_storage/s3s/client.py">sync</a>(...) -> LseS3ImportStorage</code></summary>
+<details><summary><code>client.import_storage.s3s.<a href="src/label_studio_sdk/import_storage/s3s/client.py#L636-L670">sync</a>(...) -> LseS3ImportStorage</code></summary>
 <dl>
 <dd>
 
@@ -33114,7 +32881,7 @@ client.import_storage.s3s.sync(
 </details>
 
 ## Organizations Invites
-<details><summary><code>client.organizations.invites.<a href="src/label_studio_sdk/organizations/invites/client.py">get_invite_link</a>() -> OrganizationInvite</code></summary>
+<details><summary><code>client.organizations.invites.<a href="src/label_studio_sdk/organizations/invites/client.py#L31-L55">get_invite_link</a>() -> OrganizationInvite</code></summary>
 <dl>
 <dd>
 
@@ -33177,7 +32944,7 @@ client.organizations.invites.get_invite_link()
 </dl>
 </details>
 
-<details><summary><code>client.organizations.invites.<a href="src/label_studio_sdk/organizations/invites/client.py">revoke_invite</a>(...)</code></summary>
+<details><summary><code>client.organizations.invites.<a href="src/label_studio_sdk/organizations/invites/client.py#L57-L91">revoke_invite</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -33256,7 +33023,7 @@ client.organizations.invites.revoke_invite(
 </dl>
 </details>
 
-<details><summary><code>client.organizations.invites.<a href="src/label_studio_sdk/organizations/invites/client.py">send_email</a>(...)</code></summary>
+<details><summary><code>client.organizations.invites.<a href="src/label_studio_sdk/organizations/invites/client.py#L93-L167">send_email</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -33386,7 +33153,7 @@ Seat type for the invited members. View-Only members are free read-only seats sc
 </details>
 
 ## Organizations MemberTags
-<details><summary><code>client.organizations.member_tags.<a href="src/label_studio_sdk/organizations/member_tags/client.py">list</a>(...) -> PaginatedOrganizationMemberTagList</code></summary>
+<details><summary><code>client.organizations.member_tags.<a href="src/label_studio_sdk/organizations/member_tags/client.py#L40-L98">list</a>(...) -> PaginatedOrganizationMemberTagList</code></summary>
 <dl>
 <dd>
 
@@ -33497,7 +33264,7 @@ client.organizations.member_tags.list(
 </dl>
 </details>
 
-<details><summary><code>client.organizations.member_tags.<a href="src/label_studio_sdk/organizations/member_tags/client.py">create</a>(...) -> OrganizationMemberTag</code></summary>
+<details><summary><code>client.organizations.member_tags.<a href="src/label_studio_sdk/organizations/member_tags/client.py#L100-L141">create</a>(...) -> OrganizationMemberTag</code></summary>
 <dl>
 <dd>
 
@@ -33585,7 +33352,7 @@ client.organizations.member_tags.create(
 </dl>
 </details>
 
-<details><summary><code>client.organizations.member_tags.<a href="src/label_studio_sdk/organizations/member_tags/client.py">assign</a>(...) -> AssignMemberTagsResponse</code></summary>
+<details><summary><code>client.organizations.member_tags.<a href="src/label_studio_sdk/organizations/member_tags/client.py#L143-L252">assign</a>(...) -> AssignMemberTagsResponse</code></summary>
 <dl>
 <dd>
 
@@ -33872,7 +33639,7 @@ client.organizations.member_tags.import_(
 </dl>
 </details>
 
-<details><summary><code>client.organizations.member_tags.<a href="src/label_studio_sdk/organizations/member_tags/client.py">get_import</a>(...) -> OrganizationMemberTagImportStatus</code></summary>
+<details><summary><code>client.organizations.member_tags.<a href="src/label_studio_sdk/organizations/member_tags/client.py#L305-L348">get_import</a>(...) -> OrganizationMemberTagImportStatus</code></summary>
 <dl>
 <dd>
 
@@ -33962,7 +33729,7 @@ client.organizations.member_tags.get_import(
 </dl>
 </details>
 
-<details><summary><code>client.organizations.member_tags.<a href="src/label_studio_sdk/organizations/member_tags/client.py">get</a>(...) -> OrganizationMemberTag</code></summary>
+<details><summary><code>client.organizations.member_tags.<a href="src/label_studio_sdk/organizations/member_tags/client.py#L350-L391">get</a>(...) -> OrganizationMemberTag</code></summary>
 <dl>
 <dd>
 
@@ -34050,7 +33817,7 @@ client.organizations.member_tags.get(
 </dl>
 </details>
 
-<details><summary><code>client.organizations.member_tags.<a href="src/label_studio_sdk/organizations/member_tags/client.py">delete</a>(...)</code></summary>
+<details><summary><code>client.organizations.member_tags.<a href="src/label_studio_sdk/organizations/member_tags/client.py#L393-L431">delete</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -34138,7 +33905,7 @@ client.organizations.member_tags.delete(
 </dl>
 </details>
 
-<details><summary><code>client.organizations.member_tags.<a href="src/label_studio_sdk/organizations/member_tags/client.py">update</a>(...) -> OrganizationMemberTag</code></summary>
+<details><summary><code>client.organizations.member_tags.<a href="src/label_studio_sdk/organizations/member_tags/client.py#L433-L482">update</a>(...) -> OrganizationMemberTag</code></summary>
 <dl>
 <dd>
 
@@ -34235,7 +34002,7 @@ client.organizations.member_tags.update(
 </details>
 
 ## Organizations Members
-<details><summary><code>client.organizations.members.<a href="src/label_studio_sdk/organizations/members/client.py">list</a>(...) -> PaginatedLseOrganizationMemberListList</code></summary>
+<details><summary><code>client.organizations.members.<a href="src/label_studio_sdk/organizations/members/client.py#L36-L136">list</a>(...) -> PaginatedLseOrganizationMemberListList</code></summary>
 <dl>
 <dd>
 
@@ -34412,7 +34179,7 @@ client.organizations.members.list(
 </dl>
 </details>
 
-<details><summary><code>client.organizations.members.<a href="src/label_studio_sdk/organizations/members/client.py">update</a>(...) -> LseOrganizationMemberList</code></summary>
+<details><summary><code>client.organizations.members.<a href="src/label_studio_sdk/organizations/members/client.py#L138-L215">update</a>(...) -> LseOrganizationMemberList</code></summary>
 <dl>
 <dd>
 
@@ -34543,7 +34310,7 @@ Membership seat type. Assigning a working role to a View-Only member upgrades th
 </dl>
 </details>
 
-<details><summary><code>client.organizations.members.<a href="src/label_studio_sdk/organizations/members/client.py">get_filter_schema</a>(...) -> OrganizationMemberFilterSchema</code></summary>
+<details><summary><code>client.organizations.members.<a href="src/label_studio_sdk/organizations/members/client.py#L217-L247">get_filter_schema</a>(...) -> OrganizationMemberFilterSchema</code></summary>
 <dl>
 <dd>
 
@@ -34616,7 +34383,7 @@ client.organizations.members.get_filter_schema(
 </dl>
 </details>
 
-<details><summary><code>client.organizations.members.<a href="src/label_studio_sdk/organizations/members/client.py">list_filtered</a>(...) -> PaginatedLseOrganizationMemberListList</code></summary>
+<details><summary><code>client.organizations.members.<a href="src/label_studio_sdk/organizations/members/client.py#L249-L350">list_filtered</a>(...) -> PaginatedLseOrganizationMemberListList</code></summary>
 <dl>
 <dd>
 
@@ -34694,6 +34461,14 @@ client.organizations.members.list_filtered(
 <dd>
 
 **filters:** `typing.Optional[str]` — Versioned JSON organization-member filter payload.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**include_skills:** `typing.Optional[bool]` — Add `skills` to each row: the member's skills with their status, those the `filters` payload matched first. Owners, Administrators and Managers only; ignored for other roles.
     
 </dd>
 </dl>
@@ -34793,7 +34568,7 @@ client.organizations.members.list_filtered(
 </dl>
 </details>
 
-<details><summary><code>client.organizations.members.<a href="src/label_studio_sdk/organizations/members/client.py">search</a>(...) -> LseOrganizationMemberList</code></summary>
+<details><summary><code>client.organizations.members.<a href="src/label_studio_sdk/organizations/members/client.py#L352-L395">search</a>(...) -> LseOrganizationMemberList</code></summary>
 <dl>
 <dd>
 
@@ -34863,6 +34638,14 @@ client.organizations.members.search(
 <dl>
 <dd>
 
+**include_skills:** `typing.Optional[bool]` — Add `skills` to each row: the member's skills with their status, those the `filters` payload matched first. Owners, Administrators and Managers only; ignored for other roles.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
@@ -34875,7 +34658,7 @@ client.organizations.members.search(
 </dl>
 </details>
 
-<details><summary><code>client.organizations.members.<a href="src/label_studio_sdk/organizations/members/client.py">get</a>(...) -> OrganizationMember</code></summary>
+<details><summary><code>client.organizations.members.<a href="src/label_studio_sdk/organizations/members/client.py#L397-L441">get</a>(...) -> OrganizationMember</code></summary>
 <dl>
 <dd>
 
@@ -34965,7 +34748,7 @@ client.organizations.members.get(
 </dl>
 </details>
 
-<details><summary><code>client.organizations.members.<a href="src/label_studio_sdk/organizations/members/client.py">delete</a>(...)</code></summary>
+<details><summary><code>client.organizations.members.<a href="src/label_studio_sdk/organizations/members/client.py#L443-L474">delete</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -35048,7 +34831,7 @@ client.organizations.members.delete(
 </details>
 
 ## Organizations Permissions
-<details><summary><code>client.organizations.permissions.<a href="src/label_studio_sdk/organizations/permissions/client.py">list</a>(...) -> typing.List[OrganizationPermission]</code></summary>
+<details><summary><code>client.organizations.permissions.<a href="src/label_studio_sdk/organizations/permissions/client.py#L31-L70">list</a>(...) -> typing.List[OrganizationPermission]</code></summary>
 <dl>
 <dd>
 
@@ -35135,7 +34918,7 @@ client.organizations.permissions.list(
 </dl>
 </details>
 
-<details><summary><code>client.organizations.permissions.<a href="src/label_studio_sdk/organizations/permissions/client.py">create</a>(...) -> OrganizationPermission</code></summary>
+<details><summary><code>client.organizations.permissions.<a href="src/label_studio_sdk/organizations/permissions/client.py#L72-L119">create</a>(...) -> OrganizationPermission</code></summary>
 <dl>
 <dd>
 
@@ -35223,7 +35006,7 @@ client.organizations.permissions.create(
 </dl>
 </details>
 
-<details><summary><code>client.organizations.permissions.<a href="src/label_studio_sdk/organizations/permissions/client.py">get_options</a>(...) -> typing.List[ConfigurablePermissionOption]</code></summary>
+<details><summary><code>client.organizations.permissions.<a href="src/label_studio_sdk/organizations/permissions/client.py#L121-L160">get_options</a>(...) -> typing.List[ConfigurablePermissionOption]</code></summary>
 <dl>
 <dd>
 
@@ -35310,7 +35093,7 @@ client.organizations.permissions.get_options(
 </dl>
 </details>
 
-<details><summary><code>client.organizations.permissions.<a href="src/label_studio_sdk/organizations/permissions/client.py">get</a>(...) -> OrganizationPermission</code></summary>
+<details><summary><code>client.organizations.permissions.<a href="src/label_studio_sdk/organizations/permissions/client.py#L162-L201">get</a>(...) -> OrganizationPermission</code></summary>
 <dl>
 <dd>
 
@@ -35398,7 +35181,7 @@ client.organizations.permissions.get(
 </dl>
 </details>
 
-<details><summary><code>client.organizations.permissions.<a href="src/label_studio_sdk/organizations/permissions/client.py">replace</a>(...) -> OrganizationPermission</code></summary>
+<details><summary><code>client.organizations.permissions.<a href="src/label_studio_sdk/organizations/permissions/client.py#L203-L258">replace</a>(...) -> OrganizationPermission</code></summary>
 <dl>
 <dd>
 
@@ -35495,7 +35278,7 @@ client.organizations.permissions.replace(
 </dl>
 </details>
 
-<details><summary><code>client.organizations.permissions.<a href="src/label_studio_sdk/organizations/permissions/client.py">delete</a>(...)</code></summary>
+<details><summary><code>client.organizations.permissions.<a href="src/label_studio_sdk/organizations/permissions/client.py#L260-L296">delete</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -35583,7 +35366,7 @@ client.organizations.permissions.delete(
 </dl>
 </details>
 
-<details><summary><code>client.organizations.permissions.<a href="src/label_studio_sdk/organizations/permissions/client.py">update</a>(...) -> OrganizationPermission</code></summary>
+<details><summary><code>client.organizations.permissions.<a href="src/label_studio_sdk/organizations/permissions/client.py#L298-L351">update</a>(...) -> OrganizationPermission</code></summary>
 <dl>
 <dd>
 
@@ -35688,7 +35471,7 @@ client.organizations.permissions.update(
 </details>
 
 ## Organizations MemberTags Bulk
-<details><summary><code>client.organizations.member_tags.bulk.<a href="src/label_studio_sdk/organizations/member_tags/bulk/client.py">post</a>(...) -> PostBulkResponse</code></summary>
+<details><summary><code>client.organizations.member_tags.bulk.<a href="src/label_studio_sdk/organizations/member_tags/bulk/client.py#L30-L71">post</a>(...) -> PostBulkResponse</code></summary>
 <dl>
 <dd>
 
@@ -35778,7 +35561,7 @@ client.organizations.member_tags.bulk.post(
 </dl>
 </details>
 
-<details><summary><code>client.organizations.member_tags.bulk.<a href="src/label_studio_sdk/organizations/member_tags/bulk/client.py">delete</a>(...) -> DeleteBulkResponse</code></summary>
+<details><summary><code>client.organizations.member_tags.bulk.<a href="src/label_studio_sdk/organizations/member_tags/bulk/client.py#L73-L113">delete</a>(...) -> DeleteBulkResponse</code></summary>
 <dl>
 <dd>
 
@@ -35866,7 +35649,7 @@ client.organizations.member_tags.bulk.delete(
 </details>
 
 ## Projects Roles
-<details><summary><code>client.projects.roles.<a href="src/label_studio_sdk/projects/roles/client.py">list</a>(...) -> typing.List[ProjectRole]</code></summary>
+<details><summary><code>client.projects.roles.<a href="src/label_studio_sdk/projects/roles/client.py#L30-L74">list</a>(...) -> typing.List[ProjectRole]</code></summary>
 <dl>
 <dd>
 
@@ -35953,7 +35736,7 @@ client.projects.roles.list()
 </dl>
 </details>
 
-<details><summary><code>client.projects.roles.<a href="src/label_studio_sdk/projects/roles/client.py">add</a>(...) -> ProjectRole</code></summary>
+<details><summary><code>client.projects.roles.<a href="src/label_studio_sdk/projects/roles/client.py#L76-L125">add</a>(...) -> ProjectRole</code></summary>
 <dl>
 <dd>
 
@@ -36052,7 +35835,7 @@ client.projects.roles.add(
 </dl>
 </details>
 
-<details><summary><code>client.projects.roles.<a href="src/label_studio_sdk/projects/roles/client.py">remove</a>(...)</code></summary>
+<details><summary><code>client.projects.roles.<a href="src/label_studio_sdk/projects/roles/client.py#L127-L163">remove</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -36133,7 +35916,7 @@ client.projects.roles.remove(
 </dl>
 </details>
 
-<details><summary><code>client.projects.roles.<a href="src/label_studio_sdk/projects/roles/client.py">get</a>(...) -> typing.List[ProjectRole]</code></summary>
+<details><summary><code>client.projects.roles.<a href="src/label_studio_sdk/projects/roles/client.py#L165-L202">get</a>(...) -> typing.List[ProjectRole]</code></summary>
 <dl>
 <dd>
 
@@ -36216,7 +35999,7 @@ client.projects.roles.get(
 </details>
 
 ## Projects Stats
-<details><summary><code>client.projects.stats.<a href="src/label_studio_sdk/projects/stats/client.py">data_quality_agreement_confusion_matrix</a>(...) -> DataQualityAgreementConfusionMatrix</code></summary>
+<details><summary><code>client.projects.stats.<a href="src/label_studio_sdk/projects/stats/client.py#L55-L104">data_quality_agreement_confusion_matrix</a>(...) -> DataQualityAgreementConfusionMatrix</code></summary>
 <dl>
 <dd>
 
@@ -36311,7 +36094,7 @@ client.projects.stats.data_quality_agreement_confusion_matrix(
 </dl>
 </details>
 
-<details><summary><code>client.projects.stats.<a href="src/label_studio_sdk/projects/stats/client.py">data_quality_agreement_dimensions</a>(...) -> typing.List[DataQualityAgreementDimensions]</code></summary>
+<details><summary><code>client.projects.stats.<a href="src/label_studio_sdk/projects/stats/client.py#L106-L142">data_quality_agreement_dimensions</a>(...) -> typing.List[DataQualityAgreementDimensions]</code></summary>
 <dl>
 <dd>
 
@@ -36390,7 +36173,7 @@ client.projects.stats.data_quality_agreement_dimensions(
 </dl>
 </details>
 
-<details><summary><code>client.projects.stats.<a href="src/label_studio_sdk/projects/stats/client.py">data_quality_agreement_distribution</a>(...) -> DataQualityAgreementDistribution</code></summary>
+<details><summary><code>client.projects.stats.<a href="src/label_studio_sdk/projects/stats/client.py#L144-L180">data_quality_agreement_distribution</a>(...) -> DataQualityAgreementDistribution</code></summary>
 <dl>
 <dd>
 
@@ -36469,7 +36252,7 @@ client.projects.stats.data_quality_agreement_distribution(
 </dl>
 </details>
 
-<details><summary><code>client.projects.stats.<a href="src/label_studio_sdk/projects/stats/client.py">model_version_annotator_agreement</a>(...) -> ModelVersionAnnotatorAgreementStatsResponse</code></summary>
+<details><summary><code>client.projects.stats.<a href="src/label_studio_sdk/projects/stats/client.py#L182-L223">model_version_annotator_agreement</a>(...) -> ModelVersionAnnotatorAgreementStatsResponse</code></summary>
 <dl>
 <dd>
 
@@ -36557,7 +36340,7 @@ client.projects.stats.model_version_annotator_agreement(
 </dl>
 </details>
 
-<details><summary><code>client.projects.stats.<a href="src/label_studio_sdk/projects/stats/client.py">model_version_ground_truth_agreement</a>(...) -> ModelVersionGroundTruthAgreementStatsResponse</code></summary>
+<details><summary><code>client.projects.stats.<a href="src/label_studio_sdk/projects/stats/client.py#L225-L274">model_version_ground_truth_agreement</a>(...) -> ModelVersionGroundTruthAgreementStatsResponse</code></summary>
 <dl>
 <dd>
 
@@ -36653,7 +36436,7 @@ client.projects.stats.model_version_ground_truth_agreement(
 </dl>
 </details>
 
-<details><summary><code>client.projects.stats.<a href="src/label_studio_sdk/projects/stats/client.py">model_version_prediction_agreement</a>(...) -> ModelVersionPredictionAgreementStatsResponse</code></summary>
+<details><summary><code>client.projects.stats.<a href="src/label_studio_sdk/projects/stats/client.py#L276-L325">model_version_prediction_agreement</a>(...) -> ModelVersionPredictionAgreementStatsResponse</code></summary>
 <dl>
 <dd>
 
@@ -36749,7 +36532,7 @@ client.projects.stats.model_version_prediction_agreement(
 </dl>
 </details>
 
-<details><summary><code>client.projects.stats.<a href="src/label_studio_sdk/projects/stats/client.py">iaa</a>(...) -> IaaStatsResponse</code></summary>
+<details><summary><code>client.projects.stats.<a href="src/label_studio_sdk/projects/stats/client.py#L327-L384">iaa</a>(...) -> IaaStatsResponse</code></summary>
 <dl>
 <dd>
 
@@ -36860,7 +36643,7 @@ client.projects.stats.iaa(
 </dl>
 </details>
 
-<details><summary><code>client.projects.stats.<a href="src/label_studio_sdk/projects/stats/client.py">users_ground_truth_agreement</a>(...) -> UsersGroundTruthAgreementStatsResponse</code></summary>
+<details><summary><code>client.projects.stats.<a href="src/label_studio_sdk/projects/stats/client.py#L386-L436">users_ground_truth_agreement</a>(...) -> UsersGroundTruthAgreementStatsResponse</code></summary>
 <dl>
 <dd>
 
@@ -36956,7 +36739,7 @@ client.projects.stats.users_ground_truth_agreement(
 </dl>
 </details>
 
-<details><summary><code>client.projects.stats.<a href="src/label_studio_sdk/projects/stats/client.py">agreement_annotator</a>(...) -> AgreementAnnotatorStatsResponse</code></summary>
+<details><summary><code>client.projects.stats.<a href="src/label_studio_sdk/projects/stats/client.py#L438-L477">agreement_annotator</a>(...) -> AgreementAnnotatorStatsResponse</code></summary>
 <dl>
 <dd>
 
@@ -37044,7 +36827,7 @@ client.projects.stats.agreement_annotator(
 </dl>
 </details>
 
-<details><summary><code>client.projects.stats.<a href="src/label_studio_sdk/projects/stats/client.py">agreement_annotators</a>(...) -> AgreementAnnotatorsStatsResponse</code></summary>
+<details><summary><code>client.projects.stats.<a href="src/label_studio_sdk/projects/stats/client.py#L479-L519">agreement_annotators</a>(...) -> AgreementAnnotatorsStatsResponse</code></summary>
 <dl>
 <dd>
 
@@ -37132,7 +36915,7 @@ client.projects.stats.agreement_annotators(
 </dl>
 </details>
 
-<details><summary><code>client.projects.stats.<a href="src/label_studio_sdk/projects/stats/client.py">data_filters</a>(...) -> DataFiltersStatsResponse</code></summary>
+<details><summary><code>client.projects.stats.<a href="src/label_studio_sdk/projects/stats/client.py#L521-L557">data_filters</a>(...) -> DataFiltersStatsResponse</code></summary>
 <dl>
 <dd>
 
@@ -37211,7 +36994,7 @@ client.projects.stats.data_filters(
 </dl>
 </details>
 
-<details><summary><code>client.projects.stats.<a href="src/label_studio_sdk/projects/stats/client.py">finished_tasks</a>(...) -> FinishedTasksStatsResponse</code></summary>
+<details><summary><code>client.projects.stats.<a href="src/label_studio_sdk/projects/stats/client.py#L559-L598">finished_tasks</a>(...) -> FinishedTasksStatsResponse</code></summary>
 <dl>
 <dd>
 
@@ -37298,7 +37081,7 @@ client.projects.stats.finished_tasks(
 </dl>
 </details>
 
-<details><summary><code>client.projects.stats.<a href="src/label_studio_sdk/projects/stats/client.py">label_distribution_counts</a>(...) -> LabelDistributionCountsResponse</code></summary>
+<details><summary><code>client.projects.stats.<a href="src/label_studio_sdk/projects/stats/client.py#L600-L658">label_distribution_counts</a>(...) -> LabelDistributionCountsResponse</code></summary>
 <dl>
 <dd>
 
@@ -37410,7 +37193,7 @@ client.projects.stats.label_distribution_counts(
 </dl>
 </details>
 
-<details><summary><code>client.projects.stats.<a href="src/label_studio_sdk/projects/stats/client.py">label_distribution_structure</a>(...) -> LabelDistributionStructureResponse</code></summary>
+<details><summary><code>client.projects.stats.<a href="src/label_studio_sdk/projects/stats/client.py#L660-L696">label_distribution_structure</a>(...) -> LabelDistributionStructureResponse</code></summary>
 <dl>
 <dd>
 
@@ -37489,7 +37272,7 @@ client.projects.stats.label_distribution_structure(
 </dl>
 </details>
 
-<details><summary><code>client.projects.stats.<a href="src/label_studio_sdk/projects/stats/client.py">lead_time</a>(...) -> LeadTimeStatsResponse</code></summary>
+<details><summary><code>client.projects.stats.<a href="src/label_studio_sdk/projects/stats/client.py#L698-L732">lead_time</a>(...) -> LeadTimeStatsResponse</code></summary>
 <dl>
 <dd>
 
@@ -37568,7 +37351,7 @@ client.projects.stats.lead_time(
 </dl>
 </details>
 
-<details><summary><code>client.projects.stats.<a href="src/label_studio_sdk/projects/stats/client.py">member_performance_participants</a>(...) -> typing.List[UserSimple]</code></summary>
+<details><summary><code>client.projects.stats.<a href="src/label_studio_sdk/projects/stats/client.py#L734-L777">member_performance_participants</a>(...) -> typing.List[UserSimple]</code></summary>
 <dl>
 <dd>
 
@@ -37655,7 +37438,7 @@ client.projects.stats.member_performance_participants(
 </dl>
 </details>
 
-<details><summary><code>client.projects.stats.<a href="src/label_studio_sdk/projects/stats/client.py">member_performance_rows</a>(...) -> MemberPerformanceRowsStatsResponse</code></summary>
+<details><summary><code>client.projects.stats.<a href="src/label_studio_sdk/projects/stats/client.py#L779-L840">member_performance_rows</a>(...) -> MemberPerformanceRowsStatsResponse</code></summary>
 <dl>
 <dd>
 
@@ -37774,7 +37557,7 @@ client.projects.stats.member_performance_rows(
 </dl>
 </details>
 
-<details><summary><code>client.projects.stats.<a href="src/label_studio_sdk/projects/stats/client.py">member_performance_summary</a>(...) -> MemberPerformanceSummaryStatsResponse</code></summary>
+<details><summary><code>client.projects.stats.<a href="src/label_studio_sdk/projects/stats/client.py#L842-L891">member_performance_summary</a>(...) -> MemberPerformanceSummaryStatsResponse</code></summary>
 <dl>
 <dd>
 
@@ -37869,7 +37652,7 @@ client.projects.stats.member_performance_summary(
 </dl>
 </details>
 
-<details><summary><code>client.projects.stats.<a href="src/label_studio_sdk/projects/stats/client.py">total_agreement</a>(...) -> typing.Optional[TotalAgreementStatsResponse]</code></summary>
+<details><summary><code>client.projects.stats.<a href="src/label_studio_sdk/projects/stats/client.py#L893-L938">total_agreement</a>(...) -> typing.Optional[TotalAgreementStatsResponse]</code></summary>
 <dl>
 <dd>
 
@@ -37958,7 +37741,7 @@ client.projects.stats.total_agreement(
 </dl>
 </details>
 
-<details><summary><code>client.projects.stats.<a href="src/label_studio_sdk/projects/stats/client.py">update_stats</a>(...) -> typing.Dict[str, typing.Any]</code></summary>
+<details><summary><code>client.projects.stats.<a href="src/label_studio_sdk/projects/stats/client.py#L940-L983">update_stats</a>(...) -> typing.Dict[str, typing.Any]</code></summary>
 <dl>
 <dd>
 
@@ -38045,7 +37828,7 @@ client.projects.stats.update_stats(
 </dl>
 </details>
 
-<details><summary><code>client.projects.stats.<a href="src/label_studio_sdk/projects/stats/client.py">users_prediction_agreement</a>(...) -> UsersPredictionAgreementStatsResponse</code></summary>
+<details><summary><code>client.projects.stats.<a href="src/label_studio_sdk/projects/stats/client.py#L985-L1035">users_prediction_agreement</a>(...) -> UsersPredictionAgreementStatsResponse</code></summary>
 <dl>
 <dd>
 
@@ -38141,7 +37924,7 @@ client.projects.stats.users_prediction_agreement(
 </dl>
 </details>
 
-<details><summary><code>client.projects.stats.<a href="src/label_studio_sdk/projects/stats/client.py">users_review_score</a>(...) -> UsersReviewScoreStatsResponse</code></summary>
+<details><summary><code>client.projects.stats.<a href="src/label_studio_sdk/projects/stats/client.py#L1037-L1087">users_review_score</a>(...) -> UsersReviewScoreStatsResponse</code></summary>
 <dl>
 <dd>
 
@@ -38237,7 +38020,7 @@ client.projects.stats.users_review_score(
 </dl>
 </details>
 
-<details><summary><code>client.projects.stats.<a href="src/label_studio_sdk/projects/stats/client.py">user_prediction_agreement</a>(...) -> UserPredictionAgreementStatsResponse</code></summary>
+<details><summary><code>client.projects.stats.<a href="src/label_studio_sdk/projects/stats/client.py#L1089-L1138">user_prediction_agreement</a>(...) -> UserPredictionAgreementStatsResponse</code></summary>
 <dl>
 <dd>
 
@@ -38333,7 +38116,7 @@ client.projects.stats.user_prediction_agreement(
 </dl>
 </details>
 
-<details><summary><code>client.projects.stats.<a href="src/label_studio_sdk/projects/stats/client.py">user_review_score</a>(...) -> UserReviewScoreStatsResponse</code></summary>
+<details><summary><code>client.projects.stats.<a href="src/label_studio_sdk/projects/stats/client.py#L1140-L1189">user_review_score</a>(...) -> UserReviewScoreStatsResponse</code></summary>
 <dl>
 <dd>
 
@@ -38429,7 +38212,7 @@ client.projects.stats.user_review_score(
 </dl>
 </details>
 
-<details><summary><code>client.projects.stats.<a href="src/label_studio_sdk/projects/stats/client.py">user_ground_truth_agreement</a>(...) -> UserGroundTruthAgreementStatsResponse</code></summary>
+<details><summary><code>client.projects.stats.<a href="src/label_studio_sdk/projects/stats/client.py#L1191-L1240">user_ground_truth_agreement</a>(...) -> UserGroundTruthAgreementStatsResponse</code></summary>
 <dl>
 <dd>
 
@@ -38526,7 +38309,7 @@ client.projects.stats.user_ground_truth_agreement(
 </details>
 
 ## Projects Exports
-<details><summary><code>client.projects.exports.<a href="src/label_studio_sdk/projects/exports/client.py">download_sync</a>(...) -> typing.Iterator[bytes]</code></summary>
+<details><summary><code>client.projects.exports.<a href="src/label_studio_sdk/projects/exports/client.py#L38-L106">download_sync</a>(...) -> typing.Iterator[bytes]</code></summary>
 <dl>
 <dd>
 
@@ -38642,7 +38425,7 @@ client.projects.exports.download_sync(...)
 </dl>
 </details>
 
-<details><summary><code>client.projects.exports.<a href="src/label_studio_sdk/projects/exports/client.py">list_formats</a>(...) -> typing.List[str]</code></summary>
+<details><summary><code>client.projects.exports.<a href="src/label_studio_sdk/projects/exports/client.py#L108-L143">list_formats</a>(...) -> typing.List[str]</code></summary>
 <dl>
 <dd>
 
@@ -38655,12 +38438,12 @@ client.projects.exports.download_sync(...)
 <dd>
 
 
-This endpoint is deprecated in Enterprise. Use the async export API instead:
-POST /api/projects/{{id}}/exports/ (see [Create new export](api:POST/api/projects/{id}/exports/)).
+        This endpoint is deprecated in Enterprise. Use the async export API instead:
+        POST /api/projects/{{id}}/exports/ (see [Create new export](api:POST/api/projects/{id}/exports/)).
 
-In Label Studio Enterprise, this endpoint will always return a 404 Not Found response with instructions to use the async export API.
+        In Label Studio Enterprise, this endpoint will always return a 404 Not Found response with instructions to use the async export API.
 
-Retrieve the available export formats for the current project by ID.
+        Retrieve the available export formats for the current project by ID.
 </dd>
 </dl>
 </dd>
@@ -38721,7 +38504,7 @@ client.projects.exports.list_formats(
 </dl>
 </details>
 
-<details><summary><code>client.projects.exports.<a href="src/label_studio_sdk/projects/exports/client.py">list</a>(...) -> typing.List[Export]</code></summary>
+<details><summary><code>client.projects.exports.<a href="src/label_studio_sdk/projects/exports/client.py#L145-L179">list</a>(...) -> typing.List[Export]</code></summary>
 <dl>
 <dd>
 
@@ -38802,7 +38585,7 @@ client.projects.exports.list(
 </dl>
 </details>
 
-<details><summary><code>client.projects.exports.<a href="src/label_studio_sdk/projects/exports/client.py">create</a>(...) -> LseExportCreate</code></summary>
+<details><summary><code>client.projects.exports.<a href="src/label_studio_sdk/projects/exports/client.py#L181-L274">create</a>(...) -> LseExportCreate</code></summary>
 <dl>
 <dd>
 
@@ -38814,7 +38597,7 @@ client.projects.exports.list(
 <dl>
 <dd>
 
-Create a new export request to start a background task and generate an export file for a specific project by ID.
+Create a new export request to start a background task and generate an export file for a specific project by ID. Optional `since` / `until` limit the snapshot to tasks with `updated_at` in the half-open window `[since, until)`. `since` must be in the past; an omitted or later `until` becomes create/request time minus INCREMENTAL_EXPORT_UNTIL_LAG_SECONDS. Set `ephemeral=true` to omit the snapshot from list endpoints. On deployments that run the RQ cron scheduler (SaaS; on-prem with `rqcron.enabled`), ephemeral exports older than EPHEMERAL_EXPORT_TTL_HOURS (default 24) are deleted by a daily low-queue sweep; otherwise they remain unlisted until explicitly deleted. Use the resolved `until` from the response as `since` on the next incremental create. Task deletions are not represented in incremental snapshots (only surviving tasks with bumped `updated_at`). Rows committed after the export query starts but stamped with `updated_at` before `until` can fall outside both consecutive windows; the default `until` lag mitigates long transactions.
 </dd>
 </dl>
 </dd>
@@ -38895,6 +38678,14 @@ client.projects.exports.create(
 <dl>
 <dd>
 
+**ephemeral:** `typing.Optional[bool]` — When true, the export is omitted from list endpoints. Detail and download by id still work. TTL deletion (EPHEMERAL_EXPORT_TTL_HOURS, default 24) runs via the RQ cron scheduler when enabled (SaaS; on-prem `rqcron.enabled`); otherwise delete explicitly.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **finished_at:** `typing.Optional[datetime.datetime]` — Complete or fail time
     
 </dd>
@@ -38912,6 +38703,14 @@ client.projects.exports.create(
 <dd>
 
 **serialization_options:** `typing.Optional[SerializationOptionsRequest]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**since:** `typing.Optional[datetime.datetime]` — Inclusive lower bound on Task.updated_at for an incremental snapshot. Omit for a full export. Pair with until for a half-open window [since, until).
     
 </dd>
 </dl>
@@ -38943,6 +38742,14 @@ client.projects.exports.create(
 <dl>
 <dd>
 
+**until:** `typing.Optional[datetime.datetime]` — Exclusive upper bound on Task.updated_at. If omitted, or later than create/request time minus INCREMENTAL_EXPORT_UNTIL_LAG_SECONDS, the server uses that time instead. Use the returned value as since on the next incremental create.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
@@ -38955,7 +38762,7 @@ client.projects.exports.create(
 </dl>
 </details>
 
-<details><summary><code>client.projects.exports.<a href="src/label_studio_sdk/projects/exports/client.py">get</a>(...) -> Export</code></summary>
+<details><summary><code>client.projects.exports.<a href="src/label_studio_sdk/projects/exports/client.py#L276-L309">get</a>(...) -> Export</code></summary>
 <dl>
 <dd>
 
@@ -39037,7 +38844,7 @@ client.projects.exports.get(
 </dl>
 </details>
 
-<details><summary><code>client.projects.exports.<a href="src/label_studio_sdk/projects/exports/client.py">delete</a>(...)</code></summary>
+<details><summary><code>client.projects.exports.<a href="src/label_studio_sdk/projects/exports/client.py#L311-L343">delete</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -39119,7 +38926,7 @@ client.projects.exports.delete(
 </dl>
 </details>
 
-<details><summary><code>client.projects.exports.<a href="src/label_studio_sdk/projects/exports/client.py">convert</a>(...) -> ConvertExportsResponse</code></summary>
+<details><summary><code>client.projects.exports.<a href="src/label_studio_sdk/projects/exports/client.py#L345-L399">convert</a>(...) -> ConvertExportsResponse</code></summary>
 <dl>
 <dd>
 
@@ -39218,7 +39025,7 @@ client.projects.exports.convert(
 </dl>
 </details>
 
-<details><summary><code>client.projects.exports.<a href="src/label_studio_sdk/projects/exports/client.py">download</a>(...) -> typing.Iterator[bytes]</code></summary>
+<details><summary><code>client.projects.exports.<a href="src/label_studio_sdk/projects/exports/client.py#L401-L439">download</a>(...) -> typing.Iterator[bytes]</code></summary>
 <dl>
 <dd>
 
@@ -39304,7 +39111,7 @@ client.projects.exports.download(...)
 </details>
 
 ## Projects Imports
-<details><summary><code>client.projects.imports.<a href="src/label_studio_sdk/projects/imports/client.py">list</a>(...) -> PaginatedProjectImportListList</code></summary>
+<details><summary><code>client.projects.imports.<a href="src/label_studio_sdk/projects/imports/client.py#L29-L79">list</a>(...) -> PaginatedProjectImportListList</code></summary>
 <dl>
 <dd>
 
@@ -39401,8 +39208,104 @@ client.projects.imports.list(
 </dl>
 </details>
 
+<details><summary><code>client.projects.imports.<a href="src/label_studio_sdk/projects/imports/client.py#L81-L128">get</a>(...) -> ProjectImport</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+
+            Poll the status of an asynchronous project import operation.
+
+            *Note*: this endpoint is also accessible as `client.tasks.create_many_status`, its historical location.
+            
+            **Usage:**
+            1. When you POST to `/api/projects/{project_id}/import`, you'll receive a response like `{"import": <import_id>}`
+            2. Use that `import_id` with this GET endpoint to check the import status
+            3. Poll this endpoint to see if the import has completed, is still processing, or has failed
+            4. **Import errors and failures will only be visible in this GET response**, not in the original POST request
+            
+            This endpoint returns detailed information about the import including task counts, status, and any error messages.
+            While an import is running, `task_count` / annotation / prediction counts update as batches commit.
+            Counts are cumulative so far; there is no expected total, so percent-complete / ETA is not available from this API.
+        
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from label_studio_sdk import LabelStudio
+from label_studio_sdk.environment import LabelStudioEnvironment
+
+client = LabelStudio(
+    api_key="<value>",
+    environment=LabelStudioEnvironment.DEFAULT,
+)
+
+client.projects.imports.get(
+    id=1,
+    import_pk=1,
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `int` — A unique integer value identifying this project.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**import_pk:** `int` — A unique integer value identifying this project import.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Projects Members
-<details><summary><code>client.projects.members.<a href="src/label_studio_sdk/projects/members/client.py">add</a>(...) -> ProjectMember</code></summary>
+<details><summary><code>client.projects.members.<a href="src/label_studio_sdk/projects/members/client.py#L37-L74">add</a>(...) -> ProjectMember</code></summary>
 <dl>
 <dd>
 
@@ -39490,7 +39393,7 @@ client.projects.members.add(
 </dl>
 </details>
 
-<details><summary><code>client.projects.members.<a href="src/label_studio_sdk/projects/members/client.py">remove</a>(...)</code></summary>
+<details><summary><code>client.projects.members.<a href="src/label_studio_sdk/projects/members/client.py#L76-L114">remove</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -39577,7 +39480,7 @@ client.projects.members.remove(
 </dl>
 </details>
 
-<details><summary><code>client.projects.members.<a href="src/label_studio_sdk/projects/members/client.py">export_csv</a>(...) -> typing.Iterator[bytes]</code></summary>
+<details><summary><code>client.projects.members.<a href="src/label_studio_sdk/projects/members/client.py#L116-L202">export_csv</a>(...) -> typing.Iterator[bytes]</code></summary>
 <dl>
 <dd>
 
@@ -39734,7 +39637,7 @@ client.projects.members.export_csv(...)
 </details>
 
 ## Projects Metrics
-<details><summary><code>client.projects.metrics.<a href="src/label_studio_sdk/projects/metrics/client.py">get</a>(...) -> MetricParam</code></summary>
+<details><summary><code>client.projects.metrics.<a href="src/label_studio_sdk/projects/metrics/client.py#L35-L69">get</a>(...) -> MetricParam</code></summary>
 <dl>
 <dd>
 
@@ -39813,7 +39716,7 @@ client.projects.metrics.get(
 </dl>
 </details>
 
-<details><summary><code>client.projects.metrics.<a href="src/label_studio_sdk/projects/metrics/client.py">update</a>(...) -> typing.Optional[MetricParam]</code></summary>
+<details><summary><code>client.projects.metrics.<a href="src/label_studio_sdk/projects/metrics/client.py#L71-L131">update</a>(...) -> typing.Optional[MetricParam]</code></summary>
 <dl>
 <dd>
 
@@ -39925,7 +39828,7 @@ client.projects.metrics.update(
 </details>
 
 ## Projects Reimports
-<details><summary><code>client.projects.reimports.<a href="src/label_studio_sdk/projects/reimports/client.py">list</a>(...) -> PaginatedProjectReimportListList</code></summary>
+<details><summary><code>client.projects.reimports.<a href="src/label_studio_sdk/projects/reimports/client.py#L29-L79">list</a>(...) -> PaginatedProjectReimportListList</code></summary>
 <dl>
 <dd>
 
@@ -40022,7 +39925,7 @@ client.projects.reimports.list(
 </dl>
 </details>
 
-<details><summary><code>client.projects.reimports.<a href="src/label_studio_sdk/projects/reimports/client.py">get</a>(...) -> ProjectReimport</code></summary>
+<details><summary><code>client.projects.reimports.<a href="src/label_studio_sdk/projects/reimports/client.py#L81-L128">get</a>(...) -> ProjectReimport</code></summary>
 <dl>
 <dd>
 
@@ -40117,7 +40020,7 @@ client.projects.reimports.get(
 </details>
 
 ## Projects ReviewRoutingRules
-<details><summary><code>client.projects.review_routing_rules.<a href="src/label_studio_sdk/projects/review_routing_rules/client.py">list</a>(...) -> typing.List[ReviewRoutingRule]</code></summary>
+<details><summary><code>client.projects.review_routing_rules.<a href="src/label_studio_sdk/projects/review_routing_rules/client.py#L30-L69">list</a>(...) -> typing.List[ReviewRoutingRule]</code></summary>
 <dl>
 <dd>
 
@@ -40204,7 +40107,7 @@ client.projects.review_routing_rules.list(
 </dl>
 </details>
 
-<details><summary><code>client.projects.review_routing_rules.<a href="src/label_studio_sdk/projects/review_routing_rules/client.py">bulk_replace</a>(...) -> typing.List[ReviewRoutingRule]</code></summary>
+<details><summary><code>client.projects.review_routing_rules.<a href="src/label_studio_sdk/projects/review_routing_rules/client.py#L71-L118">bulk_replace</a>(...) -> typing.List[ReviewRoutingRule]</code></summary>
 <dl>
 <dd>
 
@@ -40300,7 +40203,7 @@ client.projects.review_routing_rules.bulk_replace(
 </details>
 
 ## Projects Assignments
-<details><summary><code>client.projects.assignments.<a href="src/label_studio_sdk/projects/assignments/client.py">bulk_assign</a>(...) -> BulkAssignAssignmentsResponse</code></summary>
+<details><summary><code>client.projects.assignments.<a href="src/label_studio_sdk/projects/assignments/client.py#L34-L96">bulk_assign</a>(...) -> BulkAssignAssignmentsResponse</code></summary>
 <dl>
 <dd>
 
@@ -40419,7 +40322,7 @@ client.projects.assignments.bulk_assign(
 </dl>
 </details>
 
-<details><summary><code>client.projects.assignments.<a href="src/label_studio_sdk/projects/assignments/client.py">list</a>(...) -> typing.List[TaskAssignment]</code></summary>
+<details><summary><code>client.projects.assignments.<a href="src/label_studio_sdk/projects/assignments/client.py#L98-L139">list</a>(...) -> typing.List[TaskAssignment]</code></summary>
 <dl>
 <dd>
 
@@ -40507,7 +40410,7 @@ client.projects.assignments.list(
 </dl>
 </details>
 
-<details><summary><code>client.projects.assignments.<a href="src/label_studio_sdk/projects/assignments/client.py">assign</a>(...) -> TaskAssignment</code></summary>
+<details><summary><code>client.projects.assignments.<a href="src/label_studio_sdk/projects/assignments/client.py#L141-L194">assign</a>(...) -> TaskAssignment</code></summary>
 <dl>
 <dd>
 
@@ -40615,7 +40518,7 @@ client.projects.assignments.assign(
 </dl>
 </details>
 
-<details><summary><code>client.projects.assignments.<a href="src/label_studio_sdk/projects/assignments/client.py">delete</a>(...)</code></summary>
+<details><summary><code>client.projects.assignments.<a href="src/label_studio_sdk/projects/assignments/client.py#L196-L248">delete</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -40719,7 +40622,7 @@ client.projects.assignments.delete(
 </dl>
 </details>
 
-<details><summary><code>client.projects.assignments.<a href="src/label_studio_sdk/projects/assignments/client.py">update</a>(...) -> TaskAssignment</code></summary>
+<details><summary><code>client.projects.assignments.<a href="src/label_studio_sdk/projects/assignments/client.py#L250-L301">update</a>(...) -> TaskAssignment</code></summary>
 <dl>
 <dd>
 
@@ -40824,7 +40727,7 @@ client.projects.assignments.update(
 </details>
 
 ## Projects Pauses
-<details><summary><code>client.projects.pauses.<a href="src/label_studio_sdk/projects/pauses/client.py">list</a>(...) -> typing.List[Pause]</code></summary>
+<details><summary><code>client.projects.pauses.<a href="src/label_studio_sdk/projects/pauses/client.py#L30-L83">list</a>(...) -> typing.List[Pause]</code></summary>
 <dl>
 <dd>
 
@@ -40928,7 +40831,7 @@ client.projects.pauses.list(
 </dl>
 </details>
 
-<details><summary><code>client.projects.pauses.<a href="src/label_studio_sdk/projects/pauses/client.py">create</a>(...) -> Pause</code></summary>
+<details><summary><code>client.projects.pauses.<a href="src/label_studio_sdk/projects/pauses/client.py#L85-L145">create</a>(...) -> Pause</code></summary>
 <dl>
 <dd>
 
@@ -41025,7 +40928,7 @@ client.projects.pauses.create(
 </dl>
 </details>
 
-<details><summary><code>client.projects.pauses.<a href="src/label_studio_sdk/projects/pauses/client.py">get</a>(...) -> Pause</code></summary>
+<details><summary><code>client.projects.pauses.<a href="src/label_studio_sdk/projects/pauses/client.py#L147-L190">get</a>(...) -> Pause</code></summary>
 <dl>
 <dd>
 
@@ -41122,7 +41025,7 @@ client.projects.pauses.get(
 </dl>
 </details>
 
-<details><summary><code>client.projects.pauses.<a href="src/label_studio_sdk/projects/pauses/client.py">delete</a>(...)</code></summary>
+<details><summary><code>client.projects.pauses.<a href="src/label_studio_sdk/projects/pauses/client.py#L192-L234">delete</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -41219,7 +41122,7 @@ client.projects.pauses.delete(
 </dl>
 </details>
 
-<details><summary><code>client.projects.pauses.<a href="src/label_studio_sdk/projects/pauses/client.py">update</a>(...) -> Pause</code></summary>
+<details><summary><code>client.projects.pauses.<a href="src/label_studio_sdk/projects/pauses/client.py#L236-L300">update</a>(...) -> Pause</code></summary>
 <dl>
 <dd>
 
@@ -41341,7 +41244,7 @@ Reason for pausing
 </details>
 
 ## Projects Members Bulk
-<details><summary><code>client.projects.members.bulk.<a href="src/label_studio_sdk/projects/members/bulk/client.py">post</a>(...) -> ProjectMemberBulkAssignResponse</code></summary>
+<details><summary><code>client.projects.members.bulk.<a href="src/label_studio_sdk/projects/members/bulk/client.py#L31-L144">post</a>(...) -> ProjectMemberBulkAssignResponse</code></summary>
 <dl>
 <dd>
 
@@ -41417,6 +41320,14 @@ client.projects.members.bulk.post(
 <dl>
 <dd>
 
+**filters:** `typing.Optional[str]` — Versioned JSON member-filter payload, the same one the organization members list accepts. Only when all=True. When advanced member filtering is enabled, do not also supply role, user_type, tags, or last-activity legacy filter parameters.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **last_activity_gte:** `typing.Optional[str]` — Filter by last activity (ISO 8601 formatted date). Only when all=True.
     
 </dd>
@@ -41433,7 +41344,7 @@ client.projects.members.bulk.post(
 <dl>
 <dd>
 
-**role:** `typing.Optional[str]` — Filter by role, project roles take precedence over organization roles. Only when all=True. (comma-separated values)
+**role:** `typing.Optional[str]` — Filter by organization role. Only when all=True. (comma-separated values)
     
 </dd>
 </dl>
@@ -41441,7 +41352,7 @@ client.projects.members.bulk.post(
 <dl>
 <dd>
 
-**search:** `typing.Optional[str]` — Search term for filtering members by name, email, or username. Only when all=True.
+**search:** `typing.Optional[str]` — Search members by first name, last name, email, or an enabled optional member-list column. Only when all=True.
     
 </dd>
 </dl>
@@ -41458,6 +41369,22 @@ client.projects.members.bulk.post(
 <dd>
 
 **tags_operator:** `typing.Optional[str]` — How the `tags` ids combine: `any` (at least one tag), `all` (every tag, the default), `none` (no selected tag). Ignored without `tags`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**user_last_activity_gte:** `typing.Optional[str]` — Filter user__last_activity by greater than or equal to
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**user_last_activity_lte:** `typing.Optional[str]` — Filter user__last_activity by less than or equal to
     
 </dd>
 </dl>
@@ -41509,7 +41436,7 @@ client.projects.members.bulk.post(
 </dl>
 </details>
 
-<details><summary><code>client.projects.members.bulk.<a href="src/label_studio_sdk/projects/members/bulk/client.py">delete</a>(...) -> DeleteBulkResponse</code></summary>
+<details><summary><code>client.projects.members.bulk.<a href="src/label_studio_sdk/projects/members/bulk/client.py#L146-L243">delete</a>(...) -> DeleteBulkResponse</code></summary>
 <dl>
 <dd>
 
@@ -41585,6 +41512,14 @@ client.projects.members.bulk.delete(
 <dd>
 
 **excluded:** `typing.Optional[str]` — Comma-separated list of user IDs to keep assigned when `all=true`.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**ids:** `typing.Optional[str]` — Filter id by in list
     
 </dd>
 </dl>
@@ -41669,7 +41604,7 @@ client.projects.members.bulk.delete(
 </details>
 
 ## Projects Members Paginated
-<details><summary><code>client.projects.members.paginated.<a href="src/label_studio_sdk/projects/members/paginated/client.py">list</a>(...) -> PaginatedPaginatedProjectMemberList</code></summary>
+<details><summary><code>client.projects.members.paginated.<a href="src/label_studio_sdk/projects/members/paginated/client.py#L30-L189">list</a>(...) -> PaginatedPaginatedProjectMemberList</code></summary>
 <dl>
 <dd>
 
@@ -41753,6 +41688,14 @@ client.projects.members.paginated.list(
 <dd>
 
 **implicit:** `typing.Optional[bool]` — Include/Exclude implicit project members in the results. If not provided, explicit + implicit members are returned.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**include_skills:** `typing.Optional[bool]` — Add `skills` to each row: the member's skills with their status, those the `filters` payload matched first. Owners, Administrators and Managers only; ignored for other roles.
     
 </dd>
 </dl>
@@ -41906,7 +41849,7 @@ Returns users who have any of the specified roles either:
 </details>
 
 ## Projects Metrics Custom
-<details><summary><code>client.projects.metrics.custom.<a href="src/label_studio_sdk/projects/metrics/custom/client.py">get_lambda</a>(...) -> GetLambdaCustomResponse</code></summary>
+<details><summary><code>client.projects.metrics.custom.<a href="src/label_studio_sdk/projects/metrics/custom/client.py#L31-L67">get_lambda</a>(...) -> GetLambdaCustomResponse</code></summary>
 <dl>
 <dd>
 
@@ -41985,7 +41928,7 @@ client.projects.metrics.custom.get_lambda(
 </dl>
 </details>
 
-<details><summary><code>client.projects.metrics.custom.<a href="src/label_studio_sdk/projects/metrics/custom/client.py">update_lambda</a>(...)</code></summary>
+<details><summary><code>client.projects.metrics.custom.<a href="src/label_studio_sdk/projects/metrics/custom/client.py#L69-L122">update_lambda</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -42089,7 +42032,7 @@ client.projects.metrics.custom.update_lambda(
 </dl>
 </details>
 
-<details><summary><code>client.projects.metrics.custom.<a href="src/label_studio_sdk/projects/metrics/custom/client.py">logs</a>(...) -> typing.Dict[str, typing.Any]</code></summary>
+<details><summary><code>client.projects.metrics.custom.<a href="src/label_studio_sdk/projects/metrics/custom/client.py#L124-L177">logs</a>(...) -> typing.Dict[str, typing.Any]</code></summary>
 <dl>
 <dd>
 
@@ -42192,7 +42135,7 @@ client.projects.metrics.custom.logs(
 </dl>
 </details>
 
-<details><summary><code>client.projects.metrics.custom.<a href="src/label_studio_sdk/projects/metrics/custom/client.py">check_function</a>(...)</code></summary>
+<details><summary><code>client.projects.metrics.custom.<a href="src/label_studio_sdk/projects/metrics/custom/client.py#L179-L215">check_function</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -42280,7 +42223,7 @@ client.projects.metrics.custom.check_function(
 </dl>
 </details>
 
-<details><summary><code>client.projects.metrics.custom.<a href="src/label_studio_sdk/projects/metrics/custom/client.py">get_function</a>(...) -> GetFunctionCustomResponse</code></summary>
+<details><summary><code>client.projects.metrics.custom.<a href="src/label_studio_sdk/projects/metrics/custom/client.py#L217-L253">get_function</a>(...) -> GetFunctionCustomResponse</code></summary>
 <dl>
 <dd>
 
@@ -42359,7 +42302,7 @@ client.projects.metrics.custom.get_function(
 </dl>
 </details>
 
-<details><summary><code>client.projects.metrics.custom.<a href="src/label_studio_sdk/projects/metrics/custom/client.py">deploy_function</a>(...)</code></summary>
+<details><summary><code>client.projects.metrics.custom.<a href="src/label_studio_sdk/projects/metrics/custom/client.py#L255-L291">deploy_function</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -42447,7 +42390,7 @@ client.projects.metrics.custom.deploy_function(
 </dl>
 </details>
 
-<details><summary><code>client.projects.metrics.custom.<a href="src/label_studio_sdk/projects/metrics/custom/client.py">get_function_logs</a>(...) -> typing.Dict[str, typing.Any]</code></summary>
+<details><summary><code>client.projects.metrics.custom.<a href="src/label_studio_sdk/projects/metrics/custom/client.py#L293-L346">get_function_logs</a>(...) -> typing.Dict[str, typing.Any]</code></summary>
 <dl>
 <dd>
 
@@ -42550,7 +42493,7 @@ client.projects.metrics.custom.get_function_logs(
 </dl>
 </details>
 
-<details><summary><code>client.projects.metrics.custom.<a href="src/label_studio_sdk/projects/metrics/custom/client.py">get_gcp_function</a>(...) -> GetGcpFunctionCustomResponse</code></summary>
+<details><summary><code>client.projects.metrics.custom.<a href="src/label_studio_sdk/projects/metrics/custom/client.py#L348-L384">get_gcp_function</a>(...) -> GetGcpFunctionCustomResponse</code></summary>
 <dl>
 <dd>
 
@@ -42629,7 +42572,7 @@ client.projects.metrics.custom.get_gcp_function(
 </dl>
 </details>
 
-<details><summary><code>client.projects.metrics.custom.<a href="src/label_studio_sdk/projects/metrics/custom/client.py">update_gcp_function</a>(...)</code></summary>
+<details><summary><code>client.projects.metrics.custom.<a href="src/label_studio_sdk/projects/metrics/custom/client.py#L386-L439">update_gcp_function</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -42734,7 +42677,7 @@ client.projects.metrics.custom.update_gcp_function(
 </details>
 
 ## Prompts Indicators
-<details><summary><code>client.prompts.indicators.<a href="src/label_studio_sdk/prompts/indicators/client.py">list</a>(...) -> typing.List[ListIndicatorsResponseItem]</code></summary>
+<details><summary><code>client.prompts.indicators.<a href="src/label_studio_sdk/prompts/indicators/client.py#L27-L63">list</a>(...) -> typing.List[ListIndicatorsResponseItem]</code></summary>
 <dl>
 <dd>
 
@@ -42813,7 +42756,7 @@ client.prompts.indicators.list(
 </dl>
 </details>
 
-<details><summary><code>client.prompts.indicators.<a href="src/label_studio_sdk/prompts/indicators/client.py">get</a>(...) -> LseKeyIndicatorValue</code></summary>
+<details><summary><code>client.prompts.indicators.<a href="src/label_studio_sdk/prompts/indicators/client.py#L65-L104">get</a>(...) -> LseKeyIndicatorValue</code></summary>
 <dl>
 <dd>
 
@@ -42902,7 +42845,7 @@ client.prompts.indicators.get(
 </details>
 
 ## Prompts Versions
-<details><summary><code>client.prompts.versions.<a href="src/label_studio_sdk/prompts/versions/client.py">get_default_version_name</a>(...) -> DefaultModelVersionNameResponse</code></summary>
+<details><summary><code>client.prompts.versions.<a href="src/label_studio_sdk/prompts/versions/client.py#L33-L69">get_default_version_name</a>(...) -> DefaultModelVersionNameResponse</code></summary>
 <dl>
 <dd>
 
@@ -42981,7 +42924,7 @@ client.prompts.versions.get_default_version_name(
 </dl>
 </details>
 
-<details><summary><code>client.prompts.versions.<a href="src/label_studio_sdk/prompts/versions/client.py">list</a>(...) -> typing.List[ThirdPartyModelVersion]</code></summary>
+<details><summary><code>client.prompts.versions.<a href="src/label_studio_sdk/prompts/versions/client.py#L71-L114">list</a>(...) -> typing.List[ThirdPartyModelVersion]</code></summary>
 <dl>
 <dd>
 
@@ -43068,7 +43011,7 @@ client.prompts.versions.list(
 </dl>
 </details>
 
-<details><summary><code>client.prompts.versions.<a href="src/label_studio_sdk/prompts/versions/client.py">create</a>(...) -> ThirdPartyModelVersion</code></summary>
+<details><summary><code>client.prompts.versions.<a href="src/label_studio_sdk/prompts/versions/client.py#L116-L203">create</a>(...) -> ThirdPartyModelVersion</code></summary>
 <dl>
 <dd>
 
@@ -43158,7 +43101,7 @@ client.prompts.versions.create(
 </dl>
 </details>
 
-<details><summary><code>client.prompts.versions.<a href="src/label_studio_sdk/prompts/versions/client.py">get</a>(...) -> ThirdPartyModelVersion</code></summary>
+<details><summary><code>client.prompts.versions.<a href="src/label_studio_sdk/prompts/versions/client.py#L205-L244">get</a>(...) -> ThirdPartyModelVersion</code></summary>
 <dl>
 <dd>
 
@@ -43246,7 +43189,7 @@ client.prompts.versions.get(
 </dl>
 </details>
 
-<details><summary><code>client.prompts.versions.<a href="src/label_studio_sdk/prompts/versions/client.py">delete</a>(...)</code></summary>
+<details><summary><code>client.prompts.versions.<a href="src/label_studio_sdk/prompts/versions/client.py#L246-L284">delete</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -43334,7 +43277,7 @@ client.prompts.versions.delete(
 </dl>
 </details>
 
-<details><summary><code>client.prompts.versions.<a href="src/label_studio_sdk/prompts/versions/client.py">update</a>(...) -> ThirdPartyModelVersion</code></summary>
+<details><summary><code>client.prompts.versions.<a href="src/label_studio_sdk/prompts/versions/client.py#L286-L375">update</a>(...) -> ThirdPartyModelVersion</code></summary>
 <dl>
 <dd>
 
@@ -43488,7 +43431,7 @@ The model provider to use e.g. OpenAI
 </dl>
 </details>
 
-<details><summary><code>client.prompts.versions.<a href="src/label_studio_sdk/prompts/versions/client.py">cost_estimate</a>(...) -> InferenceRunCostEstimate</code></summary>
+<details><summary><code>client.prompts.versions.<a href="src/label_studio_sdk/prompts/versions/client.py#L377-L416">cost_estimate</a>(...) -> InferenceRunCostEstimate</code></summary>
 <dl>
 <dd>
 
@@ -43576,7 +43519,7 @@ client.prompts.versions.cost_estimate(
 </dl>
 </details>
 
-<details><summary><code>client.prompts.versions.<a href="src/label_studio_sdk/prompts/versions/client.py">get_refined_prompt</a>(...) -> RefinedPromptResponse</code></summary>
+<details><summary><code>client.prompts.versions.<a href="src/label_studio_sdk/prompts/versions/client.py#L418-L467">get_refined_prompt</a>(...) -> RefinedPromptResponse</code></summary>
 <dl>
 <dd>
 
@@ -43672,7 +43615,7 @@ client.prompts.versions.get_refined_prompt(
 </dl>
 </details>
 
-<details><summary><code>client.prompts.versions.<a href="src/label_studio_sdk/prompts/versions/client.py">refine_prompt</a>(...) -> RefinedPromptResponse</code></summary>
+<details><summary><code>client.prompts.versions.<a href="src/label_studio_sdk/prompts/versions/client.py#L469-L539">refine_prompt</a>(...) -> RefinedPromptResponse</code></summary>
 <dl>
 <dd>
 
@@ -43796,7 +43739,7 @@ client.prompts.versions.refine_prompt(
 </details>
 
 ## Prompts Runs
-<details><summary><code>client.prompts.runs.<a href="src/label_studio_sdk/prompts/runs/client.py">list</a>(...) -> typing.List[ModelRun]</code></summary>
+<details><summary><code>client.prompts.runs.<a href="src/label_studio_sdk/prompts/runs/client.py#L33-L100">list</a>(...) -> typing.List[ModelRun]</code></summary>
 <dl>
 <dd>
 
@@ -43916,7 +43859,7 @@ client.prompts.runs.list(
 </dl>
 </details>
 
-<details><summary><code>client.prompts.runs.<a href="src/label_studio_sdk/prompts/runs/client.py">create</a>(...) -> ModelRun</code></summary>
+<details><summary><code>client.prompts.runs.<a href="src/label_studio_sdk/prompts/runs/client.py#L102-L198">create</a>(...) -> ModelRun</code></summary>
 <dl>
 <dd>
 
@@ -44093,7 +44036,7 @@ client.prompts.runs.create(
 </dl>
 </details>
 
-<details><summary><code>client.prompts.runs.<a href="src/label_studio_sdk/prompts/runs/client.py">cancel</a>(...) -> CancelModelRunResponse</code></summary>
+<details><summary><code>client.prompts.runs.<a href="src/label_studio_sdk/prompts/runs/client.py#L200-L247">cancel</a>(...) -> CancelModelRunResponse</code></summary>
 <dl>
 <dd>
 
@@ -44191,7 +44134,7 @@ client.prompts.runs.cancel(
 </details>
 
 ## Sso Saml
-<details><summary><code>client.sso.saml.<a href="src/label_studio_sdk/sso/saml/client.py">get</a>() -> SamlSettings</code></summary>
+<details><summary><code>client.sso.saml.<a href="src/label_studio_sdk/sso/saml/client.py#L32-L62">get</a>() -> SamlSettings</code></summary>
 <dl>
 <dd>
 
@@ -44260,7 +44203,7 @@ client.sso.saml.get()
 </dl>
 </details>
 
-<details><summary><code>client.sso.saml.<a href="src/label_studio_sdk/sso/saml/client.py">update</a>(...) -> SamlSettingsUpdate</code></summary>
+<details><summary><code>client.sso.saml.<a href="src/label_studio_sdk/sso/saml/client.py#L64-L175">update</a>(...) -> SamlSettingsUpdate</code></summary>
 <dl>
 <dd>
 
@@ -44453,7 +44396,7 @@ client.sso.saml.update(
 </dl>
 </details>
 
-<details><summary><code>client.sso.saml.<a href="src/label_studio_sdk/sso/saml/client.py">reset</a>()</code></summary>
+<details><summary><code>client.sso.saml.<a href="src/label_studio_sdk/sso/saml/client.py#L177-L206">reset</a>()</code></summary>
 <dl>
 <dd>
 
@@ -44522,7 +44465,7 @@ client.sso.saml.reset()
 </dl>
 </details>
 
-<details><summary><code>client.sso.saml.<a href="src/label_studio_sdk/sso/saml/client.py">validate_metadata_url</a>(...) -> ValidateSamlMetadataUrlResponse</code></summary>
+<details><summary><code>client.sso.saml.<a href="src/label_studio_sdk/sso/saml/client.py#L208-L244">validate_metadata_url</a>(...) -> ValidateSamlMetadataUrlResponse</code></summary>
 <dl>
 <dd>
 
@@ -44602,7 +44545,7 @@ client.sso.saml.validate_metadata_url(
 </details>
 
 ## Sso Scim
-<details><summary><code>client.sso.scim.<a href="src/label_studio_sdk/sso/scim/client.py">get</a>() -> ScimSettings</code></summary>
+<details><summary><code>client.sso.scim.<a href="src/label_studio_sdk/sso/scim/client.py#L31-L61">get</a>() -> ScimSettings</code></summary>
 <dl>
 <dd>
 
@@ -44671,7 +44614,7 @@ client.sso.scim.get()
 </dl>
 </details>
 
-<details><summary><code>client.sso.scim.<a href="src/label_studio_sdk/sso/scim/client.py">update</a>(...) -> ScimSettingsUpdate</code></summary>
+<details><summary><code>client.sso.scim.<a href="src/label_studio_sdk/sso/scim/client.py#L63-L129">update</a>(...) -> ScimSettingsUpdate</code></summary>
 <dl>
 <dd>
 
@@ -44793,7 +44736,7 @@ client.sso.scim.update(
 </details>
 
 ## Tasks AgreementMatrix
-<details><summary><code>client.tasks.agreement_matrix.<a href="src/label_studio_sdk/tasks/agreement_matrix/client.py">get</a>(...) -> TaskAgreementMatrixResponse</code></summary>
+<details><summary><code>client.tasks.agreement_matrix.<a href="src/label_studio_sdk/tasks/agreement_matrix/client.py#L27-L83">get</a>(...) -> TaskAgreementMatrixResponse</code></summary>
 <dl>
 <dd>
 
@@ -44899,7 +44842,7 @@ client.tasks.agreement_matrix.get(
 </details>
 
 ## Workspaces Members
-<details><summary><code>client.workspaces.members.<a href="src/label_studio_sdk/workspaces/members/client.py">list</a>(...) -> typing.List[WorkspaceMemberList]</code></summary>
+<details><summary><code>client.workspaces.members.<a href="src/label_studio_sdk/workspaces/members/client.py#L38-L74">list</a>(...) -> typing.List[WorkspaceMemberList]</code></summary>
 <dl>
 <dd>
 
@@ -44978,7 +44921,7 @@ client.workspaces.members.list(
 </dl>
 </details>
 
-<details><summary><code>client.workspaces.members.<a href="src/label_studio_sdk/workspaces/members/client.py">create</a>(...) -> WorkspaceMemberCreate</code></summary>
+<details><summary><code>client.workspaces.members.<a href="src/label_studio_sdk/workspaces/members/client.py#L76-L124">create</a>(...) -> WorkspaceMemberCreate</code></summary>
 <dl>
 <dd>
 
@@ -45074,7 +45017,7 @@ client.workspaces.members.create(
 </dl>
 </details>
 
-<details><summary><code>client.workspaces.members.<a href="src/label_studio_sdk/workspaces/members/client.py">delete</a>(...)</code></summary>
+<details><summary><code>client.workspaces.members.<a href="src/label_studio_sdk/workspaces/members/client.py#L126-L164">delete</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -45162,7 +45105,7 @@ client.workspaces.members.delete(
 </details>
 
 ## Workspaces Projects
-<details><summary><code>client.workspaces.projects.<a href="src/label_studio_sdk/workspaces/projects/client.py">list</a>(...) -> typing.List[Project]</code></summary>
+<details><summary><code>client.workspaces.projects.<a href="src/label_studio_sdk/workspaces/projects/client.py#L29-L63">list</a>(...) -> typing.List[Project]</code></summary>
 <dl>
 <dd>
 
@@ -45241,7 +45184,7 @@ client.workspaces.projects.list(
 </dl>
 </details>
 
-<details><summary><code>client.workspaces.projects.<a href="src/label_studio_sdk/workspaces/projects/client.py">add</a>(...)</code></summary>
+<details><summary><code>client.workspaces.projects.<a href="src/label_studio_sdk/workspaces/projects/client.py#L65-L102">add</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -45329,7 +45272,7 @@ client.workspaces.projects.add(
 </dl>
 </details>
 
-<details><summary><code>client.workspaces.projects.<a href="src/label_studio_sdk/workspaces/projects/client.py">remove</a>(...)</code></summary>
+<details><summary><code>client.workspaces.projects.<a href="src/label_studio_sdk/workspaces/projects/client.py#L104-L142">remove</a>(...)</code></summary>
 <dl>
 <dd>
 
@@ -45417,7 +45360,7 @@ client.workspaces.projects.remove(
 </details>
 
 ## Workspaces Members Bulk
-<details><summary><code>client.workspaces.members.bulk.<a href="src/label_studio_sdk/workspaces/members/bulk/client.py">post</a>(...) -> PostBulkResponse</code></summary>
+<details><summary><code>client.workspaces.members.bulk.<a href="src/label_studio_sdk/workspaces/members/bulk/client.py#L30-L123">post</a>(...) -> PostBulkResponse</code></summary>
 <dl>
 <dd>
 
@@ -45493,6 +45436,62 @@ client.workspaces.members.bulk.post(
 <dl>
 <dd>
 
+**filters:** `typing.Optional[str]` — Versioned JSON member-filter payload, the same one the organization members list accepts. Only when all=True. When advanced member filtering is enabled, do not also supply role, user_type, tags, or last-activity legacy filter parameters.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**role:** `typing.Optional[str]` — Multiple values may be separated by commas. (comma-separated values)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**search:** `typing.Optional[str]` — Search members by first name, last name, email, or an enabled optional member-list column. Only when all=True.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**tags:** `typing.Optional[str]` — Multiple values may be separated by commas. (comma-separated values)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**user_last_activity_gte:** `typing.Optional[str]` — Filter user__last_activity by greater than or equal to
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**user_last_activity_lte:** `typing.Optional[str]` — Filter user__last_activity by less than or equal to
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**user_type:** `typing.Optional[str]` — Multiple values may be separated by commas. (comma-separated values)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **excluded:** `typing.Optional[typing.List[int]]` — Excluded user IDs
     
 </dd>
@@ -45521,7 +45520,7 @@ client.workspaces.members.bulk.post(
 </dl>
 </details>
 
-<details><summary><code>client.workspaces.members.bulk.<a href="src/label_studio_sdk/workspaces/members/bulk/client.py">delete</a>(...) -> DeleteBulkResponse</code></summary>
+<details><summary><code>client.workspaces.members.bulk.<a href="src/label_studio_sdk/workspaces/members/bulk/client.py#L125-L186">delete</a>(...) -> DeleteBulkResponse</code></summary>
 <dl>
 <dd>
 
@@ -45641,7 +45640,7 @@ client.workspaces.members.bulk.delete(
 </details>
 
 ## Workspaces Members Paginated
-<details><summary><code>client.workspaces.members.paginated.<a href="src/label_studio_sdk/workspaces/members/paginated/client.py">list</a>(...) -> PaginatedLseUserList</code></summary>
+<details><summary><code>client.workspaces.members.paginated.<a href="src/label_studio_sdk/workspaces/members/paginated/client.py#L28-L89">list</a>(...) -> PaginatedLseUserList</code></summary>
 <dl>
 <dd>
 
